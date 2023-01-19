@@ -1,6 +1,13 @@
 import Head from 'next/head'
 
-export default function Home() {
+export const getServerSideProps = async () => {
+  return {
+    props: {}
+  }
+}
+
+export default function Home(props) {
+
   return (
     <>
       <Head>
