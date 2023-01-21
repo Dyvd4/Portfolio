@@ -15,10 +15,10 @@ model Project {
   id          Int               @id()
   name        String            @unique()
   alias       String
-  githubUrl   String
+  githubUrl   String?
   url         String?
   description String?
-  visibility  String
+  visibility  String?
   updatedAt   DateTime          @updatedAt()
   createdAt   DateTime          @default(now())
   commits     ProjectCommit[]
@@ -27,7 +27,7 @@ model Project {
 }
 
 model ProjectCommit {
-  id         Int       @id @default(autoincrement())
+  id         String    @id
   projectId  Int
   project    Project   @relation(fields: [projectId], references: [id])
   createDate DateTime?
