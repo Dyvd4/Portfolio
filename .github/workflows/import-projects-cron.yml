@@ -1,0 +1,13 @@
+name: import-projects-cron
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hit "import-projects-route" every 5 minutes cron job
+        run: |
+          curl --request POST \
+          --url 'david-kimmich-portfolio.de/api/projects/import' \
+          --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
