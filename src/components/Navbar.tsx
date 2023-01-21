@@ -1,4 +1,4 @@
-import IconWrapper from "@components/IconWrapper";
+import IconButton from "@components/IconButton";
 import Tooltip from "@components/Tooltip";
 import { toggleDarkMode } from "@utils/DarkModeUtils";
 import Link from "next/link";
@@ -14,9 +14,9 @@ function Navbar(props: NavbarProps) {
                     <Tooltip
                         direction="down"
                         title="Dark mode">
-                        <IconWrapper onClick={toggleDarkMode}>
+                        <IconButton onClick={toggleDarkMode}>
                             <FaAdjust />
-                        </IconWrapper>
+                        </IconButton>
                     </Tooltip>
                 </li>
                 <li>
@@ -24,9 +24,9 @@ function Navbar(props: NavbarProps) {
                         direction="down"
                         title="Contact">
                         <Link href="/Contact">
-                            <IconWrapper>
+                            <IconButton>
                                 <FaEnvelopeOpenText />
-                            </IconWrapper>
+                            </IconButton>
                         </Link>
                     </Tooltip>
                 </li>
@@ -35,16 +35,16 @@ function Navbar(props: NavbarProps) {
                         direction="down"
                         title="Home">
                         <Link href={"/"}>
-                            <IconWrapper>
+                            <IconButton>
                                 <FaHome />
-                            </IconWrapper>
+                            </IconButton>
                         </Link>
                     </Tooltip>
                 </li>
                 <li title='Menu'>
-                    <IconWrapper>
+                    <IconButton>
                         <FaBars />
-                    </IconWrapper>
+                    </IconButton>
                 </li>
             </ul>
         </nav>

@@ -1,23 +1,15 @@
-import { ComponentPropsWithRef, PropsWithChildren } from 'react';
+import { ComponentPropsWithRef, PropsWithChildren } from "react";
 
-type IconWrapperProps = PropsWithChildren<{
-	variant?: "circle" | "square"
-}> & ComponentPropsWithRef<"div">
+type IconProps = PropsWithChildren<{}> & ComponentPropsWithRef<"span">
 
-function IconWrapper({ variant = "square", className, children, ...props }: IconWrapperProps) {
-
-	return (
-		<div
-			className={`${variant === "circle" ? "rounded-full" : "rounded-lg"}
-						p-2 cursor-pointer border
-						border-black text-black dark:border-white dark:text-white
-						hover:bg-gray-100 dark:hover:bg-gray-800
-						transition-all active:scale-90
-						${className}`}
-			{...props}>
-			{children}
-		</div>
-	)
+function Icon({ className, children, ...props }: IconProps) {
+    return (
+        <span
+            className={`text-black dark:text-white ${className}`}
+            {...props}>
+            {children}
+        </span>
+    );
 }
 
-export default IconWrapper;
+export default Icon;
