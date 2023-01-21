@@ -11,27 +11,50 @@ datasource db {
   relationMode = "prisma"
 }
 
-// model Project {
-//   alias          String
-//   imageName      String
-//   GithubId       Number
-//   GithubURL      String
-//   name           String
-//   description    String
-//   website        String
-//   updatedAt      Date
-//   createdAt      Date
-//   visibility     String
-//   private        Boolean
-//   watchers_count Number
-//   size           Number
-//   contributions  Number
-//   commits        Number
-// }
+model Project {
+  id          Int               @id()
+  name        String            @unique()
+  alias       String
+  githubUrl   String
+  url         String
+  description String
+  visibility  String
+  updatedAt   DateTime          @updatedAt()
+  createdAt   DateTime          @default(now())
+  commits     ProjectCommit[]
+  languages   ProjectLanguage[]
+  tags        ProjectTag[]
+}
 
-// model ProjectActivity {
-//   date      Date
-//   type      String
-//   username  String
-//   projectId
-// }
+model ProjectCommit {
+  id         Int      @id @default(autoincrement())
+  projectId  Int
+  project    Project  @relation(fields: [projectId], references: [id])
+  createDate DateTime
+  authorName String
+  updatedAt  DateTime @updatedAt()
+  createdAt  DateTime @default(now())
+
+  @@index(fields: [projectId])
+}
+
+model ProjectLanguage {
+  projectId   Int
+  project     Project  @relation(fields: [projectId], references: [id])
+  name        String
+  codeInBytes Int
+  updatedAt   DateTime @updatedAt()
+  createdAt   DateTime @default(now())
+
+  @@unique([projectId, name])
+}
+
+model ProjectTag {
+  projectId Int
+  project   Project  @relation(fields: [projectId], references: [id])
+  name      String
+  updatedAt DateTime @updatedAt()
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, name])
+}
