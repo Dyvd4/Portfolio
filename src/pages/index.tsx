@@ -18,17 +18,17 @@ export default function Home(props) {
             Intuitive. Useful. Beautiful.
           </h1>
         </Text>
-        <div className='text-gray-300 mt-8 text-center'>
-          <Text variant='secondary'>
-            <p>
-              These are the properties a web app should have.
-            </p>
-            <p>
-              I am David Kimmich, a 18 year old web dev.
-              If you want to know more about me:
-            </p>
-          </Text>
-        </div>
+        <Text
+          className='mt-8 text-center'
+          variant='secondary'>
+          <p>
+            These are the properties a web app should have.
+          </p>
+          <p>
+            I am David Kimmich, a 18 year old web dev.
+            If you want to know more about me:
+          </p>
+        </Text>
         <Button className='group mt-8'>
           <IconLink href={"/AboutMe"} omitIconWrapper>
             Read more

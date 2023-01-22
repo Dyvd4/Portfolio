@@ -36,7 +36,7 @@ function Navbar(props: NavbarProps) {
                     <Tooltip
                         direction="down"
                         title="My projects">
-                        <Link href={"/MyProjects"}>
+                        <Link href={"/project"}>
                             <IconButton>
                                 <HiFire />
                             </IconButton>

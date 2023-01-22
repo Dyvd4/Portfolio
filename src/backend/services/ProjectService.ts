@@ -133,11 +133,11 @@ const fetchProjectLanguages = async (project: Project) => {
             create: {
                 name: languageName,
                 projectId: project.id,
-                codeInBytes: languages[languageName]
+                codeAmountInBytes: languages[languageName]
             },
             update: {
                 name: languageName,
-                codeInBytes: languages[languageName]
+                codeAmountInBytes: languages[languageName]
             }
         });
     }));
