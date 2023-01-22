@@ -1,4 +1,5 @@
 import Button from '@components/Button'
+import IconLink from '@components/IconLink'
 import Text from '@components/Text'
 import Head from 'next/head'
 import { BsArrowRight } from "react-icons/bs"
@@ -26,12 +27,13 @@ export default function Home(props) {
               I am David Kimmich, a 18 year old web dev.
               If you want to know more about me:
             </p>
-            <Button className='group mt-2'>
-              Read more&nbsp;
-              <BsArrowRight className="inline transition-transform group-hover:translate-x-1" />
-            </Button>
           </Text>
         </div>
+        <Button className='group mt-8'>
+          <IconLink href={"/AboutMe"}>
+            Read more
+          </IconLink>
+        </Button>
       </main>
     </>
   )
