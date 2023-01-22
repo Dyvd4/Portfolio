@@ -4,17 +4,23 @@ import { BsArrowRight } from "react-icons/bs";
 
 type IconLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> & LinkProps & {
     children?: React.ReactNode;
+    omitIconWrapper?: boolean
 } & React.RefAttributes<HTMLAnchorElement>
 
-function IconLink({ children, className, ...props }: IconLinkProps) {
+function IconLink({ children, className, omitIconWrapper, ...props }: IconLinkProps) {
     return (
         <Link
             className={`group hover:underline ${className}`}
             {...props}>
             {children}&nbsp;
-            <IconWrapper>
+            {omitIconWrapper && <>
                 <BsArrowRight className="inline transition-transform group-hover:translate-x-1" />
-            </IconWrapper>
+            </>}
+            {!omitIconWrapper && <>
+                <IconWrapper>
+                    <BsArrowRight className="inline transition-transform group-hover:translate-x-1" />
+                </IconWrapper>
+            </>}
         </Link>
     );
 }

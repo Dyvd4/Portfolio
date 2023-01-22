@@ -30,7 +30,7 @@ export default function Home(props) {
           </Text>
         </div>
         <Button className='group mt-8'>
-          <IconLink href={"/AboutMe"}>
+          <IconLink href={"/AboutMe"} omitIconWrapper>
             Read more
           </IconLink>
         </Button>

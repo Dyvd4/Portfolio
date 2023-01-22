@@ -2,7 +2,9 @@ import IconButton from "@components/IconButton";
 import Tooltip from "@components/Tooltip";
 import { toggleDarkMode } from "@utils/DarkModeUtils";
 import Link from "next/link";
-import { FaAdjust, FaBars, FaEnvelopeOpenText, FaHome } from "react-icons/fa";
+import { FaAdjust, FaEnvelopeOpenText, FaHome } from "react-icons/fa";
+import { HiFire } from "react-icons/hi";
+import { SiAboutdotme } from "react-icons/si";
 
 type NavbarProps = {}
 
@@ -33,6 +35,28 @@ function Navbar(props: NavbarProps) {
                 <li>
                     <Tooltip
                         direction="down"
+                        title="My projects">
+                        <Link href={"/MyProjects"}>
+                            <IconButton>
+                                <HiFire />
+                            </IconButton>
+                        </Link>
+                    </Tooltip>
+                </li>
+                <li>
+                    <Tooltip
+                        direction="down"
+                        title="About me">
+                        <Link href={"/AboutMe"}>
+                            <IconButton>
+                                <SiAboutdotme />
+                            </IconButton>
+                        </Link>
+                    </Tooltip>
+                </li>
+                <li>
+                    <Tooltip
+                        direction="down"
                         title="Home">
                         <Link href={"/"}>
                             <IconButton>
@@ -40,11 +64,6 @@ function Navbar(props: NavbarProps) {
                             </IconButton>
                         </Link>
                     </Tooltip>
-                </li>
-                <li title='Menu'>
-                    <IconButton>
-                        <FaBars />
-                    </IconButton>
                 </li>
             </ul>
         </nav>
