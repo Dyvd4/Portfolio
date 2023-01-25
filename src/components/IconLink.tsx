@@ -8,11 +8,11 @@ type IconLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof L
 function IconLink({ children, className, ...props }: IconLinkProps) {
 	return (
 		<Link
-			className={`group hover:underline 
+			className={`group hover:underline text-black
 						flex items-center ${className}`}
 			{...props}>
 			{children}&nbsp;
-			<BsArrowRight className="inline transition-transform group-hover:translate-x-1" />
+			<BsArrowRight className="inline transition-transform group-hover:translate-x-1 fill-black" />
 		</Link>
 	);
 }

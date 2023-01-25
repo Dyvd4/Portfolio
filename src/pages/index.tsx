@@ -1,6 +1,5 @@
 import Button from '@components/Button'
 import IconLink from '@components/IconLink'
-import Text from '@components/Text'
 import Head from 'next/head'
 
 export default function Home(props) {
@@ -14,22 +13,18 @@ export default function Home(props) {
 			<main className="absolute top-1/2 left-1/2 
 							transform -translate-x-1/2 -translate-y-1/2">
 				<div className="flex flex-col items-center">
-					<Text>
-						<h1 className='text-6xl font-black'>
-							Intuitive. Useful. Beautiful.
-						</h1>
-					</Text>
-					<Text
-						className='mt-8 text-center'
-						variant='secondary'>
-						<p>
+					<h1 className='text-6xl font-black whitespace-nowrap'>
+						Intuitive. Useful. Beautiful.
+					</h1>
+					<div className='mt-8 text-center'>
+						<p className='text-secondary'>
 							These are the properties a web app should have.
 						</p>
-						<p>
+						<p className='text-secondary'>
 							I am David Kimmich, a 18 year old web dev.
 							If you want to know more about me:
 						</p>
-					</Text>
+					</div>
 					<Button className='group mt-8'>
 						<IconLink href={"/AboutMe"}>
 							Read more

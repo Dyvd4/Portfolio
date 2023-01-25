@@ -2,7 +2,6 @@ import ProjectCommitService from "@backend/services/ProjectCommitService";
 import Button from "@components/Button";
 import IconLink from "@components/IconLink";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
-import Text from "@components/Text";
 import { prisma } from "@prisma";
 import dayjs from "dayjs";
 import dayJsIsBetweenPlugin from "dayjs/plugin/isBetween";
@@ -59,15 +58,11 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 	const totalLanguageAmountInBytes = project.languages.reduce((totalAmount, language) => totalAmount += language.codeAmountInBytes, 0);
 
 	return (
-		<Text className="text-center">
+		<div className="text-center">
 			<h1 className='text-7xl font-black'>
 				{project.alias}
 			</h1>
-			<Text
-				className='my-8 text-center'
-				variant='secondary'>
-				<p>{project.description || "no description available"}</p>
-			</Text>
+			<p className='my-8 text-center text-secondary'>{project.description || "no description available"}</p>
 			<div className="flex justify-center items-center gap-4 my-8">
 				<Button disabled={!project.url}>
 					<IconLink
@@ -117,7 +112,7 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 					</BarChart>
 				</ResponsiveContainer>
 			</section>
-		</Text>
+		</div>
 	);
 }
 
