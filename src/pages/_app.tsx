@@ -9,14 +9,16 @@ const robotoFont = Inter({ subsets: ["latin"] })
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  useEffect(() => {
-    applyDarkMode()
-  }, []);
+	useEffect(() => {
+		applyDarkMode()
+	}, []);
 
-  return (
-    <main className={`${robotoFont.className} dark:bg-gray-900 h-screen transition-colors`}>
-      <Navbar />
-      <Component {...pageProps} />
-    </main>
-  )
+	return (
+		<main className={`${robotoFont.className} bg-gray-50 dark:bg-gray-900 h-screen transition-colors`}>
+			<Navbar />
+			<div className="max-w-screen-md mx-auto">
+				<Component {...pageProps} />
+			</div>
+		</main>
+	)
 }
