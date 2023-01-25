@@ -58,12 +58,15 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 	const totalLanguageAmountInBytes = project.languages.reduce((totalAmount, language) => totalAmount += language.codeAmountInBytes, 0);
 
 	return (
-		<div className="text-center">
-			<h1 className='text-7xl font-black'>
-				{project.alias}
-			</h1>
-			<p className='my-8 text-center text-secondary'>{project.description || "no description available"}</p>
-			<div className="flex justify-center items-center gap-4 my-8">
+		<>
+			<div className="text-center">
+				<h1 className='text-7xl font-black'>
+					{project.alias}
+				</h1>
+				<p className='my-8 text-center text-secondary'>{project.description || "no description available"}</p>
+			</div>
+
+			<div className="flex justify-center items-center gap-4">
 				<Button disabled={!project.url}>
 					<IconLink
 						href={project.url || "#"}>
@@ -78,8 +81,9 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 					</IconLink>
 				</Button>
 			</div>
-			<section className="bg-black text-white p-4">
-				<h1 className='text-xl text-center'>
+
+			<section className="p-4 mt-20">
+				<h1 className='text-xl'>
 					Activity within last year
 				</h1>
 				<ResponsiveContainer width={"100%"} height={100}>
@@ -87,7 +91,7 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 						<Line
 							dataKey={"commitsCount"}
 							type={"monotone"}
-							stroke="white"
+							stroke="#0284c7" // fill-sky-600
 							strokeWidth={2}
 							dot={false}
 						/>
@@ -95,15 +99,16 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 					</LineChart>
 				</ResponsiveContainer>
 			</section>
-			<section className="p-4">
-				<h1 className='text-xl text-center'>
+
+			<section className="p-4 mt-16">
+				<h1 className='text-xl'>
 					Languages used (in %)
 				</h1>
 				<ResponsiveContainer width={"100%"} height={250}>
 					<BarChart data={project.languages}>
-						<Bar
-							dataKey={"codeAmountInBytes"}>
+						<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
 							<LabelList
+								className="fill-secondary"
 								position={"top"}
 								formatter={(value) => getPercentageAmountOfLanguage(value, totalLanguageAmountInBytes)}
 							/>
@@ -112,7 +117,7 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 					</BarChart>
 				</ResponsiveContainer>
 			</section>
-		</div>
+		</>
 	);
 }
 

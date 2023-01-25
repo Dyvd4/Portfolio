@@ -16,6 +16,14 @@ body {
 
 
 @layer base {
+	.stroke-secondary{
+		@apply stroke-gray-700 dark:stroke-gray-300
+	}
+
+	.fill-secondary{
+		@apply fill-gray-700 dark:fill-gray-300
+	}
+
 	.text-secondary {
 		@apply text-gray-700 dark:text-gray-300
 	}
