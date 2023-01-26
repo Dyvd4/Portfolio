@@ -69,12 +69,15 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 			<div className="flex justify-center items-center gap-4">
 				<Button disabled={!project.url}>
 					<IconLink
-						href={project.url || "#"}>
+						disabled={!project.url}
+						href={project.url || "#"}
+						target={"_blank"}>
 						View demo
 					</IconLink>
 				</Button>
 				<Button disabled={!project.githubUrl}>
 					<IconLink
+						disabled={!project.githubUrl}
 						href={project.githubUrl || "#"}
 						target={"_blank"}>
 						View on GitHub
