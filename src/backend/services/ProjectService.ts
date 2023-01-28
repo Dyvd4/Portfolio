@@ -1,4 +1,4 @@
-import config from "@config";
+import config from "@config/config";
 import { prisma } from "@prisma";
 import { Project } from "@prisma/client";
 import { Octokit } from "octokit";

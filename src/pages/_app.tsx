@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, []);
 
 	return (
-		<main className={`${robotoFont.className} bg-gray-50 dark:bg-gray-900 h-screen transition-colors`}>
+		<main className={`${robotoFont.className} bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors`}>
 			<Navbar />
 			<div className="max-w-screen-md mx-auto">
 				<Component {...pageProps} />
