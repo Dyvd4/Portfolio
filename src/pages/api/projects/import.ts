@@ -1,6 +1,6 @@
 import ProjectService from "@backend/services/ProjectService";
 import { NextApiRequest, NextApiResponse } from "next";
-import config from "@config";
+import config from "@config/config";
 
 const { IMPORT_PROJECTS_CRON_ACCESS_TOKEN } = config;
 

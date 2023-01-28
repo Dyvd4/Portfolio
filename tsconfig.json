@@ -28,7 +28,7 @@
         "prisma.ts"
       ],
       "@config": [
-        "config.ts"
+        "config/config.ts"
       ]
     }
   },
