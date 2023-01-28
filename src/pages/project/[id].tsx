@@ -1,4 +1,5 @@
 import ProjectCommitService, { LatestCommitsView } from "@backend/services/ProjectCommitService";
+import Badge from "@components/Badge";
 import Button from "@components/Button";
 import IconLink from "@components/IconLink";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
@@ -135,6 +136,21 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					</BarChart>
 				</ResponsiveContainer>
 			</section>
+
+			<footer className="py-10">
+				<h1 className='text-secondary text-sm'>
+					Tags
+				</h1>
+				<ul className="flex flex-wrap gap-2 mt-2">
+					{project.tags.map(tag => (
+						<li key={tag.name}>
+							<Badge variant="gray">
+								{tag.name}
+							</Badge>
+						</li>
+					))}
+				</ul>
+			</footer>
 		</>
 	);
 }
