@@ -137,20 +137,22 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				</ResponsiveContainer>
 			</section>
 
-			<footer className="py-10">
-				<h1 className='text-secondary text-sm'>
-					Tags
-				</h1>
-				<ul className="flex flex-wrap gap-2 mt-2">
-					{project.tags.map(tag => (
-						<li key={tag.name}>
-							<Badge variant="gray">
-								{tag.name}
-							</Badge>
-						</li>
-					))}
-				</ul>
-			</footer>
+			{project.tags.length > 0 && <>
+				<section className="py-10">
+					<h1 className='text-secondary text-sm'>
+						Tags
+					</h1>
+					<ul className="flex flex-wrap gap-2 mt-2">
+						{project.tags.map(tag => (
+							<li key={tag.name}>
+								<Badge variant="gray">
+									{tag.name}
+								</Badge>
+							</li>
+						))}
+					</ul>
+				</section>
+			</>}
 		</>
 	);
 }
