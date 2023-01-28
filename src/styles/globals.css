@@ -10,17 +10,72 @@ body {
 	overflow-x: hidden;
 }
 
+/* 
+loading circle
+shout out: https://cssloading-circles.github.io/
+*/
+.loading-circle {
+	width: 48px;
+	height: 48px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #FFF;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	position: relative;
+	animation: pulse 1s linear infinite;
+}
+
+.loading-circle:after {
+	content: '';
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #FFF;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	animation: scaleUp 1s linear infinite;
+}
+
+@keyframes scaleUp {
+	0% {
+		transform: translate(-50%, -50%) scale(0)
+	}
+
+	60%, 100% {
+		transform: translate(-50%, -50%) scale(1)
+	}
+}
+
+@keyframes pulse {
+	0%, 60%, 100% {
+		transform: scale(1)
+	}
+
+	80% {
+		transform: scale(1.2)
+	}
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
 @layer base {
-	.stroke-secondary{
+	.stroke-secondary {
 		@apply stroke-gray-700 dark:stroke-gray-300
 	}
 
-	.fill-secondary{
+	.fill-secondary {
 		@apply fill-gray-700 dark:fill-gray-300
 	}
 
