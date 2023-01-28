@@ -1,8 +1,9 @@
-import ProjectCommitService from "@backend/services/ProjectCommitService";
+import ProjectCommitService, { LatestCommitsView } from "@backend/services/ProjectCommitService";
 import Button from "@components/Button";
 import IconLink from "@components/IconLink";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
 import { prisma } from "@prisma";
+import { Project } from "@prisma/client";
 import dayjs from "dayjs";
 import dayJsIsBetweenPlugin from "dayjs/plugin/isBetween";
 import { NextPageContext } from "next";
@@ -31,20 +32,29 @@ export async function getServerSideProps(context: NextPageContext) {
 			languages: true,
 			tags: true
 		}
-	})
-
-	if (project) (project.commits as any) = ProjectCommitService.getCommitsGroupedByCreatedAt(project);
+	});
 
 	return {
 		props: {
-			project: JSON.parse(JSON.stringify(project)) as typeof project
+			// 🤔
+			project: JSON.parse(JSON.stringify(project)) as typeof project,
+			latestCommitsView: JSON.parse(JSON.stringify(project
+				? ProjectCommitService.getLatestCommitsView(project)
+				: {
+					latestCommitDate: new Date(),
+					firstCommitDate: new Date(),
+					commitsGroupedByDate: []
+				})) as LatestCommitsView
+		} satisfies {
+			project: Project | null,
+			latestCommitsView: LatestCommitsView
 		}
 	}
 }
 
 type ProjectDetailsProps = Awaited<ReturnType<typeof getServerSideProps>>["props"]
 
-function ProjectDetails({ project }: ProjectDetailsProps) {
+function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 	if (!project) return <div>no project found</div>
 
@@ -86,11 +96,16 @@ function ProjectDetails({ project }: ProjectDetailsProps) {
 			</div>
 
 			<section className="p-4 mt-20">
-				<h1 className='text-xl'>
-					Activity within last year
+				<h1>
+					<span className='text-xl'>
+						Activity
+					</span>&nbsp;
+					<span className="text-secondary text-base">
+						({dayjs(latestCommitsView.firstCommitDate).format("DD/MM/YYYY")} - {dayjs(latestCommitsView.latestCommitDate).format("DD/MM/YYYY")})
+					</span>
 				</h1>
 				<ResponsiveContainer width={"100%"} height={100}>
-					<LineChart data={project.commits}>
+					<LineChart data={latestCommitsView.commitsGroupedByDate}>
 						<Line
 							dataKey={"commitsCount"}
 							type={"monotone"}
