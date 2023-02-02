@@ -1,8 +1,12 @@
-import Button from '@components/Button'
-import IconLink from '@components/IconLink'
-import Head from 'next/head'
+import Button from '@components/Button';
+import IconLink from '@components/IconLink';
+import useAge from '@hooks/useAge';
+import Head from 'next/head';
 
 export default function Home(props) {
+
+	const age = useAge();
+
 	return (
 		<>
 			<Head>
@@ -21,7 +25,7 @@ export default function Home(props) {
 							These are the properties a web app should have.
 						</p>
 						<p className='text-secondary'>
-							I am David Kimmich, a 18 year old web dev.
+							I am David Kimmich, a {age} year old web dev.
 							If you want to know more about me:
 						</p>
 					</div>

@@ -44,11 +44,9 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 
 	return (
 		<div className="max-w-sm mx-auto">
-			<div className="text-center">
-				<h1 className='text-7xl font-black'>
-					Projects
-				</h1>
-			</div>
+			<h1 className='text-7xl font-black text-center'>
+				Projects
+			</h1>
 			<Input
 				value={projectOrTagname}
 				onChange={(e) => setProjectName(e.target.value)}
