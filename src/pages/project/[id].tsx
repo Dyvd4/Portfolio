@@ -96,7 +96,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				</Button>
 			</div>
 
-			<section className="p-4 mt-20">
+			<section className="mt-20">
 				<h1>
 					<span className='text-xl'>
 						Activity
@@ -119,9 +119,15 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				</ResponsiveContainer>
 			</section>
 
-			<section className="p-4 mt-16">
-				<h1 className='text-xl'>
-					Languages used (in %)
+			<section className="mt-16">
+				<h1>
+					<span className='text-xl'>
+						Languages used
+					</span>
+					&nbsp;
+					<span className="text-secondary text-base">
+						(in %)
+					</span>
 				</h1>
 				<ResponsiveContainer width={"100%"} height={250}>
 					<BarChart data={project.languages}>
@@ -139,7 +145,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 			{project.tags.length > 0 && <>
 				<section className="py-10">
-					<h1 className='text-secondary text-sm'>
+					<h1 className='text-xl'>
 						Tags
 					</h1>
 					<ul className="flex flex-wrap gap-2 mt-2">
