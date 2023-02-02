@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import Footer from '@components/Footer'
 import LoadingCircle from '@components/LoadingCircle'
 import Navbar from '@components/Navbar'
 import useRouterLoadingState from '@hooks/useRouterLoadingState'
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
 					<LoadingCircle />
 				</div>
 			</>}
+			<Footer />
 		</main>
 	)
 }
