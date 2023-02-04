@@ -31,7 +31,7 @@ function Navbar({ className, ...props }: NavbarProps) {
 					</Link>
 				</Tooltip>
 				<Tooltip
-					direction="up"
+					direction="left"
 					title="Mail to: david.kimmich@gmx.net">
 					<Link href={"mailto:david.kimmich@gmx.net"}>
 						<IconButton variant="circle" className="border-gray-400">
