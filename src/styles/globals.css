@@ -7,8 +7,14 @@
 html,
 body {
 	max-width: 100vw;
-	overflow-x: hidden;
 }
+
+/* for debugging */
+/* * {
+	outline: 1px solid #f00 !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+} */
 
 /* 
 loading circle

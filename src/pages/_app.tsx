@@ -19,20 +19,22 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, []);
 
 	return (
-		<main className={`${robotoFont.className} bg-white dark:bg-gray-900 min-h-screen transition-colors`}>
-			<Navbar />
-			{!isLoading && <>
-				<div className="max-w-screen-md mx-auto">
-					<Component {...pageProps} />
-				</div>
-			</>}
-			{isLoading && <>
-				<div className='absolute top-1/2 left-1/2
+		<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
+			<div className='min-h-screen'>
+				<Navbar />
+				{!isLoading && <>
+					<div className="max-w-screen-md mx-auto">
+						<Component {...pageProps} />
+					</div>
+				</>}
+				{isLoading && <>
+					<div className='absolute top-1/2 left-1/2
 							transform -translate-x-1/2 -translate-y-1/2'>
-					<LoadingCircle />
-				</div>
-			</>}
+						<LoadingCircle />
+					</div>
+				</>}
+			</div>
 			<Footer />
-		</main>
+		</div>
 	)
 }

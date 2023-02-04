@@ -11,8 +11,9 @@ export type NavbarProps = PropsWithChildren<_NavbarProps> &
 	Omit<ComponentPropsWithRef<'div'>, keyof _NavbarProps>
 
 function Navbar({ className, ...props }: NavbarProps) {
+
 	return (
-		<footer className='p-4 absolute bottom-0 w-full border-t
+		<footer className='p-4 w-full border-t
 							flex justify-between items-center'>
 			<div className='text-secondary text-xs'>
 				© 2023 by David Kimmich. All rights reserved.
@@ -40,7 +41,7 @@ function Navbar({ className, ...props }: NavbarProps) {
 				</Tooltip>
 			</div>
 		</footer>
-	);
+	)
 }
 
 export default Navbar;
