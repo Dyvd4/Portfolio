@@ -1,5 +1,5 @@
 import { StandardLonghandProperties } from 'csstype';
-import { ComponentPropsWithRef, PropsWithChildren, useState } from 'react';
+import { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
 type TooltipProps = PropsWithChildren<{
 	title: string
@@ -46,25 +46,21 @@ function useTooltipPositionStyle(direction: TooltipProps["direction"]) {
 
 function Tooltip({ children, direction = "up", title, ...props }: TooltipProps) {
 
-	const [isActive, setIsActive] = useState(false);
 	const positionStyle = useTooltipPositionStyle(direction);
 
 	return (
 		<span
-			className="relative cursor-pointer"
+			className="relative cursor-pointer group"
 			{...props}>
 			<span
 				style={positionStyle}
-				className={`${isActive ? "opacity-100" : "opacity-0"}
-							transition-opacity bg-black text-white
+				className={`opacity-0 invisible group-hover:opacity-100 group-hover:visible
+							bg-black text-white transition-all duration-300
 							text-center font-bold text-sm absolute
 							p-2 rounded-lg whitespace-nowrap transform`}>
 				{title}
 			</span>
-			<span
-				onMouseOut={() => setIsActive(false)}
-				onMouseOver={() => setIsActive(true)}
-				className="inline-flex justify-center items-center 
+			<span className="inline-flex justify-center items-center 
 							relative z-100 ">
 				{children}
 			</span>
