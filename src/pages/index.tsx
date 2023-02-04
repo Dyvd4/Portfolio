@@ -1,3 +1,4 @@
+import Badge from '@components/Badge';
 import Button from '@components/Button';
 import IconLink from '@components/IconLink';
 import useAge from '@hooks/useAge';
@@ -17,8 +18,17 @@ export default function Home(props) {
 			<main className="absolute top-1/2 left-1/2 
 							transform -translate-x-1/2 -translate-y-1/2">
 				<div className="flex flex-col items-center">
-					<h1 className='text-6xl font-black whitespace-nowrap'>
-						Intuitive. Useful. Beautiful.
+					<h1>
+						<Badge variant="yellow" className='text-6xl font-black mr-4 text-black dark:text-white'>
+							Intuitive.
+						</Badge>
+						<Badge variant="green" className='text-6xl font-black mr-4 text-black dark:text-white'>
+							Useful.
+						</Badge>
+						<Badge variant="pink" className='text-6xl font-black mr-4 text-black dark:text-white'>
+							Beautiful.
+						</Badge>
+						{/* Intuitive. Useful. Beautiful. */}
 					</h1>
 					<div className='mt-8 text-center'>
 						<p className='text-secondary'>
