@@ -26,35 +26,27 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	const [projects, setProjects] = useState(initialProjects);
 	const [projectsAreLoading, setProjectsAreLoading] = useState(false);
 	const [projectOrTagname, setProjectName] = useState("");
-	const [parent] = useAutoAnimate();
+	const [isInitialLoad, setIsInitialLoad] = useState(true);
+	const [setParentRef] = useAutoAnimate();
 
-	const fetchProjects = useCallback(async (projectOrTagName?: string) => {
-		if (!projectOrTagName) {
-			setProjectsAreLoading(true)
-			const response = await fetch(`/api/projects`);
-			const projects = await response.json();
-			setProjects(projects)
-			setProjectsAreLoading(false)
-			return;
-		}
+	const fetchProjects = useCallback(async (projectOrTagname?: string) => {
 		setProjectsAreLoading(true)
 		const response = await fetch(`/api/projects?projectOrTagname=${projectOrTagname}`);
 		const projects = await response.json();
 		setProjects(projects)
 		setProjectsAreLoading(false)
-	}, [projectOrTagname])
+	}, [])
 
 	useEffect(() => {
-		fetchProjects(projectOrTagname)
+		if (!isInitialLoad) fetchProjects(projectOrTagname);
+		setIsInitialLoad(false)
 	}, [projectOrTagname, fetchProjects]);
 
 	return (
 		<div className="max-w-sm mx-auto">
-			<div className="text-center">
-				<h1 className='text-7xl font-black'>
-					Projects
-				</h1>
-			</div>
+			<h1 className='text-7xl font-black text-center'>
+				Projects
+			</h1>
 			<Input
 				value={projectOrTagname}
 				onChange={(e) => setProjectName(e.target.value)}
@@ -64,7 +56,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				className="border-2 rounded-md border-black mt-20"
 			/>
 			<ul
-				ref={parent}
+				ref={setParentRef}
 				className="flex flex-col gap-4 mt-20 items-center">
 				{projectsAreLoading && <>
 					<LoadingCircle />
