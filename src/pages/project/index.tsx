@@ -1,9 +1,12 @@
 import Badge from "@components/Badge";
 import Card from "@components/Card";
+import IconLink from "@components/IconLink";
 import Input from "@components/Input";
 import LoadingCircle from "@components/LoadingCircle";
+import Tooltip from "@components/Tooltip";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { prisma } from "@prisma";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 export async function getServerSideProps() {
@@ -66,13 +69,16 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 						<li className="w-full flex justify-center" key={project.id}>
 							<Card
 								className="flex-grow"
-								href={`/project/${project.id}`}
-								title={project.alias}
+								title={<>
+									<IconLink href={`/project/${project.id}`}>
+										{project.alias}
+									</IconLink>
+								</>}
 								description={project.description || "No description available"}
 								tags={project.tags.length > 0
 									? <>
 										{project.tags.map(tag => (
-											<Badge key={tag.name} className="mt-2">
+											<Badge key={tag.name}>
 												{tag.name}
 											</Badge>
 										))}

@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
 			<div className='min-h-screen'>
 				<Navbar />
 				{!isLoading && <>
-					<div className="max-w-screen-md mx-auto">
+					<div className="max-w-screen-md mx-auto px-8">
 						<Component {...pageProps} />
 					</div>
 				</>}
