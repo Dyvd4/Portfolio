@@ -15,7 +15,7 @@ function Card({ className, title, description, tags, ...props }: CardProps) {
 						rounded-lg shadow dark:bg-gray-800
 						dark:border-gray-700 ${className}`}
 			{...props}>
-			<h5 className="text-2xl font-bold text-gray-900 dark:text-white leading-none">
+			<h5 className="text-2xl font-bold leading-none">
 				{title}
 			</h5>
 			{!!description && <>
