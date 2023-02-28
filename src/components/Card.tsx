@@ -1,27 +1,23 @@
-import Link, { LinkProps } from 'next/link';
 import { ComponentPropsWithRef, PropsWithChildren } from 'react';
 
 type _CardProps = {
-	title: string
-	href: LinkProps["href"]
+	title: React.ReactNode
 	description?: string | null
 	tags?: JSX.Element
 }
 
-export type CardProps = PropsWithChildren<_CardProps> & ComponentPropsWithRef<'div'>
+export type CardProps = PropsWithChildren<_CardProps> & Omit<ComponentPropsWithRef<'div'>, keyof _CardProps>
 
-function Card({ className, title, description, tags, href, ...props }: CardProps) {
+function Card({ className, title, description, tags, ...props }: CardProps) {
 	return (
 		<div
 			className={`max-w-sm p-6 bg-white border border-gray-200
 						rounded-lg shadow dark:bg-gray-800
 						dark:border-gray-700 ${className}`}
 			{...props}>
-			<Link href={href}>
-				<h5 className="text-2xl font-bold text-gray-900 dark:text-white leading-none">
-					{title}
-				</h5>
-			</Link>
+			<h5 className="text-2xl font-bold leading-none">
+				{title}
+			</h5>
 			{!!description && <>
 				<p className="font-normal text-secondary dark:text-gray-400 mt-2">
 					{description}

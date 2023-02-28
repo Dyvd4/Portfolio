@@ -80,6 +80,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 			<div className="flex justify-center items-center gap-4">
 				<Button disabled={!project.url}>
 					<IconLink
+						variant="black"
 						disabled={!project.url}
 						href={project.url || "#"}
 						target={"_blank"}>
@@ -88,6 +89,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				</Button>
 				<Button disabled={!project.githubUrl}>
 					<IconLink
+						variant="black"
 						disabled={!project.githubUrl}
 						href={project.githubUrl || "#"}
 						target={"_blank"}>
