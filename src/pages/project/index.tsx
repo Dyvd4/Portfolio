@@ -64,7 +64,10 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				{projectsAreLoading && <>
 					<LoadingCircle />
 				</>}
-				{!projectsAreLoading && <>
+				{!projectsAreLoading && projects.length === 0 && <>
+					No projects found 😴
+				</>}
+				{!projectsAreLoading && projects.length > 0 && <>
 					{(projects).map((project) => (
 						<li className="w-full flex justify-center" key={project.id}>
 							<Card
