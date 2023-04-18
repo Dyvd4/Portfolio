@@ -46,8 +46,8 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	}, [projectOrTagname, fetchProjects]);
 
 	return (
-		<div className="max-w-sm mx-auto">
-			<h1 className='text-7xl font-black text-center'>
+		<div className="max-w-sm mx-auto pb-20">
+			<h1 className='text-6xl sm:text-7xl font-black text-center'>
 				Projects
 			</h1>
 			<Input
@@ -64,7 +64,10 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				{projectsAreLoading && <>
 					<LoadingCircle />
 				</>}
-				{!projectsAreLoading && <>
+				{!projectsAreLoading && projects.length === 0 && <>
+					No projects found 😴
+				</>}
+				{!projectsAreLoading && projects.length > 0 && <>
 					{(projects).map((project) => (
 						<li className="w-full flex justify-center" key={project.id}>
 							<Card

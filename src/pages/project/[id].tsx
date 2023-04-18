@@ -71,7 +71,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 	return (
 		<>
 			<div className="text-center">
-				<h1 className='text-7xl font-black'>
+				<h1 className='text-6xl sm:text-7xl font-black'>
 					{project.alias}
 				</h1>
 				<p className='my-8 text-center text-secondary'>{project.description || "no description available"}</p>

@@ -22,7 +22,7 @@ function AboutMe(props: AboutMeProps) {
 				className="rounded-lg mx-auto"
 			/>
 			<section className="mt-16">
-				<h1 className='text-5xl font-black'>
+				<h1 className='text-4xl sm:text-5xl font-black'>
 					About me
 				</h1>
 				<div className="mt-4 px-4">
@@ -55,7 +55,7 @@ function AboutMe(props: AboutMeProps) {
 				</div>
 			</section>
 			<section className="mt-10">
-				<h1 className='text-5xl font-black'>
+				<h1 className='text-4xl sm:text-5xl font-black'>
 					Experiences
 				</h1>
 				<div className="mt-4 px-4">
@@ -87,7 +87,7 @@ function AboutMe(props: AboutMeProps) {
 				</div>
 			</section>
 			<section className="mt-10 pb-20">
-				<h1 className='text-5xl font-black'>
+				<h1 className='text-4xl sm:text-5xl font-black'>
 					Contact
 				</h1>
 				<p className="mt-4 px-4">

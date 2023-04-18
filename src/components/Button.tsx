@@ -10,7 +10,8 @@ export default function Button({ children, className, ...props }: ButtonProps) {
 						dark:bg-yellow-400 dark:hover:bg-yellow-300
 						active:bg-yellow-300 
 						dark:active:bg-yellow-200 text-black
-						py-2 px-4 text-md w-auto
+						py-2 px-4 w-auto
+						text-xs sm:text-base
 						cursor-pointer rounded-full 
 						outline-none border-none font-bold 
 						transform transition-transform active:scale-90

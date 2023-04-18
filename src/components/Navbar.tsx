@@ -10,7 +10,7 @@ type NavbarProps = {}
 
 function Navbar(props: NavbarProps) {
 	return (
-		<nav className="pl-4 pt-4 pr-4 pb-14 sticky top-0">
+		<nav className="pl-4 pt-4 pr-4 pb-14 sticky top-0 z-50">
 			<ul className="flex justify-end items-center gap-2">
 				<li>
 					<Tooltip
