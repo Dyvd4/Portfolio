@@ -1,12 +1,12 @@
 name: import-projects-cron
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 0 * * *'
 jobs:
   cron:
     runs-on: ubuntu-latest
     steps:
-      - name: hit "import-projects-route" every 5 minutes cron job
+      - name: hit "import-projects-route" every day
         run: |
           curl --request POST \
           --url 'https://www.david-kimmich-portfolio.de/api/projects/import' \
