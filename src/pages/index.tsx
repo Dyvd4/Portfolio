@@ -11,9 +11,9 @@ export default function Home(props) {
 	return (
 		<>
 			<Head>
-				<title>David Kimmich</title>
-				<meta name="description" content="This is a portfolio of David Kimmich" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<title>Intuitive. Useful. Beautiful.</title>
+				<meta name="description" content="These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!" />
+				<meta name='keywords' content="Intuitive, Useful, Beautiful, Portfolio, Web app, David Kimmich" />
 			</Head>
 			<main className="absolute top-1/2 left-1/2 overflow-hidden max-w-full
 							transform -translate-x-1/2 -translate-y-1/2">
@@ -28,7 +28,6 @@ export default function Home(props) {
 						<Badge variant="pink" className='text-6xl font-black text-black dark:text-white'>
 							Beautiful.
 						</Badge>
-						{/* Intuitive. Useful. Beautiful. */}
 					</h1>
 					<div className='mt-8 text-center'>
 						<p className='text-secondary'>

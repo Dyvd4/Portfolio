@@ -3,10 +3,9 @@ import Card from "@components/Card";
 import IconLink from "@components/IconLink";
 import Input from "@components/Input";
 import LoadingCircle from "@components/LoadingCircle";
-import Tooltip from "@components/Tooltip";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { prisma } from "@prisma";
-import Link from "next/link";
+import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
 
 export async function getServerSideProps() {
@@ -46,54 +45,61 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	}, [projectOrTagname, fetchProjects]);
 
 	return (
-		<div className="max-w-sm mx-auto pb-20">
-			<h1 className='text-6xl sm:text-7xl font-black text-center'>
-				Projects
-			</h1>
-			<Input
-				value={projectOrTagname}
-				onChange={(e) => setProjectName(e.target.value)}
-				type="text"
-				name="projectOrTagname"
-				placeholder="search by project name or tag..."
-				className="border-2 rounded-md border-black mt-20"
-			/>
-			<ul
-				ref={setParentRef}
-				className="flex flex-col gap-4 mt-20 items-center">
-				{projectsAreLoading && <>
-					<LoadingCircle />
-				</>}
-				{!projectsAreLoading && projects.length === 0 && <>
-					No projects found 😴
-				</>}
-				{!projectsAreLoading && projects.length > 0 && <>
-					{(projects).map((project) => (
-						<li className="w-full flex justify-center" key={project.id}>
-							<Card
-								className="flex-grow"
-								title={<>
-									<IconLink href={`/project/${project.id}`}>
-										{project.alias}
-									</IconLink>
-								</>}
-								description={project.description || "No description available"}
-								tags={project.tags.length > 0
-									? <>
-										{project.tags.map(tag => (
-											<Badge key={tag.name}>
-												{tag.name}
-											</Badge>
-										))}
-									</>
-									: undefined
-								}
-							/>
-						</li>
-					))}
-				</>}
-			</ul>
-		</div>
+		<>
+			<Head>
+				<title>My projects</title>
+				<meta name="description" content="Overview of my coding projects. Most of them should be available on GitHub." />
+				<meta name="keywords" content="Web app, coding, projects, GitHub, David Kimmich" />
+			</Head>
+			<main className="max-w-sm mx-auto pb-20">
+				<h1 className='text-6xl sm:text-7xl font-black text-center'>
+					Projects
+				</h1>
+				<Input
+					value={projectOrTagname}
+					onChange={(e) => setProjectName(e.target.value)}
+					type="text"
+					name="projectOrTagname"
+					placeholder="search by project name or tag..."
+					className="border-2 rounded-md border-black mt-20"
+				/>
+				<ul
+					ref={setParentRef}
+					className="flex flex-col gap-4 mt-20 items-center">
+					{projectsAreLoading && <>
+						<LoadingCircle />
+					</>}
+					{!projectsAreLoading && projects.length === 0 && <>
+						No projects found 😴
+					</>}
+					{!projectsAreLoading && projects.length > 0 && <>
+						{(projects).map((project) => (
+							<li className="w-full flex justify-center" key={project.id}>
+								<Card
+									className="flex-grow"
+									title={<>
+										<IconLink href={`/project/${project.id}`}>
+											{project.alias}
+										</IconLink>
+									</>}
+									description={project.description || "No description available"}
+									tags={project.tags.length > 0
+										? <>
+											{project.tags.map(tag => (
+												<Badge key={tag.name}>
+													{tag.name}
+												</Badge>
+											))}
+										</>
+										: undefined
+									}
+								/>
+							</li>
+						))}
+					</>}
+				</ul>
+			</main>
+		</>
 	)
 }
 
