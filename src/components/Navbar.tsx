@@ -36,7 +36,7 @@ function Navbar(props: NavbarProps) {
 					<Tooltip
 						direction="down"
 						title="About me">
-						<Link href={"/AboutMe"}>
+						<Link href={"/about-me"}>
 							<IconButton>
 								<SiAboutdotme />
 							</IconButton>

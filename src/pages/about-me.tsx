@@ -23,6 +23,7 @@ function AboutMe(props: AboutMeProps) {
 			</Head>
 			<main>
 				<Image
+					placeholder="blur"
 					src={coworkerPic}
 					alt="David Kimmich"
 					height={300}

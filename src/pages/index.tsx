@@ -41,7 +41,7 @@ export default function Home(props) {
 					<Button className='group mt-8'>
 						<IconLink
 							variant="black"
-							href={"/AboutMe"}>
+							href={"/about-me"}>
 							Read more
 						</IconLink>
 					</Button>
