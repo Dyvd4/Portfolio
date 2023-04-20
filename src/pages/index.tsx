@@ -19,26 +19,26 @@ export default function Home(props) {
 							transform -translate-x-1/2 -translate-y-1/2">
 				<div className="flex flex-col items-center">
 					<h1 className='flex flex-col gap-4 md:flex-row'>
-						<Badge variant="yellow" className='text-6xl font-black text-black dark:text-white'>
+						<Badge variant="yellow" className='text-5xl sm:text-6xl font-black text-black dark:text-white'>
 							Intuitive.
 						</Badge>
-						<Badge variant="green" className='text-6xl font-black text-black dark:text-white'>
+						<Badge variant="green" className='text-5xl sm:text-6xl font-black text-black dark:text-white'>
 							Useful.
 						</Badge>
-						<Badge variant="pink" className='text-6xl font-black text-black dark:text-white'>
+						<Badge variant="pink" className='text-5xl sm:text-6xl font-black text-black dark:text-white'>
 							Beautiful.
 						</Badge>
 					</h1>
-					<div className='mt-8 text-center'>
+					<div className='mt-10 text-center'>
 						<p className='text-secondary'>
 							These are the properties a web app should have.
 						</p>
-						<p className='text-secondary mt-2 md:mt-0'>
+						<p className='text-secondary mt-4 md:mt-0'>
 							I am David Kimmich, a {age} year old web dev.
 							If you want to know more about me:
 						</p>
 					</div>
-					<Button className='group mt-8'>
+					<Button className='group mt-10'>
 						<IconLink
 							variant="black"
 							href={"/about-me"}>
