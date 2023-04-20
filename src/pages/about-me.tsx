@@ -1,9 +1,10 @@
 import Badge from "@components/Badge";
+import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useAge from "@hooks/useAge";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import coworkerPic from "../../public/david-kimmich.jpg";
-import Head from "next/head";
 
 type AboutMeProps = {}
 
@@ -11,6 +12,16 @@ const LANGUAGES = ["HTML", "CSS", "TypeScript", "C#", "SQL"]
 const TECHNOLOGIES = ["React", "Tailwind CSS", "Node.js"];
 
 function AboutMe(props: AboutMeProps) {
+
+	useBreadcrumb([
+		{
+			isHome: true
+		},
+		{
+			children: "about me",
+			isCurrentPage: true
+		}
+	])
 
 	const age = useAge()
 

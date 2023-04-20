@@ -1,10 +1,13 @@
 import '@/styles/globals.css'
+import Breadcrumb, { BreadcrumbItem } from '@components/Breadcrumb'
 import Footer from '@components/Footer'
 import LoadingCircle from '@components/LoadingCircle'
 import Navbar from '@components/Navbar'
+import breadcrumbAtom from '@context/atoms/BreadcrumbAtom'
 import useRouterLoadingState from '@hooks/useRouterLoadingState'
 import { Inter } from "@next/font/google"
 import { applyDarkMode } from '@utils/DarkModeUtils'
+import { useAtom } from 'jotai'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
@@ -14,6 +17,7 @@ const robotoFont = Inter({ subsets: ["latin"] })
 export default function App({ Component, pageProps }: AppProps) {
 
 	const [isLoading] = useRouterLoadingState()
+	const [breadcrumb] = useAtom(breadcrumbAtom);
 
 	useEffect(() => {
 		applyDarkMode();
@@ -31,6 +35,11 @@ export default function App({ Component, pageProps }: AppProps) {
 					<Navbar />
 					{!isLoading && <>
 						<div className="max-w-screen-md mx-auto px-8">
+							<Breadcrumb className='pb-8'>
+								{breadcrumb.items.map((item, i) => (
+									<BreadcrumbItem {...item} key={i} />
+								))}
+							</Breadcrumb>
 							<Component {...pageProps} />
 						</div>
 					</>}

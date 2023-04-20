@@ -3,6 +3,7 @@ import Badge from "@components/Badge";
 import Button from "@components/Button";
 import IconLink from "@components/IconLink";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
+import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { prisma } from "@prisma";
 import { Project } from "@prisma/client";
 import dayjs from "dayjs";
@@ -56,6 +57,20 @@ export async function getServerSideProps(context: NextPageContext) {
 type ProjectDetailsProps = Awaited<ReturnType<typeof getServerSideProps>>["props"]
 
 function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
+
+	useBreadcrumb([
+		{
+			isHome: true
+		},
+		{
+			href: "/project",
+			children: "projects"
+		},
+		{
+			isCurrentPage: true,
+			children: project?.name || "Not found"
+		}
+	]);
 
 	if (!project) return <div>no project found</div>
 

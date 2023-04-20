@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
-	"aws-build": "prisma generate && prisma migrate deploy && next build",
+    "aws-build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -20,6 +20,7 @@
     "dayjs": "^1.11.7",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
+    "jotai": "^2.0.4",
     "js-cookie": "^3.0.1",
     "next": "13.1.2",
     "octokit": "^2.0.11",

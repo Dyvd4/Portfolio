@@ -1,10 +1,13 @@
 import Badge from '@components/Badge';
 import Button from '@components/Button';
 import IconLink from '@components/IconLink';
+import useBreadcrumb from '@context/hooks/useBreadcrumb';
 import useAge from '@hooks/useAge';
 import Head from 'next/head';
 
 export default function Home(props) {
+
+	useBreadcrumb([]);
 
 	const age = useAge();
 

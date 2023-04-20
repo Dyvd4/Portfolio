@@ -3,6 +3,7 @@ import Card from "@components/Card";
 import IconLink from "@components/IconLink";
 import Input from "@components/Input";
 import LoadingCircle from "@components/LoadingCircle";
+import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { prisma } from "@prisma";
 import Head from "next/head";
@@ -24,6 +25,16 @@ export async function getServerSideProps() {
 type ProjectsProps = {} & Awaited<ReturnType<typeof getServerSideProps>>["props"]
 
 function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
+
+	useBreadcrumb([
+		{
+			isHome: true
+		},
+		{
+			children: "projects",
+			isCurrentPage: true
+		}
+	]);
 
 	const [projects, setProjects] = useState(initialProjects);
 	const [projectsAreLoading, setProjectsAreLoading] = useState(false);
