@@ -135,7 +135,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					</LineChart>
 				</ResponsiveContainer>
 			</section>
-
+			{/* FIXME: labels are not responsive enough */}
 			<section className="mt-16">
 				<h1>
 					<span className='text-xl'>

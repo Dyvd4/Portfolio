@@ -1,18 +1,17 @@
 import Link from 'next/link';
 import { ComponentPropsWithRef } from 'react';
 
-// TODO: check type
 export type _BreadcrumbItemProps = {
 	isCurrentPage: true
-	isHome?: false
+	isHome?: never
 	children: React.ReactNode
 } | {
 	isHome: true
-	isCurrentPage?: false
+	isCurrentPage?: never
 	children?: never
 } | {
-	isHome?: false
-	isCurrentPage?: false
+	isHome?: never
+	isCurrentPage?: never
 	children: React.ReactNode
 	href: string
 }

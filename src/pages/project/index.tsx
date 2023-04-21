@@ -5,6 +5,7 @@ import Input from "@components/Input";
 import LoadingCircle from "@components/LoadingCircle";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import useDebounce from "@hooks/useDebounce";
 import { prisma } from "@prisma";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
@@ -39,6 +40,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	const [projects, setProjects] = useState(initialProjects);
 	const [projectsAreLoading, setProjectsAreLoading] = useState(false);
 	const [projectOrTagname, setProjectName] = useState("");
+	const { value: debouncedProjectOrTagname, isDebouncing } = useDebounce(projectOrTagname);
 	const [isInitialLoad, setIsInitialLoad] = useState(true);
 	const [setParentRef] = useAutoAnimate();
 
@@ -51,9 +53,9 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	}, [])
 
 	useEffect(() => {
-		if (!isInitialLoad) fetchProjects(projectOrTagname);
+		if (!isInitialLoad) fetchProjects(debouncedProjectOrTagname);
 		setIsInitialLoad(false)
-	}, [projectOrTagname, fetchProjects]);
+	}, [debouncedProjectOrTagname, fetchProjects]);
 
 	return (
 		<>
@@ -77,13 +79,13 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				<ul
 					ref={setParentRef}
 					className="flex flex-col gap-4 mt-20 items-center">
-					{projectsAreLoading && <>
+					{projectsAreLoading || isDebouncing && <>
 						<LoadingCircle />
 					</>}
-					{!projectsAreLoading && projects.length === 0 && <>
+					{!projectsAreLoading && !isDebouncing && projects.length === 0 && <>
 						No projects found 😴
 					</>}
-					{!projectsAreLoading && projects.length > 0 && <>
+					{!projectsAreLoading && !isDebouncing && projects.length > 0 && <>
 						{(projects).map((project) => (
 							<li className="w-full flex justify-center" key={project.id}>
 								<Card
