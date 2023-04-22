@@ -25,13 +25,37 @@ export async function getServerSideProps(context: NextPageContext) {
 		}
 	}
 
-	const project = await prisma.project.findUnique({
+	const projectLanguageAggregate = await prisma.projectLanguage.aggregate({
 		where: {
-			id: parseInt(id as string)
+			projectId: +id
 		},
-		include: {
+		_sum: {
+			codeAmountInBytes: true
+		}
+	});
+
+	const project = await prisma.project.findFirst({
+		where: {
+			id: +id,
+		},
+		select: {
+			id: true,
+			name: true,
+			alias: true,
+			githubUrl: true,
+			url: true,
+			description: true,
+			visibility: true,
+			updatedAt: true,
+			createdAt: true,
+			languages: {
+				where: {
+					codeAmountInBytes: {
+						gte: Number((projectLanguageAggregate._sum.codeAmountInBytes! * 0.01).toFixed(0))
+					}
+				}
+			},
 			commits: true,
-			languages: true,
 			tags: true
 		}
 	});
@@ -135,7 +159,6 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					</LineChart>
 				</ResponsiveContainer>
 			</section>
-			{/* FIXME: labels are not responsive enough */}
 			<section className="mt-16">
 				<h1>
 					<span className='text-xl'>
