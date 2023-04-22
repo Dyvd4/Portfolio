@@ -150,12 +150,16 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					<BarChart data={project.languages}>
 						<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
 							<LabelList
-								className="fill-secondary"
+								className="fill-secondary text-xs sm:text-sm md:text-base"
 								position={"top"}
 								formatter={(value) => getPercentageAmountOfLanguage(value, totalLanguageAmountInBytes)}
 							/>
 						</Bar>
-						<XAxis dataKey={"name"} />
+						<XAxis
+							dataKey={"name"}
+							interval={0}
+							style={{ fontSize: "10px" }}
+						/>
 					</BarChart>
 				</ResponsiveContainer>
 			</section>
