@@ -5,6 +5,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import coworkerPic from "../../public/david-kimmich.jpg";
+import IconLink from "@components/IconLink";
+import Button from "@components/Button";
 
 type AboutMeProps = {}
 
@@ -103,6 +105,23 @@ function AboutMe(props: AboutMeProps) {
 								</li>
 							))}
 						</ul>
+					</div>
+				</section>
+				<section className="mt-10">
+					<h1 className='text-4xl sm:text-5xl font-black'>
+						Projects
+					</h1>
+					<div className="mt-4 px-4">
+						<span className="mr-2">
+							See:
+						</span>
+						<b>
+							<IconLink
+								className="inline-flex"
+								href={"/project"}>
+								my projects
+							</IconLink>
+						</b>
 					</div>
 				</section>
 				<section className="mt-10 pb-20">
