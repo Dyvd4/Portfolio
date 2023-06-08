@@ -1,8 +1,6 @@
 import { Prisma } from "@prisma/client";
 import dayjs from "dayjs";
 
-const latestCommitsLimit = 300;
-
 type ProjectPayload = Prisma.ProjectGetPayload<{
 	include: { commits: true }
 }>
@@ -10,10 +8,11 @@ type ProjectPayload = Prisma.ProjectGetPayload<{
 export const getLatestCommitsView = (project: ProjectPayload) => {
 	const groupedCommits = project.commits.sort((a, b) => {
 		return dayjs(b.createDate).isBefore(dayjs(a.createDate))
-		? -1
-		: 1
-	}).slice(0, latestCommitsLimit).filter((commit, index, self) => {
-		return self.findIndex(c => dayjs(c.createDate).isSame(dayjs(commit.createDate), "day")) === index;
+			? -1
+			: 1
+	}).filter((commit, index, self) => {
+		return self.findIndex(c => dayjs(c.createDate).isSame(dayjs(commit.createDate), "day")) === index &&
+			dayjs(commit.createDate).isAfter(dayjs().subtract(1, "year"));
 	}).map((commit) => {
 		return {
 			date: commit.createDate,
@@ -23,10 +22,10 @@ export const getLatestCommitsView = (project: ProjectPayload) => {
 		}
 	}).sort((a, b) => {
 		return dayjs(a.date).isBefore(dayjs(b.date))
-		? -1
-		: 1
+			? -1
+			: 1
 	})
-	
+
 	return {
 		firstCommitDate: groupedCommits[0]?.date || dayjs().toDate(),
 		latestCommitDate: groupedCommits[groupedCommits.length - 1]?.date || dayjs().toDate(),

@@ -64,7 +64,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				<meta name="description" content="Overview of my coding projects. Most of them should be available on GitHub." />
 				<meta name="keywords" content="Web app, coding, projects, GitHub, David Kimmich" />
 			</Head>
-			<main className="max-w-sm mx-auto pb-20">
+			<main className="max-w-sm mx-auto">
 				<h1 className='text-6xl sm:text-7xl font-black text-center'>
 					Projects
 				</h1>
@@ -74,11 +74,11 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					type="text"
 					name="projectOrTagname"
 					placeholder="search by project name or tag..."
-					className="border-2 rounded-md border-black mt-20"
+					className="border-2 rounded-md border-black mt-12"
 				/>
 				<ul
 					ref={setParentRef}
-					className="flex flex-col gap-4 mt-20 items-center">
+					className="flex flex-col gap-4 mt-12 items-center">
 					{projectsAreLoading || isDebouncing && <>
 						<LoadingCircle />
 					</>}

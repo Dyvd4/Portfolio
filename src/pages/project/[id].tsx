@@ -109,7 +109,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 	return (
 		<>
-			<div className="text-center">
+			<div className="text-center mt-12">
 				<h1 className='text-6xl sm:text-7xl font-black'>
 					{project.alias}
 				</h1>
@@ -138,12 +138,12 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 			</div>
 
 			<section className="mt-20">
-				<h1>
+				<h1 className="flex items-center">
 					<span className='text-xl'>
-						Activity
+						Development activity
 					</span>&nbsp;
 					<span className="text-secondary text-base">
-						({dayjs(latestCommitsView.firstCommitDate).format("DD/MM/YYYY")} - {dayjs(latestCommitsView.latestCommitDate).format("DD/MM/YYYY")})
+						(within past year)
 					</span>
 				</h1>
 				<ResponsiveContainer width={"100%"} height={100}>
@@ -160,7 +160,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				</ResponsiveContainer>
 			</section>
 			<section className="mt-16">
-				<h1>
+				<h1 className="flex items-center">
 					<span className='text-xl'>
 						Languages used
 					</span>
@@ -173,7 +173,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					<BarChart data={project.languages}>
 						<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
 							<LabelList
-								className="fill-secondary text-xs sm:text-sm md:text-base"
+								className="fill-secondary text-xs"
 								position={"top"}
 								formatter={(value) => getPercentageAmountOfLanguage(value, totalLanguageAmountInBytes)}
 							/>
