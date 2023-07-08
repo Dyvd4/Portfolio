@@ -1,17 +1,16 @@
 import Badge from "@components/Badge";
+import IconLink from "@components/IconLink";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useAge from "@hooks/useAge";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import coworkerPic from "../../public/david-kimmich.jpg";
-import IconLink from "@components/IconLink";
-import Button from "@components/Button";
 
 type AboutMeProps = {}
 
-const LANGUAGES = ["HTML", "CSS", "TypeScript", "C#", "SQL"]
-const TECHNOLOGIES = ["React", "Tailwind CSS", "Node.js"];
+const LANGUAGES = ["TypeScript", "C#", "SQL"]
+const TECHNOLOGIES = ["HTML", "CSS", "Tailwind CSS", "React", "Next.js", "Node.js", "NestJS", "Express.js", "GitHub"];
 
 function AboutMe(props: AboutMeProps) {
 
