@@ -1,6 +1,6 @@
 import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-
+import config from "@config/config";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 	const projectOrTagname = req.query.projectOrTagname;
@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	if (projectOrTagname instanceof Array) {
 		return res.status(400).json("projectOrTagname must be a string")
 	}
-
+	console.log(config.DATABASE_URL)
 	const projects = await prisma.project.findMany({
 		where: {
 			OR: projectOrTagname
