@@ -6,6 +6,7 @@ frontend:
         - npm ci
     build:
       commands:
+        - env >> .env.production
         - npm run build
         - npx prisma migrate deploy
   artifacts:
