@@ -6,7 +6,8 @@ frontend:
         - npm ci
     build:
       commands:
-        - npm run aws-build
+        - npm run build
+        - npx prisma migrate deploy
   artifacts:
     baseDirectory: .next
     files:
