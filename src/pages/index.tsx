@@ -44,8 +44,8 @@ export default function Home(props) {
 					<Button className='group mt-10'>
 						<IconLink
 							variant="black"
-							href={"/about-me"}>
-							Read more
+							href={"/project"}>
+							My projects
 						</IconLink>
 					</Button>
 				</div>
