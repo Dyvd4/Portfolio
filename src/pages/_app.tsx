@@ -11,10 +11,11 @@ import { useAtom } from 'jotai'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
+import { SessionProvider } from "next-auth/react"
 
 const robotoFont = Inter({ subsets: ["latin"] })
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
 	const [isLoading] = useRouterLoadingState()
 	const [breadcrumb] = useAtom(breadcrumbAtom);
@@ -30,28 +31,30 @@ export default function App({ Component, pageProps }: AppProps) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="author" content="David Kimmich" />
 			</Head>
-			<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
-				<div className='min-h-screen'>
-					<Navbar />
-					{!isLoading && <>
-						<div className="max-w-screen-md mx-auto px-8">
-							<Breadcrumb className='pb-8'>
-								{breadcrumb.items.map((item, i) => (
-									<BreadcrumbItem {...item} key={i} />
-								))}
-							</Breadcrumb>
-							<Component {...pageProps} />
-						</div>
-					</>}
-					{isLoading && <>
-						<div className='absolute top-1/2 left-1/2
+			<SessionProvider session={session}>
+				<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
+					<div className='min-h-screen'>
+						<Navbar />
+						{!isLoading && <>
+							<div className="max-w-screen-md mx-auto px-8">
+								<Breadcrumb className='pb-8'>
+									{breadcrumb.items.map((item, i) => (
+										<BreadcrumbItem {...item} key={i} />
+									))}
+								</Breadcrumb>
+								<Component {...pageProps} />
+							</div>
+						</>}
+						{isLoading && <>
+							<div className='absolute top-1/2 left-1/2
 							transform -translate-x-1/2 -translate-y-1/2'>
-							<LoadingCircle />
-						</div>
-					</>}
+								<LoadingCircle />
+							</div>
+						</>}
+					</div>
+					<Footer />
 				</div>
-				<Footer />
-			</div>
+			</SessionProvider>
 		</>
 	)
 }
