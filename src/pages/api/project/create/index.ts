@@ -15,7 +15,7 @@ export default async function handler(
     return res.status(400).json("Please fill in required fields");
   const projectExists = await prisma.project.findUnique({
     where: {
-      id,
+      id: parseInt(id),
     },
   });
   if (projectExists) {
@@ -23,7 +23,7 @@ export default async function handler(
   }
   const newProject = await prisma.project.create({
     data: {
-      id,
+      id: parseInt(id),
       name,
       alias,
     },

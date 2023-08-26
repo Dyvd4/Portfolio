@@ -25,6 +25,9 @@ function Navbar(props: NavbarProps) {
 					<ul className="flex items-center gap-2">
 						{status === "authenticated" && <>
 							<Button onClick={() => signOut()} className="sm:text-xs">Sign out</Button>
+							<Link href={"/project/create"}>
+								<Button className="sm:text-xs">Create project</Button>
+							</Link>
 						</>}
 						<li>
 							<Tooltip
