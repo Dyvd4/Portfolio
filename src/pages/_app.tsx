@@ -27,7 +27,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 	return (
 		<>
 			<Head>
-				<link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+				<link rel="shortcut icon" href="/Logo.png" type="image/x-icon" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="author" content="David Kimmich" />
 			</Head>
