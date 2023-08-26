@@ -48,7 +48,6 @@ function ProjectCreate() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 			<h1 className="text-4xl font-bold">Create project</h1>
-			<Input placeholder="id" {...register("id")} type="number" />
 			<Input placeholder="name" {...register("name")} />
 			<Input placeholder="alias" {...register("alias")} />
 			{successMessage && <>
