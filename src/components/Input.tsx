@@ -1,11 +1,12 @@
-import { ComponentPropsWithRef } from "react";
+import { ComponentPropsWithRef, forwardRef } from "react";
 
 type InputProps = {} & ComponentPropsWithRef<"input">
 
 /** @see https://flowbite.com/docs/forms/search-input/ */
-function Input({ className, ...props }: InputProps) {
+const Input = forwardRef<HTMLInputElement, InputProps>(function Input({ className, ...props }, ref) {
 	return (
 		<input
+			ref={ref}
 			className={`block w-full p-4
 						text-sm border border-gray-300
 						rounded-lg bg-gray-50 outline-none
@@ -16,6 +17,6 @@ function Input({ className, ...props }: InputProps) {
 			{...props}
 		/>
 	);
-}
+})
 
 export default Input;

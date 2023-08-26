@@ -55,6 +55,9 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/secret-sign-in",
+  },
   secret: process.env.NEXTAUTH_SECRET!,
 };
 

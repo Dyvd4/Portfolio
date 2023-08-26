@@ -1,15 +1,18 @@
 import IconButton from "@components/IconButton";
 import Tooltip from "@components/Tooltip";
 import { toggleDarkMode } from "@utils/DarkModeUtils";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaAdjust, FaHome } from "react-icons/fa";
 import { HiFire } from "react-icons/hi";
 import { SiAboutdotme } from "react-icons/si";
+import Button from "./Button";
 
 type NavbarProps = {}
 
 function Navbar(props: NavbarProps) {
+	const { status } = useSession()
 	return (
 		<nav className="pl-4 pt-4 pr-4 pb-8 sticky top-0 z-50">
 			<ul className="flex justify-between items-center gap-2">
@@ -20,6 +23,9 @@ function Navbar(props: NavbarProps) {
 				</li>
 				<li>
 					<ul className="flex items-center gap-2">
+						{status === "authenticated" && <>
+							<Button onClick={() => signOut()} className="sm:text-xs">Sign out</Button>
+						</>}
 						<li>
 							<Tooltip
 								direction="down"

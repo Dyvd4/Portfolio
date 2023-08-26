@@ -9,6 +9,7 @@ const config = {
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET!,
   ADMIN_USERNAME: process.env.ADMIN_USERNAME!,
   ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
+  BASE_URL: process.env.BASE_URL!,
 };
 
 export default config;
