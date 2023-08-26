@@ -1,7 +1,7 @@
 name: import-projects-cron
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 jobs:
   cron:
     runs-on: ubuntu-latest
@@ -9,5 +9,5 @@ jobs:
       - name: hit "import-projects-route" every day
         run: |
           curl --request POST \
-          --url 'https://www.david-kimmich-portfolio.de/api/projects/import' \
+          --url 'https://www.ticketify.kimmich.dev/api/projects/import' \
           --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
