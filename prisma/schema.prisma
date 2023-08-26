@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Project {
-  id          Int               @id()
+  id          Int               @id() @default(autoincrement())
   name        String            @unique()
   alias       String
   githubUrl   String?

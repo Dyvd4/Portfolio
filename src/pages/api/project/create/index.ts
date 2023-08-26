@@ -10,12 +10,12 @@ export default async function handler(
   const session = await getServerSession(req, res, authOptions);
   if (!session) return res.send("You have to be singed in");
   if (req.method !== "POST") return res.send("Handler only accepts POST");
-  const { id, name, alias } = req.body;
-  if (!id && !name && !alias)
+  const { name, alias } = req.body;
+  if (!name && !alias)
     return res.status(400).json("Please fill in required fields");
   const projectExists = await prisma.project.findUnique({
     where: {
-      id: parseInt(id),
+      name,
     },
   });
   if (projectExists) {
@@ -23,7 +23,6 @@ export default async function handler(
   }
   const newProject = await prisma.project.create({
     data: {
-      id: parseInt(id),
       name,
       alias,
     },
