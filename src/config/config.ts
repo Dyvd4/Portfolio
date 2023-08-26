@@ -7,6 +7,8 @@ const config = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID!,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET!,
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET!,
+  ADMIN_USERNAME: process.env.ADMIN_USERNAME!,
+  ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
 };
 
 export default config;
