@@ -26,7 +26,7 @@ function Navbar(props: NavbarProps) {
 	const darkModeIsActive = useDarkModeIsActive()
 	const router = useRouter();
 	return (
-		<nav className="pl-6 pt-6 pr-6 pb-8 sticky top-0 z-50 bg-white dark:bg-gray-900">
+		<nav className="p-6 sticky top-0 z-50 bg-white dark:bg-gray-900">
 			<ul className="flex justify-between items-center gap-2">
 				<li>
 					<Link href={"/"}>

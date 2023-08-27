@@ -60,8 +60,8 @@ function Tooltip({ children, direction = "up", title, ...props }: TooltipProps) 
 							p-2 rounded-lg whitespace-nowrap transform`}>
 				{title}
 			</span>
-			<span className="inline-flex justify-center items-center 
-							relative z-100 ">
+			<span className="flex justify-center items-center 
+							relative z-100">
 				{children}
 			</span>
 		</span>

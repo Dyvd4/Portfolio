@@ -36,7 +36,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 					<div className='min-h-screen'>
 						<Navbar />
 						{!isLoading && <>
-							<div className="max-w-screen-md mx-auto px-8">
+							<div className="max-w-screen-md mx-auto px-8 pt-2">
 								<Breadcrumb className='pb-8'>
 									{breadcrumb.items.map((item, i) => (
 										<BreadcrumbItem {...item} key={i} />
