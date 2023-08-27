@@ -13,6 +13,7 @@ import { SessionProvider } from "next-auth/react"
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 const robotoFont = Inter({ subsets: ["latin"] })
 
@@ -53,6 +54,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 							</div>
 						</>}
 					</div>
+					<Toaster position="bottom-center" />
 					<ModalPortal />
 					<Footer />
 				</div>
