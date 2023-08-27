@@ -1,12 +1,12 @@
 import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
 import { toggleDarkMode } from "@utils/DarkModeUtils";
-import { HalfMoon, SunLight } from "iconoir-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Button from "./Button";
 import NavLink from "./NavLink";
+import { SunLight, HalfMoon } from "./Icons";
 
 type NavbarProps = {}
 

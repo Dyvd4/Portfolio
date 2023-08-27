@@ -22,6 +22,17 @@
 
 	svg.icon {
 		cursor: pointer;
+		width: 24px;
+		height: 24px;
+		stroke-width: 1.5;
+		fill: none;
+	}
+
+	svg.icon > path {
+		stroke-width: 1.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		@apply dark:stroke-white stroke-black
 	}
 
 	svg.icon:hover > path {

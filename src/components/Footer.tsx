@@ -1,8 +1,8 @@
 import IconButton from '@components/IconButton';
 import Tooltip from '@components/Tooltip';
-import { LinkedIn, Mail } from 'iconoir-react';
 import Link from 'next/link';
 import { ComponentPropsWithRef, PropsWithChildren } from 'react';
+import { LinkedIn, Mail } from './Icons';
 
 type _NavbarProps = {}
 
