@@ -82,9 +82,9 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					{projectsAreLoading || isDebouncing && <>
 						<LoadingCircle />
 					</>}
-					{!projectsAreLoading && !isDebouncing && projects.length === 0 && <>
+					{!projectsAreLoading && !isDebouncing && projects.length === 0 && <p>
 						No projects found 😴
-					</>}
+					</p>}
 					{!projectsAreLoading && !isDebouncing && projects.length > 0 && <>
 						{(projects).map((project) => (
 							<li className="w-full flex justify-center" key={project.id}>

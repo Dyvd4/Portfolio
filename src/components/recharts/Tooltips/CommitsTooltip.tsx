@@ -9,7 +9,7 @@ export default function CommitsTooltip({ active, payload: payloads }: TooltipPro
 		const payload = payloads[0];
 
 		return (
-			<TooltipWrapper>
+			<TooltipWrapper className="dark:text-white">
 				<div>
 					Date: {dayjs(payload.payload.date).format("DD/MM/YYYY")}
 				</div>

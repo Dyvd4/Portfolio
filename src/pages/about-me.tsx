@@ -33,7 +33,7 @@ function AboutMe(props: AboutMeProps) {
 				<meta name="description" content="Here is an overview about me, my experiences and what technologies I use." />
 				<meta name="keywords" content="About me, Experiences, Skills, Technologies, Contact, Programming languages, David Kimmich" />
 			</Head>
-			<main>
+			<main className="dark:text-white">
 				<Image
 					placeholder="blur"
 					src={coworkerPic}
