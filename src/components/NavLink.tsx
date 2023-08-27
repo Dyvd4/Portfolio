@@ -12,7 +12,8 @@ export type NavLinkProps = _NavLinkProps &
 
 function NavLink({ className, children, isActive, ...props }: NavLinkProps) {
     return (
-        <Link className={cn(`hover:text-yellow-500 dark:hover:text-yellow-500 transition-colors`,
+        <Link className={cn(`hover:text-yellow-500 dark:hover:text-yellow-500 
+                            transition-colors dark:text-white`,
             {
                 "text-yellow-500 dark:text-yellow-500": !!isActive
             },
