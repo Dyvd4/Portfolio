@@ -1,0 +1,28 @@
+{
+	"create functional ${1:component}": {
+		"scope": "typescript, typescriptreact",
+		"prefix": "cfc",
+		"body": [
+			"import { ComponentPropsWithRef, PropsWithChildren } from 'react';",
+			"import { cn } from '@utils/component-utils';",
+			"",
+			"type _${1:Component}Props = {}",
+			"",
+			"export type ${1:Component}Props = _${1:Component}Props &",
+			"\tOmit<PropsWithChildren<ComponentPropsWithRef<'div'>>, keyof _${1:Component}Props>",
+			"",
+			"function ${1:Component}({ className, children, ...props }: ${1:Component}Props) {",
+			"\treturn (",
+			"\t\t<div",
+			"\t\t\tclassName={cn(``, className)}",
+			"\t\t\t{...props}>",
+			"\t\t\tMy component",
+			"\t\t</div>",
+			"\t);",
+			"}",
+			"",
+			"export default ${1:Component};"
+		],
+		"description": "Create a highly reusable component"
+	}
+}

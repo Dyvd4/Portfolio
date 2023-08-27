@@ -19,6 +19,14 @@
 	body {
 		max-width: 100vw;
 	}
+
+	svg.icon {
+		cursor: pointer;
+	}
+
+	svg.icon:hover > path {
+		@apply dark:stroke-yellow-300 stroke-yellow-400 transition-all;
+	}
 }
 
 @layer components {

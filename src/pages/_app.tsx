@@ -12,6 +12,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { SessionProvider } from "next-auth/react"
+import { IconoirProvider } from 'iconoir-react'
 
 const robotoFont = Inter({ subsets: ["latin"] })
 
@@ -32,28 +33,36 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 				<meta name="author" content="David Kimmich" />
 			</Head>
 			<SessionProvider session={session}>
-				<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
-					<div className='min-h-screen'>
-						<Navbar />
-						{!isLoading && <>
-							<div className="max-w-screen-md mx-auto px-8">
-								<Breadcrumb className='pb-8'>
-									{breadcrumb.items.map((item, i) => (
-										<BreadcrumbItem {...item} key={i} />
-									))}
-								</Breadcrumb>
-								<Component {...pageProps} />
-							</div>
-						</>}
-						{isLoading && <>
-							<div className='absolute top-1/2 left-1/2
+				<IconoirProvider iconProps={{
+					width: "24px",
+					height: "24px",
+					color: "black",
+					strokeWidth: 1.5,
+					className: "icon"
+				}}>
+					<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
+						<div className='min-h-screen'>
+							<Navbar />
+							{!isLoading && <>
+								<div className="max-w-screen-md mx-auto px-8">
+									<Breadcrumb className='pb-8'>
+										{breadcrumb.items.map((item, i) => (
+											<BreadcrumbItem {...item} key={i} />
+										))}
+									</Breadcrumb>
+									<Component {...pageProps} />
+								</div>
+							</>}
+							{isLoading && <>
+								<div className='absolute top-1/2 left-1/2
 							transform -translate-x-1/2 -translate-y-1/2'>
-								<LoadingCircle />
-							</div>
-						</>}
+									<LoadingCircle />
+								</div>
+							</>}
+						</div>
+						<Footer />
 					</div>
-					<Footer />
-				</div>
+				</IconoirProvider>
 			</SessionProvider>
 		</>
 	)
