@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import Breadcrumb, { BreadcrumbItem } from '@components/Breadcrumb'
 import Footer from '@components/Footer'
 import LoadingCircle from '@components/LoadingCircle'
+import ModalPortal from '@components/ModalPortal'
 import Navbar from '@components/Navbar'
 import breadcrumbAtom from '@context/atoms/BreadcrumbAtom'
 import useRouterLoadingState from '@hooks/useRouterLoadingState'
@@ -52,6 +53,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 							</div>
 						</>}
 					</div>
+					<ModalPortal />
 					<Footer />
 				</div>
 			</SessionProvider>

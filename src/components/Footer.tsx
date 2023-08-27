@@ -1,8 +1,11 @@
 import IconButton from '@components/IconButton';
 import Tooltip from '@components/Tooltip';
+import modalIsActiveAtom from '@context/atoms/ModalIsActiveAtom';
+import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { ComponentPropsWithRef, PropsWithChildren } from 'react';
 import { LinkedIn, Mail } from './Icons';
+import ContactModal from './Modals/ContactModal';
 
 type _NavbarProps = {}
 
@@ -10,7 +13,7 @@ export type NavbarProps = PropsWithChildren<_NavbarProps> &
 	Omit<ComponentPropsWithRef<'div'>, keyof _NavbarProps>
 
 function Navbar({ className, ...props }: NavbarProps) {
-
+	const [, setModalIsActive] = useAtom(modalIsActiveAtom)
 	return (
 		<footer className='p-6 w-full
 							flex justify-between items-center'>
@@ -31,14 +34,13 @@ function Navbar({ className, ...props }: NavbarProps) {
 				</Tooltip>
 				<Tooltip
 					direction="left"
-					title="Mail to: david.kimmich@gmx.net">
-					<Link href={"mailto:david.kimmich@gmx.net"}>
-						<IconButton variant="circle" className="border-0">
-							<Mail />
-						</IconButton>
-					</Link>
+					title="Contact">
+					<IconButton onClick={() => setModalIsActive(true)} variant="circle" className="border-0">
+						<Mail />
+					</IconButton>
 				</Tooltip>
 			</div>
+			<ContactModal />
 		</footer>
 	)
 }
