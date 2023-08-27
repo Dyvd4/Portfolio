@@ -1,5 +1,6 @@
 import IconButton from "@components/IconButton";
 import Tooltip from "@components/Tooltip";
+import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
 import { toggleDarkMode } from "@utils/DarkModeUtils";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -8,17 +9,22 @@ import { FaAdjust, FaHome } from "react-icons/fa";
 import { HiFire } from "react-icons/hi";
 import { SiAboutdotme } from "react-icons/si";
 import Button from "./Button";
-
 type NavbarProps = {}
 
 function Navbar(props: NavbarProps) {
 	const { status } = useSession()
+	const darkModeIsActive = useDarkModeIsActive()
 	return (
 		<nav className="pl-4 pt-4 pr-4 pb-8 sticky top-0 z-50">
 			<ul className="flex justify-between items-center gap-2">
 				<li>
 					<Link href={"/"}>
-						<Image src={"/Logo.png"} alt="Logo" width={50} height={50} />
+						{darkModeIsActive && <>
+							<Image src={`/Favicon_dark.png`} alt="Logo" width={50} height={50} />
+						</>}
+						{!darkModeIsActive && <>
+							<Image src={`/Favicon_light.png`} alt="Logo" width={50} height={50} />
+						</>}
 					</Link>
 				</li>
 				<li>
