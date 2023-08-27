@@ -20,7 +20,7 @@ export default function Home(props) {
 			</Head>
 			<main className="absolute top-1/2 left-1/2 overflow-hidden max-w-full
 							transform -translate-x-1/2 -translate-y-1/2">
-				<div className="flex flex-col items-center">
+				<div className="flex flex-col items-center mt-12">
 					<h1 className='flex flex-col gap-4 md:flex-row'>
 						<Badge variant="yellow" className='text-5xl sm:text-6xl font-black text-black dark:text-white'>
 							Intuitive.

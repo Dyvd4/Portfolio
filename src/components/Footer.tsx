@@ -13,7 +13,7 @@ export type NavbarProps = PropsWithChildren<_NavbarProps> &
 function Navbar({ className, ...props }: NavbarProps) {
 
 	return (
-		<footer className='p-4 w-full border-t
+		<footer className='p-4 w-full
 							flex justify-between items-center'>
 			<div className='text-secondary text-xs'>
 				© 2023 by David Kimmich. All rights reserved.

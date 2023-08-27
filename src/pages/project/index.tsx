@@ -78,7 +78,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				/>
 				<ul
 					ref={setParentRef}
-					className="flex flex-col gap-4 mt-12 items-center">
+					className="flex flex-col gap-6 my-12 items-center">
 					{projectsAreLoading || isDebouncing && <>
 						<LoadingCircle />
 					</>}
