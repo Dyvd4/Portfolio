@@ -1,6 +1,6 @@
 import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
 import { toggleDarkMode } from "@utils/DarkModeUtils";
-import { HalfMoon } from "iconoir-react";
+import { HalfMoon, SunLight } from "iconoir-react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +54,7 @@ function Navbar(props: NavbarProps) {
 							</li>
 						))}
 						<li onClick={toggleDarkMode}>
-							<HalfMoon />
+							{darkModeIsActive ? <SunLight /> : <HalfMoon />}
 						</li>
 					</ul>
 				</li>
