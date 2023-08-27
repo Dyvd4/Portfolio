@@ -169,7 +169,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 						(in %)
 					</span>
 				</h1>
-				<ResponsiveContainer width={"100%"} height={250}>
+				<ResponsiveContainer width={"100%"} height={300}>
 					<BarChart data={project.languages}>
 						<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
 							<LabelList
