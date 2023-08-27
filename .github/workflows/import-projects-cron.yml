@@ -9,5 +9,5 @@ jobs:
       - name: hit "import-projects-route" every day
         run: |
           curl --request POST \
-          --url 'https://www.ticketify.kimmich.dev/api/projects/import' \
+          --url 'https://portfolio.kimmich.dev/api/projects/import' \
           --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
