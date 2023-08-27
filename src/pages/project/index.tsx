@@ -74,7 +74,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					type="text"
 					name="projectOrTagname"
 					placeholder="search by project name or tag..."
-					className="border-2 rounded-md border-black mt-12"
+					className="border-2 rounded-md mt-12"
 				/>
 				<ul
 					ref={setParentRef}
