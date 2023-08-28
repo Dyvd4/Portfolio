@@ -8,7 +8,7 @@ export type MailProps = _MailProps &
 
 function Mail({ className, children, ...props }: MailProps) {
     return (
-        <svg className={cn('icon', className)} {...props}>
+        <svg className={cn('icon', className)} viewBox="0 0 24 24" {...props}>
             <path
                 d="M7 9l5 3.5L17 9"
             />

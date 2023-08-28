@@ -8,7 +8,7 @@ export type LinkedInProps = _LinkedInProps &
 
 function LinkedIn({ className, children, ...props }: LinkedInProps) {
     return (
-        <svg className={cn('icon', className)} {...props}>
+        <svg className={cn('icon', className)} viewBox="0 0 24 24" {...props}>
             <path
                 d="M21 8v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5h8a5 5 0 015 5zM7 17v-7"
             />

@@ -54,7 +54,7 @@ function Navbar(props: NavbarProps) {
 							</li>
 						))}
 						<li onClick={toggleDarkMode}>
-							{darkModeIsActive ? <SunLight /> : <HalfMoon />}
+							{darkModeIsActive ? <SunLight className="!w-5 !h-5" /> : <HalfMoon className="!w-5 !h-5" />}
 						</li>
 					</ul>
 				</li>
