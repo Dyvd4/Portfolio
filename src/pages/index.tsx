@@ -38,7 +38,6 @@ export default function Home(props) {
 						</p>
 						<p className='text-secondary mt-4 md:mt-0'>
 							I am David Kimmich, a {age} year old web dev.
-							If you want to know more about me:
 						</p>
 					</div>
 					<Button className='group mt-10'>
