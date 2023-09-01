@@ -1,8 +1,7 @@
-import ModalIsActiveAtom from "@context/atoms/ModalIsActiveAtom";
-import { useAtom } from "jotai";
+import { useState } from "react";
 
 const useModalDisclosure = () => {
-  const [modalIsActive, setModalIsActive] = useAtom(ModalIsActiveAtom);
+  const [modalIsActive, setModalIsActive] = useState(false);
   return {
     isActive: modalIsActive,
     open: () => setModalIsActive(true),

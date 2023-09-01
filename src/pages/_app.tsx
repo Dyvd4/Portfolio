@@ -15,8 +15,17 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 const robotoFont = Inter({ subsets: ["latin"] })
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			staleTime: 60000,
+			refetchOnWindowFocus: false
+		}
+	}
+})
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
@@ -35,26 +44,28 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 				<meta name="author" content="David Kimmich" />
 			</Head>
 			<SessionProvider session={session}>
-				<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
-					<div className='min-h-screen'>
-						<Navbar />
-						{!routerIsLoading && <>
-							<div className="max-w-screen-md mx-auto px-8 pt-2">
-								<Breadcrumb className='pb-8'>
-									{breadcrumb.items.map((item, i) => (
-										<BreadcrumbItem {...item} key={i} />
-									))}
-								</Breadcrumb>
-								<Component {...pageProps} />
-							</div>
-						</>}
-						{routerIsLoading && <LoadingCircleWithPositioning />}
-						<LoadingPortalSlot />
+				<QueryClientProvider client={queryClient}>
+					<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
+						<div className='min-h-screen'>
+							<Navbar />
+							{!routerIsLoading && <>
+								<div className="max-w-screen-md mx-auto px-8 pt-2">
+									<Breadcrumb className='pb-8'>
+										{breadcrumb.items.map((item, i) => (
+											<BreadcrumbItem {...item} key={i} />
+										))}
+									</Breadcrumb>
+									<Component {...pageProps} />
+								</div>
+							</>}
+							{routerIsLoading && <LoadingCircleWithPositioning />}
+							<LoadingPortalSlot />
+						</div>
+						<Toaster position="bottom-center" />
+						<ModalPortal />
+						<Footer />
 					</div>
-					<Toaster position="bottom-center" />
-					<ModalPortal />
-					<Footer />
-				</div>
+				</QueryClientProvider>
 			</SessionProvider>
 		</>
 	)
