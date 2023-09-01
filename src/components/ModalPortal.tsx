@@ -1,4 +1,4 @@
-import ModalIsActiveAtom from "@context/atoms/ModalIsActiveAtom";
+import ModalPortalIsActiveAtom from "@context/atoms/ModalPortalIsActiveAtom";
 import { cn } from "@utils/component-utils";
 import { useAtom } from "jotai";
 import { ComponentPropsWithRef, PropsWithChildren, useEffect } from "react";
@@ -8,7 +8,7 @@ export type ModalCoverProps = _ModalCoverProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _ModalCoverProps>;
 
 function ModalCover({ className, children, ...props }: ModalCoverProps) {
-	const [modalIsActive] = useAtom(ModalIsActiveAtom);
+	const [modalIsActive] = useAtom(ModalPortalIsActiveAtom);
 
 	useEffect(() => {
 		if (modalIsActive) document.body.style.overflow = "hidden";
