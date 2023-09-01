@@ -1,10 +1,9 @@
 import IconButton from '@components/IconButton';
 import Tooltip from '@components/Tooltip';
-import modalIsActiveAtom from '@context/atoms/ModalIsActiveAtom';
-import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { ComponentPropsWithRef, PropsWithChildren } from 'react';
 import { LinkedIn, Mail } from './Icons';
+import useModalDisclosure from './Modal/hooks/useModalDisclosure';
 import ContactModal from './Modals/ContactModal';
 
 type _NavbarProps = {}
@@ -13,7 +12,8 @@ export type NavbarProps = PropsWithChildren<_NavbarProps> &
 	Omit<ComponentPropsWithRef<'div'>, keyof _NavbarProps>
 
 function Navbar({ className, ...props }: NavbarProps) {
-	const [, setModalIsActive] = useAtom(modalIsActiveAtom)
+	const { isActive, open, close } = useModalDisclosure()
+
 	return (
 		<footer className='p-6 w-full
 							flex justify-between items-center'>
@@ -35,12 +35,12 @@ function Navbar({ className, ...props }: NavbarProps) {
 				<Tooltip
 					direction="left"
 					title="Contact">
-					<IconButton onClick={() => setModalIsActive(true)} variant="circle" className="border-0">
+					<IconButton onClick={open} variant="circle" className="border-0">
 						<Mail />
 					</IconButton>
 				</Tooltip>
 			</div>
-			<ContactModal />
+			<ContactModal isActive={isActive} close={close} />
 		</footer>
 	)
 }

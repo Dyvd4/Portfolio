@@ -3,9 +3,7 @@ import FormControl from "@components/FormControl";
 import Input from "@components/Input";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
 import Textarea from "@components/Textarea";
-import ModalIsActiveAtom from "@context/atoms/ModalIsActiveAtom";
 import request from "@utils/request-utils";
-import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
@@ -20,13 +18,15 @@ const contactSchema = z.object({
 });
 type ContactSchema = z.infer<typeof contactSchema>;
 
-type _ContactModalProps = {};
+type _ContactModalProps = {
+	isActive: boolean
+	close(): void
+};
 
 export type ContactModalProps = _ContactModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _ContactModalProps>;
 
 function ContactModal({ className, children, ...props }: ContactModalProps) {
-	const [, setModalIsActive] = useAtom(ModalIsActiveAtom);
 	const { register, handleSubmit } = useForm<ContactSchema>();
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<ContactSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -34,15 +34,20 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 
 	const handleLinkClick = (e, href: string) => {
 		e.preventDefault();
-		setModalIsActive(false);
+		props.close()
 		router.push(href);
 	};
+
+	const handleClose = () => {
+		setErrorMap(null)
+		props.close();
+	}
 
 	const makeContactRequest = async (data: ContactSchema, e) => {
 		try {
 			const { name, email, message } = data;
 			contactSchema.parse({ name, email, message });
-			setModalIsActive(false);
+			close()
 			toast.promise(
 				request.post(`/api/contact`, data),
 				{
@@ -68,8 +73,8 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 	};
 
 	return (
-		<Modal>
-			<ModalHeader onClose={() => setErrorMap(null)}>Contact Form</ModalHeader>
+		<Modal isActive={props.isActive}>
+			<ModalHeader close={handleClose}>Contact Form</ModalHeader>
 			<ModalBody>
 				<form className="flex flex-col gap-2" onSubmit={handleSubmit(makeContactRequest)}>
 					<FormControl errorMessage={errorMap?.name?._errors}>
