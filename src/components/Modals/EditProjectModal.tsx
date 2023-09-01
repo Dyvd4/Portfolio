@@ -27,9 +27,8 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 	const { register, handleSubmit } = useForm<ProjectSchema>();
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<ProjectSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
-
 	const { isLoading, data: project } = useQuery<{ alias: string, name: string }>(["project", props.projectId], () => {
-		return fetchEntity({ route: `/api/project`, queryParams: { projectId: props.projectId } })
+		return fetchEntity({ route: `/api/project`, entityId: props.projectId })
 	}, {
 		enabled: !!props.isActive,
 	});
@@ -47,7 +46,7 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 			toast.promise(
 				updateEntity({ route: `/api/project`, entityId: props.projectId, payload: data }),
 				{
-					loading: "Sending mail...",
+					loading: "Saving project...",
 					success: () => {
 						setErrorMap(null);
 						return "Successfully saved project";
@@ -71,16 +70,16 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 	return (
 		<Modal isLoading={isLoading} isActive={props.isActive}>
 			{props.isActive && !!project && <>
-
 				<ModalHeader close={handleClose}>
 					<>
-						Edit project: {project!.name}
+						Edit project
 					</>
 				</ModalHeader>
 				<ModalBody>
 					<form className="flex flex-col gap-2" onSubmit={handleSubmit(makeContactRequest)}>
+						<Input className="w-full" placeholder="name" readOnly value={project!.name} />
 						<FormControl errorMessage={errorMap?.alias?._errors}>
-							<Input className="w-full" placeholder="Name" {...register("alias")} />
+							<Input className="w-full" placeholder="alias" {...register("alias")} defaultValue={project.alias} />
 						</FormControl>
 						<button ref={submitButtonRef} type="submit" className="hidden"></button>
 					</form>
