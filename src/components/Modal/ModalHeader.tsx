@@ -9,7 +9,7 @@ type _ModalHeaderProps = {
 export type ModalHeaderProps = _ModalHeaderProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"h1">>, keyof _ModalHeaderProps>;
 
-function ModalHeader({ className, children, ...props }: ModalHeaderProps) {
+function ModalHeader({ className, children, close, ...props }: ModalHeaderProps) {
 	return (
 		<h1
 			className={cn(`flex w-[576px] items-center justify-between text-2xl text-white`, className)}
@@ -19,7 +19,7 @@ function ModalHeader({ className, children, ...props }: ModalHeaderProps) {
 			{/* that's crazy but I stick with it (it works) */}
 			<Times className="[&>path]:!stroke-white 
 								[&:hover>path]:!stroke-yellow-400"
-				onClick={props.close}
+				onClick={close}
 			/>
 		</h1>
 	);
