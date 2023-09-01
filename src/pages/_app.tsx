@@ -1,9 +1,10 @@
 import '@/styles/globals.css'
 import Breadcrumb, { BreadcrumbItem } from '@components/Breadcrumb'
 import Footer from '@components/Footer'
-import LoadingCircle from '@components/LoadingCircle'
+import LoadingCircleWithPositioning from '@components/LoadingCircleWithPositioning'
 import ModalPortal from '@components/ModalPortal'
 import Navbar from '@components/Navbar'
+import LoadingPortalSlot from '@components/Slots/LoadingPortalSlot'
 import breadcrumbAtom from '@context/atoms/BreadcrumbAtom'
 import useRouterLoadingState from '@hooks/useRouterLoadingState'
 import { Inter } from "@next/font/google"
@@ -19,7 +20,7 @@ const robotoFont = Inter({ subsets: ["latin"] })
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
-	const [isLoading] = useRouterLoadingState()
+	const [routerIsLoading] = useRouterLoadingState()
 	const [breadcrumb] = useAtom(breadcrumbAtom);
 
 	useEffect(() => {
@@ -37,7 +38,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 				<div className={`${robotoFont.className} bg-white dark:bg-gray-900 transition-colors`}>
 					<div className='min-h-screen'>
 						<Navbar />
-						{!isLoading && <>
+						{!routerIsLoading && <>
 							<div className="max-w-screen-md mx-auto px-8 pt-2">
 								<Breadcrumb className='pb-8'>
 									{breadcrumb.items.map((item, i) => (
@@ -47,12 +48,8 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
 								<Component {...pageProps} />
 							</div>
 						</>}
-						{isLoading && <>
-							<div className='absolute top-1/2 left-1/2
-							transform -translate-x-1/2 -translate-y-1/2'>
-								<LoadingCircle />
-							</div>
-						</>}
+						{routerIsLoading && <LoadingCircleWithPositioning />}
+						<LoadingPortalSlot />
 					</div>
 					<Toaster position="bottom-center" />
 					<ModalPortal />
