@@ -3,7 +3,7 @@ import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
 import { removeEntity } from "@utils/request-utils";
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
 import toast from "react-hot-toast";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 type _DeleteProjectModalProps = {
     projectId?: number
@@ -16,6 +16,7 @@ export type DeleteProjectModalProps = _DeleteProjectModalProps &
 
 function DeleteProjectModal({ className, children, projectId, ...props }: DeleteProjectModalProps) {
 
+    const queryClient = useQueryClient();
     const deleteProjectMutation = useMutation(() => {
         props.close();
         return toast.promise(
@@ -36,6 +37,10 @@ function DeleteProjectModal({ className, children, projectId, ...props }: Delete
                 },
             }
         );
+    }, {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(["projects"])
+        }
     });
 
     return (

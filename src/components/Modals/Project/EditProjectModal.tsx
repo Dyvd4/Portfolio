@@ -6,7 +6,7 @@ import { fetchEntity, updateEntity } from "@utils/request-utils";
 import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { z } from "zod";
 
 const editProjectSchema = z.object({
@@ -27,6 +27,7 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 	const { register, handleSubmit } = useForm<EditProjectSchema>();
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<EditProjectSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+	const queryClient = useQueryClient();
 	const { isLoading, data: project } = useQuery<{ alias: string, name: string }>(["project", props.projectId], () => {
 		return fetchEntity({ route: `/api/project`, entityId: props.projectId!.toString() })
 	}, {
@@ -57,8 +58,9 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 			}
 		);
 	}, {
-		onSuccess: () => {
+		onSuccess: async () => {
 			setErrorMap(null);
+			await queryClient.invalidateQueries(["projects"])
 		},
 		onError: (e) => {
 			setErrorMap(e.format());

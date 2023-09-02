@@ -6,7 +6,7 @@ import { addEntity } from "@utils/request-utils";
 import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { z } from "zod";
 
 type _AddProjectModalProps = {
@@ -26,6 +26,7 @@ export type AddProjectModalProps = _AddProjectModalProps &
 
 function AddProjectModal({ className, children, ...props }: AddProjectModalProps) {
 
+    const queryClient = useQueryClient();
     const { register, handleSubmit } = useForm<AddProjectSchema>()
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const submitButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -53,8 +54,9 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
             }
         );
     }, {
-        onSuccess: () => {
+        onSuccess: async () => {
             setErrorMessage(null)
+            await queryClient.invalidateQueries(["projects"])
         },
         onError: (e) => {
             if (e instanceof z.ZodError) {
