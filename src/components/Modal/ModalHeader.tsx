@@ -12,10 +12,7 @@ export type ModalHeaderProps = _ModalHeaderProps &
 function ModalHeader({ className, children, close, ...props }: ModalHeaderProps) {
 	return (
 		<h1
-			className={cn(
-				`flex w-[576px] items-center justify-between text-2xl text-white`,
-				className
-			)}
+			className={cn(`flex items-center justify-between text-2xl text-white`, className)}
 			{...props}
 		>
 			{children}
