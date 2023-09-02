@@ -21,7 +21,7 @@ function SecretSignIn() {
             redirect: false
         })
         if (response!.ok) {
-            router.push("/project/create");
+            router.push("/project");
         }
         else {
             setErrorMessage(response!.error)
