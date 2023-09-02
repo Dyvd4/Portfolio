@@ -6,16 +6,16 @@ import { fetchEntity, updateEntity } from "@utils/request-utils";
 import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { z } from "zod";
 
-const projectSchema = z.object({
+const editProjectSchema = z.object({
 	alias: z.string().nonempty(),
 });
-type ProjectSchema = z.infer<typeof projectSchema>;
+type EditProjectSchema = z.infer<typeof editProjectSchema>;
 
 type _EditProjectModalProps = {
-	projectId?: string
+	projectId?: number
 	isActive: boolean
 	close(): void
 };
@@ -24,11 +24,11 @@ export type EditProjectModalProps = _EditProjectModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _EditProjectModalProps>;
 
 function EditProjectModal({ className, children, ...props }: EditProjectModalProps) {
-	const { register, handleSubmit } = useForm<ProjectSchema>();
-	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<ProjectSchema> | null>(null);
+	const { register, handleSubmit } = useForm<EditProjectSchema>();
+	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<EditProjectSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const { isLoading, data: project } = useQuery<{ alias: string, name: string }>(["project", props.projectId], () => {
-		return fetchEntity({ route: `/api/project`, entityId: props.projectId })
+		return fetchEntity({ route: `/api/project`, entityId: props.projectId!.toString() })
 	}, {
 		enabled: !!props.isActive,
 	});
@@ -38,45 +38,41 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 		props.close();
 	}
 
-	const makeContactRequest = async (data: ProjectSchema, e) => {
-		try {
-			const { alias } = data;
-			projectSchema.parse({ alias });
-			props.close();
-			toast.promise(
-				updateEntity({ route: `/api/project`, entityId: props.projectId, payload: data }),
-				{
-					loading: "Saving project...",
-					success: () => {
-						setErrorMap(null);
-						return "Successfully saved project";
-					},
-					error: "An unknown error occurred",
+	const editProjectMutation = useMutation<any, any, any, any>((payload) => {
+		editProjectSchema.parse(payload);
+		props.close();
+		return toast.promise(
+			updateEntity({ route: `/api/project`, entityId: props.projectId!.toString(), payload }),
+			{
+				loading: "Saving project...",
+				success: "Successfully saved project",
+				error: "An unknown error occurred",
+			},
+			{
+				style: {
+					borderRadius: "10px",
+					background: "#333",
+					color: "#fff",
 				},
-				{
-					style: {
-						borderRadius: "10px",
-						background: "#333",
-						color: "#fff",
-					},
-				}
-			);
-		} catch (e) {
-			setErrorMap((e as z.ZodError).format());
-			return;
+			}
+		);
+	}, {
+		onSuccess: () => {
+			setErrorMap(null);
+		},
+		onError: (e) => {
+			setErrorMap(e.format());
 		}
-	};
+	});
 
 	return (
 		<Modal isLoading={isLoading} isActive={props.isActive}>
 			{props.isActive && !!project && <>
 				<ModalHeader close={handleClose}>
-					<>
-						Edit project
-					</>
+					Edit project
 				</ModalHeader>
 				<ModalBody>
-					<form className="flex flex-col gap-2" onSubmit={handleSubmit(makeContactRequest)}>
+					<form className="flex flex-col gap-2" onSubmit={handleSubmit((data) => editProjectMutation.mutate(data))}>
 						<Input className="w-full" placeholder="name" readOnly value={project!.name} />
 						<FormControl errorMessage={errorMap?.alias?._errors}>
 							<Input className="w-full" placeholder="alias" {...register("alias")} defaultValue={project.alias} />
@@ -86,7 +82,7 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 				</ModalBody>
 				<ModalFooter className="flex flex-col gap-2">
 					<Button onClick={() => submitButtonRef.current!.click()}>
-						Send
+						Save
 					</Button>
 				</ModalFooter>
 			</>}

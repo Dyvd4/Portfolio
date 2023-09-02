@@ -2,7 +2,7 @@ import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 
-const projectSchema = z.object({
+const editProjectSchema = z.object({
   alias: z.string().nonempty(),
 });
 
@@ -19,7 +19,7 @@ export default async function handler(
   switch (method) {
     case "PATCH":
       try {
-        projectSchema.parse({ alias });
+        editProjectSchema.parse({ alias });
         const updatedProject = await prisma.project.update({
           where: {
             id: parseInt(id as string),

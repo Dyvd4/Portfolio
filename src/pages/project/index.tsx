@@ -1,12 +1,18 @@
 import Badge from "@components/Badge";
+import Button from "@components/Button";
 import Card from "@components/Card";
 import IconLink from "@components/IconLink";
 import Input from "@components/Input";
 import LoadingCircle from "@components/LoadingCircle";
+import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
+import AddProjectModal from "@components/Modals/Project/AddProjectModal";
+import DeleteProjectModal from "@components/Modals/Project/DeleteProjectModal";
+import EditProjectModal from "@components/Modals/Project/EditProjectModal";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useDebounce from "@hooks/useDebounce";
 import { prisma } from "@prisma";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
 
@@ -37,12 +43,26 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 		}
 	]);
 
+	const { isActive: projectEditModalIsActive, open: openProjectEditModal, close: closeProjectEditModal } = useModalDisclosure()
+	const { isActive: projectDeleteModalIsActive, open: openProjectDeleteModal, close: closeProjectDeleteModal } = useModalDisclosure()
+	const { isActive: projectAddModalIsActive, open: openProjectAddModal, close: closeProjectAddModal } = useModalDisclosure()
+	const [projectIdToEdit, setProjectIdToEdit] = useState<number | undefined>();
+	const { status } = useSession()
 	const [projects, setProjects] = useState(initialProjects);
 	const [projectsAreLoading, setProjectsAreLoading] = useState(false);
 	const [projectOrTagname, setProjectName] = useState("");
 	const { value: debouncedProjectOrTagname, isDebouncing } = useDebounce(projectOrTagname);
 	const [isInitialLoad, setIsInitialLoad] = useState(true);
 	const [setParentRef] = useAutoAnimate();
+
+	const handleProjectEdit = (projectId: number) => {
+		setProjectIdToEdit(projectId);
+		openProjectEditModal();
+	}
+	const handleProjectDelete = (projectId: number) => {
+		setProjectIdToEdit(projectId);
+		openProjectDeleteModal();
+	}
 
 	const fetchProjects = useCallback(async (projectOrTagname?: string) => {
 		setProjectsAreLoading(true)
@@ -67,6 +87,9 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 			<main className="max-w-sm mx-auto">
 				<h1 className='text-6xl sm:text-7xl font-black text-center'>
 					Projects
+					{status === "authenticated" && <>
+						<Button onClick={openProjectAddModal}>Add project</Button>
+					</>}
 				</h1>
 				<Input
 					value={projectOrTagname}
@@ -87,7 +110,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					</p>}
 					{!projectsAreLoading && !isDebouncing && projects.length > 0 && <>
 						{(projects).map((project) => (
-							<li className="w-full flex justify-center" key={project.id}>
+							<li className="w-full flex justify-center gap-4" key={project.id}>
 								<Card
 									className="flex-grow"
 									title={<>
@@ -107,11 +130,22 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 										: undefined
 									}
 								/>
+								{status === "authenticated" && <>
+									<div className="flex gap-4 justify-center h-fit">
+										<Button onClick={() => handleProjectDelete(project.id)}>Delete</Button>
+										<Button onClick={() => handleProjectEdit(project.id)}>Edit</Button>
+									</div>
+								</>}
 							</li>
 						))}
 					</>}
 				</ul>
 			</main>
+			{status === "authenticated" && <>
+				<AddProjectModal isActive={projectAddModalIsActive} close={closeProjectAddModal} />
+				<EditProjectModal isActive={projectEditModalIsActive} close={closeProjectEditModal} projectId={projectIdToEdit} />
+				<DeleteProjectModal isActive={projectDeleteModalIsActive} close={closeProjectDeleteModal} projectId={projectIdToEdit} />
+			</>}
 		</>
 	)
 }

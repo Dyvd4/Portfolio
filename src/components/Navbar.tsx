@@ -1,12 +1,11 @@
 import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
 import { toggleDarkMode } from "@utils/DarkModeUtils";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Button from "./Button";
+import { HalfMoon, SunLight } from "./Icons";
 import NavLink from "./NavLink";
-import { SunLight, HalfMoon } from "./Icons";
 
 type NavbarProps = {}
 
@@ -40,12 +39,6 @@ function Navbar(props: NavbarProps) {
 				</li>
 				<li>
 					<ul className="flex items-center gap-6 sm:gap-12">
-						{status === "authenticated" && <>
-							<Button onClick={() => signOut()} className="sm:text-xs">Sign out</Button>
-							<Link href={"/project/create"}>
-								<Button className="sm:text-xs">Create project</Button>
-							</Link>
-						</>}
 						{LINKS.map(({ href, title }) => (
 							<li key={href}>
 								<NavLink href={href} isActive={router.pathname === href}>
