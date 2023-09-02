@@ -103,7 +103,7 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 				<Button onClick={() => submitButtonRef.current!.click()}>
 					Send
 				</Button>
-				<div>
+				<div className="text-white">
 					By clicking “Send”, you accept our{" "}
 					<Link
 						className="underline"
