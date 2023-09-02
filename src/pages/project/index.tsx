@@ -21,72 +21,92 @@ import { useQuery } from "react-query";
 export async function getServerSideProps() {
 	const projects = await prisma.project.findMany({
 		include: {
-			tags: true
-		}
+			tags: true,
+		},
 	});
 	return {
 		props: {
-			projects: JSON.parse(JSON.stringify(projects)) as typeof projects
-		}
-	}
+			projects: JSON.parse(JSON.stringify(projects)) as typeof projects,
+		},
+	};
 }
 
-type ProjectsProps = {} & Awaited<ReturnType<typeof getServerSideProps>>["props"]
+type ProjectsProps = {} & Awaited<ReturnType<typeof getServerSideProps>>["props"];
 
 function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
-
 	useBreadcrumb([
 		{
-			isHome: true
+			isHome: true,
 		},
 		{
 			children: "projects",
-			isCurrentPage: true
-		}
+			isCurrentPage: true,
+		},
 	]);
 
-	const { isActive: projectEditModalIsActive, open: openProjectEditModal, close: closeProjectEditModal } = useModalDisclosure()
-	const { isActive: projectDeleteModalIsActive, open: openProjectDeleteModal, close: closeProjectDeleteModal } = useModalDisclosure()
-	const { isActive: projectAddModalIsActive, open: openProjectAddModal, close: closeProjectAddModal } = useModalDisclosure()
+	const {
+		isActive: projectEditModalIsActive,
+		open: openProjectEditModal,
+		close: closeProjectEditModal,
+	} = useModalDisclosure();
+	const {
+		isActive: projectDeleteModalIsActive,
+		open: openProjectDeleteModal,
+		close: closeProjectDeleteModal,
+	} = useModalDisclosure();
+	const {
+		isActive: projectAddModalIsActive,
+		open: openProjectAddModal,
+		close: closeProjectAddModal,
+	} = useModalDisclosure();
 	const [projectIdToEdit, setProjectIdToEdit] = useState<number | undefined>();
-	const { status } = useSession()
+	const { status } = useSession();
 	const [projectOrTagname, setProjectOrTagName] = useState("");
 	const { value: debouncedProjectOrTagname } = useDebounce(projectOrTagname);
 	const [setParentRef] = useAutoAnimate();
 
-	const { isLoading: projectsAreLoading, data: projects } = useQuery(["projects", debouncedProjectOrTagname], () => {
-		return fetchEntity({
-			route: `/api/projects`,
-			queryParams: {
-				projectOrTagname: debouncedProjectOrTagname
-			}
-		});
-	}, {
-		initialData: initialProjects
-	});
+	const { isLoading: projectsAreLoading, data: projects } = useQuery(
+		["projects", debouncedProjectOrTagname],
+		() => {
+			return fetchEntity({
+				route: `/api/projects`,
+				queryParams: {
+					projectOrTagname: debouncedProjectOrTagname,
+				},
+			});
+		},
+		{
+			initialData: initialProjects,
+		}
+	);
 
 	const handleProjectEdit = (projectId: number) => {
 		setProjectIdToEdit(projectId);
 		openProjectEditModal();
-	}
+	};
 	const handleProjectDelete = (projectId: number) => {
 		setProjectIdToEdit(projectId);
 		openProjectDeleteModal();
-	}
+	};
 
 	return (
 		<>
 			<Head>
 				<title>My projects</title>
-				<meta name="description" content="Overview of my coding projects. Most of them should be available on GitHub." />
+				<meta
+					name="description"
+					content="Overview of my coding projects. Most of them should be available on GitHub."
+				/>
 				<meta name="keywords" content="Web app, coding, projects, GitHub, David Kimmich" />
 			</Head>
-			<main className="max-w-sm mx-auto">
-				<h1 className='text-6xl sm:text-7xl font-black text-center'>
+			<main className="mx-auto max-w-sm">
+				<h1 className="text-center text-6xl font-black sm:text-7xl">
 					Projects
-					{status === "authenticated" && <>
-						<Button onClick={openProjectAddModal}>Add project</Button>
-					</>}
+					{status === "authenticated" && (
+						<>
+							<Button onClick={openProjectAddModal}>Add project</Button>
+						</>
+					)}
 				</h1>
 				<Input
 					value={projectOrTagname}
@@ -94,57 +114,83 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					type="text"
 					name="projectOrTagname"
 					placeholder="search by project name or tag..."
-					className="border-2 rounded-md mt-12"
+					className="mt-12 rounded-md border-2"
 				/>
-				<ul
-					ref={setParentRef}
-					className="flex flex-col gap-6 my-12 items-center">
-					{projectsAreLoading && <>
-						<LoadingCircle />
-					</>}
-					{!projectsAreLoading && projects.length === 0 && <p>
-						No projects found 😴
-					</p>}
-					{!projectsAreLoading && projects.length > 0 && <>
-						{(projects).map((project) => (
-							<li className="w-full flex justify-center gap-4" key={project.id}>
-								<Card
-									className="flex-grow"
-									title={<>
-										<IconLink href={`/project/${project.id}`}>
-											{project.alias}
-										</IconLink>
-									</>}
-									description={project.description || "No description available"}
-									tags={project.tags.length > 0
-										? <>
-											{project.tags.map(tag => (
-												<Badge key={tag.name}>
-													{tag.name}
-												</Badge>
-											))}
+				<ul ref={setParentRef} className="my-12 flex flex-col items-center gap-6">
+					{projectsAreLoading && (
+						<>
+							<LoadingCircle />
+						</>
+					)}
+					{!projectsAreLoading && projects.length === 0 && <p>No projects found 😴</p>}
+					{!projectsAreLoading && projects.length > 0 && (
+						<>
+							{projects.map((project) => (
+								<li className="flex w-full justify-center gap-4" key={project.id}>
+									<Card
+										className="flex-grow"
+										title={
+											<>
+												<IconLink href={`/project/${project.id}`}>
+													{project.alias}
+												</IconLink>
+											</>
+										}
+										description={
+											project.description || "No description available"
+										}
+										tags={
+											project.tags.length > 0 ? (
+												<>
+													{project.tags.map((tag) => (
+														<Badge key={tag.name}>{tag.name}</Badge>
+													))}
+												</>
+											) : undefined
+										}
+									/>
+									{status === "authenticated" && (
+										<>
+											<div className="flex h-fit justify-center gap-4">
+												<Button
+													onClick={() => handleProjectDelete(project.id)}
+												>
+													Delete
+												</Button>
+												<Button
+													onClick={() => handleProjectEdit(project.id)}
+												>
+													Edit
+												</Button>
+											</div>
 										</>
-										: undefined
-									}
-								/>
-								{status === "authenticated" && <>
-									<div className="flex gap-4 justify-center h-fit">
-										<Button onClick={() => handleProjectDelete(project.id)}>Delete</Button>
-										<Button onClick={() => handleProjectEdit(project.id)}>Edit</Button>
-									</div>
-								</>}
-							</li>
-						))}
-					</>}
+									)}
+								</li>
+							))}
+						</>
+					)}
 				</ul>
 			</main>
-			{status === "authenticated" && <>
-				<AddProjectModal isActive={projectAddModalIsActive} close={closeProjectAddModal} />
-				<EditProjectModal isActive={projectEditModalIsActive} close={closeProjectEditModal} projectId={projectIdToEdit} />
-				<DeleteProjectModal isActive={projectDeleteModalIsActive} close={closeProjectDeleteModal} projectId={projectIdToEdit} />
-			</>}
+			{status === "authenticated" && (
+				<>
+					<AddProjectModal
+						isActive={projectAddModalIsActive}
+						close={closeProjectAddModal}
+					/>
+					<EditProjectModal
+						isActive={projectEditModalIsActive}
+						close={closeProjectEditModal}
+						projectId={projectIdToEdit}
+					/>
+					<DeleteProjectModal
+						isActive={projectDeleteModalIsActive}
+						close={closeProjectDeleteModal}
+						projectId={projectIdToEdit}
+					/>
+				</>
+			)}
 		</>
-	)
+	);
 }
 
 export default Projects;

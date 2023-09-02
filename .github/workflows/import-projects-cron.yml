@@ -1,13 +1,13 @@
 name: import-projects-cron
 on:
-  schedule:
-    - cron: "0 0 * * *"
+    schedule:
+        - cron: "0 0 * * *"
 jobs:
-  cron:
-    runs-on: ubuntu-latest
-    steps:
-      - name: hit "import-projects-route" every day
-        run: |
-          curl --request POST \
-          --url 'https://portfolio.kimmich.dev/api/projects/import' \
-          --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
+    cron:
+        runs-on: ubuntu-latest
+        steps:
+            - name: hit "import-projects-route" every day
+              run: |
+                  curl --request POST \
+                  --url 'https://portfolio.kimmich.dev/api/projects/import' \
+                  --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'

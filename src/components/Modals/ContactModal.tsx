@@ -19,8 +19,8 @@ const contactSchema = z.object({
 type ContactSchema = z.infer<typeof contactSchema>;
 
 type _ContactModalProps = {
-	isActive: boolean
-	close(): void
+	isActive: boolean;
+	close(): void;
 };
 
 export type ContactModalProps = _ContactModalProps &
@@ -34,20 +34,20 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 
 	const handleLinkClick = (e, href: string) => {
 		e.preventDefault();
-		props.close()
+		props.close();
 		router.push(href);
 	};
 
 	const handleClose = () => {
-		setErrorMap(null)
+		setErrorMap(null);
 		props.close();
-	}
+	};
 
 	const makeContactRequest = async (data: ContactSchema, e) => {
 		try {
 			const { name, email, message } = data;
 			contactSchema.parse({ name, email, message });
-			close()
+			close();
 			toast.promise(
 				request.post(`/api/contact`, data),
 				{
@@ -100,9 +100,7 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 				</form>
 			</ModalBody>
 			<ModalFooter className="flex flex-col gap-2">
-				<Button onClick={() => submitButtonRef.current!.click()}>
-					Send
-				</Button>
+				<Button onClick={() => submitButtonRef.current!.click()}>Send</Button>
 				<div className="text-white">
 					By clicking “Send”, you accept our{" "}
 					<Link

@@ -11,8 +11,7 @@
 
 @layer base {
 	* {
-		@apply  
-			p-0 m-0 box-border
+		@apply m-0 box-border p-0;
 	}
 
 	h1,
@@ -22,7 +21,7 @@
 	h5,
 	h6,
 	p {
-		@apply text-black dark:text-white
+		@apply text-black dark:text-white;
 	}
 
 	html,
@@ -42,26 +41,25 @@
 		stroke-width: 1.5;
 		stroke-linecap: round;
 		stroke-linejoin: round;
-		@apply dark:stroke-white stroke-black
+		@apply stroke-black dark:stroke-white;
 	}
 
 	svg.icon:hover > path {
-		@apply dark:stroke-yellow-300 stroke-yellow-400 transition-all;
+		@apply stroke-yellow-400 transition-all dark:stroke-yellow-300;
 	}
 }
 
 @layer components {
-	
 	.stroke-secondary {
-		@apply stroke-gray-700 dark:stroke-gray-300
+		@apply stroke-gray-700 dark:stroke-gray-300;
 	}
 
 	.fill-secondary {
-		@apply fill-gray-700 dark:fill-gray-300
+		@apply fill-gray-700 dark:fill-gray-300;
 	}
 
 	.text-secondary {
-		@apply text-gray-700 dark:text-gray-300
+		@apply text-gray-700 dark:text-gray-300;
 	}
 
 	/* 
@@ -73,7 +71,7 @@
 		height: 48px;
 		border-width: 5px;
 		border-style: solid;
-		border-color: #FFF;
+		border-color: #fff;
 		border-radius: 50%;
 		display: inline-block;
 		box-sizing: border-box;
@@ -82,13 +80,13 @@
 	}
 
 	.loading-circle:after {
-		content: '';
+		content: "";
 		position: absolute;
 		width: 48px;
 		height: 48px;
 		border-width: 5px;
 		border-style: solid;
-		border-color: #FFF;
+		border-color: #fff;
 		border-radius: 50%;
 		display: inline-block;
 		box-sizing: border-box;
@@ -100,21 +98,24 @@
 
 	@keyframes scaleUp {
 		0% {
-			transform: translate(-50%, -50%) scale(0)
+			transform: translate(-50%, -50%) scale(0);
 		}
 
-		60%, 100% {
-			transform: translate(-50%, -50%) scale(1)
+		60%,
+		100% {
+			transform: translate(-50%, -50%) scale(1);
 		}
 	}
 
 	@keyframes pulse {
-		0%, 60%, 100% {
-			transform: scale(1)
+		0%,
+		60%,
+		100% {
+			transform: scale(1);
 		}
 
 		80% {
-			transform: scale(1.2)
+			transform: scale(1.2);
 		}
 	}
 }

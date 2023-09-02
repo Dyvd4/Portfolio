@@ -3,27 +3,32 @@ import { ComponentPropsWithRef, forwardRef } from "react";
 
 type InputProps = {
 	hasError?: boolean;
-} & ComponentPropsWithRef<"input">
+} & ComponentPropsWithRef<"input">;
 
 /** @see https://flowbite.com/docs/forms/search-input/ */
-const Input = forwardRef<HTMLInputElement, InputProps>(function Input({ className, hasError, ...props }, ref) {
+const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+	{ className, hasError, ...props },
+	ref
+) {
 	return (
 		<input
 			ref={ref}
-			className={cn(`block w-full p-4
-						text-sm border border-gray-300 dark:text-white
-						rounded-lg bg-gray-50 outline-none
-						focus:ring-blue-500 focus:ring-2 focus:border-blue-500
-						dark:bg-gray-700 dark:border-gray-600
+			className={cn(
+				`block w-full rounded-lg
+						border border-gray-300 bg-gray-50 p-4
+						text-sm outline-none focus:border-blue-500
+						focus:ring-2 focus:ring-blue-500 dark:border-gray-600
+						dark:bg-gray-700 dark:text-white
 						dark:placeholder-gray-400
-						dark:focus:ring-blue-500 dark:focus:border-blue-500`,
+						dark:focus:border-blue-500 dark:focus:ring-blue-500`,
 				{
 					"text-red-500 placeholder:text-red-500": !!hasError,
 				},
-				className)}
+				className
+			)}
 			{...props}
 		/>
 	);
-})
+});
 
 export default Input;

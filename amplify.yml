@@ -1,18 +1,18 @@
 version: 1
 frontend:
-  phases:
-    preBuild:
-      commands:
-        - npm ci
-    build:
-      commands:
-        - env >> .env.production
-        - npm run build
-        - npx prisma migrate deploy
-  artifacts:
-    baseDirectory: .next
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
+    phases:
+        preBuild:
+            commands:
+                - npm ci
+        build:
+            commands:
+                - env >> .env.production
+                - npm run build
+                - npx prisma migrate deploy
+    artifacts:
+        baseDirectory: .next
+        files:
+            - "**/*"
+    cache:
+        paths:
+            - node_modules/**/*

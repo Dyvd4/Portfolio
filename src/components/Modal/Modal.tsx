@@ -4,8 +4,8 @@ import { ComponentPropsWithRef, PropsWithChildren, useEffect, useState } from "r
 import { createPortal } from "react-dom";
 
 type _ModalProps = {
-	isActive: boolean
-	isLoading?: boolean
+	isActive: boolean;
+	isLoading?: boolean;
 };
 
 export type ModalProps = _ModalProps &
@@ -18,11 +18,10 @@ function Modal({ className, children, isLoading, isActive, ...props }: ModalProp
 		setDomIsReady(true);
 	}, []);
 
-	if (isLoading) return <LoadingCircleWithPositioning />
+	if (isLoading) return <LoadingCircleWithPositioning />;
 
-	return (
-		!!domIsReady
-			? createPortal(
+	return !!domIsReady
+		? createPortal(
 				<div
 					className={cn(
 						`border-1 absolute z-50 scale-0 transform rounded-2xl border border-[#111]
@@ -37,9 +36,8 @@ function Modal({ className, children, isLoading, isActive, ...props }: ModalProp
 					{children}
 				</div>,
 				document.getElementById("modal-portal")!
-			)
-			: null
-	);
+		  )
+		: null;
 }
 
 export default Modal;
