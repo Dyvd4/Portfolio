@@ -12,9 +12,11 @@ import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useDebounce from "@hooks/useDebounce";
 import { prisma } from "@prisma";
+import { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "react-query";
 
 export async function getServerSideProps() {
 	const projects = await prisma.project.findMany({
@@ -48,12 +50,20 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	const { isActive: projectAddModalIsActive, open: openProjectAddModal, close: closeProjectAddModal } = useModalDisclosure()
 	const [projectIdToEdit, setProjectIdToEdit] = useState<number | undefined>();
 	const { status } = useSession()
-	const [projects, setProjects] = useState(initialProjects);
-	const [projectsAreLoading, setProjectsAreLoading] = useState(false);
-	const [projectOrTagname, setProjectName] = useState("");
-	const { value: debouncedProjectOrTagname, isDebouncing } = useDebounce(projectOrTagname);
-	const [isInitialLoad, setIsInitialLoad] = useState(true);
+	const [projectOrTagname, setProjectOrTagName] = useState("");
+	const { value: debouncedProjectOrTagname } = useDebounce(projectOrTagname);
 	const [setParentRef] = useAutoAnimate();
+
+	const { isLoading: projectsAreLoading, data: projects } = useQuery(["projects", debouncedProjectOrTagname], () => {
+		return fetchEntity({
+			route: `/api/projects`,
+			queryParams: {
+				projectOrTagname: debouncedProjectOrTagname
+			}
+		});
+	}, {
+		initialData: initialProjects
+	});
 
 	const handleProjectEdit = (projectId: number) => {
 		setProjectIdToEdit(projectId);
@@ -63,19 +73,6 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 		setProjectIdToEdit(projectId);
 		openProjectDeleteModal();
 	}
-
-	const fetchProjects = useCallback(async (projectOrTagname?: string) => {
-		setProjectsAreLoading(true)
-		const response = await fetch(`/api/projects?projectOrTagname=${projectOrTagname}`);
-		const projects = await response.json();
-		setProjects(projects)
-		setProjectsAreLoading(false)
-	}, [])
-
-	useEffect(() => {
-		if (!isInitialLoad) fetchProjects(debouncedProjectOrTagname);
-		setIsInitialLoad(false)
-	}, [debouncedProjectOrTagname, fetchProjects]);
 
 	return (
 		<>
@@ -93,7 +90,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				</h1>
 				<Input
 					value={projectOrTagname}
-					onChange={(e) => setProjectName(e.target.value)}
+					onChange={(e) => setProjectOrTagName(e.target.value)}
 					type="text"
 					name="projectOrTagname"
 					placeholder="search by project name or tag..."
@@ -102,13 +99,13 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				<ul
 					ref={setParentRef}
 					className="flex flex-col gap-6 my-12 items-center">
-					{projectsAreLoading || isDebouncing && <>
+					{projectsAreLoading && <>
 						<LoadingCircle />
 					</>}
-					{!projectsAreLoading && !isDebouncing && projects.length === 0 && <p>
+					{!projectsAreLoading && projects.length === 0 && <p>
 						No projects found 😴
 					</p>}
-					{!projectsAreLoading && !isDebouncing && projects.length > 0 && <>
+					{!projectsAreLoading && projects.length > 0 && <>
 						{(projects).map((project) => (
 							<li className="w-full flex justify-center gap-4" key={project.id}>
 								<Card
