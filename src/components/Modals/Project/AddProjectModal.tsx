@@ -2,11 +2,13 @@ import Button from "@components/Button";
 import FormControl from "@components/FormControl";
 import Input from "@components/Input";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
-import { addEntity } from "@utils/request-utils";
+import Select from "@components/Select";
+import useGithubReposQuery from "@queries/github-repos-query";
+import { addEntity, fetchEntity } from "@utils/request-utils";
 import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { z } from "zod";
 
 type _AddProjectModalProps = {
@@ -30,6 +32,8 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<AddProjectSchema> | null>(null);
+
+	const { isLoading, data: githubRepos } = useGithubReposQuery();
 
 	const createProjectMutation = useMutation<any, any, any, any>(
 		(payload) => {
@@ -76,31 +80,41 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 	};
 
 	return (
-		<Modal isActive={props.isActive}>
-			<ModalHeader close={props.close}>Add project</ModalHeader>
-			<ModalBody>
-				<form
-					onSubmit={handleSubmit((data) => createProjectMutation.mutate(data))}
-					className="flex flex-col gap-4"
-				>
-					<FormControl errorMessage={errorMap?.name?._errors}>
-						<Input placeholder="name" {...register("name")} />
-					</FormControl>
-					<FormControl errorMessage={errorMap?.alias?._errors}>
-						<Input placeholder="alias" {...register("alias")} />
-					</FormControl>
-					{!!errorMessage && (
-						<>
-							<div className="text-red-500">{errorMessage}</div>
-						</>
-					)}
-					<button ref={submitButtonRef} type="submit" className="hidden"></button>
-				</form>
-			</ModalBody>
-			<ModalFooter className="flex gap-2">
-				<Button onClick={handleClose}>Cancel</Button>
-				<Button onClick={() => submitButtonRef.current!.click()}>Add</Button>
-			</ModalFooter>
+		<Modal isLoading={isLoading} isActive={props.isActive}>
+			{!isLoading && (
+				<>
+					<ModalHeader close={props.close}>Add project</ModalHeader>
+					<ModalBody>
+						<form
+							onSubmit={handleSubmit((data) => createProjectMutation.mutate(data))}
+							className="flex flex-col gap-4"
+						>
+							<FormControl errorMessage={errorMap?.name?._errors}>
+								<Select placeholder="name" {...register("name")}>
+									{githubRepos.map((repo) => (
+										<option value={repo.name} key={repo.id}>
+											{repo.name}
+										</option>
+									))}
+								</Select>
+							</FormControl>
+							<FormControl errorMessage={errorMap?.alias?._errors}>
+								<Input placeholder="alias" {...register("alias")} />
+							</FormControl>
+							{!!errorMessage && (
+								<>
+									<div className="text-red-500">{errorMessage}</div>
+								</>
+							)}
+							<button ref={submitButtonRef} type="submit" className="hidden"></button>
+						</form>
+					</ModalBody>
+					<ModalFooter className="flex gap-2">
+						<Button onClick={handleClose}>Cancel</Button>
+						<Button onClick={() => submitButtonRef.current!.click()}>Add</Button>
+					</ModalFooter>
+				</>
+			)}
 		</Modal>
 	);
 }

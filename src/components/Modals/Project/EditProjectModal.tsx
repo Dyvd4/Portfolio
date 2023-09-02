@@ -2,6 +2,8 @@ import Button from "@components/Button";
 import FormControl from "@components/FormControl";
 import Input from "@components/Input";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
+import Select from "@components/Select";
+import useGithubReposQuery from "@queries/github-repos-query";
 import { fetchEntity, updateEntity } from "@utils/request-utils";
 import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -28,7 +30,11 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<EditProjectSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const queryClient = useQueryClient();
-	const { isLoading, data: project } = useQuery<{ alias: string; name: string }>(
+	const { isLoading: reposAreLoading, data: githubRepos } = useGithubReposQuery();
+	const { isLoading: projectIsLoading, data: project } = useQuery<{
+		alias: string;
+		name: string;
+	}>(
 		["project", props.projectId],
 		() => {
 			return fetchEntity({ route: `/api/project`, entityId: props.projectId!.toString() });
@@ -78,6 +84,8 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 		}
 	);
 
+	const isLoading = projectIsLoading || reposAreLoading;
+
 	return (
 		<Modal isLoading={isLoading} isActive={props.isActive}>
 			{props.isActive && !!project && (
@@ -88,12 +96,13 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 							className="flex flex-col gap-2"
 							onSubmit={handleSubmit((data) => editProjectMutation.mutate(data))}
 						>
-							<Input
-								className="w-full"
-								placeholder="name"
-								readOnly
-								value={project!.name}
-							/>
+							<Select placeholder="name" value={project.name} disabled>
+								{githubRepos.map((repo) => (
+									<option value={repo.name} key={repo.id}>
+										{repo.name}
+									</option>
+								))}
+							</Select>
 							<FormControl errorMessage={errorMap?.alias?._errors}>
 								<Input
 									className="w-full"
