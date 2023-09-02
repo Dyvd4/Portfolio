@@ -12,6 +12,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		res.status(401).json("Not authenticated to trigger import route");
 	} else {
 		await ProjectService.fetchProjects();
-		res.json("Successfully imported repos from GitHub");
+		res.json("Successfully updated projects with repo data from GitHub");
 	}
 }
