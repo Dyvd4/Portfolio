@@ -16,10 +16,10 @@ export type IndexProps = _IndexProps &
 function Index({ className, children, ...props }: IndexProps) {
     const { isActive, open, close } = useModalDisclosure()
     const { isActive: pIsActive, open: pOpen, close: pClose } = useModalDisclosure()
-    const [projectId, setProjectId] = useState<string | undefined>();
+    const [projectId, setProjectId] = useState<number | undefined>();
     const handleProjectModalOpen = () => {
         pOpen()
-        setProjectId("340071710");
+        setProjectId(340071710);
 
     }
     return (
