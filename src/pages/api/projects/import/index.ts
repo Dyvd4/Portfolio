@@ -10,14 +10,6 @@ export default async function handler(
 ) {
   const IMPORT_PROJECTS_CRON_ACCESS_TOKEN_FROM_REQUEST =
     req.headers.authorization?.split("Bearer ")[1];
-  console.log(
-    "🚀 ~ file: index.ts:6 ~ IMPORT_PROJECTS_CRON_ACCESS_TOKEN:",
-    IMPORT_PROJECTS_CRON_ACCESS_TOKEN
-  );
-  console.log(
-    "🚀 ~ file: index.ts:10 ~ handler ~ IMPORT_PROJECTS_CRON_ACCESS_TOKEN_FROM_REQUEST:",
-    IMPORT_PROJECTS_CRON_ACCESS_TOKEN_FROM_REQUEST
-  );
 
   if (
     IMPORT_PROJECTS_CRON_ACCESS_TOKEN !==
