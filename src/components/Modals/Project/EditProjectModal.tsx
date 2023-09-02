@@ -15,7 +15,10 @@ const editProjectSchema = z.object({
 	alias: z.string().nonempty(),
 });
 type EditProjectSchema = z.infer<typeof editProjectSchema>;
-
+type Project = {
+	alias: string;
+	name: string;
+};
 type _EditProjectModalProps = {
 	projectId?: number;
 	isActive: boolean;
@@ -26,21 +29,24 @@ export type EditProjectModalProps = _EditProjectModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _EditProjectModalProps>;
 
 function EditProjectModal({ className, children, ...props }: EditProjectModalProps) {
-	const { register, handleSubmit } = useForm<EditProjectSchema>();
+	const { register, handleSubmit, reset } = useForm<Project>();
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<EditProjectSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const queryClient = useQueryClient();
 	const { isLoading: reposAreLoading, data: githubRepos } = useGithubReposQuery();
-	const { isLoading: projectIsLoading, data: project } = useQuery<{
-		alias: string;
-		name: string;
-	}>(
+	const { isLoading: projectIsLoading, data: project } = useQuery<Project>(
 		["project", props.projectId],
 		() => {
 			return fetchEntity({ route: `/api/project`, entityId: props.projectId!.toString() });
 		},
 		{
 			enabled: !!props.isActive,
+			onSuccess(project) {
+				reset({
+					alias: project.alias,
+					name: project.name,
+				});
+			},
 		}
 	);
 
@@ -96,7 +102,12 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 							className="flex flex-col gap-2"
 							onSubmit={handleSubmit((data) => editProjectMutation.mutate(data))}
 						>
-							<Select placeholder="name" value={project.name} disabled>
+							<Select
+								placeholder="name"
+								value={project.name}
+								disabled
+								{...register("name")}
+							>
 								{githubRepos.map((repo) => (
 									<option value={repo.name} key={repo.id}>
 										{repo.name}
