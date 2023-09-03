@@ -28,7 +28,6 @@ function ProjectListItem({
 	return (
 		<div className={cn(`flex gap-6`, className)} {...props}>
 			<Image
-				placeholder="blur"
 				className="rounded-xl"
 				src={imageUrl || fallbackProjectImage}
 				width={356}
