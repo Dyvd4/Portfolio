@@ -8,16 +8,15 @@ const octokit = new Octokit({ auth: config.GITHUB_ACCESS_TOKEN });
 
 const fetchProjects = async () => {
 	const projects = await prisma.project.findMany();
+	await Promise.all(projects.map(fetchProject));
+};
 
-	await Promise.all(
-		projects.map(async (project) => {
-			return Promise.all([
-				updateProjectMetaData(project),
-				upsertProjectCommits(project),
-				upsertProjectLanguages(project),
-			]);
-		})
-	);
+const fetchProject = (project: Project) => {
+	return Promise.all([
+		updateProjectMetaData(project),
+		upsertProjectCommits(project),
+		upsertProjectLanguages(project),
+	]);
 };
 
 const updateProjectMetaData = async (project: Project) => {
@@ -179,6 +178,7 @@ const upsertProjectTags = async (project: Project, githubTags: string[]) => {
 
 const ProjectService = {
 	fetchProjects,
+	fetchProject,
 	updateProjectMetaData,
 	upsertProjectCommits,
 	upsertProjectLanguages,

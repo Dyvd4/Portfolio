@@ -1,3 +1,4 @@
+import ProjectService from "@backend/services/ProjectService";
 import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
@@ -33,6 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						imageUrl,
 					},
 				});
+				await ProjectService.fetchProject(newProject);
 				return res.status(200).json(newProject);
 			} catch (e) {
 				if (e instanceof z.ZodError) {
