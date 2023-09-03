@@ -1,8 +1,7 @@
 import Badge from "@components/Badge";
 import Button from "@components/Button";
-import Card from "@components/Card";
-import IconLink from "@components/IconLink";
 import Input from "@components/Input";
+import ProjectListItem from "@components/ListItems/ProjectListItem";
 import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
 import AddProjectModal from "@components/Modals/Project/AddProjectModal";
 import DeleteProjectModal from "@components/Modals/Project/DeleteProjectModal";
@@ -98,15 +97,13 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				/>
 				<meta name="keywords" content="Web app, coding, projects, GitHub, David Kimmich" />
 			</Head>
-			<main className="mx-auto max-w-sm">
-				<h1 className="text-center text-6xl font-black sm:text-7xl">
-					Projects
-					{status === "authenticated" && (
-						<>
-							<Button onClick={openProjectAddModal}>Add project</Button>
-						</>
-					)}
-				</h1>
+			<main className="mx-auto">
+				<h1 className="text-center text-6xl font-black sm:text-7xl">Projects</h1>
+				{status === "authenticated" && (
+					<>
+						<Button onClick={openProjectAddModal}>Add project</Button>
+					</>
+				)}
 				<Input
 					value={projectOrTagname}
 					onChange={(e) => setProjectOrTagName(e.target.value)}
@@ -120,19 +117,15 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					{!projectsAreLoading && projects.length > 0 && (
 						<>
 							{projects.map((project) => (
-								<li className="flex w-full justify-center gap-4" key={project.id}>
-									<Card
-										className="flex-grow"
-										title={
-											<>
-												<IconLink href={`/project/${project.id}`}>
-													{project.alias}
-												</IconLink>
-											</>
-										}
-										description={
-											project.description || "No description available"
-										}
+								<li
+									className="flex w-full flex-col items-start gap-4"
+									key={project.id}
+								>
+									<ProjectListItem
+										id={project.id}
+										alias={project.alias}
+										imageUrl={project.imageUrl}
+										description={project.description}
 										tags={
 											project.tags.length > 0 ? (
 												<>
