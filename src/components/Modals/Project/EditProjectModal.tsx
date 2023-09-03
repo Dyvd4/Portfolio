@@ -115,7 +115,7 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 
 	return (
 		<Modal isLoading={isLoading} isActive={props.isActive}>
-			{props.isActive && !!project && (
+			{!!project && (
 				<>
 					<ModalHeader close={handleClose}>Edit project</ModalHeader>
 					<ModalBody>
