@@ -29,7 +29,7 @@ export type EditProjectModalProps = _EditProjectModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _EditProjectModalProps>;
 
 function EditProjectModal({ className, children, ...props }: EditProjectModalProps) {
-	const { register, handleSubmit, reset } = useForm<AddProjectFormData>();
+	const { register, handleSubmit, reset: resetForm } = useForm<AddProjectFormData>();
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<EditProjectSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const queryClient = useQueryClient();
@@ -44,7 +44,7 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 		{
 			enabled: !!props.isActive,
 			onSuccess(project) {
-				reset({
+				resetForm({
 					alias: project.alias,
 					name: project.name,
 				});
@@ -88,6 +88,8 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 	);
 
 	const handleClose = () => {
+		resetForm();
+		setImageAsDataUrl(undefined);
 		setErrorMap(null);
 		props.close();
 	};
@@ -155,7 +157,8 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 							<button ref={submitButtonRef} type="submit" className="hidden"></button>
 						</form>
 					</ModalBody>
-					<ModalFooter className="flex flex-col gap-2">
+					<ModalFooter className="flex justify-end gap-4">
+						<Button onClick={handleClose}>Cancel</Button>
 						<Button onClick={() => submitButtonRef.current!.click()}>Save</Button>
 					</ModalFooter>
 				</>

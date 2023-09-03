@@ -40,7 +40,13 @@ export type AddProjectModalProps = _AddProjectModalProps &
 
 function AddProjectModal({ className, children, ...props }: AddProjectModalProps) {
 	const queryClient = useQueryClient();
-	const { register, handleSubmit, watch, setValue } = useForm<AddProjectFormData>();
+	const {
+		register,
+		handleSubmit,
+		watch,
+		setValue,
+		reset: resetFrom,
+	} = useForm<AddProjectFormData>();
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<AddProjectSchema> | null>(null);
@@ -90,6 +96,8 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 	);
 
 	const handleClose = () => {
+		resetFrom();
+		setImageAsDataUrl(undefined);
 		setErrorMessage(null);
 		setErrorMap(null);
 		props.close();
@@ -153,7 +161,7 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 							<button ref={submitButtonRef} type="submit" className="hidden"></button>
 						</form>
 					</ModalBody>
-					<ModalFooter className="flex gap-2">
+					<ModalFooter className="flex justify-end gap-4">
 						<Button onClick={handleClose}>Cancel</Button>
 						<Button onClick={() => submitButtonRef.current!.click()}>Add</Button>
 					</ModalFooter>
