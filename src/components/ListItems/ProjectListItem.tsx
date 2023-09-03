@@ -46,7 +46,7 @@ function ProjectListItem({
 					</IconLink>
 					<p className="text-secondary">{description}</p>
 				</div>
-				<div className="flex items-start justify-start gap-2">{tags}</div>
+				<div className="flex flex-wrap items-start justify-start gap-2">{tags}</div>
 			</div>
 		</div>
 	);
