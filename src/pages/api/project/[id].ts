@@ -1,28 +1,28 @@
 import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
+import { addProjectSchema } from ".";
 
-const editProjectSchema = z.object({
-	alias: z.string().nonempty(),
-});
+const editProjectSchema = addProjectSchema.omit({ name: true });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const {
 		query: { id },
 		method,
-		body: { alias },
+		body: { alias, imageUrl },
 	} = req;
 
 	switch (method) {
 		case "PATCH":
 			try {
-				editProjectSchema.parse({ alias });
+				editProjectSchema.parse({ alias, imageUrl });
 				const updatedProject = await prisma.project.update({
 					where: {
 						id: parseInt(id as string),
 					},
 					data: {
 						alias,
+						imageUrl,
 					},
 				});
 				return res.json(updatedProject);

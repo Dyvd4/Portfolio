@@ -3,7 +3,6 @@ import Button from "@components/Button";
 import Card from "@components/Card";
 import IconLink from "@components/IconLink";
 import Input from "@components/Input";
-import LoadingCircle from "@components/LoadingCircle";
 import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
 import AddProjectModal from "@components/Modals/Project/AddProjectModal";
 import DeleteProjectModal from "@components/Modals/Project/DeleteProjectModal";
@@ -117,11 +116,6 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					className="mt-12 rounded-md border-2"
 				/>
 				<ul ref={setParentRef} className="my-12 flex flex-col items-center gap-6">
-					{projectsAreLoading && (
-						<>
-							<LoadingCircle />
-						</>
-					)}
 					{!projectsAreLoading && projects.length === 0 && <p>No projects found 😴</p>}
 					{!projectsAreLoading && projects.length > 0 && (
 						<>

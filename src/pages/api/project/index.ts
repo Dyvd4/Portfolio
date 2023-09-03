@@ -2,21 +2,22 @@ import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 
-const addProjectSchema = z.object({
+export const addProjectSchema = z.object({
 	name: z.string().nonempty(),
 	alias: z.string().nonempty(),
+	imageUrl: z.string().optional(),
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const {
 		method,
-		body: { name, alias },
+		body: { name, alias, imageUrl },
 	} = req;
 
 	switch (method) {
 		case "POST":
 			try {
-				addProjectSchema.parse({ name, alias });
+				addProjectSchema.parse({ name, alias, imageUrl });
 				const projectExists = await prisma.project.findUnique({
 					where: {
 						name,
@@ -29,6 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					data: {
 						name,
 						alias,
+						imageUrl,
 					},
 				});
 				return res.status(200).json(newProject);
@@ -37,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					return res.status(400).json((e as z.ZodError).format());
 				}
 				console.error(e);
-				return res.status(500).json("An unknown error occurred sending the mail");
+				return res.status(500).json("An unknown error occurred");
 			}
 	}
 }
