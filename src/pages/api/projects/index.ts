@@ -18,6 +18,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 							},
 						},
 						{
+							alias: {
+								startsWith: projectOrTagname,
+							},
+						},
+						{
 							tags: {
 								some: {
 									name: {
