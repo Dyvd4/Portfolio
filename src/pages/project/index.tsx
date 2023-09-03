@@ -10,11 +10,12 @@ import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useDebounce from "@hooks/useDebounce";
 import { prisma } from "@prisma";
-import { fetchEntity } from "@utils/request-utils";
+import request, { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import toast from "react-hot-toast";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export async function getServerSideProps() {
 	const projects = await prisma.project.findMany({
@@ -57,12 +58,15 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 		open: openProjectAddModal,
 		close: closeProjectAddModal,
 	} = useModalDisclosure();
+
 	const [projectIdToEdit, setProjectIdToEdit] = useState<number | undefined>();
 	const { status } = useSession();
 	const [projectOrTagname, setProjectOrTagName] = useState("");
 	const { value: debouncedProjectOrTagname } = useDebounce(projectOrTagname);
 	const [setParentRef] = useAutoAnimate();
+	const queryClient = useQueryClient();
 
+	console.log("🚀 ~ file: index.tsx:81 ~ Projects ~ initialProjects:", initialProjects);
 	const { isLoading: projectsAreLoading, data: projects } = useQuery(
 		["projects", debouncedProjectOrTagname],
 		() => {
@@ -77,6 +81,32 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 			initialData: initialProjects,
 		}
 	);
+	console.log("🚀 ~ file: index.tsx:71 ~ Projects ~ projects:", projects);
+
+	const projectReImportMutation = useMutation(
+		(projectId: number) => {
+			return toast.promise(
+				request.post(`/api/project/${projectId}/import`),
+				{
+					loading: "Importing project from GitHub...",
+					success: "Successfully imported project",
+					error: "An unknown error occurred",
+				},
+				{
+					style: {
+						borderRadius: "10px",
+						background: "#333",
+						color: "#fff",
+					},
+				}
+			);
+		},
+		{
+			onSuccess: async () => {
+				await queryClient.invalidateQueries(["projects"]);
+			},
+		}
+	);
 
 	const handleProjectEdit = (projectId: number) => {
 		setProjectIdToEdit(projectId);
@@ -85,6 +115,9 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	const handleProjectDelete = (projectId: number) => {
 		setProjectIdToEdit(projectId);
 		openProjectDeleteModal();
+	};
+	const handleProjectReImport = (projectId: number) => {
+		projectReImportMutation.mutate(projectId);
 	};
 
 	return (
@@ -143,6 +176,13 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 													onClick={() => handleProjectDelete(project.id)}
 												>
 													Delete
+												</Button>
+												<Button
+													onClick={() =>
+														handleProjectReImport(project.id)
+													}
+												>
+													Re-import
 												</Button>
 												<Button
 													onClick={() => handleProjectEdit(project.id)}

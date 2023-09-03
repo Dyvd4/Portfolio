@@ -4,7 +4,6 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Button from "./Button";
 import { HalfMoon, SunLight } from "./Icons";
 import NavLink from "./NavLink";
 
@@ -55,11 +54,17 @@ function Navbar(props: NavbarProps) {
 				<li>
 					<ul className="flex items-center gap-6 sm:gap-12">
 						{status === "authenticated" && (
-							<>
-								<Button onClick={() => signOut()} className="sm:text-xs">
+							<li key={"sign-out"}>
+								<NavLink
+									href="#"
+									onClick={(e) => {
+										e.preventDefault();
+										signOut();
+									}}
+								>
 									Sign out
-								</Button>
-							</>
+								</NavLink>
+							</li>
 						)}
 						{LINKS.map(({ href, title }) => (
 							<li key={href}>
