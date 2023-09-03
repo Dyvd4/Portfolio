@@ -9,5 +9,5 @@ jobs:
             - name: hit "import-projects-route" every day
               run: |
                   curl --request POST \
-                  --url 'https://www.portfolio.kimmich.dev/api/projects/import' \
+                  --url '${{ env.API_URL }}${{ env.IMPORT_PROJECTS_ROUTE }}' \
                   --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'

@@ -9,5 +9,5 @@ jobs:
             - name: hit "import-repos-route" every day
               run: |
                   curl --request POST \
-                  --url 'https://portfolio.kimmich.dev/api/repos/import' \
+                  --url 'https://www.portfolio.kimmich.dev/api/repos/import' \
                   --header 'Authorization: Bearer ${{ secrets.IMPORT_REPOS_CRON_ACCESS_TOKEN }}'
