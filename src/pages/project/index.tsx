@@ -66,7 +66,6 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 	const [setParentRef] = useAutoAnimate();
 	const queryClient = useQueryClient();
 
-	console.log("🚀 ~ file: index.tsx:81 ~ Projects ~ initialProjects:", initialProjects);
 	const { isLoading: projectsAreLoading, data: projects } = useQuery(
 		["projects", debouncedProjectOrTagname],
 		() => {
@@ -81,7 +80,6 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 			initialData: initialProjects,
 		}
 	);
-	console.log("🚀 ~ file: index.tsx:71 ~ Projects ~ projects:", projects);
 
 	const projectReImportMutation = useMutation(
 		(projectId: number) => {
