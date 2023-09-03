@@ -1,12 +1,13 @@
-name: import-repos-cron
+name: import-repos-cron-test
 on:
-    schedule:
-        - cron: "0 0 * * *"
+    push:
+        branches:
+            - "test-workflows"
 jobs:
     cron:
         runs-on: ubuntu-latest
         steps:
-            - name: hit "import-repos-route" every day
+            - name: hit "import-repos-route"
               run: |
                   curl --request POST \
                   --url '${{ vars.API_URL }}${{ vars.IMPORT_REPOS_ROUTE }}' \

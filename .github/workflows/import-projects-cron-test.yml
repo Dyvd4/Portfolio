@@ -7,7 +7,7 @@ jobs:
     cron:
         runs-on: ubuntu-latest
         steps:
-            - name: hit "import-projects-route" every day
+            - name: hit "import-projects-route"
               run: |
                   curl --request POST \
                   --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
