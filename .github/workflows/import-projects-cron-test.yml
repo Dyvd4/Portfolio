@@ -7,8 +7,14 @@ jobs:
     cron:
         runs-on: ubuntu-latest
         steps:
-            - name: hit "import-projects-route"
+            - name: get csrf token
+              run: csrfToken=$(curl --url '${{ vars.API_URL }}/auth/csrf)
+            - name: get session token
               run: |
-                  curl --request POST \
-                  --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
-                  --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
+                  cookies=$(curl -c - '${{ vars.API_URL }}/auth/callback/credentials?')
+                  echo $cookies
+            # - name: hit "import-projects-route"
+            #   run: |
+            #       curl --request POST \
+            #       --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
+            #       --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
