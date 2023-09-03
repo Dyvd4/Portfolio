@@ -1,8 +1,7 @@
 import IconLink from "@components/IconLink";
+import ProjectImage from "@components/Images/ProjectImage";
 import { cn } from "@utils/component-utils";
-import Image from "next/image";
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
-import fallbackProjectImage from "../../../public/Project_fallback.png";
 
 type _ProjectListItemProps = {
 	id: number;
@@ -27,19 +26,13 @@ function ProjectListItem({
 }: ProjectListItemProps) {
 	return (
 		<div className={cn(`flex gap-6`, className)} {...props}>
-			<Image
-				className="rounded-xl"
-				src={imageUrl || fallbackProjectImage}
-				width={356}
-				height={200}
-				alt="project image"
-			/>
+			<ProjectImage src={imageUrl} />
 			<div className="flex min-w-0 flex-col items-start gap-4 pt-2">
 				<div className="flex max-w-full flex-col gap-2">
 					<IconLink useArrowUp href={`/project/${id}`}>
 						<h1 className="truncate text-3xl font-semibold">{alias}</h1>
 					</IconLink>
-					<p className="text-gray-400 dark:text-gray-400">{description}</p>
+					<p className="text-secondary">{description}</p>
 				</div>
 				<div className="flex items-start justify-start gap-2">{tags}</div>
 			</div>

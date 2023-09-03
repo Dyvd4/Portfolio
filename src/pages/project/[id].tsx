@@ -1,7 +1,7 @@
 import ProjectCommitService, { LatestCommitsView } from "@backend/services/ProjectCommitService";
 import Badge from "@components/Badge";
-import Button from "@components/Button";
 import IconLink from "@components/IconLink";
+import ProjectImage from "@components/Images/ProjectImage";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { prisma } from "@prisma";
@@ -126,39 +126,33 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 	return (
 		<>
-			<div className="mt-12 text-center">
+			<div className="mt-4 flex justify-between">
 				<h1 className="text-6xl font-black sm:text-7xl">{project.alias}</h1>
-				<p className="text-secondary my-8 text-center">
-					{project.description || "no description available"}
-				</p>
-			</div>
-
-			<div className="flex items-center justify-center gap-4">
-				<Button disabled={!project.url}>
+				<div className="flex items-end">
 					<IconLink
+						useArrowUp
 						variant="black"
 						disabled={!project.url}
 						href={project.url || "#"}
 						target={"_blank"}
 					>
-						View demo
+						Visit original site
 					</IconLink>
-				</Button>
-				<Button disabled={!project.githubUrl}>
-					<IconLink
-						variant="black"
-						disabled={!project.githubUrl}
-						href={project.githubUrl || "#"}
-						target={"_blank"}
-					>
-						View on GitHub
-					</IconLink>
-				</Button>
+				</div>
 			</div>
 
-			<section className="mt-20">
+			<section className="mt-16 flex flex-col gap-3">
+				<h1 className="text-xl font-medium">Description</h1>
+				<p className="text-secondary">
+					{project.description || "no description available"}
+				</p>
+			</section>
+
+			<ProjectImage className="mt-16" src={project.imageUrl} width={768} height={413} />
+
+			<section className="mt-16 flex flex-col gap-3">
 				<h1 className="flex items-center">
-					<span className="text-xl">Development activity</span>&nbsp;
+					<span className="text-xl font-medium">Development activity</span>&nbsp;
 					<span className="text-secondary text-base">(within past year)</span>
 				</h1>
 				<ResponsiveContainer width={"100%"} height={100}>
@@ -174,9 +168,9 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					</LineChart>
 				</ResponsiveContainer>
 			</section>
-			<section className="mt-16">
+			<section className="mt-16 flex flex-col gap-3">
 				<h1 className="flex items-center">
-					<span className="text-xl">Languages used</span>
+					<span className="text-xl font-medium">Languages used</span>
 					&nbsp;
 					<span className="text-secondary text-base">(in %)</span>
 				</h1>
@@ -198,12 +192,12 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 			{project.tags.length > 0 && (
 				<>
-					<section className="py-10">
-						<h1 className="text-xl">Tags</h1>
+					<section className="flex flex-col gap-3 pt-20">
+						<h1 className="text-xl font-medium">Tags</h1>
 						<ul className="mt-2 flex flex-wrap gap-2">
 							{project.tags.map((tag) => (
 								<li key={tag.name}>
-									<Badge variant="gray">{tag.name}</Badge>
+									<Badge>{tag.name}</Badge>
 								</li>
 							))}
 						</ul>
