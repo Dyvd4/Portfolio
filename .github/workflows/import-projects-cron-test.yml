@@ -1,0 +1,14 @@
+name: import-projects-cron-test
+on:
+    push:
+        branches:
+            - "test-workflows"
+jobs:
+    cron:
+        runs-on: ubuntu-latest
+        steps:
+            - name: hit "import-projects-route" every day
+              run: |
+                  curl --request POST \
+                  --url '${{ env.API_URL }}${{ env.IMPORT_PROJECTS_ROUTE }}' \
+                  --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
