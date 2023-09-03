@@ -143,7 +143,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 					placeholder="search by project name or tag..."
 					className="mt-12 rounded-md border-2"
 				/>
-				<ul ref={setParentRef} className="my-12 flex flex-col items-center gap-6">
+				<ul ref={setParentRef} className="my-12 flex flex-col items-center gap-10">
 					{!projectsAreLoading && projects.length === 0 && <p>No projects found 😴</p>}
 					{!projectsAreLoading && projects.length > 0 && (
 						<>

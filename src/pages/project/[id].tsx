@@ -197,7 +197,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 			{project.tags.length > 0 && (
 				<>
-					<section className="flex flex-col gap-3 pt-20">
+					<section className="flex flex-col gap-3 pt-20 pb-10">
 						<h1 className="text-xl font-medium">Tags</h1>
 						<ul className="mt-2 flex flex-wrap gap-2">
 							{project.tags.map((tag) => (
