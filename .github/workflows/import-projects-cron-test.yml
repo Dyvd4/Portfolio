@@ -9,11 +9,11 @@ jobs:
         steps:
             - name: get csrf token
               run: |
-                  csrfToken=$(curl --url '${{ vars.API_URL }}/auth/csrf').csrfToken
+                  csrfToken=$(curl --url '${{ vars.API_URL }}/auth/csrf')
                   echo $csrfToken
             - name: get session token
               run: |
-                  cookies=$(curl -F 'username=${{secrets.ADMIN_USERNAME}}' -F 'password=${{secrets.ADMIN_PASSWORD}}' -F 'json=true' -F 'redirect=false' -F 'csrfToken=$csrfToken' -c - '${{ vars.API_URL }}/auth/callback/credentials?')
+                  cookies=$(curl -F 'username=${{secrets.ADMIN_USERNAME}}' -F 'password=${{secrets.ADMIN_PASSWORD}}' -F 'json=true' -F 'redirect=false' -F 'csrfToken=$csrfToken.csrfToken' -c - '${{ vars.API_URL }}/auth/callback/credentials?')
                   echo $cookies
             # - name: hit "import-projects-route"
             #   run: |
