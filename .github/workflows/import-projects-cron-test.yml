@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: get csrf token
-              run: csrfToken=$(curl --url '${{ vars.API_URL }}/auth/csrf)
+              run: csrfToken=$(curl --url '${{ vars.API_URL }}/auth/csrf')
             - name: get session token
               run: |
                   cookies=$(curl -c - '${{ vars.API_URL }}/auth/callback/credentials?')
