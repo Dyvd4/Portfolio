@@ -8,10 +8,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: get csrf token
-              run: csrfToken=$(curl --url '${{ vars.API_URL }}/auth/csrf')
+              run: |
+                  csrfToken=$(curl --url '${{ vars.API_URL }}/auth/csrf').csrfToken
+                  echo $csrfToken
             - name: get session token
               run: |
-                  cookies=$(curl -c - '${{ vars.API_URL }}/auth/callback/credentials?')
+                  cookies=$(curl -F 'username=${{secrets.ADMIN_USERNAME}}' -F 'password=${{secrets.ADMIN_PASSWORD}}' -F 'json=true' -F 'redirect=false' -F 'csrfToken=$csrfToken' -c - '${{ vars.API_URL }}/auth/callback/credentials?')
                   echo $cookies
             # - name: hit "import-projects-route"
             #   run: |
