@@ -33,7 +33,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				console.error(e);
 				return res.status(500).json("An unknown error occurred");
 			}
-
+		case "GET":
+			const project = await prisma.project.findFirst({
+				where: {
+					id: parseInt(id as string),
+				},
+			});
+			return res.json(project);
 		case "DELETE":
 			const deletedProject = await prisma.project.delete({
 				where: {

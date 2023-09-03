@@ -123,12 +123,7 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 							className="flex flex-col gap-2"
 							onSubmit={handleSubmit(onHandleSubmit)}
 						>
-							<Select
-								placeholder="name"
-								value={project.name}
-								disabled
-								{...register("name")}
-							>
+							<Select placeholder="name" disabled {...register("name")}>
 								{githubRepos.map((repo) => (
 									<option value={repo.name} key={repo.id}>
 										{repo.name}
@@ -140,7 +135,6 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 									className="w-full"
 									placeholder="alias"
 									{...register("alias")}
-									defaultValue={project.alias}
 								/>
 							</FormControl>
 							<FormControl errorMessage={errorMap?.imageUrl?._errors}>
