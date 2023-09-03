@@ -41,13 +41,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				},
 			});
 			return res.json(deletedProject);
-		case "GET":
-			const project = await prisma.project.findFirst({
-				where: {
-					id: parseInt(id as string),
-				},
-			});
-			return res.json(project);
 		default:
 			return res.send(`${req.method} not supported`);
 	}
