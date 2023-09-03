@@ -39,7 +39,7 @@ function ProjectListItem({
 					<IconLink useArrowUp href={`/project/${id}`}>
 						<h1 className="truncate text-3xl font-semibold">{alias}</h1>
 					</IconLink>
-					<p className="text-gray-400">{description}</p>
+					<p className="text-gray-400 dark:text-gray-400">{description}</p>
 				</div>
 				<div className="flex items-start justify-start gap-2">{tags}</div>
 			</div>
