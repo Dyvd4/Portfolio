@@ -1,15 +1,24 @@
 import GithubApi from "@backend/GithubApi";
+import config from "@config/config";
 import { prisma } from "@prisma";
+
+const { GITHUB_REPO_OWNER } = config;
 
 type UserRepoResponse = {
 	name: string;
+	owner: {
+		login: string;
+	};
 	[key: string]: any;
 };
 
 export const fetchRepos = async () => {
 	const response = (await GithubApi.get(`user/repos`)).data as UserRepoResponse[];
+	await prisma.githubRepo.deleteMany();
 	await prisma.githubRepo.createMany({
-		data: response.map((repo) => ({ name: repo.name })),
+		data: response
+			.filter((repo) => repo.owner.login === GITHUB_REPO_OWNER)
+			.map((repo) => ({ name: repo.name })),
 	});
 };
 

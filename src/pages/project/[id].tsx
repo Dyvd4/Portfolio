@@ -51,6 +51,7 @@ export async function getServerSideProps(context: NextPageContext) {
 			name: true,
 			alias: true,
 			githubUrl: true,
+			imageUrl: true,
 			url: true,
 			description: true,
 			visibility: true,
