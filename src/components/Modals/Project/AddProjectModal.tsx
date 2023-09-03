@@ -1,14 +1,24 @@
 import Button from "@components/Button";
+import FileInput from "@components/FileInput";
 import FormControl from "@components/FormControl";
 import Input from "@components/Input";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
 import Select from "@components/Select";
 import useGithubReposQuery from "@queries/github-repos-query";
-import { addEntity, fetchEntity } from "@utils/request-utils";
-import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
+import { getDataUrl } from "@utils/file-utils";
+import { addEntity } from "@utils/request-utils";
+import Image from "next/image";
+import {
+	ChangeEvent,
+	ComponentPropsWithRef,
+	PropsWithChildren,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { z } from "zod";
 
 type _AddProjectModalProps = {
@@ -16,29 +26,34 @@ type _AddProjectModalProps = {
 	close(): void;
 };
 
-const addProjectSchema = z.object({
+export const addProjectSchema = z.object({
 	name: z.string().nonempty(),
 	alias: z.string().nonempty(),
+	imageUrl: z.string().optional(),
 });
 
-type AddProjectSchema = z.infer<typeof addProjectSchema>;
+export type AddProjectSchema = z.infer<typeof addProjectSchema>;
+export type AddProjectFormData = Omit<AddProjectSchema, "imageUrl">;
 
 export type AddProjectModalProps = _AddProjectModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _AddProjectModalProps>;
 
 function AddProjectModal({ className, children, ...props }: AddProjectModalProps) {
 	const queryClient = useQueryClient();
-	const { register, handleSubmit } = useForm<AddProjectSchema>();
+	const { register, handleSubmit, watch, setValue } = useForm<AddProjectFormData>();
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<AddProjectSchema> | null>(null);
-
 	const { isLoading, data: githubRepos } = useGithubReposQuery();
+	const [imageAsDataUrl, setImageAsDataUrl] = useState<string | undefined>();
 
-	const createProjectMutation = useMutation<any, any, any, any>(
-		(payload) => {
-			addProjectSchema.parse(payload);
-			props.close();
+	const selectedName = watch("name");
+	useEffect(() => {
+		setValue("alias", selectedName);
+	}, [selectedName]);
+
+	const createProjectMutation = useMutation<any, any, AddProjectSchema, any>(
+		async (payload) => {
 			return toast.promise(
 				addEntity({
 					route: "/api/project",
@@ -60,6 +75,7 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 		},
 		{
 			onSuccess: async () => {
+				props.close();
 				setErrorMessage(null);
 				await queryClient.invalidateQueries(["projects"]);
 			},
@@ -79,6 +95,21 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 		props.close();
 	};
 
+	const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+		const selectedFiles = e.target.files;
+		const selectedFile = selectedFiles?.[0];
+		const imageUrl = selectedFile ? await getDataUrl(selectedFile) : undefined;
+		setImageAsDataUrl(imageUrl);
+	};
+
+	const onHandleSubmit = async ({ name, alias }: AddProjectFormData) => {
+		createProjectMutation.mutate({
+			name,
+			alias,
+			imageUrl: imageAsDataUrl,
+		});
+	};
+
 	return (
 		<Modal isLoading={isLoading} isActive={props.isActive}>
 			{!isLoading && (
@@ -86,7 +117,7 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 					<ModalHeader close={props.close}>Add project</ModalHeader>
 					<ModalBody>
 						<form
-							onSubmit={handleSubmit((data) => createProjectMutation.mutate(data))}
+							onSubmit={handleSubmit(onHandleSubmit)}
 							className="flex flex-col gap-4"
 						>
 							<FormControl errorMessage={errorMap?.name?._errors}>
@@ -101,6 +132,19 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 							<FormControl errorMessage={errorMap?.alias?._errors}>
 								<Input placeholder="alias" {...register("alias")} />
 							</FormControl>
+							<FormControl errorMessage={errorMap?.imageUrl?._errors}>
+								<FileInput onChange={handleFileChange} />
+							</FormControl>
+							{imageAsDataUrl && (
+								<>
+									<Image
+										src={imageAsDataUrl}
+										alt="selected image"
+										width={100}
+										height={100}
+									></Image>
+								</>
+							)}
 							{!!errorMessage && (
 								<>
 									<div className="text-red-500">{errorMessage}</div>
