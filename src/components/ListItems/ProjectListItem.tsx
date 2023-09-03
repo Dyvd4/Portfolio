@@ -1,4 +1,5 @@
 import IconLink from "@components/IconLink";
+import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
 import { cn } from "@utils/component-utils";
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
@@ -25,11 +26,22 @@ function ProjectListItem({
 	...props
 }: ProjectListItemProps) {
 	return (
-		<div className={cn(`flex gap-6`, className)} {...props}>
+		<div
+			className={cn(`flex flex-col-reverse gap-4 sm:flex-row sm:gap-6`, className)}
+			{...props}
+		>
 			<ProjectImage src={imageUrl} />
-			<div className="flex min-w-0 flex-col items-start gap-4 pt-2">
+			<div className="flex min-w-0 flex-col items-start gap-4 sm:pt-2">
 				<div className="flex max-w-full flex-col gap-2">
-					<IconLink useArrowUp href={`/project/${id}`}>
+					<IconLink
+						icon={
+							<LongArrowRightUp
+								className={`inline shrink-0 transition-transform
+										group-hover:translate-x-1`}
+							/>
+						}
+						href={`/project/${id}`}
+					>
 						<h1 className="truncate text-3xl font-semibold">{alias}</h1>
 					</IconLink>
 					<p className="text-secondary">{description}</p>

@@ -1,6 +1,5 @@
 import Link, { LinkProps } from "next/link";
 import { BsArrowRight } from "react-icons/bs";
-import LongArrowRightUp from "./Icons/LongArrowRightUp";
 
 type IconLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
 	LinkProps & {
@@ -13,7 +12,7 @@ type IconLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof L
 		 * text and icon is always black (also in dark mode)
 		 */
 		variant?: "normal" | "black";
-		useArrowUp?: boolean;
+		icon?: React.ReactElement;
 	} & React.RefAttributes<HTMLAnchorElement>;
 
 function IconLink({
@@ -21,7 +20,7 @@ function IconLink({
 	className,
 	disabled,
 	variant = "normal",
-	useArrowUp,
+	icon,
 	...props
 }: IconLinkProps) {
 	const variantLinkClassNames =
@@ -38,15 +37,8 @@ function IconLink({
 			{...props}
 		>
 			{children}
-			{!!useArrowUp && (
-				<>
-					<LongArrowRightUp
-						className={`inline shrink-0 transition-transform
-										group-hover:translate-x-1 ${variantIconClassNames}`}
-					/>
-				</>
-			)}
-			{!useArrowUp && (
+			{!!icon && icon}
+			{!icon && (
 				<>
 					<BsArrowRight
 						className={`inline transition-transform 

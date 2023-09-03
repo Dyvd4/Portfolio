@@ -1,6 +1,7 @@
 import ProjectCommitService, { LatestCommitsView } from "@backend/services/ProjectCommitService";
 import Badge from "@components/Badge";
 import IconLink from "@components/IconLink";
+import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
@@ -126,12 +127,16 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 	return (
 		<>
-			<div className="mt-4 flex justify-between">
+			<div className="mt-4 flex flex-col justify-between gap-4 sm:flex-row sm:gap-0">
 				<h1 className="text-6xl font-black sm:text-7xl">{project.alias}</h1>
 				<div className="flex items-end">
 					<IconLink
-						useArrowUp
-						variant="black"
+						icon={
+							<LongArrowRightUp
+								className={`inline shrink-0 transition-transform
+											group-hover:translate-x-1`}
+							/>
+						}
 						disabled={!project.url}
 						href={project.url || "#"}
 						target={"_blank"}
