@@ -14,6 +14,7 @@ jobs:
                   echo $username
                   authToken=$(curl --request POST --header 'Content-Type: application/json' --data '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}' --url '${{ vars.API_URL }}/auth/custom-sign-in')
                   echo $authToken
-                  curl --request POST \
+                  response = $(curl --request POST \
                   --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
-                  --header 'auth-token: $authToken'
+                  --header 'auth-token: $authToken')
+                  echo $response
