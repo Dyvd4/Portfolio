@@ -9,8 +9,9 @@ jobs:
         steps:
             - name: get auth token
               run: |
-                  authToken=$(curl --request POST --url '${{ vars.API_URL }}/auth/custom-sign-in' -d '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}')
-                  echo $authToken
+                  echo ${{secrets.ADMIN_USERNAME}}
+                    authToken=$(curl --request POST --url --data '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}' '${{ vars.API_URL }}/auth/custom-sign-in')
+                    echo $authToken
             - name: hit "import-projects-route"
               run: |
                   echo $authToken
