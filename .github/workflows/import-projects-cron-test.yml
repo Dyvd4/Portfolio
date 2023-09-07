@@ -7,17 +7,13 @@ jobs:
     cron:
         runs-on: ubuntu-latest
         steps:
-            - name: get csrf token
+            - name: get auth token
               run: |
-                  response=$(curl --url '${{ vars.API_URL }}/auth/csrf')
-                  csrfToken=$(echo $response | jq -r '.csrfToken')
-                  echo $csrfToken
-            - name: get session token
+                  authToken=$(curl --request POST --url '${{ vars.API_URL }}/auth/custom-sign-in' -d '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}')
+                  echo $authToken
+            - name: hit "import-projects-route"
               run: |
-                  cookies=$(curl -F 'username=${{secrets.ADMIN_USERNAME}}' -F 'password=${{secrets.ADMIN_PASSWORD}}' -F 'json=true' -F 'redirect=false' -F 'csrfToken=$csrfToken' -c - '${{ vars.API_URL }}/auth/callback/credentials?')
-                  echo $cookies
-            # - name: hit "import-projects-route"
-            #   run: |
-            #       curl --request POST \
-            #       --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
-            #       --header 'Authorization: Bearer ${{ secrets.IMPORT_PROJECTS_CRON_ACCESS_TOKEN }}'
+                  echo $authToken
+                    curl --request POST \
+                    --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
+                    --header 'auth-token: $authToken'
