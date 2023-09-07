@@ -9,7 +9,8 @@ jobs:
         steps:
             - name: get auth token
               run: |
-                  username=${{secrets.ADMIN_USERNAME}}
+                  test="hello world"
+                  echo $test
                   echo $username
                   authToken=$(curl --request POST --header 'Content-Type: application/json' --data '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}' --url '${{ vars.API_URL }}/auth/custom-sign-in')
                   echo $authToken
