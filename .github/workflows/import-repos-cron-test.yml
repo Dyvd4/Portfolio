@@ -7,8 +7,11 @@ jobs:
     cron:
         runs-on: ubuntu-latest
         steps:
+            - name: get auth token
+              run: |
+                  authToken=$(curl --request POST --url '${{ vars.API_URL }}/auth/custom-sign-in' -d '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}')
             - name: hit "import-repos-route"
               run: |
                   curl --request POST \
                   --url '${{ vars.API_URL }}${{ vars.IMPORT_REPOS_ROUTE }}' \
-                  --header 'Authorization: Bearer ${{ secrets.IMPORT_REPOS_CRON_ACCESS_TOKEN }}'
+                  --header 'auth-token: $authToken'
