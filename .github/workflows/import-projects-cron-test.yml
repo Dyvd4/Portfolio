@@ -10,12 +10,9 @@ jobs:
             - name: get auth token
               run: |
                   username=${{secrets.ADMIN_USERNAME}}
-                    echo $username
-                      authToken=$(curl --request POST --data '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}' --url '${{ vars.API_URL }}/auth/custom-sign-in')
-                      echo $authToken
-            - name: hit "import-projects-route"
-              run: |
+                  echo $username
+                  authToken=$(curl --request POST --data '{"username": "${{ secrets.ADMIN_USERNAME }}", "password": "${{ secrets.ADMIN_PASSWORD }}"}' --url '${{ vars.API_URL }}/auth/custom-sign-in')
                   echo $authToken
-                    curl --request POST \
-                    --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
-                    --header 'auth-token: $authToken'
+                  curl --request POST \
+                  --url '${{ vars.API_URL }}${{ vars.IMPORT_PROJECTS_ROUTE }}' \
+                  --header 'auth-token: $authToken'
