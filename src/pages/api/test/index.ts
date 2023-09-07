@@ -1,10 +1,8 @@
+import { isAuthenticated } from "@backend/utils/auth-utils";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	const session = await getServerSession(req, res, authOptions);
-	if (session) {
+	if (await isAuthenticated(req, res)) {
 		res.send({
 			content:
 				"This is protected content. You can access this content because you are signed in.",
