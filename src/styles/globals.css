@@ -51,7 +51,7 @@
 
 @layer components {
 	.stroke-secondary {
-		@apply stroke-gray-700 dark:stroke-gray-300;
+		@apply stroke-gray-700 dark:stroke-gray-300 !important;
 	}
 
 	.fill-secondary {

@@ -3,6 +3,7 @@ import Badge from "@components/Badge";
 import IconLink from "@components/IconLink";
 import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
+import ImportedFromGithubInfo from "@components/ImportedFromGithubInfo";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { prisma } from "@prisma";
@@ -209,6 +210,9 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					</section>
 				</>
 			)}
+			<div className="flex justify-center">
+				<ImportedFromGithubInfo />
+			</div>
 		</>
 	);
 }
