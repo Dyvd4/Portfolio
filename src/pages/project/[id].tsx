@@ -1,5 +1,6 @@
 import ProjectCommitService, { LatestCommitsView } from "@backend/services/ProjectCommitService";
 import Badge from "@components/Badge";
+import LeftHeading from "@components/Headings/LeftHeading";
 import IconLink from "@components/IconLink";
 import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
@@ -128,9 +129,8 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 	return (
 		<>
-			<div className="mt-4 flex flex-col justify-between gap-4 sm:flex-row sm:gap-0">
-				<h1 className="text-6xl font-black sm:text-7xl">{project.alias}</h1>
-				<div className="flex items-end">
+			<LeftHeading
+				rightSection={
 					<IconLink
 						icon={
 							<LongArrowRightUp
@@ -144,8 +144,10 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					>
 						Visit original site
 					</IconLink>
-				</div>
-			</div>
+				}
+			>
+				{project.alias}
+			</LeftHeading>
 
 			<section className="mt-16 flex flex-col gap-3">
 				<h1 className="text-xl font-medium">Description</h1>
