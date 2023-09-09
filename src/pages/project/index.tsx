@@ -18,11 +18,21 @@ import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export async function getServerSideProps() {
-	const projects = await prisma.project.findMany({
-		include: {
-			tags: true,
+	const latestCommits = await prisma.projectCommit.findMany({
+		select: {
+			project: {
+				include: {
+					tags: true,
+				},
+			},
+			createdAt: true,
 		},
+		orderBy: {
+			createdAt: "desc",
+		},
+		take: 1,
 	});
+	const projects = latestCommits.map((commit) => commit.project);
 	return {
 		props: {
 			projects: JSON.parse(JSON.stringify(projects)) as typeof projects,

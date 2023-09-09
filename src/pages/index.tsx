@@ -1,9 +1,33 @@
 import Badge from "@components/Badge";
 import Button from "@components/Button";
 import IconLink from "@components/IconLink";
+import LatestProjectSection from "@components/Sections/LatestProjectSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useAge from "@hooks/useAge";
+import { prisma } from "@prisma";
 import Head from "next/head";
+
+export async function getServerSideProps() {
+	const latestCommit = await prisma.projectCommit.findFirst({
+		select: {
+			projectId: true,
+			project: {
+				include: {
+					tags: true,
+				},
+			},
+		},
+		orderBy: {
+			createdAt: "desc",
+		},
+	});
+	const latestProject = !!latestCommit ? latestCommit.project : null;
+	return {
+		props: {
+			latestProject: JSON.parse(JSON.stringify(latestProject)) as typeof latestProject,
+		},
+	};
+}
 
 export default function Home(props) {
 	useBreadcrumb([]);
@@ -23,11 +47,11 @@ export default function Home(props) {
 					content="Intuitive, Useful, Beautiful, Portfolio, Web app, David Kimmich"
 				/>
 			</Head>
-			<main
-				className="absolute top-1/2 left-1/2 max-w-full -translate-x-1/2
-							-translate-y-1/2 transform overflow-hidden"
-			>
-				<div className="mt-12 flex flex-col items-center">
+			<main>
+				<div
+					className="absolute top-1/2 left-1/2 mt-12 flex max-w-full -translate-x-1/2 -translate-y-1/2 transform
+							flex-col items-center overflow-hidden"
+				>
 					<h1 className="flex flex-col gap-4 md:flex-row">
 						<Badge
 							variant="yellow"
@@ -62,6 +86,7 @@ export default function Home(props) {
 						</IconLink>
 					</Button>
 				</div>
+				<LatestProjectSection latestProject={props.latestProject} />
 			</main>
 		</>
 	);
