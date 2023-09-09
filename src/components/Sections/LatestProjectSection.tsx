@@ -36,7 +36,6 @@ function LatestProjectSection({ latestProject, ...props }: LatestProjectSectionP
 								/>
 							}
 							href={"/project"}
-							target={"_blank"}
 						>
 							See all projects
 						</IconLink>
