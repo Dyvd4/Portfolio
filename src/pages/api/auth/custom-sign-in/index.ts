@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			},
 			config.NEXTAUTH_SECRET,
 			{
-				expiresIn: "1d",
+				expiresIn: "10m",
 			}
 		);
 		return res.json(jwtToken);
