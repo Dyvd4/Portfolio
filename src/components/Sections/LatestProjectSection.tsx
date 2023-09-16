@@ -16,6 +16,7 @@ function LatestProjectSection({ latestProject, ...props }: LatestProjectSectionP
 				rightSection={
 					<>
 						<IconLink
+							variant="secondary"
 							icon={
 								<LongArrowRightUp
 									className={`inline shrink-0 transition-transform
@@ -29,6 +30,7 @@ function LatestProjectSection({ latestProject, ...props }: LatestProjectSectionP
 							Visit original site
 						</IconLink>
 						<IconLink
+							variant="secondary"
 							icon={
 								<LongArrowRightUp
 									className={`inline shrink-0 transition-transform

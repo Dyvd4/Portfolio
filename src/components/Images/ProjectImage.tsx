@@ -14,7 +14,7 @@ function ProjectImage({ className, children, src, ...props }: ProjectImageProps)
 		<Image
 			className={cn(`rounded-xl`, className)}
 			src={src || fallbackProjectImage}
-			width={356}
+			width={350}
 			height={200}
 			alt="project image"
 			{...props}

@@ -31,7 +31,7 @@ function ProjectListItem({
 			{...props}
 		>
 			<ProjectImage src={imageUrl} />
-			<div className="flex min-w-0 flex-col items-start gap-4 sm:pt-2">
+			<div className="flex flex-col items-start gap-4 sm:pt-2">
 				<div className="flex max-w-full flex-col gap-2">
 					<IconLink
 						icon={
