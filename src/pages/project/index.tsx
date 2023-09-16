@@ -30,7 +30,6 @@ export async function getServerSideProps() {
 		orderBy: {
 			createdAt: "desc",
 		},
-		take: 1,
 	});
 	const projects = latestCommits.map((commit) => commit.project);
 	return {
