@@ -12,6 +12,7 @@ import { Project } from "@prisma/client";
 import dayjs from "dayjs";
 import dayJsIsBetweenPlugin from "dayjs/plugin/isBetween";
 import { NextPageContext } from "next";
+import Head from "next/head";
 import {
 	Bar,
 	BarChart,
@@ -127,8 +128,17 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 		0
 	);
 
+	const documentTitle = `Project: ${project.alias}`;
 	return (
 		<>
+			<Head>
+				<title>{documentTitle}</title>
+				<meta
+					name="description"
+					content={`Detailed overview of the "${project.alias}"-project`}
+				/>
+				<meta name="keywords" content={`${documentTitle}, David Kimmich`} />
+			</Head>
 			<LeftHeading
 				rightSection={
 					<IconLink

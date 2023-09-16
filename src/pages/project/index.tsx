@@ -10,7 +10,6 @@ import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useDebounce from "@hooks/useDebounce";
 import { getLatestProjects } from "@pages/api/projects";
-import { prisma } from "@prisma";
 import request, { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
