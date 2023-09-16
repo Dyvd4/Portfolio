@@ -9,6 +9,7 @@ import EditProjectModal from "@components/Modals/Project/EditProjectModal";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useDebounce from "@hooks/useDebounce";
+import { getLatestProjects } from "@pages/api/projects";
 import { prisma } from "@prisma";
 import request, { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
@@ -18,23 +19,10 @@ import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export async function getServerSideProps() {
-	const latestCommits = await prisma.projectCommit.findMany({
-		select: {
-			project: {
-				include: {
-					tags: true,
-				},
-			},
-			createdAt: true,
-		},
-		orderBy: {
-			createdAt: "desc",
-		},
-	});
-	const projects = latestCommits.map((commit) => commit.project);
+	const latestProjects = await getLatestProjects();
 	return {
 		props: {
-			projects: JSON.parse(JSON.stringify(projects)) as typeof projects,
+			projects: JSON.parse(JSON.stringify(latestProjects)) as typeof latestProjects,
 		},
 	};
 }
