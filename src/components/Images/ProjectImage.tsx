@@ -1,9 +1,8 @@
 import { cn } from "@utils/component-utils";
 import Image, { ImageProps } from "next/image";
-import fallbackProjectImage from "../../../public/Project_fallback.png";
 
 type _ProjectImageProps = {
-	src: string | null;
+	src: string;
 };
 
 export type ProjectImageProps = _ProjectImageProps &
@@ -13,7 +12,7 @@ function ProjectImage({ className, children, src, ...props }: ProjectImageProps)
 	return (
 		<Image
 			className={cn(`rounded-xl`, className)}
-			src={src || fallbackProjectImage}
+			src={src}
 			width={350}
 			height={200}
 			alt="project image"

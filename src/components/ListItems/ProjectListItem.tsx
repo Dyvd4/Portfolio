@@ -7,7 +7,7 @@ import { ComponentPropsWithRef, PropsWithChildren } from "react";
 type _ProjectListItemProps = {
 	id: number;
 	alias: string;
-	imageUrl: string | null;
+	imageUrl: string;
 	description: string | null;
 	tags?: JSX.Element;
 };
