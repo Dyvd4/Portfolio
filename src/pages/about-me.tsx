@@ -2,10 +2,13 @@ import Badge from "@components/Badge";
 import IconLink from "@components/IconLink";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useAge from "@hooks/useAge";
+import useCurrentUrl from "@hooks/useCurrentUrl";
+import useStaticImageUrl from "@hooks/useStaticImageUrl";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import coworkerPic from "../../public/david-kimmich.jpg";
+import coworkerPic from "@public/david-kimmich.jpg";
+import aboutMePageOpenGraphImage from "@public/og/about-me-page.png";
 
 type AboutMeProps = {};
 
@@ -34,19 +37,32 @@ function AboutMe(props: AboutMeProps) {
 	]);
 
 	const age = useAge();
+	const currentUrl = useCurrentUrl();
+	const ogImageUrl = useStaticImageUrl(aboutMePageOpenGraphImage);
 
+	const metaTitle = "About me";
+	const metaDescription =
+		"Here is an overview about me, my experiences and what technologies I use.";
+	const metaTags =
+		"About me, Experiences, Skills, Technologies, Contact, Programming languages, David Kimmich";
 	return (
 		<>
 			<Head>
-				<title>About me</title>
-				<meta
-					name="description"
-					content="Here is an overview about me, my experiences and what technologies I use."
-				/>
-				<meta
-					name="keywords"
-					content="About me, Experiences, Skills, Technologies, Contact, Programming languages, David Kimmich"
-				/>
+				<title>{metaTitle}</title>
+				<meta name="description" content={metaDescription} />
+				<meta name="keywords" content={metaTags} />
+
+				{/* Facebook Meta Tags */}
+				<meta property="og:url" content={currentUrl} />
+				<meta property="og:image" content={ogImageUrl} />
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content={metaTitle} />
+				<meta property="og:description" content={metaDescription} />
+				{/* Twitter Meta Tags */}
+				<meta property="twitter:url" content={currentUrl} />
+				<meta property="twitter:image" content={ogImageUrl} />
+				<meta name="twitter:title" content={metaTitle} />
+				<meta name="twitter:description" content={metaDescription} />
 			</Head>
 			<main className="dark:text-white">
 				<Image

@@ -10,6 +10,7 @@ import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useCurrentUrl from "@hooks/useCurrentUrl";
 import useDebounce from "@hooks/useDebounce";
+import useStaticImageUrl from "@hooks/useStaticImageUrl";
 import { getLatestProjects } from "@pages/api/projects";
 import request, { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
@@ -17,6 +18,7 @@ import Head from "next/head";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import projectsPageOpenGraphImage from "@public/og/projects-page.png";
 
 export async function getServerSideProps() {
 	const latestProjects = await getLatestProjects();
@@ -40,6 +42,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 		},
 	]);
 	const currentUrl = useCurrentUrl();
+	const ogImageUrl = useStaticImageUrl(projectsPageOpenGraphImage);
 	const {
 		isActive: projectEditModalIsActive,
 		open: openProjectEditModal,
@@ -128,11 +131,13 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 				<meta name="keywords" content={metaTags} />
 				{/* Facebook Meta Tags */}
 				<meta property="og:url" content={currentUrl} />
+				<meta property="og:image" content={ogImageUrl} />
 				<meta property="og:type" content="website" />
 				<meta property="og:title" content={metaTitle} />
 				<meta property="og:description" content={metaDescription} />
 				{/* Twitter Meta Tags */}
 				<meta property="twitter:url" content={currentUrl} />
+				<meta property="twitter:image" content={ogImageUrl} />
 				<meta name="twitter:title" content={metaTitle} />
 				<meta name="twitter:description" content={metaDescription} />
 			</Head>

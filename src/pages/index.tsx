@@ -35,37 +35,31 @@ export async function getServerSideProps() {
 export default function Home(props) {
 	useBreadcrumb([]);
 	const currentUrl = useCurrentUrl();
-	const age = useAge();
 	const ogImageUrl = useStaticImageUrl(landingPageOpenGraphImage);
+	const age = useAge();
+
+	const metaTitle = "Intuitive. Useful. Beautiful.";
+	const metaDescription =
+		"These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!";
+	const metaTags = "Intuitive, Useful, Beautiful, Portfolio, Web app, David Kimmich";
+
 	return (
 		<>
 			<Head>
-				<title>Intuitive. Useful. Beautiful.</title>
-				<meta
-					name="description"
-					content="These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!"
-				/>
-				<meta
-					name="keywords"
-					content="Intuitive, Useful, Beautiful, Portfolio, Web app, David Kimmich"
-				/>
+				<title>{metaTitle}</title>
+				<meta name="description" content={metaDescription} />
+				<meta name="keywords" content={metaTags} />
 				{/* Facebook Meta Tags */}
 				<meta property="og:url" content={currentUrl} />
 				<meta property="og:image" content={ogImageUrl} />
 				<meta property="og:type" content="website" />
-				<meta property="og:title" content="Intuitive. Useful. Beautiful." />
-				<meta
-					property="og:description"
-					content="These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!"
-				/>
+				<meta property="og:title" content={metaTitle} />
+				<meta property="og:description" content={metaDescription} />
 				{/* Twitter Meta Tags */}
 				<meta property="twitter:url" content={currentUrl} />
 				<meta property="twitter:image" content={ogImageUrl} />
-				<meta name="twitter:title" content="Intuitive. Useful. Beautiful." />
-				<meta
-					name="twitter:description"
-					content="These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!"
-				/>
+				<meta name="twitter:title" content={metaTitle} />
+				<meta name="twitter:description" content={metaDescription} />
 			</Head>
 			<main>
 				<div
