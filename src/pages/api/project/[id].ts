@@ -1,3 +1,4 @@
+import { getProjectFallbackImageDataUrl } from "@backend/utils/file-utils";
 import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
@@ -9,13 +10,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const {
 		query: { id },
 		method,
-		body: { alias, imageUrl },
+		body: { alias, imageUrl: bodyImageUrl },
 	} = req;
 
 	switch (method) {
 		case "PATCH":
 			try {
-				editProjectSchema.parse({ alias, imageUrl });
+				editProjectSchema.parse({ alias, imageUrl: bodyImageUrl });
+				const imageUrl = bodyImageUrl || getProjectFallbackImageDataUrl();
 				const updatedProject = await prisma.project.update({
 					where: {
 						id: parseInt(id as string),

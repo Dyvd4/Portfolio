@@ -17,7 +17,7 @@ model Project {
   alias       String
   githubUrl   String?
   url         String?
-  imageUrl    String?           @db.LongText
+  imageUrl    String            @db.LongText
   description String?
   visibility  String?
   updatedAt   DateTime          @updatedAt()

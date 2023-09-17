@@ -1,4 +1,5 @@
 import ProjectService from "@backend/services/ProjectService";
+import { getProjectFallbackImageDataUrl } from "@backend/utils/file-utils";
 import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
@@ -12,13 +13,13 @@ export const addProjectSchema = z.object({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const {
 		method,
-		body: { name, alias, imageUrl },
+		body: { name, alias, imageUrl: bodyImageUrl },
 	} = req;
 
 	switch (method) {
 		case "POST":
 			try {
-				addProjectSchema.parse({ name, alias, imageUrl });
+				addProjectSchema.parse({ name, alias, imageUrl: bodyImageUrl });
 				const projectExists = await prisma.project.findUnique({
 					where: {
 						name,
@@ -27,6 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				if (projectExists) {
 					return res.status(400).json("Project already exists");
 				}
+				const imageUrl = bodyImageUrl || getProjectFallbackImageDataUrl();
 				const newProject = await prisma.project.create({
 					data: {
 						name,
