@@ -105,7 +105,7 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 
 	const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
 		const selectedFiles = e.target.files;
-		const selectedFile = selectedFiles?.[0]; // MayBe: add fallback image here
+		const selectedFile = selectedFiles?.[0];
 		const imageUrl = selectedFile ? await getDataUrl(selectedFile) : undefined;
 		setImageAsDataUrl(imageUrl);
 	};
