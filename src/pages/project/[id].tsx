@@ -6,12 +6,11 @@ import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
 import ImportedFromGithubInfo from "@components/ImportedFromGithubInfo";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
+import config from "@config/config";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useCurrentUrl from "@hooks/useCurrentUrl";
-import useStaticImageUrl from "@hooks/useStaticImageUrl";
 import { prisma } from "@prisma";
 import { Project } from "@prisma/client";
-import fallbackProjectImage from "@public/Project_fallback.png";
 import dayjs from "dayjs";
 import dayJsIsBetweenPlugin from "dayjs/plugin/isBetween";
 import { NextPageContext } from "next";
@@ -28,6 +27,8 @@ import {
 } from "recharts";
 
 dayjs.extend(dayJsIsBetweenPlugin);
+
+const { NEXT_PUBLIC_BASE_URL } = config;
 
 export async function getServerSideProps(context: NextPageContext) {
 	const { id } = context.query;
@@ -117,7 +118,6 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 		},
 	]);
 	const currentUrl = useCurrentUrl();
-	const fallbackImageUrl = useStaticImageUrl(fallbackProjectImage);
 
 	if (!project) return <div>no project found</div>;
 
@@ -135,7 +135,8 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 
 	const metaTitle = `Project: ${project.alias}`;
 	const metaDescription = `Detailed overview of the "${project.alias}"-project`;
-	const ogImageUrl = project.imageUrl || fallbackImageUrl;
+	const ogImageUrl = `${NEXT_PUBLIC_BASE_URL}/api/project/${project.id}/image`;
+
 	return (
 		<>
 			<Head>
