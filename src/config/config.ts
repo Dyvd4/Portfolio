@@ -8,6 +8,7 @@ const config = {
 	ADMIN_USERNAME: process.env.ADMIN_USERNAME!,
 	ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
 	BASE_URL: process.env.BASE_URL!,
+	NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL!,
 	GITHUB_API_URL: process.env.GITHUB_API_URL!,
 };
 

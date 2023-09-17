@@ -7,8 +7,11 @@ import ProjectImage from "@components/Images/ProjectImage";
 import ImportedFromGithubInfo from "@components/ImportedFromGithubInfo";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
+import useCurrentUrl from "@hooks/useCurrentUrl";
+import useStaticImageUrl from "@hooks/useStaticImageUrl";
 import { prisma } from "@prisma";
 import { Project } from "@prisma/client";
+import fallbackProjectImage from "@public/Project_fallback.png";
 import dayjs from "dayjs";
 import dayJsIsBetweenPlugin from "dayjs/plugin/isBetween";
 import { NextPageContext } from "next";
@@ -113,6 +116,8 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 			children: project?.name || "Not found",
 		},
 	]);
+	const currentUrl = useCurrentUrl();
+	const fallbackImageUrl = useStaticImageUrl(fallbackProjectImage);
 
 	if (!project) return <div>no project found</div>;
 
@@ -128,16 +133,27 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 		0
 	);
 
-	const documentTitle = `Project: ${project.alias}`;
+	const metaTitle = `Project: ${project.alias}`;
+	const metaDescription = `Detailed overview of the "${project.alias}"-project`;
+	const ogImageUrl = project.imageUrl || fallbackImageUrl;
 	return (
 		<>
 			<Head>
-				<title>{documentTitle}</title>
-				<meta
-					name="description"
-					content={`Detailed overview of the "${project.alias}"-project`}
-				/>
-				<meta name="keywords" content={`${documentTitle}, David Kimmich`} />
+				<title>{metaTitle}</title>
+				<meta name="description" content={metaDescription} />
+				<meta name="keywords" content={`${metaTitle}, David Kimmich`} />
+
+				{/* Facebook Meta Tags */}
+				<meta property="og:url" content={currentUrl} />
+				<meta property="og:image" content={ogImageUrl} />
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content={metaTitle} />
+				<meta property="og:description" content={metaDescription} />
+				{/* Twitter Meta Tags */}
+				<meta property="twitter:url" content={currentUrl} />
+				<meta property="twitter:image" content={ogImageUrl} />
+				<meta name="twitter:title" content={metaTitle} />
+				<meta name="twitter:description" content={metaDescription} />
 			</Head>
 			<LeftHeading
 				rightSection={

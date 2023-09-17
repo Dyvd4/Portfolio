@@ -19,7 +19,8 @@
 		"paths": {
 			"@*": ["*"],
 			"@prisma": ["prisma.ts"],
-			"@config": ["config/config.ts"]
+			"@config": ["config/config.ts"],
+			"@public/*": ["../public/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

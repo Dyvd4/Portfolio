@@ -4,8 +4,11 @@ import IconLink from "@components/IconLink";
 import LatestProjectSection from "@components/Sections/LatestProjectSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useAge from "@hooks/useAge";
+import useCurrentUrl from "@hooks/useCurrentUrl";
 import { prisma } from "@prisma";
 import Head from "next/head";
+import landingPageOpenGraphImage from "@public/og/landing-page.png";
+import useStaticImageUrl from "@hooks/useStaticImageUrl";
 
 export async function getServerSideProps() {
 	const latestCommit = await prisma.projectCommit.findFirst({
@@ -31,9 +34,9 @@ export async function getServerSideProps() {
 
 export default function Home(props) {
 	useBreadcrumb([]);
-
+	const currentUrl = useCurrentUrl();
 	const age = useAge();
-
+	const ogImageUrl = useStaticImageUrl(landingPageOpenGraphImage);
 	return (
 		<>
 			<Head>
@@ -45,6 +48,23 @@ export default function Home(props) {
 				<meta
 					name="keywords"
 					content="Intuitive, Useful, Beautiful, Portfolio, Web app, David Kimmich"
+				/>
+				{/* Facebook Meta Tags */}
+				<meta property="og:url" content={currentUrl} />
+				<meta property="og:image" content={ogImageUrl} />
+				<meta property="og:type" content="website" />
+				<meta property="og:title" content="Intuitive. Useful. Beautiful." />
+				<meta
+					property="og:description"
+					content="These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!"
+				/>
+				{/* Twitter Meta Tags */}
+				<meta property="twitter:url" content={currentUrl} />
+				<meta property="twitter:image" content={ogImageUrl} />
+				<meta name="twitter:title" content="Intuitive. Useful. Beautiful." />
+				<meta
+					name="twitter:description"
+					content="These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!"
 				/>
 			</Head>
 			<main>
