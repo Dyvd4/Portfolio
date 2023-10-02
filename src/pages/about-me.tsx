@@ -2,7 +2,6 @@ import Badge from "@components/Badge";
 import ExperienceCard, { ExperienceCardProps } from "@components/ExperienceCard";
 import IconLink from "@components/IconLink";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
-import useAge from "@hooks/useAge";
 import useCurrentUrl from "@hooks/useCurrentUrl";
 import useStaticImageUrl from "@hooks/useStaticImageUrl";
 import coworkerPic from "@public/david-kimmich.jpg";
@@ -126,7 +125,6 @@ function AboutMe(props: AboutMeProps) {
 		},
 	]);
 
-	const age = useAge();
 	const currentUrl = useCurrentUrl();
 	const ogImageUrl = useStaticImageUrl(aboutMePageOpenGraphImage);
 
@@ -166,8 +164,8 @@ function AboutMe(props: AboutMeProps) {
 					<h1 className="text-4xl font-black sm:text-5xl">About me</h1>
 					<div className="mt-4 px-4">
 						<p>
-							Hi! I am David Kimmich, a {age} old web dev. I like to create web apps
-							that feel: &nbsp;
+							Hi! I am David Kimmich, a web dev from Germany. I like to create web
+							apps that feel: &nbsp;
 						</p>
 						<ul className="mt-2 flex list-inside list-disc flex-col gap-1">
 							<li>

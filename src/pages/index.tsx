@@ -3,12 +3,11 @@ import Button from "@components/Button";
 import IconLink from "@components/IconLink";
 import LatestProjectSection from "@components/Sections/LatestProjectSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
-import useAge from "@hooks/useAge";
 import useCurrentUrl from "@hooks/useCurrentUrl";
-import { prisma } from "@prisma";
-import Head from "next/head";
-import landingPageOpenGraphImage from "@public/og/landing-page.png";
 import useStaticImageUrl from "@hooks/useStaticImageUrl";
+import { prisma } from "@prisma";
+import landingPageOpenGraphImage from "@public/og/landing-page.png";
+import Head from "next/head";
 
 export async function getServerSideProps() {
 	const latestCommit = await prisma.projectCommit.findFirst({
@@ -36,7 +35,6 @@ export default function Home(props) {
 	useBreadcrumb([]);
 	const currentUrl = useCurrentUrl();
 	const ogImageUrl = useStaticImageUrl(landingPageOpenGraphImage);
-	const age = useAge();
 
 	const metaTitle = "Intuitive. Useful. Beautiful.";
 	const metaDescription =
@@ -91,7 +89,7 @@ export default function Home(props) {
 							These are the properties a web app should have.
 						</p>
 						<p className="text-secondary mt-4 md:mt-0">
-							I am David Kimmich, a {age} year old web dev.
+							I am David Kimmich, a web dev from Germany.
 						</p>
 					</div>
 					<Button className="group mt-10">
