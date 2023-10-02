@@ -12,19 +12,20 @@ datasource db {
 }
 
 model Project {
-  id          Int               @id() @default(autoincrement())
-  name        String            @unique()
-  alias       String
-  githubUrl   String?
-  url         String?
-  imageUrl    String            @db.LongText
-  description String?
-  visibility  String?
-  updatedAt   DateTime          @updatedAt()
-  createdAt   DateTime          @default(now())
-  commits     ProjectCommit[]
-  languages   ProjectLanguage[]
-  tags        ProjectTag[]
+  id                    Int               @id() @default(autoincrement())
+  name                  String            @unique()
+  alias                 String
+  githubUrl             String?
+  url                   String?
+  imageUrl              String            @db.LongText
+  description           String?
+  additionalDescription String?           @db.Text
+  visibility            String?
+  updatedAt             DateTime          @updatedAt()
+  createdAt             DateTime          @default(now())
+  commits               ProjectCommit[]
+  languages             ProjectLanguage[]
+  tags                  ProjectTag[]
 }
 
 model ProjectCommit {

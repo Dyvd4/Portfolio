@@ -8,18 +8,24 @@ export const addProjectSchema = z.object({
 	name: z.string().nonempty(),
 	alias: z.string().nonempty(),
 	imageUrl: z.string().optional(),
+	additionalDescription: z.string().optional(),
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const {
 		method,
-		body: { name, alias, imageUrl: bodyImageUrl },
+		body: { name, alias, imageUrl: bodyImageUrl, additionalDescription },
 	} = req;
 
 	switch (method) {
 		case "POST":
 			try {
-				addProjectSchema.parse({ name, alias, imageUrl: bodyImageUrl });
+				addProjectSchema.parse({
+					name,
+					alias,
+					imageUrl: bodyImageUrl,
+					additionalDescription,
+				});
 				const projectExists = await prisma.project.findUnique({
 					where: {
 						name,
@@ -34,6 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						name,
 						alias,
 						imageUrl,
+						additionalDescription,
 					},
 				});
 				await ProjectService.fetchProject(newProject);

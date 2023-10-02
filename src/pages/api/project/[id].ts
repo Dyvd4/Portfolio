@@ -10,13 +10,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const {
 		query: { id },
 		method,
-		body: { alias, imageUrl: bodyImageUrl },
+		body: { alias, imageUrl: bodyImageUrl, additionalDescription },
 	} = req;
 
 	switch (method) {
 		case "PATCH":
 			try {
-				editProjectSchema.parse({ alias, imageUrl: bodyImageUrl });
+				editProjectSchema.parse({ alias, imageUrl: bodyImageUrl, additionalDescription });
 				const imageUrl = bodyImageUrl || getProjectFallbackImageDataUrl();
 				const updatedProject = await prisma.project.update({
 					where: {
@@ -25,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 					data: {
 						alias,
 						imageUrl,
+						additionalDescription,
 					},
 				});
 				return res.json(updatedProject);

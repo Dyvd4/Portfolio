@@ -4,6 +4,7 @@ import FormControl from "@components/FormControl";
 import Input from "@components/Input";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
 import Select from "@components/Select";
+import Textarea from "@components/Textarea";
 import { Project } from "@prisma/client";
 import useGithubReposQuery from "@queries/github-repos-query";
 import { getDataUrl } from "@utils/file-utils";
@@ -47,6 +48,7 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 				resetForm({
 					alias: project.alias,
 					name: project.name,
+					additionalDescription: project.additionalDescription,
 				});
 				setImageAsDataUrl(project.imageUrl || undefined);
 			},
@@ -104,10 +106,11 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 		setImageAsDataUrl(imageUrl);
 	};
 
-	const onHandleSubmit = ({ alias }: AddProjectFormData) => {
+	const onHandleSubmit = ({ alias, additionalDescription }: AddProjectFormData) => {
 		editProjectMutation.mutate({
 			alias,
 			imageUrl: imageAsDataUrl,
+			additionalDescription,
 		});
 	};
 
@@ -148,6 +151,12 @@ function EditProjectModal({ className, children, ...props }: EditProjectModalPro
 									height={100}
 								></Image>
 							)}
+							<FormControl errorMessage={errorMap?.additionalDescription?._errors}>
+								<Textarea
+									placeholder="additional description"
+									{...register("additionalDescription")}
+								/>
+							</FormControl>
 							<button ref={submitButtonRef} type="submit" className="hidden"></button>
 						</form>
 					</ModalBody>

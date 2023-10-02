@@ -65,6 +65,7 @@ export async function getServerSideProps(context: NextPageContext) {
 			visibility: true,
 			updatedAt: true,
 			createdAt: true,
+			additionalDescription: true,
 			languages: {
 				where: {
 					codeAmountInBytes: {
@@ -184,6 +185,11 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 			</section>
 
 			<ProjectImage className="mt-16" src={project.imageUrl} width={768} height={413} />
+
+			<section className="mt-16 flex flex-col gap-3">
+				<h1 className="text-xl font-medium">Intention</h1>
+				<p className="text-secondary">{project.additionalDescription || "-"}</p>
+			</section>
 
 			<section className="mt-16 flex flex-col gap-3">
 				<h1 className="flex items-center justify-between">

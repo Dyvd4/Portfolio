@@ -4,6 +4,7 @@ import FormControl from "@components/FormControl";
 import Input from "@components/Input";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
 import Select from "@components/Select";
+import Textarea from "@components/Textarea";
 import useGithubReposQuery from "@queries/github-repos-query";
 import { getDataUrl } from "@utils/file-utils";
 import { addEntity } from "@utils/request-utils";
@@ -30,6 +31,7 @@ export const addProjectSchema = z.object({
 	name: z.string().nonempty(),
 	alias: z.string().nonempty(),
 	imageUrl: z.string().optional(),
+	additionalDescription: z.string().nullable(),
 });
 
 export type AddProjectSchema = z.infer<typeof addProjectSchema>;
@@ -110,11 +112,12 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 		setImageAsDataUrl(imageUrl);
 	};
 
-	const onHandleSubmit = async ({ name, alias }: AddProjectFormData) => {
+	const onHandleSubmit = async ({ name, alias, additionalDescription }: AddProjectFormData) => {
 		createProjectMutation.mutate({
 			name,
 			alias,
 			imageUrl: imageAsDataUrl,
+			additionalDescription,
 		});
 	};
 
@@ -158,6 +161,12 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 									<div className="text-red-500">{errorMessage}</div>
 								</>
 							)}
+							<FormControl errorMessage={errorMap?.additionalDescription?._errors}>
+								<Textarea
+									placeholder="additional description"
+									{...register("additionalDescription")}
+								/>
+							</FormControl>
 							<button ref={submitButtonRef} type="submit" className="hidden"></button>
 						</form>
 					</ModalBody>
