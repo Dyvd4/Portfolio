@@ -10,7 +10,7 @@ export type ImportedFromGithubInfoProps = _ImportedFromGithubInfoProps &
 function ImportedFromGithubInfo({ className, children, ...props }: ImportedFromGithubInfoProps) {
 	return (
 		<div className={cn(`text-secondary flex items-center gap-1 text-sm`, className)} {...props}>
-			Most of the data has been imported from GitHub
+			Imported from GitHub
 			<GitHub className="[&>path]:stroke-secondary !h-4 !w-4 !cursor-default" />
 		</div>
 	);

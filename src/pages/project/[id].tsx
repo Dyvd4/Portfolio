@@ -186,9 +186,12 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 			<ProjectImage className="mt-16" src={project.imageUrl} width={768} height={413} />
 
 			<section className="mt-16 flex flex-col gap-3">
-				<h1 className="flex items-center">
-					<span className="text-xl font-medium">Development activity</span>&nbsp;
-					<span className="text-secondary text-base">(within past year)</span>
+				<h1 className="flex items-center justify-between">
+					<div className="flex items-center">
+						<span className="text-xl font-medium">Development activity</span>&nbsp;
+						<span className="text-secondary text-base">(within past year)</span>
+					</div>
+					<ImportedFromGithubInfo />
 				</h1>
 				<ResponsiveContainer width={"100%"} height={100}>
 					<LineChart data={latestCommitsView.commitsGroupedByDate}>
@@ -204,10 +207,13 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				</ResponsiveContainer>
 			</section>
 			<section className="mt-16 flex flex-col gap-3">
-				<h1 className="flex items-center">
-					<span className="text-xl font-medium">Languages used</span>
-					&nbsp;
-					<span className="text-secondary text-base">(in %)</span>
+				<h1 className="flex items-center justify-between">
+					<div className="flex items-center">
+						<span className="text-xl font-medium">Languages used</span>
+						&nbsp;
+						<span className="text-secondary text-base">(in %)</span>
+					</div>
+					<ImportedFromGithubInfo />
 				</h1>
 				<ResponsiveContainer width={"100%"} height={300}>
 					<BarChart data={project.languages}>
@@ -239,9 +245,6 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 					</section>
 				</>
 			)}
-			<div className="flex justify-center">
-				<ImportedFromGithubInfo />
-			</div>
 		</>
 	);
 }
