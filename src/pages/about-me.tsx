@@ -1,28 +1,118 @@
 import Badge from "@components/Badge";
+import ExperienceCard, { ExperienceCardProps } from "@components/ExperienceCard";
 import IconLink from "@components/IconLink";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useAge from "@hooks/useAge";
 import useCurrentUrl from "@hooks/useCurrentUrl";
 import useStaticImageUrl from "@hooks/useStaticImageUrl";
+import coworkerPic from "@public/david-kimmich.jpg";
+import CsharpImg from "@public/experience cards/Csharp.png";
+import CssImg from "@public/experience cards/CSS.svg";
+import ExpressJsImg from "@public/experience cards/ExpressJs.png";
+import GitHubImg from "@public/experience cards/GitHub.svg";
+import HtmlImg from "@public/experience cards/HTML.svg";
+import NestJsImg from "@public/experience cards/NestJS.png";
+import NextJsImg from "@public/experience cards/NextJs.svg";
+import NodeJsImg from "@public/experience cards/NodeJs.svg";
+import ReactImg from "@public/experience cards/React.svg";
+import SqlImg from "@public/experience cards/Sql.png";
+import TailwindCssImg from "@public/experience cards/Tailwind-css.svg";
+import TypeScriptImg from "@public/experience cards/TypeScript.svg";
+import aboutMePageOpenGraphImage from "@public/og/about-me-page.png";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import coworkerPic from "@public/david-kimmich.jpg";
-import aboutMePageOpenGraphImage from "@public/og/about-me-page.png";
 
 type AboutMeProps = {};
 
-const LANGUAGES = ["TypeScript", "C#", "SQL"];
-const TECHNOLOGIES = [
-	"HTML",
-	"CSS",
-	"Tailwind CSS",
-	"React",
-	"Next.js",
-	"Node.js",
-	"NestJS",
-	"Express.js",
-	"GitHub",
+const LANGUAGES: ExperienceCardProps[] = [
+	{
+		title: "TypeScript",
+		imageProps: {
+			src: TypeScriptImg,
+			alt: "TypeScript",
+		},
+	},
+	{
+		title: "C#",
+		imageProps: {
+			src: CsharpImg,
+			alt: "C#",
+		},
+	},
+	{
+		title: "SQL",
+		imageProps: {
+			src: SqlImg,
+			alt: "SQL",
+		},
+	},
+];
+
+const TECHNOLOGIES: ExperienceCardProps[] = [
+	{
+		title: "HTML",
+		imageProps: {
+			src: HtmlImg,
+			alt: "HTML",
+		},
+	},
+	{
+		title: "CSS",
+		imageProps: {
+			src: CssImg,
+			alt: "CSS",
+		},
+	},
+	{
+		title: "Tailwind CSS",
+		imageProps: {
+			src: TailwindCssImg,
+			alt: "Tailwind CSS",
+		},
+	},
+	{
+		title: "React",
+		imageProps: {
+			src: ReactImg,
+			alt: "React",
+		},
+	},
+	{
+		title: "Next.js",
+		imageProps: {
+			src: NextJsImg,
+			alt: "Next.js",
+		},
+	},
+	{
+		title: "Node.js",
+		imageProps: {
+			src: NodeJsImg,
+			alt: "Node.js",
+		},
+	},
+	{
+		title: "NestJS",
+		imageProps: {
+			src: NestJsImg,
+			alt: "NestJS",
+		},
+	},
+	{
+		title: "Express.js",
+		imageProps: {
+			src: ExpressJsImg,
+			alt: "Express.js",
+		},
+	},
+	{
+		title: "GitHub",
+		imageProps: {
+			src: GitHubImg,
+			alt: "GitHub",
+		},
+	},
 ];
 
 function AboutMe(props: AboutMeProps) {
@@ -102,19 +192,21 @@ function AboutMe(props: AboutMeProps) {
 					<h1 className="text-4xl font-black sm:text-5xl">Experiences</h1>
 					<div className="mt-4 px-4">
 						I have experience with the following...
-						<h3 className="mt-2 font-bold">Languages:</h3>
-						<ul className="mt-2 flex list-inside list-disc flex-col gap-1">
-							{LANGUAGES.map((technology) => (
-								<li key={technology}>
-									<Badge variant="indigo">{technology}</Badge>
+						<h3 className="mt-2 text-lg font-bold">Languages:</h3>
+						<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
+							{LANGUAGES.map((cardProps) => (
+								<li key={cardProps.title}>
+									{" "}
+									<ExperienceCard {...cardProps} />{" "}
 								</li>
 							))}
 						</ul>
-						<h3 className="mt-2 font-bold">Technologies:</h3>
-						<ul className="mt-2 flex list-inside list-disc flex-col gap-1">
-							{TECHNOLOGIES.map((technology) => (
-								<li key={technology}>
-									<Badge variant="indigo">{technology}</Badge>
+						<h3 className="mt-4 text-lg font-bold">Technologies:</h3>
+						<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
+							{TECHNOLOGIES.map((cardProps) => (
+								<li key={cardProps.title} className="min-h-0 min-w-0">
+									{" "}
+									<ExperienceCard {...cardProps} />{" "}
 								</li>
 							))}
 						</ul>
