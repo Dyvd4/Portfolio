@@ -16,7 +16,7 @@ import NextJsImg from "@public/experience cards/NextJs.svg";
 import NodeJsImg from "@public/experience cards/NodeJs.svg";
 import ReactImg from "@public/experience cards/React.svg";
 import SqlImg from "@public/experience cards/Sql.png";
-import TailwindCssImg from "@public/experience cards/Tailwind-css.svg";
+import TailwindCssImg from "@public/experience cards/tailwind-css.svg";
 import TypeScriptImg from "@public/experience cards/TypeScript.svg";
 import aboutMePageOpenGraphImage from "@public/og/about-me-page.png";
 import Head from "next/head";
