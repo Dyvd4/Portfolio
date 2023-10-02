@@ -6,6 +6,9 @@ import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
 import ImportedFromGithubInfo from "@components/ImportedFromGithubInfo";
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
+import ProjectSection from "@components/Sections/ProjectSection/ProjectSection";
+import ProjectSectionBody from "@components/Sections/ProjectSection/ProjectSectionBody";
+import ProjectSectionHeading from "@components/Sections/ProjectSection/ProjectSectionHeading";
 import config from "@config/config";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import useCurrentUrl from "@hooks/useCurrentUrl";
@@ -157,6 +160,7 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				<meta name="twitter:title" content={metaTitle} />
 				<meta name="twitter:description" content={metaDescription} />
 			</Head>
+
 			<LeftHeading
 				rightSection={
 					<IconLink
@@ -177,65 +181,84 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 				{project.alias}
 			</LeftHeading>
 
-			<section className="mt-16 flex flex-col gap-3">
-				<h1 className="text-xl font-medium">Description</h1>
-				<p className="text-secondary">
+			<ProjectSection className="mt-16">
+				<ProjectSectionHeading>Description</ProjectSectionHeading>
+				<ProjectSectionBody>
 					{project.description || "no description available"}
-				</p>
-			</section>
+				</ProjectSectionBody>
+			</ProjectSection>
 
 			<ProjectImage className="mt-16" src={project.imageUrl} width={768} height={413} />
 
-			<section className="mt-16 flex flex-col gap-3">
-				<h1 className="text-xl font-medium">Intention</h1>
-				<p className="text-secondary">{project.additionalDescription || "-"}</p>
-			</section>
+			<ProjectSection className="mt-16">
+				<ProjectSectionHeading>Intention</ProjectSectionHeading>
+				<ProjectSectionBody>{project.additionalDescription || "-"}</ProjectSectionBody>
+			</ProjectSection>
 
-			<section className="mt-16 flex flex-col gap-3">
-				<h1 className="flex items-center justify-between">
-					<div className="flex items-center">
-						<span className="text-xl font-medium">Development activity</span>&nbsp;
-						<span className="text-secondary text-base">(within past year)</span>
-					</div>
-					<ImportedFromGithubInfo />
-				</h1>
-				<ResponsiveContainer width={"100%"} height={100}>
-					<LineChart data={latestCommitsView.commitsGroupedByDate}>
-						<Line
-							dataKey={"commitsCount"}
-							type={"monotone"}
-							stroke="#0284c7" // fill-sky-600
-							strokeWidth={2}
-							dot={false}
-						/>
-						<Tooltip content={<CommitsTooltip />} />
-					</LineChart>
-				</ResponsiveContainer>
-			</section>
-			<section className="mt-16 flex flex-col gap-3">
-				<h1 className="flex items-center justify-between">
-					<div className="flex items-center">
-						<span className="text-xl font-medium">Languages used</span>
-						&nbsp;
-						<span className="text-secondary text-base">(in %)</span>
-					</div>
-					<ImportedFromGithubInfo />
-				</h1>
-				<ResponsiveContainer width={"100%"} height={300}>
-					<BarChart data={project.languages}>
-						<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
-							<LabelList
-								className="fill-secondary text-xs"
-								position={"top"}
-								formatter={(value) =>
-									getPercentageAmountOfLanguage(value, totalLanguageAmountInBytes)
-								}
+			<ProjectSection className="mt-16">
+				<ProjectSectionHeading className="flex items-center justify-between">
+					<>
+						<div className="flex items-center">
+							<span className="text-lg font-medium sm:text-xl">
+								Development activity
+							</span>
+							&nbsp;
+							<span className="text-secondary text-sm font-normal sm:text-base">
+								(within past year)
+							</span>
+						</div>
+						<ImportedFromGithubInfo className="hidden sm:flex" />
+					</>
+				</ProjectSectionHeading>
+				<ProjectSectionBody>
+					<ResponsiveContainer width={"100%"} height={100}>
+						<LineChart data={latestCommitsView.commitsGroupedByDate}>
+							<Line
+								dataKey={"commitsCount"}
+								type={"monotone"}
+								stroke="#0284c7" // fill-sky-600
+								strokeWidth={2}
+								dot={false}
 							/>
-						</Bar>
-						<XAxis dataKey={"name"} interval={0} style={{ fontSize: "10px" }} />
-					</BarChart>
-				</ResponsiveContainer>
-			</section>
+							<Tooltip content={<CommitsTooltip />} />
+						</LineChart>
+					</ResponsiveContainer>
+				</ProjectSectionBody>
+			</ProjectSection>
+
+			<ProjectSection className="mt-16">
+				<ProjectSectionHeading className="flex items-center justify-between">
+					<>
+						<div className="flex items-center">
+							<span className="font-medium">Languages used</span>
+							&nbsp;
+							<span className="text-secondary text-sm font-normal sm:text-base">
+								(in %)
+							</span>
+						</div>
+						<ImportedFromGithubInfo className="hidden sm:flex" />
+					</>
+				</ProjectSectionHeading>
+				<ProjectSectionBody>
+					<ResponsiveContainer width={"100%"} height={300}>
+						<BarChart data={project.languages}>
+							<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
+								<LabelList
+									className="fill-secondary text-xs"
+									position={"top"}
+									formatter={(value) =>
+										getPercentageAmountOfLanguage(
+											value,
+											totalLanguageAmountInBytes
+										)
+									}
+								/>
+							</Bar>
+							<XAxis dataKey={"name"} interval={0} style={{ fontSize: "10px" }} />
+						</BarChart>
+					</ResponsiveContainer>
+				</ProjectSectionBody>
+			</ProjectSection>
 
 			{project.tags.length > 0 && (
 				<>
