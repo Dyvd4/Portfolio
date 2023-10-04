@@ -189,7 +189,6 @@ function AboutMe(props: AboutMeProps) {
 				<section className="mt-10">
 					<h1 className="text-4xl font-black sm:text-5xl">Experiences</h1>
 					<div className="mt-4 px-4">
-						I have experience with the following...
 						<h3 className="mt-2 text-lg font-bold">Languages:</h3>
 						<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
 							{LANGUAGES.map((cardProps) => (
