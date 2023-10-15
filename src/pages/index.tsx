@@ -38,7 +38,7 @@ export default function Home(props) {
 
 	const metaTitle = "Intuitive. Useful. Beautiful.";
 	const metaDescription =
-		"These are the properties a web app should have. I am David Kimmich, a 19 year old web dev. If you want to know more about me, have a look in this site!";
+		"These are the properties a web app should have. I am David Kimmich, a web dev from Germany. If you want to know more about me, have a look here on this site and feel free to contact me!";
 	const metaTags = "Intuitive, Useful, Beautiful, Portfolio, Web app, David Kimmich";
 
 	return (
