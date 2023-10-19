@@ -202,10 +202,6 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 							<span className="text-lg font-medium sm:text-xl">
 								Development activity
 							</span>
-							&nbsp;
-							<span className="text-secondary text-sm font-normal sm:text-base">
-								(within past year)
-							</span>
 						</div>
 						<ImportedFromGithubInfo className="hidden sm:flex" />
 					</>

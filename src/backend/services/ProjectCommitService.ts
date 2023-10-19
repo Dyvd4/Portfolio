@@ -14,7 +14,7 @@ export const getLatestCommitsView = (project: ProjectPayload) => {
 			return (
 				self.findIndex((c) =>
 					dayjs(c.createDate).isSame(dayjs(commit.createDate), "day")
-				) === index && dayjs(commit.createDate).isAfter(dayjs().subtract(1, "year"))
+				) === index
 			);
 		})
 		.map((commit) => {
