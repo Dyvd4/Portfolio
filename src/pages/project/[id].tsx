@@ -206,20 +206,18 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 						<ImportedFromGithubInfo className="hidden sm:flex" />
 					</>
 				</ProjectSectionHeading>
-				<ProjectSectionBody>
-					<ResponsiveContainer width={"100%"} height={100}>
-						<LineChart data={latestCommitsView.commitsGroupedByDate}>
-							<Line
-								dataKey={"commitsCount"}
-								type={"monotone"}
-								stroke="#0284c7" // fill-sky-600
-								strokeWidth={2}
-								dot={false}
-							/>
-							<Tooltip content={<CommitsTooltip />} />
-						</LineChart>
-					</ResponsiveContainer>
-				</ProjectSectionBody>
+				<ResponsiveContainer width={"100%"} height={100}>
+					<LineChart data={latestCommitsView.commitsGroupedByDate}>
+						<Line
+							dataKey={"commitsCount"}
+							type={"monotone"}
+							stroke="#0284c7" // fill-sky-600
+							strokeWidth={2}
+							dot={false}
+						/>
+						<Tooltip content={<CommitsTooltip />} />
+					</LineChart>
+				</ResponsiveContainer>
 			</ProjectSection>
 
 			<ProjectSection className="mt-16">
@@ -235,25 +233,20 @@ function ProjectDetails({ project, latestCommitsView }: ProjectDetailsProps) {
 						<ImportedFromGithubInfo className="hidden sm:flex" />
 					</>
 				</ProjectSectionHeading>
-				<ProjectSectionBody>
-					<ResponsiveContainer width={"100%"} height={300}>
-						<BarChart data={project.languages}>
-							<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
-								<LabelList
-									className="fill-secondary text-xs"
-									position={"top"}
-									formatter={(value) =>
-										getPercentageAmountOfLanguage(
-											value,
-											totalLanguageAmountInBytes
-										)
-									}
-								/>
-							</Bar>
-							<XAxis dataKey={"name"} interval={0} style={{ fontSize: "10px" }} />
-						</BarChart>
-					</ResponsiveContainer>
-				</ProjectSectionBody>
+				<ResponsiveContainer width={"100%"} height={300}>
+					<BarChart data={project.languages}>
+						<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
+							<LabelList
+								className="fill-secondary text-xs"
+								position={"top"}
+								formatter={(value) =>
+									getPercentageAmountOfLanguage(value, totalLanguageAmountInBytes)
+								}
+							/>
+						</Bar>
+						<XAxis dataKey={"name"} interval={0} style={{ fontSize: "10px" }} />
+					</BarChart>
+				</ResponsiveContainer>
 			</ProjectSection>
 
 			{project.tags.length > 0 && (
