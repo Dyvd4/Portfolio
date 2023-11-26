@@ -3,7 +3,7 @@ import Footer from "@components/Footer";
 import ModalPortal from "@components/ModalPortal";
 import Navbar from "@components/Navbar_APP";
 import LoadingPortalSlot from "@components/Slots/LoadingPortalSlot";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import { darkModeCookieName } from "@utils/DarkModeUtils";
 import { cookies } from "next/headers";
 import { Metadata } from "next/types";
