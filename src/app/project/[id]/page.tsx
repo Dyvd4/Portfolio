@@ -24,7 +24,6 @@ export async function generateMetadata({ params: { id } }: ProjectDetailsProps):
 		},
 	});
 
-	// todo: not-found???
 	if (!project) return {};
 
 	return {
