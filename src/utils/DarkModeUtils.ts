@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-const darkModeCookieName = "darkMode";
+export const darkModeCookieName = "darkMode";
 
 export function toggleDarkMode() {
 	if (document.documentElement.classList.contains("dark")) {

@@ -1,3 +1,5 @@
+"use client";
+
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
 import { cn } from "@utils/component-utils";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";

@@ -1,3 +1,4 @@
+"use client";
 import IconButton from "@components/IconButton";
 import Tooltip from "@components/Tooltip";
 import Link from "next/link";

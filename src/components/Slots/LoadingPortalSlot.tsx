@@ -1,3 +1,4 @@
+"use client";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 import LoadingPortalSlotIsRenderedAtom from "@context/atoms/LoadingPortalSlotIsRenderedAtom";

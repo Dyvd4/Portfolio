@@ -1,3 +1,4 @@
+"use client";
 import LoadingCircleWithPositioning from "@components/LoadingCircleWithPositioning";
 import { cn } from "@utils/component-utils";
 import { ComponentPropsWithRef, PropsWithChildren, useEffect, useState } from "react";

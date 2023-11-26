@@ -4,7 +4,7 @@ import { toggleDarkMode } from "@utils/DarkModeUtils";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { HalfMoon, SunLight } from "./Icons";
 import NavLink from "./NavLink";
 
@@ -24,7 +24,7 @@ const LINKS: Array<{ href: string; title: string }> = [
 function Navbar(props: NavbarProps) {
 	const { status } = useSession();
 	const darkModeIsActive = useDarkModeIsActive();
-	const router = useRouter();
+	const pathname = usePathname();
 	return (
 		<nav className="sticky top-0 z-50 bg-white p-6 dark:bg-gray-900">
 			<ul className="flex items-center justify-between gap-2">
@@ -69,7 +69,7 @@ function Navbar(props: NavbarProps) {
 						)}
 						{LINKS.map(({ href, title }) => (
 							<li key={href}>
-								<NavLink href={href} isActive={router.pathname === href}>
+								<NavLink href={href} isActive={pathname === href}>
 									{title}
 								</NavLink>
 							</li>

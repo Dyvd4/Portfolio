@@ -1,3 +1,4 @@
+"use client";
 import ModalIsActiveAtom from "@context/atoms/ModalPortalIsActiveAtom";
 import { useAtom } from "jotai";
 import { useState } from "react";

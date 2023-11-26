@@ -1,3 +1,4 @@
+"use client";
 import ModalPortalIsActiveAtom from "@context/atoms/ModalPortalIsActiveAtom";
 import { cn } from "@utils/component-utils";
 import { useAtom } from "jotai";

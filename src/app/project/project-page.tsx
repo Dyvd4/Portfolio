@@ -1,3 +1,4 @@
+"use client";
 import Badge from "@components/Badge";
 import Button from "@components/Button";
 import Input from "@components/Input";
@@ -8,30 +9,14 @@ import DeleteProjectModal from "@components/Modals/Project/DeleteProjectModal";
 import EditProjectModal from "@components/Modals/Project/EditProjectModal";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import useCurrentUrl from "@hooks/useCurrentUrl";
 import useDebounce from "@hooks/useDebounce";
-import useStaticImageUrl from "@hooks/useStaticImageUrl";
-import { getLatestProjects } from "@pages/api/projects";
 import request, { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
-import Head from "next/head";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import projectsPageOpenGraphImage from "@public/og/projects-page.png";
+import { useQueryClient, useQuery, useMutation } from "react-query";
 
-export async function getServerSideProps() {
-	const latestProjects = await getLatestProjects();
-	return {
-		props: {
-			projects: JSON.parse(JSON.stringify(latestProjects)) as typeof latestProjects,
-		},
-	};
-}
-
-type ProjectsProps = {} & Awaited<ReturnType<typeof getServerSideProps>>["props"];
-
-function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
+export default function ProjectPage({ initialProjects }) {
 	useBreadcrumb([
 		{
 			isHome: true,
@@ -41,8 +26,6 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 			isCurrentPage: true,
 		},
 	]);
-	const currentUrl = useCurrentUrl();
-	const ogImageUrl = useStaticImageUrl(projectsPageOpenGraphImage);
 	const {
 		isActive: projectEditModalIsActive,
 		open: openProjectEditModal,
@@ -61,6 +44,7 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 
 	const [projectIdToEdit, setProjectIdToEdit] = useState<number | undefined>();
 	const { status } = useSession();
+	// TODO set to search params
 	const [projectOrTagname, setProjectOrTagName] = useState("");
 	const { value: debouncedProjectOrTagname } = useDebounce(projectOrTagname);
 	const [setParentRef] = useAutoAnimate();
@@ -118,29 +102,8 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 		projectReImportMutation.mutate(projectId);
 	};
 
-	const metaTitle = "My projects";
-	const metaDescription =
-		"Overview of my coding projects. Most of them should be available on GitHub.";
-	const metaTags = "Web app, coding, projects, GitHub, David Kimmich";
-
 	return (
 		<>
-			<Head>
-				<title>{metaTitle}</title>
-				<meta name="description" content={metaDescription} />
-				<meta name="keywords" content={metaTags} />
-				{/* Facebook Meta Tags */}
-				<meta property="og:url" content={currentUrl} />
-				<meta property="og:image" content={ogImageUrl} />
-				<meta property="og:type" content="website" />
-				<meta property="og:title" content={metaTitle} />
-				<meta property="og:description" content={metaDescription} />
-				{/* Twitter Meta Tags */}
-				<meta property="twitter:url" content={currentUrl} />
-				<meta property="twitter:image" content={ogImageUrl} />
-				<meta name="twitter:title" content={metaTitle} />
-				<meta name="twitter:description" content={metaDescription} />
-			</Head>
 			<main className="mx-auto">
 				<h1 className="text-center text-6xl font-black sm:text-7xl">Projects</h1>
 				{status === "authenticated" && (
@@ -230,5 +193,3 @@ function Projects({ projects: initialProjects, ...props }: ProjectsProps) {
 		</>
 	);
 }
-
-export default Projects;
