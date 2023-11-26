@@ -10,10 +10,13 @@ import { Metadata } from "next/types";
 import { Toaster } from "react-hot-toast";
 import Breadcrumbs from "./breadcrumbs";
 import Providers from "./providers";
+import config from "@config/config";
 
+const { BASE_URL } = config;
 const robotoFont = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(BASE_URL),
 	title: "Intuitive. Useful. Beautiful.",
 	description:
 		"These are the properties a web app should have. I am David Kimmich, a web dev from Germany. If you want to know more about me, have a look here on this site and feel free to contact me!",
