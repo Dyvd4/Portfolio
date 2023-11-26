@@ -1,14 +1,16 @@
 "use client";
 import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
-import { toggleDarkMode } from "@utils/DarkModeUtils";
-import { signOut, useSession } from "next-auth/react";
+import { toggleDarkMode } from "@utils/dark-mode-utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HalfMoon, SunLight } from "./Icons";
+import { HalfMoon, SunLight } from "../Icons";
 import NavLink from "./NavLink";
+import SignOutButton from "./SignOutButton";
 
-type NavbarProps = {};
+type NavbarProps = {
+	darkModeIsActive: boolean;
+};
 
 const LINKS: Array<{ href: string; title: string }> = [
 	{
@@ -21,10 +23,9 @@ const LINKS: Array<{ href: string; title: string }> = [
 	},
 ];
 
-function Navbar(props: NavbarProps) {
-	const { status } = useSession();
-	const darkModeIsActive = useDarkModeIsActive();
+function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 	const pathname = usePathname();
+	const darkModeIsActive = useDarkModeIsActive(initialDarkModeIsActive);
 	return (
 		<nav className="sticky top-0 z-50 bg-white p-6 dark:bg-gray-900">
 			<ul className="flex items-center justify-between gap-2">
@@ -54,19 +55,7 @@ function Navbar(props: NavbarProps) {
 				</li>
 				<li>
 					<ul className="flex items-center gap-6 sm:gap-12">
-						{status === "authenticated" && (
-							<li key={"sign-out"}>
-								<NavLink
-									href="#"
-									onClick={(e) => {
-										e.preventDefault();
-										signOut();
-									}}
-								>
-									Sign out
-								</NavLink>
-							</li>
-						)}
+						<SignOutButton />
 						{LINKS.map(({ href, title }) => (
 							<li key={href}>
 								<NavLink href={href} isActive={pathname === href}>

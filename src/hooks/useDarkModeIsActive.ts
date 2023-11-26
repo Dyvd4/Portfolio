@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useDarkModeIsActive = () => {
-	const [darkModeIsActive, setDarkModeIsActive] = useState(false);
+const useDarkModeIsActive = (initialValue = false) => {
+	const [darkModeIsActive, setDarkModeIsActive] = useState(initialValue);
 
 	const handleObserve = (mutations: MutationRecord[]) => {
 		let darkModeIsActive = false;

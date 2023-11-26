@@ -1,16 +1,15 @@
 import "@/styles/globals.css";
 import Footer from "@components/Footer";
 import ModalPortal from "@components/ModalPortal";
-import Navbar from "@components/Navbar_APP";
+import Navbar from "@components/Navbar/Navbar";
 import LoadingPortalSlot from "@components/Slots/LoadingPortalSlot";
+import useDarkModeIsActive from "@hooks/server/useDarkModeIsActive";
+import { getServerSession } from "next-auth";
 import { Inter } from "next/font/google";
-import { darkModeCookieName } from "@utils/DarkModeUtils";
-import { cookies } from "next/headers";
 import { Metadata } from "next/types";
 import { Toaster } from "react-hot-toast";
 import Breadcrumbs from "./breadcrumbs";
 import Providers from "./providers";
-import { getServerSession } from "next-auth";
 
 const robotoFont = Inter({ subsets: ["latin"] });
 
@@ -26,16 +25,16 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-	const isDarkMode = Boolean(parseInt(cookies().get(darkModeCookieName)?.value || "0"));
+	const darkModeIsActive = useDarkModeIsActive();
 	const session = await getServerSession();
 	return (
-		<html lang="en" className={isDarkMode ? "dark" : ""}>
+		<html lang="en" className={darkModeIsActive ? "dark" : ""}>
 			<body
 				className={`${robotoFont.className} bg-white transition-colors dark:bg-gray-900 `}
 			>
 				<Providers session={session}>
 					<div className="min-h-screen">
-						<Navbar />
+						<Navbar darkModeIsActive={darkModeIsActive} />
 						<main className="mx-auto max-w-screen-md px-8 pt-2">
 							<Breadcrumbs />
 							{children}
