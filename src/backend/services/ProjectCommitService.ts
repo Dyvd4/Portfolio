@@ -7,24 +7,22 @@ type ProjectPayload = Prisma.ProjectGetPayload<{
 
 export const getLatestCommitsView = (project: ProjectPayload) => {
 	const groupedCommits = project.commits
-		.sort((a, b) => {
-			return dayjs(b.createDate).isBefore(dayjs(a.createDate)) ? -1 : 1;
-		})
-		.filter((commit, index, self) => {
-			return (
-				self.findIndex((c) =>
-					dayjs(c.createDate).isSame(dayjs(commit.createDate), "day")
-				) === index
-			);
-		})
-		.map((commit) => {
-			return {
-				date: commit.createDate,
-				commitsCount: project.commits.filter((c) => {
-					return dayjs(c.createDate).isSame(dayjs(commit.createDate), "day");
-				}).length,
-			};
-		})
+		.reduce(
+			(result, commit) => {
+				const commitDate = dayjs(commit.createDate).startOf("day").toISOString();
+				const existingGroup = result.find((g) => g.date === commitDate);
+				if (!existingGroup) {
+					result.push({
+						date: commitDate,
+						commitsCount: 1,
+					});
+				} else {
+					existingGroup.commitsCount++;
+				}
+				return result;
+			},
+			[] as { date: string; commitsCount: number }[]
+		)
 		.sort((a, b) => {
 			return dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1;
 		});
