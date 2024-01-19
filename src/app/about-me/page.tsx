@@ -8,12 +8,15 @@ import CsharpImg from "@public/experience cards/Csharp.png";
 import CssImg from "@public/experience cards/CSS.svg";
 import ExpressJsImg from "@public/experience cards/ExpressJs.png";
 import GitHubImg from "@public/experience cards/GitHub.svg";
+import T3Img from "@public/experience cards/t3-dark.svg";
+import AwsImg from "@public/experience cards/AWS.png";
 import HtmlImg from "@public/experience cards/HTML.svg";
 import NestJsImg from "@public/experience cards/NestJS.png";
 import NextJsImg from "@public/experience cards/NextJs.svg";
 import NodeJsImg from "@public/experience cards/NodeJs.svg";
 import ReactImg from "@public/experience cards/React.svg";
 import SqlImg from "@public/experience cards/Sql.png";
+import GoImg from "@public/experience cards/Go.svg";
 import TailwindCssImg from "@public/experience cards/tailwind-css.svg";
 import TypeScriptImg from "@public/experience cards/TypeScript.svg";
 import Image from "next/image";
@@ -41,6 +44,13 @@ const LANGUAGES: ExperienceCardProps[] = [
 		imageProps: {
 			src: SqlImg,
 			alt: "SQL",
+		},
+	},
+	{
+		title: "Go",
+		imageProps: {
+			src: GoImg,
+			alt: "Go",
 		},
 	},
 ];
@@ -107,6 +117,20 @@ const TECHNOLOGIES: ExperienceCardProps[] = [
 		imageProps: {
 			src: GitHubImg,
 			alt: "GitHub",
+		},
+	},
+	{
+		title: "T3 Stack",
+		imageProps: {
+			src: T3Img,
+			alt: "T3 Stack",
+		},
+	},
+	{
+		title: "AWS",
+		imageProps: {
+			src: AwsImg,
+			alt: "AWS",
 		},
 	},
 ];
