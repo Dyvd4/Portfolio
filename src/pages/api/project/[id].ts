@@ -6,6 +6,13 @@ import { addProjectSchema } from ".";
 
 const editProjectSchema = addProjectSchema.omit({ name: true });
 
+export const config = {
+	api: {
+		bodyParser: {
+			sizeLimit: "5mb",
+		},
+	},
+};
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const {
 		query: { id },
