@@ -13,20 +13,16 @@ export type ImportedFromGithubInfoProps = _ImportedFromGithubInfoProps &
 function ImportedFromGithubInfo({ className, children, ...props }: ImportedFromGithubInfoProps) {
 	return (
 		<Link
-			className="hover:underline"
 			href={NEXT_PUBLIC_GITHUB_PROFILE_URL}
 			target={"_blank"}
+			className={cn(
+				`text-secondary flex items-center gap-1 text-sm font-normal hover:underline`,
+				className
+			)}
 			{...props}
 		>
-			<div
-				className={cn(
-					`text-secondary flex items-center gap-1 text-sm font-normal`,
-					className
-				)}
-			>
-				Imported from GitHub
-				<GitHub className="[&>path]:stroke-secondary !h-4 !w-4 !cursor-default" />
-			</div>
+			Imported from GitHub
+			<GitHub className="[&>path]:stroke-secondary !h-4 !w-4 !cursor-default" />
 		</Link>
 	);
 }
