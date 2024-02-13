@@ -8,12 +8,12 @@ export type ProjectSectionHeadingProps = _ProjectSectionHeadingProps &
 
 function ProjectSectionHeading({ className, children, ...props }: ProjectSectionHeadingProps) {
 	return (
-		<h1
+		<h2
 			className={cn(`whitespace-nowrap text-lg font-medium sm:text-xl`, className)}
 			{...props}
 		>
 			{children}
-		</h1>
+		</h2>
 	);
 }
 
