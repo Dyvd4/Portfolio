@@ -23,8 +23,13 @@ function Navbar({ className, ...props }: NavbarProps) {
 			className="flex w-full
 							items-center justify-between p-6"
 		>
-			<div className="text-secondary text-xs">
-				© {dayjs().year()} by David Kimmich. All rights reserved.
+			<div className="text-secondary text-xs flex flex-col">
+				<div>
+					<span>© {dayjs().year()} by David Kimmich.</span><span className="whitespace-nowrap"> All rights reserved.</span>
+				</div>
+				<Link className="whitespace-nowrap" href={"/legal-disclosure"}>
+					Impressum - Legal Disclosure
+				</Link>
 			</div>
 			<div className="flex items-center justify-center gap-4">
 				<Tooltip direction="up" title="GitHub">

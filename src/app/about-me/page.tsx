@@ -22,6 +22,8 @@ import TypeScriptImg from "@public/experience cards/TypeScript.svg";
 import Image from "next/image";
 import Link from "next/link";
 
+const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
+
 type AboutMeProps = {};
 
 const LANGUAGES: ExperienceCardProps[] = [
@@ -220,8 +222,8 @@ function AboutMe(props: AboutMeProps) {
 				<p className="mt-4 px-4">
 					Write an&nbsp;
 					<b>
-						<Link className="hover:underline" href={"mailto:david.kimmich@gmx.net"}>
-							<b>e-mail to david.kimmich@gmx.net</b>
+						<Link className="hover:underline" href={`mailto:${CONTACT_RECIPIENT}`}>
+							<b>e-mail to {CONTACT_RECIPIENT}</b>
 						</Link>
 					</b>
 					&nbsp;or check the social media links in the footer.
