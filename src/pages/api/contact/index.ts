@@ -2,7 +2,7 @@ import mailTransport from "@backend/MailTransport";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 
-const CONTACT_RECIPIENT = process.env.CONTACT_RECIPIENT!;
+const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT!;
 const BASE_URL = process.env.BASE_URL!;
 
 export const contactSchema = z.object({

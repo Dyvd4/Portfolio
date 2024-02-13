@@ -11,6 +11,13 @@ export const addProjectSchema = z.object({
 	additionalDescription: z.string().optional(),
 });
 
+export const config = {
+	api: {
+		bodyParser: {
+			sizeLimit: "5mb",
+		},
+	},
+};
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const {
 		method,

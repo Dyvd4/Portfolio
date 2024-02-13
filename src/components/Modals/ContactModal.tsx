@@ -28,7 +28,7 @@ export type ContactModalProps = _ContactModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _ContactModalProps>;
 
 function ContactModal({ className, children, ...props }: ContactModalProps) {
-	const { register, handleSubmit } = useForm<ContactSchema>();
+	const { register, handleSubmit, reset: resetFields } = useForm<ContactSchema>();
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<ContactSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const router = useRouter();
@@ -41,6 +41,7 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 
 	const handleClose = () => {
 		setErrorMap(null);
+		resetFields()
 		props.close();
 	};
 
@@ -48,7 +49,7 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 		try {
 			const { name, email, message } = data;
 			contactSchema.parse({ name, email, message });
-			close();
+			handleClose();
 			toast.promise(
 				request.post(`/api/contact`, data),
 				{
