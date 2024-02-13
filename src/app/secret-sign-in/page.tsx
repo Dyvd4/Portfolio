@@ -1,5 +1,6 @@
 "use client";
 import Button from "@components/Button";
+import { H1 } from "@components/H1";
 import Input from "@components/Input";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -29,7 +30,7 @@ function SecretSignIn() {
 	};
 	return (
 		<form className="flex flex-col gap-4" onSubmit={handleSubmit(handleSignIn)}>
-			<h1 className="text-4xl font-bold">Sign in</h1>
+			<H1>Sign in</H1>
 			<Input placeholder="username" {...register("username")} />
 			<Input placeholder="password" {...register("password")} type="password" />
 			<div className="pl-1 text-sm font-bold text-red-500">{errorMessage}</div>

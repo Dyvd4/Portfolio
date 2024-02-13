@@ -21,6 +21,7 @@ import TailwindCssImg from "@public/experience cards/tailwind-css.svg";
 import TypeScriptImg from "@public/experience cards/TypeScript.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { H1 } from "@components/H1";
 
 const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
 
@@ -158,7 +159,7 @@ function AboutMe(props: AboutMeProps) {
 				className="mx-auto rounded-lg"
 			/>
 			<section className="mt-16">
-				<h1 className="text-4xl font-black sm:text-5xl">About me</h1>
+				<H1>About me</H1>
 				<div className="mt-4 px-4">
 					<p>
 						Hi! I am David Kimmich, a web dev from Germany. I like to create web apps
@@ -184,7 +185,7 @@ function AboutMe(props: AboutMeProps) {
 				</div>
 			</section>
 			<section className="mt-10">
-				<h1 className="text-4xl font-black sm:text-5xl">Experiences</h1>
+				<H1>Experiences</H1>
 				<div className="mt-4 px-4">
 					<h3 className="mt-2 text-lg font-bold">Languages:</h3>
 					<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
@@ -207,7 +208,7 @@ function AboutMe(props: AboutMeProps) {
 				</div>
 			</section>
 			<section className="mt-10">
-				<h1 className="text-4xl font-black sm:text-5xl">Projects</h1>
+				<H1>Projects</H1>
 				<div className="mt-4 px-4">
 					<span className="mr-2">See:</span>
 					<b>
@@ -218,7 +219,7 @@ function AboutMe(props: AboutMeProps) {
 				</div>
 			</section>
 			<section className="mt-10 pb-20">
-				<h1 className="text-4xl font-black sm:text-5xl">Contact</h1>
+				<H1>Contact</H1>
 				<p className="mt-4 px-4">
 					Write an&nbsp;
 					<b>

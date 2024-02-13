@@ -1,6 +1,7 @@
 "use client";
 import Badge from "@components/Badge";
 import Button from "@components/Button";
+import { H1 } from "@components/H1";
 import Input from "@components/Input";
 import ProjectListItem from "@components/ListItems/ProjectListItem";
 import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
@@ -105,7 +106,7 @@ export default function ProjectPage({ initialProjects }) {
 	return (
 		<>
 			<main className="mx-auto">
-				<h1 className="text-center text-6xl font-black sm:text-7xl">Projects</h1>
+				<H1 className="text-center text-6xl sm:text-7xl">Projects</H1>
 				{status === "authenticated" && (
 					<>
 						<Button onClick={openProjectAddModal}>Add project</Button>

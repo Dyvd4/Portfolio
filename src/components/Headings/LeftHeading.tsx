@@ -1,3 +1,4 @@
+import { H1 } from "@components/H1";
 import { cn } from "@utils/component-utils";
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
 
@@ -14,7 +15,7 @@ function LeftHeading({ className, children, rightSection, ...props }: LeftHeadin
 			className={cn(`flex flex-col justify-between gap-4 sm:flex-row sm:gap-0`, className)}
 			{...props}
 		>
-			<h1 className="text-5xl font-black sm:text-7xl">{children}</h1>
+			<H1 className="text-5xl sm:text-7xl">{children}</H1>
 			<div className="flex flex-col items-start sm:items-end sm:justify-end">
 				{rightSection}
 			</div>
