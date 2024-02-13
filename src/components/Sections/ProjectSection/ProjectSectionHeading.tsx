@@ -1,5 +1,6 @@
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
 import { cn } from "@utils/component-utils";
+import { H2 } from "@components/H2";
 
 type _ProjectSectionHeadingProps = {};
 
@@ -8,12 +9,12 @@ export type ProjectSectionHeadingProps = _ProjectSectionHeadingProps &
 
 function ProjectSectionHeading({ className, children, ...props }: ProjectSectionHeadingProps) {
 	return (
-		<h2
-			className={cn(`whitespace-nowrap text-lg font-medium sm:text-xl`, className)}
+		<H2
+			className={cn(`whitespace-nowrap`, className)}
 			{...props}
 		>
 			{children}
-		</h2>
+		</H2>
 	);
 }
 

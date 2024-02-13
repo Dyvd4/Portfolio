@@ -1,5 +1,6 @@
 "use client";
 import Badge from "@components/Badge";
+import { H2 } from "@components/H2";
 import LeftHeading from "@components/Headings/LeftHeading";
 import IconLink from "@components/IconLink";
 import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
@@ -66,14 +67,8 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 
 			<ProjectSection className="mt-16">
 				<ProjectSectionHeading className="flex items-center justify-between">
-					<>
-						<div className="flex items-center">
-							<span className="text-lg font-medium sm:text-xl">
-								Development activity
-							</span>
-						</div>
-						<ImportedFromGithubInfo className="hidden sm:flex" />
-					</>
+					Development activity
+					<ImportedFromGithubInfo className="hidden sm:flex" />
 				</ProjectSectionHeading>
 				<Suspense fallback="loading...">
 					<DevelopmentActivityChart latestCommitsView={latestCommitsView} />
@@ -82,16 +77,14 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 
 			<ProjectSection className="mt-16">
 				<ProjectSectionHeading className="flex items-center justify-between">
-					<>
-						<div className="flex items-center">
-							<span className="font-medium">Languages used</span>
-							&nbsp;
-							<span className="text-secondary text-sm font-normal sm:text-base">
-								(in %)
-							</span>
-						</div>
-						<ImportedFromGithubInfo className="hidden sm:flex" />
-					</>
+					<div className="flex items-center">
+						<span >Languages used</span>
+						&nbsp;
+						<span className="text-secondary font-normal text-sm">
+							(in %)
+						</span>
+					</div>
+					<ImportedFromGithubInfo className="hidden sm:flex" />
 				</ProjectSectionHeading>
 				<Suspense fallback="loading...">
 					<LanguagesUsedChart project={project} />
@@ -101,7 +94,7 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 			{project.tags.length > 0 && (
 				<>
 					<section className="flex flex-col gap-3 pt-20 pb-10">
-						<h1 className="text-xl font-medium">Tags</h1>
+						<H2>Tags</H2>
 						<ul className="mt-2 flex flex-wrap gap-2">
 							{project.tags.map((tag) => (
 								<li key={tag.name}>

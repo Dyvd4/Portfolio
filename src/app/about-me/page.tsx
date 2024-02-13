@@ -22,6 +22,7 @@ import TypeScriptImg from "@public/experience cards/TypeScript.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { H1 } from "@components/H1";
+import { H2 } from "@components/H2";
 
 const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
 
@@ -187,7 +188,7 @@ function AboutMe(props: AboutMeProps) {
 			<section className="mt-10">
 				<H1>Experiences</H1>
 				<div className="mt-4 px-4">
-					<h3 className="mt-2 text-lg font-bold">Languages:</h3>
+					<H2 className="mt-2 text-lg font-bold">Languages:</H2>
 					<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
 						{LANGUAGES.map((cardProps) => (
 							<li key={cardProps.title}>
@@ -196,7 +197,7 @@ function AboutMe(props: AboutMeProps) {
 							</li>
 						))}
 					</ul>
-					<h3 className="mt-4 text-lg font-bold">Technologies:</h3>
+					<H2 className="mt-4 text-lg font-bold">Technologies:</H2>
 					<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
 						{TECHNOLOGIES.map((cardProps) => (
 							<li key={cardProps.title} className="min-h-0 min-w-0">
