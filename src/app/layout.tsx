@@ -13,7 +13,7 @@ import Providers from "./providers";
 import config from "@config/config";
 
 const { BASE_URL } = config;
-const robotoFont = Inter({ subsets: ["latin"] });
+const interFont = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL(BASE_URL),
@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 	return (
 		<html lang="en" className={darkModeIsActive ? "dark" : ""}>
 			<body
-				className={`${robotoFont.className} bg-white transition-colors dark:bg-gray-900 `}
+				className={`${interFont.className} bg-white transition-colors dark:bg-gray-900 `}
 			>
 				<Providers session={session}>
 					<div className="min-h-screen">
