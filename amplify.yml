@@ -13,3 +13,6 @@ frontend:
         baseDirectory: .next
         files:
             - "**/*"
+    cache:
+        paths:
+            - node_modules/**/*
