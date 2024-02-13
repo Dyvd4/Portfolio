@@ -30,6 +30,7 @@ export default function LegalDisclosurePage() {
                     <b>{CONTACT_RECIPIENT}</b>
                 </Link>
             </p>
+            <p>Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
         </div>
     );
 }
