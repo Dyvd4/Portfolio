@@ -6,8 +6,6 @@ frontend:
                 - npm ci
         build:
             commands:
-                - "# Execute Amplify CLI with the helper script"
-                - envCache --set stackInfo ""
                 - env >> .env.production
                 - npm run build
                 - npx prisma migrate deploy
