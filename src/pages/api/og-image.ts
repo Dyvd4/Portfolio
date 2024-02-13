@@ -13,17 +13,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.send(`${req.method} not supported`);
     }
 
-    const { query: { title: reqTitle } } = req
+    const { query: { title } } = req
 
-    if (typeof reqTitle !== "string") {
+    if (typeof title !== "string") {
         return res.status(400).send("Title must be of type string")
     }
 
-    if (reqTitle.length > MAX_CHARACTERS) {
+    if (title.length > MAX_CHARACTERS) {
         return res.status(400).json(`Text should not be longer than ${MAX_CHARACTERS} characters`)
     }
-
-    const title = reqTitle.replaceAll(" ", "_")
 
     // Create canvas
     const canvas = createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT);
