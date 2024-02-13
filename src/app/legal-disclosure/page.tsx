@@ -1,4 +1,6 @@
 "use client"
+import { PAGE_TITLE } from '@app/legal-disclosure';
+import { H2 } from '@components/H2';
 import useBreadcrumb from '@context/hooks/useBreadcrumb';
 import Link from 'next/link';
 
@@ -10,13 +12,13 @@ export default function LegalDisclosurePage() {
             isHome: true,
         },
         {
-            children: "Impressum - Legal disclosure",
+            children: PAGE_TITLE,
             isCurrentPage: true,
         },
     ]);
     return (
         <div>
-            <h2 className='text-2xl font-black'>Impressum - Legal disclosure</h2>
+            <H2 className='text-2xl font-black'>Impressum - Legal disclosure</H2>
             <p>
                 <b>Angaben gem&auml;&szlig; &sect; 5 TMG</b><br />
                 David Kimmich<br />
@@ -24,7 +26,7 @@ export default function LegalDisclosurePage() {
                 71522 Backnang
             </p>
             <br />
-            <h2 className='text-2xl font-black'>Kontakt</h2>
+            <H2 className='text-2xl font-black'>Kontakt</H2>
             <p>
                 E-Mail: <Link className="hover:underline" href={`mailto:${CONTACT_RECIPIENT}`}>
                     <b>{CONTACT_RECIPIENT}</b>
