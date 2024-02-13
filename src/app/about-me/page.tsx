@@ -30,6 +30,8 @@ const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
 
 const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
 
+const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
+
 type AboutMeProps = {};
 
 const LANGUAGES: ExperienceCardProps[] = [
