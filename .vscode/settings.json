@@ -1,4 +1,6 @@
 {
 	"cSpell.words": ["NEXTAUTH"],
-	"typescript.tsdk": "node_modules\\typescript\\lib"
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false
 }
