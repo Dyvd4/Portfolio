@@ -50,6 +50,8 @@ jobs:
                   SMPT_PASSWORD: ${{secrets.SMPT_PASSWORD}}
                   SMPT_USERNAME: ${{secrets.SMPT_USERNAME}}
                   SMTP_HOST: ${{secrets.SMTP_HOST}}
+                  DOMAIN_NAME: ${{secrets.DOMAIN_NAME}}
+                  CERT_ARN: ${{secrets.CERT_ARN}}
               run: |
                   npx prisma generate
                   npx sst deploy --stage prod
