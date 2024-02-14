@@ -1,0 +1,44 @@
+name: Deploy
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "18"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Deploy
+              env:
+                  ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
+                  ADMIN_USERNAME: ${{secrets.ADMIN_USERNAME}}
+                  BASE_URL: ${{secrets.BASE_URL}}
+                  DATABASE_URL: ${{secrets.DATABASE_URL}}
+                  GH_ACCESS_TOKEN: ${{secrets.GH_ACCESS_TOKEN}}
+                  GH_API_URL: ${{secrets.GH_API_URL}}
+                  GH_REPO_OWNER: ${{secrets.GH_REPO_OWNER}}
+                  NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+                  NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
+                  NEXT_PUBLIC_BASE_URL: ${{secrets.NEXT_PUBLIC_BASE_URL}}
+                  NEXT_PUBLIC_CONTACT_RECIPIENT: ${{secrets.NEXT_PUBLIC_CONTACT_RECIPIENT}}
+                  NEXT_PUBLIC_GITHUB_PROFILE_URL: ${{secrets.NEXT_PUBLIC_GITHUB_PROFILE_URL}}
+                  NEXT_PUBLIC_LINKEDIN_PROFILE_URL: ${{secrets.NEXT_PUBLIC_LINKEDIN_PROFILE_URL}}
+                  SMPT_PASSWORD: ${{secrets.SMPT_PASSWORD}}
+                  SMPT_USERNAME: ${{secrets.SMPT_USERNAME}}
+                  SMTP_HOST: ${{secrets.SMTP_HOST}}
+              run: |
+                  npx prisma generate
+                  npx sst deploy --stage prod
