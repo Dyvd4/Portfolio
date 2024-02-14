@@ -1,1 +1,1 @@
-export const PAGE_TITLE = "Datenschutzerklärung - Privacy policy"
+export const PAGE_TITLE = "Datenschutzerklärung - Privacy policy";

@@ -41,7 +41,7 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 
 	const handleClose = () => {
 		setErrorMap(null);
-		resetFields()
+		resetFields();
 		props.close();
 	};
 

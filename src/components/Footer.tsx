@@ -23,9 +23,10 @@ function Navbar({ className, ...props }: NavbarProps) {
 			className="flex w-full
 							items-center justify-between p-6"
 		>
-			<div className="text-secondary text-xs flex flex-col">
+			<div className="text-secondary flex flex-col text-xs">
 				<div>
-					<span>© {dayjs().year()} by David Kimmich.</span><span className="whitespace-nowrap"> All rights reserved.</span>
+					<span>© {dayjs().year()} by David Kimmich.</span>
+					<span className="whitespace-nowrap"> All rights reserved.</span>
 				</div>
 				<Link className="whitespace-nowrap" href={"/legal-disclosure"}>
 					Impressum - Legal Disclosure

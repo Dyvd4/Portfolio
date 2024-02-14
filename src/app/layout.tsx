@@ -32,9 +32,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 	const session = await getServerSession();
 	return (
 		<html lang="en" className={darkModeIsActive ? "dark" : ""}>
-			<body
-				className={`${interFont.className} bg-white transition-colors dark:bg-gray-900 `}
-			>
+			<body className={`${interFont.className} bg-white transition-colors dark:bg-gray-900 `}>
 				<Providers session={session}>
 					<div className="min-h-screen">
 						<Navbar darkModeIsActive={darkModeIsActive} />

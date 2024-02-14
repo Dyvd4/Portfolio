@@ -78,11 +78,9 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 			<ProjectSection className="mt-16">
 				<ProjectSectionHeading className="flex items-center justify-between">
 					<div className="flex items-center">
-						<span >Languages used</span>
+						<span>Languages used</span>
 						&nbsp;
-						<span className="text-secondary font-normal text-sm">
-							(in %)
-						</span>
+						<span className="text-secondary text-sm font-normal">(in %)</span>
 					</div>
 					<ImportedFromGithubInfo className="hidden sm:flex" />
 				</ProjectSectionHeading>
