@@ -3,12 +3,11 @@ frontend:
     phases:
         preBuild:
             commands:
-                - npm i -g pnpm
-                - pnpm i
+                - npm ci
         build:
             commands:
                 - env >> .env.production
-                - pnpm run build
+                - npm run build
                 - npx prisma migrate deploy
     artifacts:
         baseDirectory: .next
