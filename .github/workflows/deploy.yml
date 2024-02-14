@@ -44,5 +44,4 @@ jobs:
                   DOMAIN_NAME: ${{secrets.DOMAIN_NAME}}
                   CERT_ARN: ${{secrets.CERT_ARN}}
               run: |
-                  npx prisma generate
                   npx sst deploy --stage prod
