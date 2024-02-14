@@ -19,7 +19,8 @@ export default {
 					cdk: {
 						certificate: Certificate.fromCertificateArn(stack, "MyCert", certArn),
 					}
-				}
+				},
+				memorySize: "2048 MB",
 			});
 
 			stack.addOutputs({
