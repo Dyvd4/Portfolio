@@ -23,7 +23,7 @@ export default {
 			});
 
 			stack.addOutputs({
-				SiteUrl: site.url,
+				SiteUrl: site.customDomainUrl || site.url,
 			});
 		});
 	},
