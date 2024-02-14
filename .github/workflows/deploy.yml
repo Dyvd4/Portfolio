@@ -13,15 +13,12 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3
 
-            - name: configure aws credentials
+            - name: Configure aws credentials
               uses: aws-actions/configure-aws-credentials@v3
               with:
                   aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   aws-region: eu-central-1
-
-            - name: Install dependencies
-              run: npm ci
 
             - name: Deploy
               env:
@@ -44,5 +41,6 @@ jobs:
                   DOMAIN_NAME: ${{secrets.DOMAIN_NAME}}
                   CERT_ARN: ${{secrets.CERT_ARN}}
               run: |
+                  npm i
                   npx prisma generate
                   npx sst deploy --stage prod
