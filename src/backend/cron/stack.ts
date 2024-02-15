@@ -17,7 +17,7 @@ export function CronStack({ stack }: StackContext) {
 			function: {
 				handler: "src/backend/cron/import-repos.handler",
 				environment,
-				timeout: "30 seconds"
+				timeout: "1 minute"
 			}
 		},
 	});
@@ -28,7 +28,7 @@ export function CronStack({ stack }: StackContext) {
 			function: {
 				handler: "src/backend/cron/import-projects.handler",
 				environment,
-				timeout: "30 seconds"
+				timeout: "1 minute"
 			}
 		},
 	});
