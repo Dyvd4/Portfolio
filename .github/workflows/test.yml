@@ -1,0 +1,23 @@
+name: test
+
+on:
+    push:
+        branches:
+            - sst-deployment
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: generate bunding using open-next
+              run: |
+                  npx open-next@latest build
+                  npx sst deploy --stage prod
+                  du -hs .open-next/server-function/node_modules/* | sort -rh
