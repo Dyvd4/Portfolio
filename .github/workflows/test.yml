@@ -38,4 +38,5 @@ jobs:
                   CERT_ARN: ${{secrets.CERT_ARN}}
               run: |
                   npx open-next@latest build
+                  du -hs .open-next/server-function/ | sort -rh
                   du -hs .open-next/server-function/node_modules/* | sort -rh
