@@ -16,7 +16,7 @@ export function CronStack({ stack }: StackContext) {
 		schedule: scheduleRate,
 		job: {
 			function: {
-				handler: "./import-repos.handler",
+				handler: "import-repos.handler",
 				environment
 			}
 		},
@@ -26,7 +26,7 @@ export function CronStack({ stack }: StackContext) {
 		schedule: scheduleRate,
 		job: {
 			function: {
-				handler: "./import-projects.handler",
+				handler: "import-projects.handler",
 				environment
 			}
 		},
