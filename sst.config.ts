@@ -1,3 +1,4 @@
+import { CronStack } from "@backend/cron/stack";
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
 import { SSTConfig } from "sst";
 import { NextjsSite } from "sst/constructs";
@@ -46,5 +47,7 @@ export default {
 				SiteUrl: site.customDomainUrl || site.url,
 			});
 		});
-	},
+
+		app.stack(CronStack)
+	}
 } satisfies SSTConfig;
