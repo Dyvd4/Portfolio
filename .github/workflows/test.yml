@@ -38,5 +38,4 @@ jobs:
                   CERT_ARN: ${{secrets.CERT_ARN}}
               run: |
                   npx open-next@latest build
-                  npx sst deploy --stage prod
                   du -hs .open-next/server-function/node_modules/* | sort -rh
