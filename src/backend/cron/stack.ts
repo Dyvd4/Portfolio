@@ -6,10 +6,9 @@ export function CronStack({ stack }: StackContext) {
 	// env-variables need to be explicitly passed here, as the handlers
 	// get deployed to separate lambda functions, which have their own env-variables each
 	const environment = {
-		GH_REPO_OWNER: process.env.GH_REPO_OWNER!,
-		GH_API_URL: process.env.GH_API_URL!,
-		GH_ACCESS_TOKEN: process.env.GH_ACCESS_TOKEN!,
-		DATABASE_URL: process.env.DATABASE_URL!
+		API_BASE_URL: process.env.API_BASE_URL!,
+		ADMIN_USERNAME: process.env.ADMIN_USERNAME!,
+		ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
 	}
 
 	new Cron(stack, "Import-repos", {
@@ -27,11 +26,7 @@ export function CronStack({ stack }: StackContext) {
 		job: {
 			function: {
 				handler: "src/backend/cron/import-projects.handler",
-				environment: {
-					BASE_URL: process.env.BASE_URL!,
-					ADMIN_USERNAME: process.env.ADMIN_USERNAME!,
-					ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
-				}
+				environment
 			}
 		},
 	});

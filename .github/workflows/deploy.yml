@@ -43,6 +43,7 @@ jobs:
                   SMTP_HOST: ${{secrets.SMTP_HOST}}
                   DOMAIN_NAME: ${{secrets.DOMAIN_NAME}}
                   CERT_ARN: ${{secrets.CERT_ARN}}
+                  API_BASE_URL: ${{secrets.API_BASE_URL}}
               run: |
                   npx prisma generate
                   npx sst deploy --stage prod
