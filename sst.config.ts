@@ -13,13 +13,13 @@ export default {
 		app.stack(function Site({ stack }) {
 			const certArn = process.env.CERT_ARN!;
 			const site = new NextjsSite(stack, "site", {
-				// customDomain: {
-				// 	domainName: process.env.DOMAIN_NAME!,
-				// 	isExternalDomain: true,
-				// 	cdk: {
-				// 		certificate: Certificate.fromCertificateArn(stack, "MyCert", certArn),
-				// 	}
-				// },
+				customDomain: {
+					domainName: process.env.DOMAIN_NAME!,
+					isExternalDomain: true,
+					cdk: {
+						certificate: Certificate.fromCertificateArn(stack, "MyCert", certArn),
+					}
+				},
 			});
 
 			stack.addOutputs({
