@@ -27,7 +27,11 @@ export function CronStack({ stack }: StackContext) {
 		job: {
 			function: {
 				handler: "src/backend/cron/import-projects.handler",
-				environment
+				environment: {
+					BASE_URL: process.env.BASE_URL!,
+					ADMIN_USERNAME: process.env.ADMIN_USERNAME!,
+					ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
+				}
 			}
 		},
 	});
