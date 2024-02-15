@@ -25,7 +25,6 @@ import { H1 } from "@components/H1";
 import { H2 } from "@components/H2";
 
 const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
-const GH_REPO_OWNER = process.env.GH_REPO_OWNER!;
 
 type AboutMeProps = {};
 
@@ -151,7 +150,6 @@ function AboutMe(props: AboutMeProps) {
 		},
 	]);
 
-	console.log(GH_REPO_OWNER)
 	return (
 		<main className="dark:text-white">
 			<Image
