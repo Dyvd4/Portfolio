@@ -40,7 +40,8 @@ export default {
 					SMTP_HOST: process.env.SMTP_HOST!,
 					DOMAIN_NAME: process.env.DOMAIN_NAME!,
 					CERT_ARN: process.env.CERT_ARN!,
-				}
+				},
+				timeout: "1 minute"
 			});
 
 			stack.addOutputs({
