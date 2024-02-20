@@ -4,7 +4,7 @@ import { Project } from "@prisma/client";
 import { Octokit } from "octokit";
 import parseLink from "parse-link-header";
 
-const octokit = new Octokit({ auth: config.GITHUB_ACCESS_TOKEN });
+const octokit = new Octokit({ auth: config.GH_ACCESS_TOKEN });
 
 const fetchProjects = async () => {
 	const projects = await prisma.project.findMany();
@@ -21,7 +21,7 @@ const fetchProject = (project: Project) => {
 
 const updateProjectMetaData = async (project: Project) => {
 	const response = await octokit.rest.repos.get({
-		owner: config.GITHUB_REPO_OWNER,
+		owner: config.GH_REPO_OWNER,
 		repo: project.name,
 	});
 
@@ -55,7 +55,7 @@ const updateProjectMetaData = async (project: Project) => {
 
 const upsertProjectCommits = async (project: Project) => {
 	const response = await octokit.rest.repos.listCommits({
-		owner: config.GITHUB_REPO_OWNER,
+		owner: config.GH_REPO_OWNER,
 		repo: project.name,
 		per_page: 100,
 	});
@@ -69,7 +69,7 @@ const upsertProjectCommits = async (project: Project) => {
 		await Promise.all(
 			new Array(Number(parsedLink.last.page) - 1).fill("").map(async (item, index) => {
 				const response = await octokit.rest.repos.listCommits({
-					owner: config.GITHUB_REPO_OWNER,
+					owner: config.GH_REPO_OWNER,
 					repo: project.name,
 					per_page: 100,
 					page: index + 2,
@@ -106,7 +106,7 @@ const upsertProjectCommits = async (project: Project) => {
 
 const upsertProjectLanguages = async (project: Project) => {
 	const response = await octokit.rest.repos.listLanguages({
-		owner: config.GITHUB_REPO_OWNER,
+		owner: config.GH_REPO_OWNER,
 		repo: project.name,
 	});
 

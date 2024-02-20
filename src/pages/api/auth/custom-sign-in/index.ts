@@ -1,6 +1,6 @@
 import config from "@config/config";
 import { prisma } from "@prisma";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 

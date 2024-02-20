@@ -1,18 +1,21 @@
 import { PAGE_TITLE } from "@app/legal-disclosure";
-import { getOgImageUrl } from "@utils/utils";
 import { Metadata } from "next/types";
-
-const ogImageTitle = "legal_disclosure";
-const ogImage = { url: getOgImageUrl(ogImageTitle), alt: ogImageTitle };
+import OgImage from "@public/og/legal-disclosure.png"
 
 export const metadata: Metadata = {
 	title: PAGE_TITLE,
 	openGraph: {
-		images: ogImage,
+		images: [{
+			url: OgImage.src,
+			alt: "legal disclosure"
+		}]
 	},
 	twitter: {
-		images: ogImage,
-	},
+		images: [{
+			url: OgImage.src,
+			alt: "legal disclosure"
+		}]
+	}
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

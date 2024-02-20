@@ -1,4 +1,5 @@
 import { Metadata } from "next/types";
+import OgImage from "@public/og/about-me-page.png"
 
 export const metadata: Metadata = {
 	title: "About me",
@@ -13,8 +14,20 @@ export const metadata: Metadata = {
 		"languages",
 		"David Kimmich",
 	],
+	openGraph: {
+		images: [{
+			url: OgImage.src,
+			alt: "About me"
+		}]
+	},
+	twitter: {
+		images: [{
+			url: OgImage.src,
+			alt: "About me"
+		}]
+	}
 };
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
 	return children;
 }

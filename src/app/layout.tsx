@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import Breadcrumbs from "./breadcrumbs";
 import Providers from "./providers";
 import config from "@config/config";
+import OgImage from "@public/og/landing-page.png"
 
 const { BASE_URL } = config;
 const interFont = Inter({ subsets: ["latin"] });
@@ -25,6 +26,18 @@ export const metadata: Metadata = {
 	icons: {
 		shortcut: "/Logo.png",
 	},
+	openGraph: {
+		images: [{
+			url: OgImage.src,
+			alt: "Portfolio"
+		}]
+	},
+	twitter: {
+		images: [{
+			url: OgImage.src,
+			alt: "Portfolio"
+		}]
+	}
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
