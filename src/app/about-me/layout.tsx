@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 		"Technologies",
 		"Contact",
 		"Programming",
-		"languages",
+		"Languages",
 		"David Kimmich",
 	],
 	openGraph: {
