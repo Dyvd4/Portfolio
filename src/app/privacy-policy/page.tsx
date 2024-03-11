@@ -5,6 +5,9 @@ import { H1 } from "@components/H1";
 import { H2 } from "@components/H2";
 import { H3 } from "@components/H3";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
+import Link from "next/link";
+
+const CONTACT_RECIPIENT = process.env.NEXT_PUBLIC_CONTACT_RECIPIENT;
 
 export default function PrivacyPolicyPage() {
 	useBreadcrumb([
@@ -159,9 +162,9 @@ export default function PrivacyPolicyPage() {
 				71522 Backnang
 			</p>
 			<p>
-				Telefon: &#91;Telefonnummer der verantwortlichen Stelle&#93;
-				<br />
-				E-Mail: &#91;E-Mail-Adresse der verantwortlichen Stelle&#93;
+				E-Mail: <Link className="hover:underline" href={`mailto:${CONTACT_RECIPIENT}`}>
+					<b>{CONTACT_RECIPIENT}</b>
+				</Link>
 			</p>
 			<p>
 				Verantwortliche Stelle ist die nat&uuml;rliche oder juristische Person, die allein
