@@ -32,7 +32,7 @@ jobs:
                   ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
                   ADMIN_USERNAME: ${{secrets.ADMIN_USERNAME}}
                   BASE_URL: ${{secrets.BASE_URL}}
-                  DATABASE_URL: ${{secrets.DATABASE_URL}}
+                  PORTFOLIO_DATABASE_URL: ${{secrets.PORTFOLIO_DATABASE_URL}}
                   GH_ACCESS_TOKEN: ${{secrets.GH_ACCESS_TOKEN}}
                   GH_API_URL: ${{secrets.GH_API_URL}}
                   GH_REPO_OWNER: ${{secrets.GH_REPO_OWNER}}
