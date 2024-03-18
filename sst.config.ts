@@ -19,13 +19,13 @@ export default {
 					isExternalDomain: true,
 					cdk: {
 						certificate: Certificate.fromCertificateArn(stack, "MyCert", certArn),
-					}
+					},
 				},
 				environment: {
 					ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
 					ADMIN_USERNAME: process.env.ADMIN_USERNAME!,
 					BASE_URL: process.env.BASE_URL!,
-					DATABASE_URL: process.env.DATABASE_URL!,
+					PORTFOLIO_DATABASE_URL: process.env.PORTFOLIO_DATABASE_URL!,
 					GH_ACCESS_TOKEN: process.env.GH_ACCESS_TOKEN!,
 					GH_API_URL: process.env.GH_API_URL!,
 					GH_REPO_OWNER: process.env.GH_REPO_OWNER!,
@@ -41,7 +41,7 @@ export default {
 					DOMAIN_NAME: process.env.DOMAIN_NAME!,
 					CERT_ARN: process.env.CERT_ARN!,
 				},
-				timeout: "1 minute"
+				timeout: "1 minute",
 			});
 
 			stack.addOutputs({
@@ -49,6 +49,6 @@ export default {
 			});
 		});
 
-		app.stack(CronStack)
-	}
+		app.stack(CronStack);
+	},
 } satisfies SSTConfig;
