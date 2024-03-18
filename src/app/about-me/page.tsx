@@ -161,7 +161,7 @@ function AboutMe(props: AboutMeProps) {
 			/>
 			<section className="mt-16">
 				<H1>About me</H1>
-				<div className="mt-4 px-4">
+				<div className="mt-8">
 					<p>
 						Hi! I am David Kimmich, a web dev from Germany. I like to create web apps
 						that feel: &nbsp;
@@ -185,11 +185,11 @@ function AboutMe(props: AboutMeProps) {
 					</ul>
 				</div>
 			</section>
-			<section className="mt-10">
+			<section className="mt-12">
 				<H1>Experiences</H1>
-				<div className="mt-4 px-4">
-					<H2 className="mt-2 text-lg font-bold">Languages:</H2>
-					<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
+				<div className="mt-8">
+					<H2 className="mt-4 text-lg font-bold">Languages:</H2>
+					<ul className="mt-6 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
 						{LANGUAGES.map((cardProps) => (
 							<li key={cardProps.title}>
 								{" "}
@@ -197,8 +197,8 @@ function AboutMe(props: AboutMeProps) {
 							</li>
 						))}
 					</ul>
-					<H2 className="mt-4 text-lg font-bold">Technologies:</H2>
-					<ul className="mt-4 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
+					<H2 className="mt-8 text-lg font-bold">Technologies:</H2>
+					<ul className="mt-6 grid w-fit list-inside grid-cols-2 gap-6 sm:grid-cols-4">
 						{TECHNOLOGIES.map((cardProps) => (
 							<li key={cardProps.title} className="min-h-0 min-w-0">
 								{" "}
@@ -208,9 +208,9 @@ function AboutMe(props: AboutMeProps) {
 					</ul>
 				</div>
 			</section>
-			<section className="mt-10">
+			<section className="mt-12">
 				<H1>Projects</H1>
-				<div className="mt-4 px-4">
+				<div className="mt-4">
 					<span className="mr-2">See:</span>
 					<b>
 						<IconLink className="inline-flex" href={"/project"}>
@@ -219,9 +219,9 @@ function AboutMe(props: AboutMeProps) {
 					</b>
 				</div>
 			</section>
-			<section className="mt-10 pb-20">
+			<section className="mt-12 pb-20">
 				<H1>Contact</H1>
-				<p className="mt-4 px-4">
+				<p className="mt-4">
 					Write an&nbsp;
 					<b>
 						<Link className="hover:underline" href={`mailto:${CONTACT_RECIPIENT}`}>
