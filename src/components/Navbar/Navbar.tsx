@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { GitHub, HalfMoon, LinkedIn, Mail, SunLight } from "../Icons";
 import NavLink from "./NavLink";
 import SignOutButton from "./SignOutButton";
+import Image from "next/image";
 
 const {
 	NEXT_PUBLIC_GITHUB_PROFILE_URL,
@@ -92,10 +93,32 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			<ul className="flex items-center justify-between p-6 backdrop-blur-lg">
 				<li>
 					<Link href={"/"}>
-						<H1 className="flex items-center gap-1 text-lg font-extrabold sm:text-2xl">
+						<H1 className="hidden items-center gap-1 text-lg font-extrabold sm:flex sm:text-2xl">
 							<span>Dave The Developer</span>
 							<span className="text-yellow-400">/</span>
 						</H1>
+						<div className="sm:hidden">
+							{darkModeIsActive && (
+								<>
+									<Image
+										src={`/Favicon_dark.png`}
+										alt="Logo"
+										width={50}
+										height={50}
+									/>
+								</>
+							)}
+							{!darkModeIsActive && (
+								<>
+									<Image
+										src={`/Favicon_light.png`}
+										alt="Logo"
+										width={50}
+										height={50}
+									/>
+								</>
+							)}
+						</div>
 					</Link>
 				</li>
 				<li>
