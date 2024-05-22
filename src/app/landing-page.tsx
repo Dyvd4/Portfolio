@@ -16,7 +16,7 @@ export default function LandingPage({ latestProject }) {
 	return (
 		<>
 			<div
-				className="absolute left-1/2 top-1/2 mt-12 flex max-w-full -translate-x-1/2 -translate-y-1/2 transform
+				className="absolute left-1/2 top-1/2 mt-16 flex max-w-full -translate-x-1/2 -translate-y-1/2 transform
 							flex-col items-center overflow-hidden"
 			>
 				<H1 className="flex flex-col gap-4 md:flex-row">

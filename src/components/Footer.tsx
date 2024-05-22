@@ -9,13 +9,13 @@ function Footer() {
 		>
 			<div className="flex flex-col">
 				<Link className="whitespace-nowrap" href={"/legal-disclosure"}>
-					Impressum - Legal Disclosure
+					Legal Disclosure
 				</Link>
 				<Link className="whitespace-nowrap" href={"/privacy-policy"}>
 					Privacy policy
 				</Link>
 			</div>
-			<div>
+			<div className="text-right">
 				<span>© {dayjs().year()} by David Kimmich.</span>
 				<span className="whitespace-nowrap"> All rights reserved.</span>
 			</div>
