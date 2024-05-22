@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@formkit/auto-animate':
-        specifier: ^1.0.0-beta.6
+        specifier: 1.0.0-pre-alpha.3
         version: 1.0.0-pre-alpha.3(react@18.2.0)
       '@next-auth/prisma-adapter':
         specifier: ^1.0.7

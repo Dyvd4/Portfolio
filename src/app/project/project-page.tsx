@@ -9,6 +9,7 @@ import AddProjectModal from "@components/Modals/Project/AddProjectModal";
 import DeleteProjectModal from "@components/Modals/Project/DeleteProjectModal";
 import EditProjectModal from "@components/Modals/Project/EditProjectModal";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
+import autoAnimate from "@formkit/auto-animate";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useDebounce from "@hooks/useDebounce";
 import request, { fetchEntity } from "@utils/request-utils";
@@ -45,10 +46,8 @@ export default function ProjectPage({ initialProjects }) {
 
 	const [projectIdToEdit, setProjectIdToEdit] = useState<number | undefined>();
 	const { status } = useSession();
-	// TODO set to search params
 	const [projectOrTagname, setProjectOrTagName] = useState("");
 	const { value: debouncedProjectOrTagname } = useDebounce(projectOrTagname);
-	const [setParentRef] = useAutoAnimate();
 	const queryClient = useQueryClient();
 
 	const { isLoading: projectsAreLoading, data: projects } = useQuery(
@@ -120,7 +119,10 @@ export default function ProjectPage({ initialProjects }) {
 					placeholder="search by project name or tag..."
 					className="mt-12 rounded-md border-2"
 				/>
-				<ul ref={setParentRef} className="my-12 flex flex-col items-center gap-10">
+				<ul
+					ref={(ref) => !!ref && autoAnimate(ref)}
+					className="my-12 flex flex-col items-center gap-10"
+				>
 					{!projectsAreLoading && projects.length === 0 && <p>No projects found 😴</p>}
 					{!projectsAreLoading && projects.length > 0 && (
 						<>
