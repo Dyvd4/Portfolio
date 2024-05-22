@@ -10,11 +10,9 @@ function IconButton({ variant = "square", className, children, ...props }: IconB
 	return (
 		<div
 			className={cn(
-				`cursor-pointer border border-black
-						bg-white p-2
-						transition-all hover:bg-gray-50
-						active:scale-90 dark:border-white
-						dark:bg-gray-900 dark:hover:bg-gray-800`,
+				`cursor-pointer border border-black p-2
+						transition-all 
+						active:scale-90 dark:border-white`,
 				{
 					"rounded-full": variant === "circle",
 					"rounded-lg": variant !== "circle",

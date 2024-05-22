@@ -45,6 +45,10 @@
 		@apply stroke-black dark:stroke-white;
 	}
 
+	svg.icon-black > path {
+		@apply stroke-black dark:stroke-black;
+	}
+
 	svg.icon:hover > path {
 		@apply stroke-yellow-400 transition-all dark:stroke-yellow-300;
 	}

@@ -2,12 +2,16 @@
 import Badge from "@components/Badge";
 import Button from "@components/Button";
 import { H1 } from "@components/H1";
-import IconLink from "@components/IconLink";
+import Mail from "@components/Icons/Mail";
+import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
+import ContactModal from "@components/Modals/ContactModal";
 import LatestProjectSection from "@components/Sections/LatestProjectSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 
 export default function LandingPage({ latestProject }) {
 	useBreadcrumb([]);
+
+	const { isActive, open, close } = useModalDisclosure();
 
 	return (
 		<>
@@ -43,13 +47,20 @@ export default function LandingPage({ latestProject }) {
 						I am David Kimmich, a web dev from Germany.
 					</p>
 				</div>
-				<Button className="group mt-10">
-					<IconLink variant="black" href={"/project"}>
-						My projects
-					</IconLink>
+				<Button
+					onClick={open}
+					className="group mt-10 flex items-center justify-center gap-3"
+				>
+					<Mail
+						className="[&.icon:hover>path]:stroke-black
+									dark:[&.icon:hover>path]:stroke-black
+										[&.icon>path]:!stroke-black"
+					/>
+					Contact me
 				</Button>
 			</div>
 			<LatestProjectSection latestProject={latestProject} />
+			<ContactModal isActive={isActive} close={close} />
 		</>
 	);
 }

@@ -51,8 +51,8 @@ function Tooltip({ children, direction = "up", title, ...props }: TooltipProps) 
 		<span className="group relative cursor-pointer" {...props}>
 			<span
 				style={positionStyle}
-				className={`invisible absolute transform whitespace-nowrap
-							rounded-lg bg-black p-2 text-center
+				className={`invisible absolute z-50 transform
+							whitespace-nowrap rounded-lg bg-black p-2 text-center
 							text-sm font-bold text-white opacity-0
 							transition-all duration-300 group-hover:visible group-hover:opacity-100`}
 			>
