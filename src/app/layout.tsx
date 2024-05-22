@@ -11,33 +11,46 @@ import { Toaster } from "react-hot-toast";
 import Breadcrumbs from "./breadcrumbs";
 import Providers from "./providers";
 import config from "@config/config";
-import OgImage from "@public/og/landing-page.png"
+import OgImage from "@public/og/landing-page.png";
 
 const { BASE_URL } = config;
 const interFont = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL(BASE_URL),
-	title: "Intuitive. Useful. Beautiful.",
+	title: "Dave The Developer - Full-Stack Web Development",
 	description:
-		"These are the properties a web app should have. I am David Kimmich, a web dev from Germany. If you want to know more about me, have a look here on this site and feel free to contact me!",
-	keywords: ["Intuitive", "Useful", "Beautiful", "Portfolio", "Web app", "David Kimmich"],
+		"Crafting Seamless Individual Web Experiences: Dave The Developer - Full-Stack Web Developer",
+	keywords: [
+		"Full Stack Web Development",
+		"Dave The Developer",
+		"Intuitive",
+		"Useful",
+		"Beautiful",
+		"Portfolio",
+		"Web Applications",
+		"David Kimmich",
+	],
 	authors: [{ name: "David Kimmich" }],
 	icons: {
 		shortcut: "/Logo.png",
 	},
 	openGraph: {
-		images: [{
-			url: OgImage.src,
-			alt: "Portfolio"
-		}]
+		images: [
+			{
+				url: OgImage.src,
+				alt: "Portfolio",
+			},
+		],
 	},
 	twitter: {
-		images: [{
-			url: OgImage.src,
-			alt: "Portfolio"
-		}]
-	}
+		images: [
+			{
+				url: OgImage.src,
+				alt: "Portfolio",
+			},
+		],
+	},
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

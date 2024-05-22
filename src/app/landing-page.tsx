@@ -16,7 +16,7 @@ export default function LandingPage({ latestProject }) {
 	return (
 		<>
 			<div
-				className="absolute top-1/2 left-1/2 mt-12 flex max-w-full -translate-x-1/2 -translate-y-1/2 transform
+				className="absolute left-1/2 top-1/2 mt-12 flex max-w-full -translate-x-1/2 -translate-y-1/2 transform
 							flex-col items-center overflow-hidden"
 			>
 				<H1 className="flex flex-col gap-4 md:flex-row">
@@ -41,10 +41,11 @@ export default function LandingPage({ latestProject }) {
 				</H1>
 				<div className="mt-10 text-center">
 					<p className="text-secondary">
-						These are the properties a web app should have.
+						These are the properties a web application should have.
 					</p>
 					<p className="text-secondary mt-4 md:mt-0">
-						I am David Kimmich, a web dev from Germany.
+						I am a Full-Stack Web Developer from Germany and I can create the web
+						application you always wanted:
 					</p>
 				</div>
 				<Button
