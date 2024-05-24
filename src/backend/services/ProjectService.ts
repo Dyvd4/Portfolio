@@ -67,7 +67,7 @@ const upsertProjectCommits = async (project: Project) => {
 		const parsedLink = parseLink(response.headers.link)!;
 
 		await Promise.all(
-			new Array(Number(parsedLink.last.page) - 1).fill("").map(async (item, index) => {
+			new Array(Number(parsedLink.last!.page) - 1).fill("").map(async (item, index) => {
 				const response = await octokit.rest.repos.listCommits({
 					owner: config.GH_REPO_OWNER,
 					repo: project.name,
@@ -124,7 +124,7 @@ const upsertProjectLanguages = async (project: Project) => {
 				create: {
 					name: languageName,
 					projectId: project.id,
-					codeAmountInBytes: languages[languageName],
+					codeAmountInBytes: languages[languageName]!,
 				},
 				update: {
 					name: languageName,
