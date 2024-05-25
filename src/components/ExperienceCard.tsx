@@ -18,13 +18,7 @@ function ExperienceCard({ className, title, imageProps, ...props }: ExperienceCa
 				{...props}
 			>
 				{/* eslint-disable-next-line jsx-a11y/alt-text */}
-				<Image
-					unoptimized
-					className="aspect-square"
-					width={64}
-					height={64}
-					{...imageProps}
-				/>
+				<Image className="aspect-square" width={64} height={64} {...imageProps} />
 			</div>
 			<div className="text-sm leading-4">{title}</div>
 		</div>
