@@ -1,5 +1,5 @@
 {
-	"cSpell.words": ["NEXTAUTH"],
+	"cSpell.words": ["NEXTAUTH", "unoptimized"],
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"editor.insertSpaces": false,
 	"editor.detectIndentation": false
