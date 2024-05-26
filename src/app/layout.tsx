@@ -54,6 +54,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+	console.log("test")
 	const darkModeIsActive = useDarkModeIsActive();
 	const session = await getServerSession();
 	return (
