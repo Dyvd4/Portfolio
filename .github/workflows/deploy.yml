@@ -1,4 +1,4 @@
-name: Deploy
+name: deploy
 
 on:
     push:
@@ -10,47 +10,75 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    deploy:
+    build:
         runs-on: ubuntu-latest
-
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Configure aws credentials
+            - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v4
               with:
-                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  aws-region: eu-central-1
+                  aws-access-key-id: ${{ secrets.AWS_CLI_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_CLI_SECRET_ACCESS_KEY }}
+                  aws-region: ${{ secrets.AWS_CLI_REGION }}
 
-            - name: Install pnpm
-              run: npm install -g pnpm@9.0.4
+            - name: Login to Amazon ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v2
+              with:
+                  mask-password: "true"
 
-            - name: Install dependencies
-              run: pnpm i --frozen-lockfile
-
-            - name: Deploy
-              env:
-                  ADMIN_PASSWORD: ${{secrets.ADMIN_PASSWORD}}
-                  ADMIN_USERNAME: ${{secrets.ADMIN_USERNAME}}
-                  BASE_URL: ${{secrets.BASE_URL}}
-                  PORTFOLIO_DATABASE_URL: ${{secrets.PORTFOLIO_DATABASE_URL}}
-                  GH_ACCESS_TOKEN: ${{secrets.GH_ACCESS_TOKEN}}
-                  GH_API_URL: ${{secrets.GH_API_URL}}
-                  GH_REPO_OWNER: ${{secrets.GH_REPO_OWNER}}
-                  NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
-                  NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
-                  NEXT_PUBLIC_BASE_URL: ${{secrets.NEXT_PUBLIC_BASE_URL}}
-                  NEXT_PUBLIC_CONTACT_RECIPIENT: ${{secrets.NEXT_PUBLIC_CONTACT_RECIPIENT}}
-                  NEXT_PUBLIC_GITHUB_PROFILE_URL: ${{secrets.NEXT_PUBLIC_GITHUB_PROFILE_URL}}
-                  NEXT_PUBLIC_LINKEDIN_PROFILE_URL: ${{secrets.NEXT_PUBLIC_LINKEDIN_PROFILE_URL}}
-                  SMPT_PASSWORD: ${{secrets.SMPT_PASSWORD}}
-                  SMPT_USERNAME: ${{secrets.SMPT_USERNAME}}
-                  SMTP_HOST: ${{secrets.SMTP_HOST}}
-                  DOMAIN_NAME: ${{secrets.DOMAIN_NAME}}
-                  CERT_ARN: ${{secrets.CERT_ARN}}
-                  API_BASE_URL: ${{secrets.API_BASE_URL}}
+            - name: create .env file for building `frontend` image
               run: |
-                  npx prisma generate
-                  npx sst deploy --stage prod
+                  echo "BASE_URL=${{secrets.BASE_URL}}" >> docker/.env
+                  echo "NEXT_PUBLIC_BASE_URL=${{secrets.NEXT_PUBLIC_BASE_URL}}" >> docker/.env
+                  echo "NEXT_PUBLIC_GITHUB_PROFILE_URL=${{secrets.NEXT_PUBLIC_GITHUB_PROFILE_URL}}" >> docker/.env
+                  echo "NEXT_PUBLIC_CONTACT_RECIPIENT=${{secrets.NEXT_PUBLIC_CONTACT_RECIPIENT}}" >> docker/.env
+                  echo "NEXT_PUBLIC_LINKEDIN_PROFILE_URL=${{secrets.NEXT_PUBLIC_LINKEDIN_PROFILE_URL}}" >> docker/.env
+
+            - name: Build, tag, and push `frontend` image to Amazon ECR
+              env:
+                  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+                  AWS_DEFAULT_REGION: ${{ secrets.AWS_ECR_REGION }}
+                  ECR_REPO_URL: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.eu-central-1.amazonaws.com/portfolio
+                  BUILD_IMAGE_NAME: portfolio
+              run: |
+                  cd docker
+                  docker compose --file docker-compose.build.yml build 
+                  docker tag $BUILD_IMAGE_NAME $ECR_REPO_URL
+                  docker push $ECR_REPO_URL
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        env:
+            APP_PATH: /usr/web-services/portfolio/
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: copy necessary files for starting docker container into vps
+              uses: appleboy/scp-action@v0.1.7
+              with:
+                  host: ${{ secrets.VPS_HOST }}
+                  username: ${{ secrets.VPS_USERNAME }}
+                  key: ${{ secrets.VPS_PRIVATE_KEY }}
+                  port: 22
+                  source: docker/server/
+                  target: ${{env.APP_PATH}}
+                  strip_components: 2
+
+            - name: start `frontend` application
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.VPS_HOST }}
+                  username: ${{ secrets.VPS_USERNAME }}
+                  key: ${{ secrets.VPS_PRIVATE_KEY }}
+                  port: 22
+                  script: |
+                      aws ecr get-login-password --region ${{ secrets.AWS_ECR_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_ECR_REGION }}.amazonaws.com
+                      cd ${{env.APP_PATH}}/frontend
+                      docker stop frontend
+                      docker rm frontend
+                      docker compose -f docker/docker-compose.yml pull
+                      docker compose -f docker/docker-compose.yml up -d
