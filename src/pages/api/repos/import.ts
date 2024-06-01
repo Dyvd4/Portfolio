@@ -1,5 +1,6 @@
 import GitHubRepoService from "@backend/services/GitHubRepoService";
 import { isAuthenticated } from "@backend/utils/auth-utils";
+import logger from "@lib/logger";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,12 +10,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	try {
 		await GitHubRepoService.fetchRepos();
-	}
-	catch (e) {
-		console.error(e)
+	} catch (e) {
+		logger.error(e);
 		return res.status(500).json("Internal server error");
 	}
-	const responseMsg = "Successfully imported repos from GitHub"
-	console.log(responseMsg)
+	const responseMsg = "Successfully imported repos from GitHub";
+	logger.info(responseMsg);
 	return res.json(responseMsg);
 }
