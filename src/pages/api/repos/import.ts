@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		await GitHubRepoService.fetchRepos();
 	} catch (e) {
-		logger.error(e);
+		logger.error("Error trying to fetch repos.", e);
 		return res.status(500).json("Internal server error");
 	}
 	const responseMsg = "Successfully imported repos from GitHub";

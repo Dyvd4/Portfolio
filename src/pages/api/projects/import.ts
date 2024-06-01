@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		await ProjectService.fetchProjects();
 	} catch (e) {
-		logger.error(e);
+		logger.error("Error trying to fetch projects.", e);
 		return res.status(500).json("Internal server error");
 	}
 	const responseMsg = "Successfully updated projects with repo data from GitHub";
