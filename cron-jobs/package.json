@@ -1,0 +1,25 @@
+{
+	"name": "cron-jobs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.ts",
+	"scripts": {
+		"start": "tsx index.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@axiomhq/js": "1.0.0-rc.3",
+		"@axiomhq/winston": "1.0.0-rc.3",
+		"axios": "^1.7.2",
+		"dotenv": "^16.4.5",
+		"node-cron": "^3.0.3",
+		"tsx": "^4.11.0",
+		"winston": "^3.13.0"
+	},
+	"type": "module",
+	"devDependencies": {
+		"@types/node-cron": "^3.0.11"
+	}
+}

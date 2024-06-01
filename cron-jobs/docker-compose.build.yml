@@ -1,0 +1,6 @@
+services:
+    portfolio-cron-jobs:
+        image: portfolio-cron-jobs
+        build:
+            context: .
+            dockerfile: Dockerfile

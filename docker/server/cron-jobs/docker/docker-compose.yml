@@ -1,0 +1,6 @@
+services:
+    portfolio-cron-jobs:
+        container_name: portfolio-cron-jobs
+        image: ${AWS_ACCOUNT_ID}.dkr.ecr.eu-central-1.amazonaws.com/portfolio-cron-jobs
+        env_file:
+            - ../.env

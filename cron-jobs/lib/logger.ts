@@ -1,9 +1,8 @@
 import winston from "winston";
 import { WinstonTransport as AxiomTransport } from "@axiomhq/winston";
+import config from "@/config";
 
-const NODE_ENV = process.env.NODE_ENV!;
-const AXIOM_TOKEN = process.env.AXIOM_TOKEN!;
-const AXIOM_DATASET = process.env.AXIOM_DATASET!;
+const { NODE_ENV, AXIOM_TOKEN, AXIOM_DATASET } = config;
 
 const logger = winston.createLogger({
 	level: "info",
@@ -13,7 +12,7 @@ const logger = winston.createLogger({
 		winston.format.json()
 	),
 	defaultMeta: {
-		service: "frontend",
+		service: "cron-jobs",
 	},
 });
 
