@@ -21,7 +21,7 @@ importers:
         specifier: ^13.4.19
         version: 13.5.6
       '@prisma/client':
-        specifier: ^5.11.0
+        specifier: ^5.14.0
         version: 5.14.0(prisma@5.14.0)
       '@types/node':
         specifier: 18.11.18
@@ -151,7 +151,7 @@ importers:
         specifier: ^0.5.4
         version: 0.5.14(prettier@3.2.5)
       prisma:
-        specifier: ^5.11.0
+        specifier: ^5.14.0
         version: 5.14.0
       sst:
         specifier: ^2.40.3
