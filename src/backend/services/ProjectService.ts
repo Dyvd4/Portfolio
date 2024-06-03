@@ -80,28 +80,20 @@ const upsertProjectCommits = async (project: Project) => {
 		);
 	}
 
-	await Promise.all(
-		commits.map((commit) => {
-			return prisma.projectCommit.upsert({
-				where: {
-					id_projectId: {
-						id: commit.node_id,
-						projectId: project.id,
-					},
-				},
-				create: {
-					id: commit.node_id,
-					projectId: project.id,
-					authorName: commit.commit.author?.name,
-					createDate: commit.commit.author?.date,
-				},
-				update: {
-					authorName: commit.commit.author?.name,
-					createDate: commit.commit.author?.date,
-				},
-			});
-		})
-	);
+	await prisma.projectCommit.deleteMany({
+		where: {
+			projectId: project.id,
+		},
+	});
+
+	await prisma.projectCommit.createMany({
+		data: commits.map((commit) => ({
+			id: commit.node_id,
+			projectId: project.id,
+			authorName: commit.commit.author?.name,
+			createDate: commit.commit.author?.date,
+		})),
+	});
 };
 
 const upsertProjectLanguages = async (project: Project) => {
