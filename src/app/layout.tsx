@@ -3,18 +3,18 @@ import Footer from "@components/Footer";
 import ModalPortal from "@components/ModalPortal";
 import Navbar from "@components/Navbar/Navbar";
 import LoadingPortalSlot from "@components/Slots/LoadingPortalSlot";
+import config from "@config/config";
 import useDarkModeIsActive from "@hooks/server/useDarkModeIsActive";
+import OgImage from "@public/og/landing-page.png";
 import { getServerSession } from "next-auth";
-import { Inter } from "next/font/google";
+import { Geologica } from "next/font/google";
 import { Metadata } from "next/types";
 import { Toaster } from "react-hot-toast";
 import Breadcrumbs from "./breadcrumbs";
 import Providers from "./providers";
-import config from "@config/config";
-import OgImage from "@public/og/landing-page.png";
 
 const { BASE_URL } = config;
-const interFont = Inter({ subsets: ["latin"] });
+const font = Geologica({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL(BASE_URL),
@@ -58,7 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 	const session = await getServerSession();
 	return (
 		<html lang="en" className={darkModeIsActive ? "dark" : ""}>
-			<body className={`${interFont.className} bg-white transition-colors dark:bg-gray-900 `}>
+			<body className={`${font.className} bg-white transition-colors dark:bg-gray-900 `}>
 				<Providers session={session}>
 					<div className="min-h-screen">
 						<Navbar darkModeIsActive={darkModeIsActive} />
