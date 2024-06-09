@@ -1,3 +1,4 @@
+import { H1 } from "@components/H1";
 import Times from "@components/Icons/Times";
 import { cn } from "@utils/component-utils";
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
@@ -11,18 +12,21 @@ export type ModalHeaderProps = _ModalHeaderProps &
 
 function ModalHeader({ className, children, close, ...props }: ModalHeaderProps) {
 	return (
-		<h1
-			className={cn(`flex items-center justify-between text-2xl text-white`, className)}
+		<H1
+			className={cn(
+				`flex items-center justify-between text-2xl text-white sm:text-2xl`,
+				className
+			)}
 			{...props}
 		>
 			{children}
 			{/* that's crazy but I stick with it (it works) */}
 			<Times
-				className="[&>path]:!stroke-white 
-								[&:hover>path]:!stroke-yellow-400"
+				className="[&:hover>path]:!stroke-yellow-400 
+								[&>path]:!stroke-white"
 				onClick={close}
 			/>
-		</h1>
+		</H1>
 	);
 }
 
