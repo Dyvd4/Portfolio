@@ -20,7 +20,11 @@ function LatestProjectSection({ latestProject, ...props }: LatestProjectSectionP
 		},
 	};
 	return (
-		<LandingPageSection className="pb-0 lg:pb-0" heading="Latest project">
+		<LandingPageSection
+			className="pb-0 lg:pb-0"
+			heading="Latest project"
+			subheading="What I work on"
+		>
 			<motion.div initial={initial} whileInView={whileInView}>
 				<ProjectListItem
 					className="mt-16 px-6 lg:mt-20"
