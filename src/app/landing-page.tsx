@@ -55,16 +55,11 @@ export default function LandingPage({ latestProject }) {
 				<div className="mt-10 flex items-center gap-6">
 					<Button
 						onClick={open}
-						className="group flex items-center justify-center gap-3 bg-yellow-300"
+						className="group flex items-center justify-center gap-3 whitespace-nowrap bg-yellow-300"
 					>
-						<Mail
-							className="[&.icon:hover>path]:stroke-black
-									dark:[&.icon:hover>path]:stroke-black
-										[&.icon>path]:!stroke-black"
-						/>
 						Contact me
 					</Button>
-					<Button className="group">
+					<Button className="group h-full whitespace-nowrap">
 						<IconLink variant="black" href={"/project"}>
 							My projects
 						</IconLink>
