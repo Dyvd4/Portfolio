@@ -30,11 +30,11 @@ export default function ServiceCard({
 		>
 			<div className="flex items-center gap-4">
 				<div>{icon}</div>
-				<H2>{title}</H2>
+				<H2 className="dark:text-black">{title}</H2>
 			</div>
 			<div className="flex flex-col gap-4">
 				{services.map((service, idx) => (
-					<div className="flex items-start gap-3" key={idx}>
+					<div className="flex items-start gap-3 dark:text-black" key={idx}>
 						<Check className="shrink-0" />
 						{service}
 					</div>

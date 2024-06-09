@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 
 export const SERVICE_CARDS: _ServiceCardProps[] = [
 	{
-		icon: <AppleImac />,
+		icon: <AppleImac className="icon-black" />,
 		title: "Web Application",
 		services: [
 			"Implementation of custom made Figma design",
@@ -21,7 +21,7 @@ export const SERVICE_CARDS: _ServiceCardProps[] = [
 		],
 	},
 	{
-		icon: <DataTransferBoth />,
+		icon: <DataTransferBoth className="icon-black" />,
 		title: "Rest API",
 		services: [
 			"Integration to existing or new database",
@@ -31,7 +31,7 @@ export const SERVICE_CARDS: _ServiceCardProps[] = [
 		],
 	},
 	{
-		icon: <FireFlame />,
+		icon: <FireFlame className="icon-black" />,
 		title: "Other",
 		services: [
 			// eslint-disable-next-line react/jsx-key
@@ -62,7 +62,7 @@ export function ServicesSection() {
 			id="services"
 			heading="Services"
 			subheading="What I can offer you"
-			className="mt-[100vh] bg-[#FEF5DB]"
+			className="mt-[100vh] bg-[#FEF5DB] [&_h1]:dark:text-black"
 		>
 			<div className="mt-16 flex flex-col gap-6 px-6 lg:mt-20">
 				{getGroupedArray(SERVICE_CARDS, 2).map((group, idx) => (

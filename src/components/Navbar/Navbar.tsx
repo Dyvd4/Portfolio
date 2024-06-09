@@ -54,9 +54,9 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			initial={{
 				transform: "translateY(0%)",
 			}}
-			animate={{ transform: navHeaderIsHidden ? "translateY(-64px)" : "translateY(0px)" }}
+			animate={{ transform: navHeaderIsHidden ? "translateY(-57px)" : "translateY(0px)" }}
 			transition={{ duration: 0.25 }}
-			className="sticky top-0 z-50"
+			className="sticky top-0 z-50 dark:bg-gray-900"
 		>
 			<ul className="sticky z-40 flex items-center justify-between bg-[#fef5db] px-4 py-2 dark:bg-white">
 				<li className="flex items-center gap-2">
