@@ -12,7 +12,7 @@ export type ExperienceCardProps = _ExperienceCardProps &
 
 function ExperienceCard({ className, title, imageProps, ...props }: ExperienceCardProps) {
 	return (
-		<div className={cn("flex w-fit flex-col items-center gap-3", className)}>
+		<div className={cn("flex max-w-[104px] flex-col items-center gap-4", className)}>
 			<div
 				className={`flex items-center justify-center gap-6 rounded-xl bg-gray-100 p-5`}
 				{...props}

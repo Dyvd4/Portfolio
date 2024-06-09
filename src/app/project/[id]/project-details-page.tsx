@@ -58,7 +58,7 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 				</ProjectSectionBody>
 			</ProjectSection>
 
-			<ProjectImage className="mt-16" src={project.imageUrl} width={768} height={413} />
+			<ProjectImage className="mt-16" src={project.imageUrl} width={1024} height={413} />
 
 			<ProjectSection className="mt-16">
 				<ProjectSectionHeading>Intention</ProjectSectionHeading>
@@ -91,7 +91,7 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 
 			{project.tags.length > 0 && (
 				<>
-					<section className="flex flex-col gap-3 pt-20 pb-10">
+					<section className="flex flex-col gap-3 pt-20">
 						<H2>Tags</H2>
 						<ul className="mt-2 flex flex-wrap gap-2">
 							{project.tags.map((tag) => (

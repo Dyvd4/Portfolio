@@ -4,8 +4,8 @@ import Link from "next/link";
 function Footer() {
 	return (
 		<footer
-			className="text-secondary flex w-full items-center
-							justify-between p-6 text-xs"
+			className="text-secondary mt-28 flex w-full items-center justify-between
+							p-6 text-xs lg:mt-44"
 		>
 			<div className="flex flex-col">
 				<Link className="whitespace-nowrap" href={"/legal-disclosure"}>

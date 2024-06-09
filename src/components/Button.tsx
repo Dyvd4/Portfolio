@@ -11,8 +11,8 @@ export default function Button({ children, className, ...props }: ButtonProps) {
 				`w-auto transform
 						cursor-pointer rounded-full
 						border-none 
-						bg-yellow-500 py-2
-						px-4 text-xs font-bold
+						bg-yellow-500 px-4
+						py-2 text-xs font-bold
 						text-black outline-none
 						transition-transform hover:bg-yellow-400 
 						active:scale-90 active:bg-yellow-300 disabled:transform-none 

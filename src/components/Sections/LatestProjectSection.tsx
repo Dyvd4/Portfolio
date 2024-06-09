@@ -1,8 +1,9 @@
 import Badge from "@components/Badge";
-import LeftHeading from "@components/Headings/LeftHeading";
+import Button from "@components/Button";
 import IconLink from "@components/IconLink";
-import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectListItem from "@components/ListItems/ProjectListItem";
+import { LandingPageSection } from "@components/Sections/LandingPageSection";
+import { motion } from "framer-motion";
 
 type LatestProjectSectionProps = {
 	latestProject: any;
@@ -10,60 +11,46 @@ type LatestProjectSectionProps = {
 
 function LatestProjectSection({ latestProject, ...props }: LatestProjectSectionProps) {
 	if (!latestProject) return null;
+	const initial = { opacity: 0, transform: "translateY(100%)" };
+	const whileInView = {
+		opacity: 1,
+		transform: "translateY(0%)",
+		transition: {
+			duration: 0.5,
+		},
+	};
 	return (
-		<section className="mt-[100vh]">
-			<LeftHeading
-				rightSection={
-					<>
-						<IconLink
-							variant="secondary"
-							icon={
-								<LongArrowRightUp
-									className={`inline shrink-0 transition-transform
-									group-hover:translate-x-1`}
-								/>
-							}
-							disabled={!latestProject.url}
-							href={latestProject.url || "#"}
-							target={"_blank"}
-						>
-							Visit original site
-						</IconLink>
-						<IconLink
-							variant="secondary"
-							icon={
-								<LongArrowRightUp
-									className={`inline shrink-0 transition-transform
-									group-hover:translate-x-1`}
-								/>
-							}
-							href={"/project"}
-						>
-							See all projects
-						</IconLink>
-					</>
-				}
-				className="mt-4"
+		<LandingPageSection className="pb-0 lg:pb-0" heading="Latest project">
+			<motion.div initial={initial} whileInView={whileInView}>
+				<ProjectListItem
+					className="mt-16 px-6 lg:mt-20"
+					id={latestProject.id}
+					alias={latestProject.alias}
+					imageUrl={latestProject.imageUrl}
+					description={latestProject.description}
+					tags={
+						latestProject.tags.length > 0 ? (
+							<>
+								{latestProject.tags.map((tag) => (
+									<Badge key={tag.name}>{tag.name}</Badge>
+								))}
+							</>
+						) : undefined
+					}
+				/>
+			</motion.div>
+			<motion.div
+				className="mt-16 flex items-center justify-center lg:mt-20"
+				initial={initial}
+				whileInView={whileInView}
 			>
-				Latest project
-			</LeftHeading>
-			<ProjectListItem
-				className="mt-6 mb-12 sm:mt-12"
-				id={latestProject.id}
-				alias={latestProject.alias}
-				imageUrl={latestProject.imageUrl}
-				description={latestProject.description}
-				tags={
-					latestProject.tags.length > 0 ? (
-						<>
-							{latestProject.tags.map((tag) => (
-								<Badge key={tag.name}>{tag.name}</Badge>
-							))}
-						</>
-					) : undefined
-				}
-			/>
-		</section>
+				<Button className="group">
+					<IconLink variant="black" href={"/project"}>
+						See all projects
+					</IconLink>
+				</Button>
+			</motion.div>
+		</LandingPageSection>
 	);
 }
 

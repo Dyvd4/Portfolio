@@ -2,10 +2,14 @@
 import Badge from "@components/Badge";
 import Button from "@components/Button";
 import { H1 } from "@components/H1";
+import IconLink from "@components/IconLink";
 import Mail from "@components/Icons/Mail";
 import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
 import ContactModal from "@components/Modals/ContactModal";
+import { LanguagesSection } from "@components/Sections/LanguagesSection";
 import LatestProjectSection from "@components/Sections/LatestProjectSection";
+import { ServicesSection } from "@components/Sections/ServicesSection";
+import { TechnologiesSection } from "@components/Sections/TechnologiesSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 
 export default function LandingPage({ latestProject }) {
@@ -48,18 +52,28 @@ export default function LandingPage({ latestProject }) {
 						application you always wanted:
 					</p>
 				</div>
-				<Button
-					onClick={open}
-					className="group mt-10 flex items-center justify-center gap-3"
-				>
-					<Mail
-						className="[&.icon:hover>path]:stroke-black
+				<div className="mt-10 flex items-center gap-6">
+					<Button
+						onClick={open}
+						className="group flex items-center justify-center gap-3 bg-yellow-300"
+					>
+						<Mail
+							className="[&.icon:hover>path]:stroke-black
 									dark:[&.icon:hover>path]:stroke-black
 										[&.icon>path]:!stroke-black"
-					/>
-					Contact me
-				</Button>
+						/>
+						Contact me
+					</Button>
+					<Button className="group">
+						<IconLink variant="black" href={"/project"}>
+							My projects
+						</IconLink>
+					</Button>
+				</div>
 			</div>
+			<ServicesSection />
+			<LanguagesSection />
+			<TechnologiesSection />
 			<LatestProjectSection latestProject={latestProject} />
 			<ContactModal isActive={isActive} close={close} />
 		</>

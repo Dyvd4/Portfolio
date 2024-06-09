@@ -1,12 +1,12 @@
-export const getTwoDArray = <T>(array: Array<T>, twoDArraySize: number) => {
-	const twoDArray: Array<Array<T>> = [[]];
+export const getGroupedArray = <T>(array: Array<T>, groupSize: number) => {
+	const groupedArray: Array<Array<T>> = [[]];
 	let y = 0;
 	for (let i = 0; i < array.length; i++) {
-		if (twoDArray[y].length === twoDArraySize) {
+		if (groupedArray[y].length === groupSize) {
 			y++;
-			twoDArray[y] = [];
+			groupedArray[y] = [];
 		}
-		twoDArray[y].push(array[i]);
+		groupedArray[y].push(array[i]);
 	}
-	return twoDArray;
+	return groupedArray;
 };

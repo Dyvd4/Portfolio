@@ -7,6 +7,7 @@ import config from "@config/config";
 import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
 import { toggleDarkMode } from "@utils/dark-mode-utils";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -14,7 +15,6 @@ import toast from "react-hot-toast";
 import { GitHub, HalfMoon, LinkedIn, Mail, SunLight } from "../Icons";
 import NavLink from "./NavLink";
 import SignOutButton from "./SignOutButton";
-import Image from "next/image";
 
 const {
 	NEXT_PUBLIC_GITHUB_PROFILE_URL,
@@ -28,11 +28,11 @@ type NavbarProps = {
 
 const LINKS: Array<{ href: string; title: string }> = [
 	{
-		href: "/project",
-		title: "Projects",
+		href: "#services",
+		title: "Services",
 	},
 	{
-		href: "/about-me",
+		href: "#about-me",
 		title: "About me",
 	},
 ];
@@ -94,7 +94,7 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 				<li>
 					<Link href={"/"}>
 						<H1 className="hidden items-center gap-1 text-lg font-extrabold sm:flex sm:text-2xl">
-							<span>Dave The Developer</span>
+							<span className="whitespace-nowrap">Dave The Developer</span>
 							<span className="text-yellow-400">/</span>
 						</H1>
 						<div className="sm:hidden">
@@ -126,11 +126,20 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 						<SignOutButton />
 						{LINKS.map(({ href, title }) => (
 							<li key={href}>
-								<NavLink href={href} isActive={pathname === href}>
+								<NavLink
+									className="whitespace-nowrap"
+									href={href}
+									isActive={pathname === href}
+								>
 									{title}
 								</NavLink>
 							</li>
 						))}
+						<li className="hidden sm:block" key={"/projects"}>
+							<NavLink href={"/projects"} isActive={pathname === "/projects"}>
+								Projects
+							</NavLink>
+						</li>
 						<li onClick={toggleDarkMode}>
 							{darkModeIsActive ? (
 								<SunLight className="!h-5 !w-5" />
