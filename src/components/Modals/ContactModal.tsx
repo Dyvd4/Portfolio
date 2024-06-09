@@ -86,7 +86,7 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 			<ModalHeader close={handleClose}>Contact Form</ModalHeader>
 			<ModalBody>
 				<form className="flex flex-col gap-2" onSubmit={handleSubmit(makeContactRequest)}>
-					<H3>Service</H3>
+					<H3 className="text-white">Service</H3>
 					<FormControl errorMessage={errorMap?.services?._errors}>
 						<div className="flex flex-col gap-4 text-white">
 							{SERVICE_CARDS.map((service) => (

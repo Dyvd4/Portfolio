@@ -58,7 +58,7 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			transition={{ duration: 0.25 }}
 			className="sticky top-0 z-50"
 		>
-			<ul className="sticky z-40 flex items-center justify-between bg-[#fef5db] px-6 py-3 dark:bg-white">
+			<ul className="sticky z-40 flex items-center justify-between bg-[#fef5db] px-4 py-2 dark:bg-white">
 				<li className="flex items-center gap-2">
 					<Mail
 						className="[&.icon:hover>path]:stroke-black
@@ -73,7 +73,7 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 						{NEXT_PUBLIC_CONTACT_RECIPIENT}
 					</Copyable>
 				</li>
-				<li className="flex items-center justify-center gap-4">
+				<li className="flex items-center justify-center">
 					<Tooltip direction="down" title="GitHub">
 						<Link target={"_blank"} href={NEXT_PUBLIC_GITHUB_PROFILE_URL}>
 							<IconButton variant="circle" className="border-0">
@@ -135,8 +135,8 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 								</NavLink>
 							</li>
 						))}
-						<li className="hidden sm:block" key={"/projects"}>
-							<NavLink href={"/projects"} isActive={pathname === "/projects"}>
+						<li className="hidden sm:block" key={"/project"}>
+							<NavLink href={"/project"} isActive={pathname === "/project"}>
 								Projects
 							</NavLink>
 						</li>

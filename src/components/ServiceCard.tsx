@@ -21,14 +21,20 @@ export default function ServiceCard({
 	...props
 }: ServiceCardProps) {
 	return (
-		<div className={cn(`flex flex-col gap-6 rounded-lg bg-white p-8`, className)} {...props}>
+		<div
+			className={cn(
+				`flex flex-col gap-6 rounded-lg border bg-white p-8 drop-shadow-xl`,
+				className
+			)}
+			{...props}
+		>
 			<div className="flex items-center gap-4">
 				<div>{icon}</div>
 				<H2>{title}</H2>
 			</div>
 			<div className="flex flex-col gap-4">
 				{services.map((service, idx) => (
-					<div className="flex items-center gap-3" key={idx}>
+					<div className="flex items-start gap-3" key={idx}>
 						<Check className="shrink-0" />
 						{service}
 					</div>

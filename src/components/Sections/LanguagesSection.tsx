@@ -106,7 +106,7 @@ const LANGUAGE_GROUPS = [
 export function LanguagesSection() {
 	return (
 		<LandingPageSection id="about-me" heading="Languages" subheading="What I speak">
-			<ul className="mt-20 flex flex-col items-center gap-x-6 gap-y-10 sm:grid sm:grid-cols-2 sm:items-stretch">
+			<ul className="mt-20 flex flex-col items-center gap-10 sm:grid sm:grid-cols-2 sm:items-stretch">
 				{LANGUAGE_GROUPS.map((group) => (
 					<motion.li
 						initial={{ opacity: 0, transform: "translateY(100%)" }}
@@ -118,22 +118,24 @@ export function LanguagesSection() {
 							},
 						}}
 						viewport={{ once: true }}
-						className="flex w-full flex-col gap-3"
+						className="flex w-full flex-col gap-4"
 						key={group.title}
 					>
-						<H2 className="pl-[98px]">{group.title}</H2>
+						<H2 className="pl-32">{group.title}</H2>
 						{group.languages.map((language) => (
 							<div
-								className="flex w-full items-center gap-3 px-5 py-4"
+								className="flex w-full items-center gap-3 px-6 lg:px-0"
 								key={language.name}
 							>
-								{/* eslint-disable-next-line jsx-a11y/alt-text */}
-								<Image
-									className="aspect-square"
-									width={64}
-									height={64}
-									{...language.imageProps}
-								/>
+								<div className="rounded-2xl bg-gray-100 px-5 py-4">
+									{/* eslint-disable-next-line jsx-a11y/alt-text */}
+									<Image
+										className="aspect-square"
+										width={64}
+										height={64}
+										{...language.imageProps}
+									/>
+								</div>
 								<div className="flex w-full flex-col gap-1">
 									<div>{language.name}</div>
 									<Bar widthInPercent={language.widthInPercent} />

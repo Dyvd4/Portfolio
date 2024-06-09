@@ -11,7 +11,7 @@ export type ProjectImageProps = _ProjectImageProps &
 function ProjectImage({ className, children, src, ...props }: ProjectImageProps) {
 	return (
 		<Image
-			className={cn(`rounded-xl`, className)}
+			className={cn(`rounded-xl border drop-shadow-2xl`, className)}
 			src={src}
 			width={350}
 			height={200}
