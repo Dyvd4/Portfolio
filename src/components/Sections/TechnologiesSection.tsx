@@ -123,6 +123,7 @@ export function TechnologiesSection() {
 				}}
 				initial="hidden"
 				whileInView="show"
+				viewport={{ once: true }}
 				className="mt-16 flex flex-col gap-x-10 gap-y-12 px-6 sm:mt-20 sm:grid sm:grid-cols-2"
 			>
 				{TECHNOLOGY_GROUPS.map((group) => (
