@@ -28,11 +28,11 @@ type NavbarProps = {
 
 const LINKS: Array<{ href: string; title: string }> = [
 	{
-		href: "#services",
+		href: "/#services",
 		title: "Services",
 	},
 	{
-		href: "#about-me",
+		href: "/#about-me",
 		title: "About me",
 	},
 ];
