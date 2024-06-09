@@ -9,7 +9,7 @@ import ServiceCard, { _ServiceCardProps } from "@components/ServiceCard";
 import { getGroupedArray } from "@utils/array-utils";
 import { motion } from "framer-motion";
 
-const SERVICE_CARDS: _ServiceCardProps[] = [
+export const SERVICE_CARDS: _ServiceCardProps[] = [
 	{
 		icon: <AppleImac />,
 		title: "Web Application",

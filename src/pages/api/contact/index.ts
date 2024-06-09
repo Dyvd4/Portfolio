@@ -9,19 +9,26 @@ export const contactSchema = z.object({
 	name: z.string().nonempty(),
 	email: z.string().email(),
 	message: z.string().nonempty(),
+	services: z.array(z.string()).min(1, { message: "You must select at least one service." }),
 });
 export type ContactSchema = z.infer<typeof contactSchema>;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const reqData = await req.body;
-	const { name, email, message } = reqData;
+	const { name, email, message, services } = reqData;
 	try {
-		contactSchema.parse({ name, email, message });
+		contactSchema.parse({ name, email, message, services });
 		await mailTransport.sendMail({
 			from: email,
 			to: CONTACT_RECIPIENT,
 			subject: `Contact request (from ${BASE_URL})`,
-			text: message,
+			text:
+				"Requested services: " +
+				"\n" +
+				services.map((s) => `- ${s}`).join(`\n`) +
+				"\n" +
+				"\n" +
+				message,
 		});
 		return res.json("Success");
 	} catch (e) {

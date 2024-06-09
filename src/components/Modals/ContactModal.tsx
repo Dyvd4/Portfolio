@@ -1,8 +1,10 @@
 "use client";
 import Button from "@components/Button";
 import FormControl from "@components/FormControl";
+import { H3 } from "@components/H3";
 import Input from "@components/Input";
 import Modal, { ModalBody, ModalFooter, ModalHeader } from "@components/Modal";
+import { SERVICE_CARDS } from "@components/Sections/ServicesSection";
 import Textarea from "@components/Textarea";
 import request from "@utils/request-utils";
 import Link from "next/link";
@@ -16,6 +18,7 @@ const contactSchema = z.object({
 	name: z.string().nonempty(),
 	email: z.string().email(),
 	message: z.string().nonempty(),
+	services: z.array(z.string()).min(1, { message: "You must select at least one service." }),
 });
 type ContactSchema = z.infer<typeof contactSchema>;
 
@@ -28,7 +31,11 @@ export type ContactModalProps = _ContactModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _ContactModalProps>;
 
 function ContactModal({ className, children, ...props }: ContactModalProps) {
-	const { register, handleSubmit, reset: resetFields } = useForm<ContactSchema>();
+	const {
+		register,
+		handleSubmit,
+		reset: resetFields,
+	} = useForm<ContactSchema>({ defaultValues: { services: ["Web Application"] } });
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<ContactSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const router = useRouter();
@@ -47,8 +54,8 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 
 	const makeContactRequest = async (data: ContactSchema, e) => {
 		try {
-			const { name, email, message } = data;
-			contactSchema.parse({ name, email, message });
+			const { name, email, message, services } = data;
+			contactSchema.parse({ name, email, message, services });
 			handleClose();
 			toast.promise(
 				request.post(`/api/contact`, data),
@@ -79,7 +86,22 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 			<ModalHeader close={handleClose}>Contact Form</ModalHeader>
 			<ModalBody>
 				<form className="flex flex-col gap-2" onSubmit={handleSubmit(makeContactRequest)}>
-					<FormControl errorMessage={errorMap?.name?._errors}>
+					<H3>Service</H3>
+					<FormControl errorMessage={errorMap?.services?._errors}>
+						<div className="flex flex-col gap-4 text-white">
+							{SERVICE_CARDS.map((service) => (
+								<div className="flex gap-2" key={service.title}>
+									<input
+										type="checkbox"
+										value={service.title}
+										{...register("services")}
+									/>
+									<label htmlFor="service">{service.title}</label>
+								</div>
+							))}
+						</div>
+					</FormControl>
+					<FormControl className="mt-2" errorMessage={errorMap?.name?._errors}>
 						<Input className="w-full" placeholder="Name" {...register("name")} />
 					</FormControl>
 					<FormControl errorMessage={errorMap?.email?._errors}>
