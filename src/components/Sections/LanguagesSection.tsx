@@ -7,8 +7,8 @@ import GoImg from "@public/experience-cards/Go.svg";
 import HtmlImg from "@public/experience-cards/HTML.svg";
 import SqlImg from "@public/experience-cards/Sql.png";
 import TypeScriptImg from "@public/experience-cards/TypeScript.svg";
+import EnglishImg from "@public/experience-cards/UK.png";
 import CppImg from "@public/experience-cards/cpp.png";
-import EnglishImg from "@public/experience-cards/english.png";
 import GermanImg from "@public/experience-cards/german.png";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -56,7 +56,7 @@ const LANGUAGE_GROUPS = [
 			},
 			{
 				name: "SQL",
-				widthInPercent: 80,
+				widthInPercent: 65,
 				imageProps: {
 					src: SqlImg,
 					alt: "SQL",
@@ -127,10 +127,10 @@ export function LanguagesSection() {
 								className="flex w-full items-center gap-3 px-6 lg:px-0"
 								key={language.name}
 							>
-								<div className="rounded-2xl bg-gray-100 px-5 py-4">
+								<div className="rounded-2xl bg-gray-100 p-5">
 									{/* eslint-disable-next-line jsx-a11y/alt-text */}
 									<Image
-										className="aspect-square"
+										className="aspect-square object-contain"
 										width={64}
 										height={64}
 										{...language.imageProps}
