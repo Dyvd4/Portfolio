@@ -140,7 +140,7 @@ export function TechnologiesSection() {
 						key={group.title}
 					>
 						<H2>{group.title}</H2>
-						<ul className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
+						<ul className="flex flex-wrap gap-3 sm:justify-start">
 							{group.technologies.map((language) => (
 								<li className="flex items-center gap-3" key={language.name}>
 									<ExperienceCard
