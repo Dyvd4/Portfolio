@@ -55,7 +55,7 @@ export default function LandingPage({ latestProject }) {
 				<div className="mt-10 flex items-center gap-6">
 					<Button
 						onClick={open}
-						className="group flex items-center justify-center gap-3 whitespace-nowrap bg-yellow-300"
+						className="group flex items-center justify-center gap-3 whitespace-nowrap"
 					>
 						Contact me
 					</Button>
