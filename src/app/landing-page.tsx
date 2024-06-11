@@ -52,7 +52,7 @@ export default function LandingPage({ latestProject }) {
 						application you always wanted:
 					</p>
 				</div>
-				<div className="mt-10 flex items-center gap-6">
+				<div className="mt-10 flex items-center gap-4 sm:gap-6">
 					<Button
 						onClick={open}
 						className="group flex items-center justify-center gap-3 whitespace-nowrap"
