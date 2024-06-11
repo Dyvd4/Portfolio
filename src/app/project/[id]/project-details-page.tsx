@@ -13,6 +13,7 @@ import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import { Suspense } from "react";
 import DevelopmentActivityChart from "./DevelopmentActivityChart";
 import LanguagesUsedChart from "./LanguagesUsedChart";
+import Link from "next/link";
 
 export default function ProjectDetailsPage({ project, latestCommitsView }) {
 	useBreadcrumb([
@@ -29,6 +30,8 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 		},
 	]);
 
+	const projectLink = project.url || "#";
+
 	return (
 		<>
 			<LeftHeading
@@ -41,7 +44,7 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 							/>
 						}
 						disabled={!project.url}
-						href={project.url || "#"}
+						href={projectLink}
 						target={"_blank"}
 					>
 						Visit original site
@@ -58,7 +61,9 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 				</ProjectSectionBody>
 			</ProjectSection>
 
-			<ProjectImage className="mt-16" src={project.imageUrl} width={1024} height={413} />
+			<Link target="_blank" href={projectLink}>
+				<ProjectImage className="mt-16" src={project.imageUrl} width={1024} height={413} />
+			</Link>
 
 			<ProjectSection className="mt-16">
 				<ProjectSectionHeading>Intention</ProjectSectionHeading>

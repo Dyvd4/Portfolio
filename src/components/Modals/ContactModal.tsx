@@ -31,11 +31,7 @@ export type ContactModalProps = _ContactModalProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _ContactModalProps>;
 
 function ContactModal({ className, children, ...props }: ContactModalProps) {
-	const {
-		register,
-		handleSubmit,
-		reset: resetFields,
-	} = useForm<ContactSchema>({ defaultValues: { services: ["Web Application"] } });
+	const { register, handleSubmit, reset: resetFields } = useForm<ContactSchema>();
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<ContactSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const router = useRouter();
