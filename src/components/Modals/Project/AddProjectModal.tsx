@@ -52,7 +52,7 @@ function AddProjectModal({ className, children, ...props }: AddProjectModalProps
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<AddProjectSchema> | null>(null);
-	const { isLoading, data: githubRepos } = useGithubReposQuery();
+	const { isLoading, data: githubRepos } = useGithubReposQuery(props.isActive);
 	const [imageAsDataUrl, setImageAsDataUrl] = useState<string | undefined>();
 
 	const selectedName = watch("name");

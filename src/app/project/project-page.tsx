@@ -10,13 +10,12 @@ import DeleteProjectModal from "@components/Modals/Project/DeleteProjectModal";
 import EditProjectModal from "@components/Modals/Project/EditProjectModal";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import autoAnimate from "@formkit/auto-animate";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import useDebounce from "@hooks/useDebounce";
 import request, { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useQueryClient, useQuery, useMutation } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export default function ProjectPage({ initialProjects }) {
 	useBreadcrumb([

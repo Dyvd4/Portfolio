@@ -23,7 +23,7 @@ API.interceptors.request.use(async (config) => {
 
 	const resText = await res.json();
 	if (!res.ok) {
-		throw new Error("Error retrieving auth token.", resText);
+		throw new Error(`Error retrieving auth token: ${resText}`);
 	}
 	config.headers["auth-token"] = resText;
 	return config;

@@ -21,9 +21,11 @@ function Copyable({ className, children, onClick, iconProps, ...props }: Copyabl
 	};
 
 	let iconClassName: string | undefined;
+	let copyIconProps: _CopyableProps["iconProps"];
 	if (iconProps) {
-		iconClassName = iconProps.className;
-		delete iconProps.className;
+		copyIconProps = { ...iconProps };
+		iconClassName = copyIconProps.className;
+		delete copyIconProps.className;
 	}
 
 	return (
@@ -38,7 +40,7 @@ function Copyable({ className, children, onClick, iconProps, ...props }: Copyabl
 			>
 				{children}
 				<div className="absolute right-0 top-0 -translate-y-2/4 translate-x-full transform">
-					<Copy className={cn("!h-4 !w-4", iconClassName)} {...iconProps} />
+					<Copy className={cn("!h-4 !w-4", iconClassName)} {...copyIconProps} />
 				</div>
 			</div>
 		</div>
