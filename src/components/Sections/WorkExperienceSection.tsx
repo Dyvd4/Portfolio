@@ -32,7 +32,7 @@ const experiences: Experience[] = [
 
 export function WorkExperienceSection() {
 	return (
-		<LandingPageSection id="about-me" heading="Work Experience">
+		<LandingPageSection id="work" heading="Work Experience">
 			<WorkExperienceWrapper
 				className="mt-16 px-6 lg:mt-20 lg:px-0"
 				experiences={experiences}

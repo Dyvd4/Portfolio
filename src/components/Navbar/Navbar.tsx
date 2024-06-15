@@ -32,8 +32,8 @@ const LINKS: Array<{ href: string; title: string }> = [
 		title: "Services",
 	},
 	{
-		href: "/#about-me",
-		title: "About me",
+		href: "/#work",
+		title: "Work",
 	},
 ];
 
@@ -41,12 +41,37 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 	const pathname = usePathname();
 	const darkModeIsActive = useDarkModeIsActive(initialDarkModeIsActive);
 	const [navHeaderIsHidden, setNavHeaderIsHidden] = useState(false);
+	const [intersectingSections, setIntersectingSections] = useState<string[]>([]);
 
 	useEffect(() => {
 		const threshold = 50;
+		setNavHeaderIsHidden(window.scrollY > threshold);
 		window.addEventListener("scroll", (e) => {
 			setNavHeaderIsHidden(window.scrollY > threshold);
 		});
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting && !intersectingSections.includes(entry.target.id)) {
+					setIntersectingSections((s) => [...s, entry.target.id]);
+				} else if (!entry.isIntersecting) {
+					setIntersectingSections((s) => [...s.filter((s) => s !== entry.target.id)]);
+				}
+			});
+		});
+
+		LINKS.map((link) => document.getElementById(link.href.split("#")[1])!).forEach(
+			(element) => {
+				observer.observe(element);
+			}
+		);
+		return () => {
+			LINKS.map((link) => document.getElementById(link.href.split("#")[1])!).forEach(
+				(element) => {
+					observer.unobserve(element);
+				}
+			);
+			observer.disconnect();
+		};
 	}, []);
 
 	return (
@@ -126,7 +151,10 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 								<NavLink
 									className="whitespace-nowrap"
 									href={href}
-									isActive={pathname === href}
+									isActive={
+										intersectingSections[intersectingSections.length - 1] ===
+										href.split("#")[1]
+									}
 								>
 									{title}
 								</NavLink>

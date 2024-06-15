@@ -105,7 +105,7 @@ const LANGUAGE_GROUPS = [
 
 export function LanguagesSection() {
 	return (
-		<LandingPageSection id="about-me" heading="Languages" subheading="What I speak">
+		<LandingPageSection heading="Languages" subheading="What I speak">
 			<ul className="mt-16 flex flex-col items-center gap-10 sm:grid sm:grid-cols-2 sm:items-stretch lg:mt-20">
 				{LANGUAGE_GROUPS.map((group) => (
 					<motion.li

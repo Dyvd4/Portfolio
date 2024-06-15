@@ -77,7 +77,14 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 							<>
 								<div className="font-bold">{experience.title}</div>
 								<div className="font-light">
-									{experience.organization.name} · {experience.employmentType}
+									<Link
+										className="hover:underline"
+										href={experience.organization.link}
+										target="_blank"
+									>
+										{experience.organization.name}
+									</Link>{" "}
+									· {experience.employmentType}
 								</div>
 								<div className="text-secondary font-light">
 									{getTimeSpanWitReadableDuration(experience)}
@@ -86,7 +93,11 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 						)}
 						{experience.subExperience.length > 0 && (
 							<>
-								<Link href={experience.organization.link} className="font-bold">
+								<Link
+									href={experience.organization.link}
+									target="_blank"
+									className="font-bold hover:underline"
+								>
 									{experience.organization.name}
 								</Link>
 								<div className="text-secondary font-light">

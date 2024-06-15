@@ -56,10 +56,6 @@
 	svg.icon:hover > path {
 		@apply stroke-yellow-400 transition-all dark:stroke-yellow-300;
 	}
-
-	a:hover {
-		@apply underline;
-	}
 }
 
 @layer components {
