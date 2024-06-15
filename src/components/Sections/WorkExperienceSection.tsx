@@ -43,7 +43,7 @@ export function WorkExperienceSection() {
 				}
 				target="_blank"
 			>
-				<Button className="group mx-auto mt-16 flex items-center justify-center gap-3 whitespace-nowrap lg:mt-20">
+				<Button className="group mx-auto mt-16 flex items-center justify-center gap-2 whitespace-nowrap lg:mt-20">
 					<Download
 						className="[&.icon:hover>path]:stroke-black
 									dark:[&.icon:hover>path]:stroke-black
