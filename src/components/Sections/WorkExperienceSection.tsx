@@ -10,7 +10,7 @@ const experiences: Experience[] = [
 		title: "Project Engineer",
 		dateStarted: new Date(2023, 6),
 		dateEnded: new Date(2024, 6),
-		employmentType: "Vollzeit",
+		employmentType: "Fulltime",
 		organization: {
 			name: "L-mobile",
 			icon: LMobileImg,
@@ -21,7 +21,7 @@ const experiences: Experience[] = [
 		title: "Fachinformatiker für Anwendungswickler",
 		dateStarted: new Date(2020, 8),
 		dateEnded: new Date(2023, 6),
-		employmentType: "Azubi",
+		employmentType: "Trainee",
 		organization: {
 			name: "L-mobile",
 			icon: LMobileImg,
