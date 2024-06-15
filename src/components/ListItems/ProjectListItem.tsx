@@ -30,7 +30,7 @@ function ProjectListItem({
 			className={cn(`flex flex-col-reverse gap-4 sm:flex-row sm:gap-6`, className)}
 			{...props}
 		>
-			<ProjectImage src={imageUrl} />
+			<ProjectImage className="aspect-video object-cover" src={imageUrl} />
 			<div className="flex flex-col items-start gap-4 sm:pt-2">
 				<div className="flex max-w-full flex-col gap-2">
 					<IconLink

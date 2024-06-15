@@ -68,7 +68,7 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 						className="max-w-[104px] overflow-hidden rounded-xl bg-gray-100 p-5"
 					>
 						<Image
-							className="aspect-square"
+							className="aspect-square overflow-hidden rounded-md"
 							src={experience.organization.icon}
 							width={48}
 							height={48}

@@ -49,6 +49,17 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 		window.addEventListener("scroll", (e) => {
 			setNavHeaderIsHidden(window.scrollY > threshold);
 		});
+	}, []);
+
+	useEffect(() => {
+		setIntersectingSections([]);
+		const observer = observe();
+		return () => {
+			unobserve(observer);
+		};
+	}, [pathname]);
+
+	const observe = () => {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting && !intersectingSections.includes(entry.target.id)) {
@@ -59,20 +70,22 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			});
 		});
 
-		LINKS.map((link) => document.getElementById(link.href.split("#")[1])!).forEach(
-			(element) => {
+		LINKS.map((link) => document.getElementById(link.href.split("#")[1])!)
+			.filter((s) => !!s)
+			.forEach((element) => {
 				observer.observe(element);
-			}
-		);
-		return () => {
-			LINKS.map((link) => document.getElementById(link.href.split("#")[1])!).forEach(
-				(element) => {
-					observer.unobserve(element);
-				}
-			);
-			observer.disconnect();
-		};
-	}, []);
+			});
+		return observer;
+	};
+
+	const unobserve = (observer: IntersectionObserver) => {
+		LINKS.map((link) => document.getElementById(link.href.split("#")[1])!)
+			.filter((s) => !!s)
+			.forEach((element) => {
+				observer.unobserve(element);
+			});
+		observer.disconnect();
+	};
 
 	return (
 		<motion.nav
