@@ -65,15 +65,12 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 									dark:[&.icon:hover>path]:stroke-black
 										[&.icon>path]:!stroke-black"
 					/>
-					<Copyable
-						iconProps={{ className: "icon-black" }}
-						className="text-black"
-						onClick={() => toast.success("Copied")}
-					>
+					<Copyable className="text-black" onClick={() => toast.success("Copied")}>
 						{NEXT_PUBLIC_CONTACT_RECIPIENT}
 					</Copyable>
 				</li>
-				<li className="flex items-center justify-center">
+				{/* moved slightly to left because tooltip is causing overflow otherwise */}
+				<li className="flex items-center justify-center pr-1">
 					<Tooltip direction="down" title="GitHub">
 						<Link target={"_blank"} href={NEXT_PUBLIC_GITHUB_PROFILE_URL}>
 							<IconButton variant="circle" className="border-0">

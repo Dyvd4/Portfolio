@@ -1,9 +1,9 @@
-/* for debugging
-* {
-		outline: 1px solid #f00 !important;
-		opacity: 1 !important;
-		visibility: visible !important;
-}  */
+/* for debugging */
+/* * {
+	outline: 1px solid #f00 !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+} */
 
 @tailwind base;
 @tailwind components;
