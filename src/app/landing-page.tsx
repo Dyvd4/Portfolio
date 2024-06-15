@@ -3,13 +3,13 @@ import Badge from "@components/Badge";
 import Button from "@components/Button";
 import { H1 } from "@components/H1";
 import IconLink from "@components/IconLink";
-import Mail from "@components/Icons/Mail";
 import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
 import ContactModal from "@components/Modals/ContactModal";
 import { LanguagesSection } from "@components/Sections/LanguagesSection";
 import LatestProjectSection from "@components/Sections/LatestProjectSection";
 import { ServicesSection } from "@components/Sections/ServicesSection";
 import { TechnologiesSection } from "@components/Sections/TechnologiesSection";
+import { WorkExperienceSection } from "@components/Sections/WorkExperienceSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 
 export default function LandingPage({ latestProject }) {
@@ -67,6 +67,7 @@ export default function LandingPage({ latestProject }) {
 				</div>
 			</div>
 			<ServicesSection />
+			<WorkExperienceSection />
 			<LanguagesSection />
 			<TechnologiesSection />
 			<LatestProjectSection latestProject={latestProject} />
