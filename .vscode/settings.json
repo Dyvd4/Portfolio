@@ -1,5 +1,5 @@
 {
-	"cSpell.words": ["dayjs", "Imac", "NEXTAUTH", "nextjs", "Résumé", "unoptimized"],
+	"cSpell.words": ["dayjs", "Imac", "NEXTAUTH", "nextjs", "prisma", "Résumé", "unoptimized"],
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 	"editor.insertSpaces": false,
 	"editor.detectIndentation": false
