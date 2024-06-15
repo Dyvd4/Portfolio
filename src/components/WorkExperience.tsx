@@ -61,9 +61,14 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 	return (
 		<>
 			<div className={cn(`flex w-full gap-3`, className)} key={experience.title} {...props}>
-				<div className="flex items-start">
-					<Link href={experience.organization.link} target="_blank">
+				<div className="flex shrink-0 items-start">
+					<Link
+						href={experience.organization.link}
+						target="_blank"
+						className="max-w-[104px] overflow-hidden rounded-xl bg-gray-100 p-5"
+					>
 						<Image
+							className="aspect-square"
 							src={experience.organization.icon}
 							width={48}
 							height={48}
@@ -71,12 +76,12 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 						/>
 					</Link>
 				</div>
-				<div className="flex flex-col gap-3">
-					<div>
+				<div className="flex w-full flex-col gap-10">
+					<div className="mt-5">
 						{experience.subExperience.length === 0 && (
 							<>
-								<div className="font-bold">{experience.title}</div>
-								<div className="font-light">
+								<h1 className="font-bold">{experience.title}</h1>
+								<h2 className="font-light">
 									<Link
 										className="hover:underline"
 										href={experience.organization.link}
@@ -85,7 +90,7 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 										{experience.organization.name}
 									</Link>{" "}
 									· {experience.employmentType}
-								</div>
+								</h2>
 								<div className="text-secondary font-light">
 									{getTimeSpanWitReadableDuration(experience)}
 								</div>
@@ -93,28 +98,30 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 						)}
 						{experience.subExperience.length > 0 && (
 							<>
-								<Link
-									href={experience.organization.link}
-									target="_blank"
-									className="font-bold hover:underline"
-								>
-									{experience.organization.name}
-								</Link>
+								<h1>
+									<Link
+										href={experience.organization.link}
+										target="_blank"
+										className="font-bold hover:underline"
+									>
+										{experience.organization.name}
+									</Link>
+								</h1>
 								<div className="text-secondary font-light">
 									{getGroupReadableDuration(experience)}
 								</div>
 							</>
 						)}
 					</div>
-					<div className="flex flex-col gap-3">
+					<div className="flex flex-col gap-6">
 						{experience.subExperience.map((subExperience, idx, self) => (
 							<div className="relative flex flex-col" key={subExperience.title}>
-								<div className="absolute -left-10 top-2 h-2 w-2 rounded-full bg-neutral-300"></div>
+								<div className="absolute -left-[60px] top-2 h-2 w-2 rounded-full bg-neutral-300"></div>
 								{idx !== self.length - 1 && (
-									<div className="absolute -left-[37.25px] top-6 h-[82.25%] w-[2px] bg-neutral-300"></div>
+									<div className="absolute -left-[57px] top-6 h-[95%] w-[2px] bg-neutral-300"></div>
 								)}
-								<div className="font-bold">{subExperience.title}</div>
-								<div className="font-light">{subExperience.employmentType}</div>
+								<h1 className="font-bold">{subExperience.title}</h1>
+								<h2 className="font-light">{subExperience.employmentType}</h2>
 								<div className="text-secondary font-light">
 									{getTimeSpanWitReadableDuration(subExperience)}
 								</div>

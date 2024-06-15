@@ -26,7 +26,7 @@ export function LandingPageSection({
 					whileInView={{ transform: "translateY(0%)", opacity: 1 }}
 					transition={{ duration: 0.5, delay: 0.5 }}
 					viewport={{ once: true }}
-					className="flex flex-col items-center justify-center gap-3"
+					className="flex flex-col items-center justify-center gap-3 text-center"
 				>
 					{subheading && <div className="text-secondary">{subheading}</div>}
 					<H1>{heading}</H1>
