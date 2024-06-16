@@ -3,13 +3,17 @@ import { H2 } from "@components/H2";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import AwsImg from "@public/experience-cards/AWS.png";
 import ExpressJsImg from "@public/experience-cards/ExpressJs.png";
+import FigmaImg from "@public/experience-cards/Figma.png";
 import GitHubImg from "@public/experience-cards/GitHub.svg";
+import KnockoutImg from "@public/experience-cards/Knockout.png";
 import NestJsImg from "@public/experience-cards/NestJS.png";
 import NextJsImg from "@public/experience-cards/NextJs.svg";
 import NodeJsImg from "@public/experience-cards/NodeJs.svg";
 import ReactImg from "@public/experience-cards/React.svg";
+import DrizzleImg from "@public/experience-cards/drizzle.png";
 import FiberImg from "@public/experience-cards/fiber.png";
-import T3Img from "@public/experience-cards/t3-dark.svg";
+import PrismaImg from "@public/experience-cards/prisma.png";
+import tRPC from "@public/experience-cards/tRPC.svg";
 import TailwindCssImg from "@public/experience-cards/tailwind-css.svg";
 import TeamCityImg from "@public/experience-cards/teamcity.png";
 import { motion } from "framer-motion";
@@ -40,10 +44,17 @@ const TECHNOLOGY_GROUPS = [
 				},
 			},
 			{
-				name: "T3 Stack",
+				name: "tRPC",
 				imageProps: {
-					src: T3Img,
-					alt: "T3 Stack",
+					src: tRPC,
+					alt: "tRPC",
+				},
+			},
+			{
+				name: "Knockout.js",
+				imageProps: {
+					src: KnockoutImg,
+					alt: "Express.js",
 				},
 			},
 		],
@@ -69,6 +80,20 @@ const TECHNOLOGY_GROUPS = [
 				name: "Express.js",
 				imageProps: {
 					src: ExpressJsImg,
+					alt: "Express.js",
+				},
+			},
+			{
+				name: "Prisma",
+				imageProps: {
+					src: PrismaImg,
+					alt: "Prisma",
+				},
+			},
+			{
+				name: "Drizzle",
+				imageProps: {
+					src: DrizzleImg,
 					alt: "Express.js",
 				},
 			},
@@ -103,6 +128,18 @@ const TECHNOLOGY_GROUPS = [
 				imageProps: {
 					src: TeamCityImg,
 					alt: "TeamCity",
+				},
+			},
+		],
+	},
+	{
+		title: "Design",
+		technologies: [
+			{
+				name: "Figma",
+				imageProps: {
+					src: FigmaImg,
+					alt: "Figma",
 				},
 			},
 		],
