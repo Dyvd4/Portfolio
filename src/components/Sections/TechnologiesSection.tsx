@@ -5,7 +5,7 @@ import AwsImg from "@public/experience-cards/AWS.png";
 import ExpressJsImg from "@public/experience-cards/ExpressJs.png";
 import FigmaImg from "@public/experience-cards/Figma.png";
 import GitHubImg from "@public/experience-cards/GitHub.svg";
-import KnockoutImg from "@public/experience-cards/Knockout.png";
+import KnockoutImg from "@public/experience-cards/knockout.png";
 import NestJsImg from "@public/experience-cards/NestJS.png";
 import NextJsImg from "@public/experience-cards/NextJs.svg";
 import NodeJsImg from "@public/experience-cards/NodeJs.svg";
