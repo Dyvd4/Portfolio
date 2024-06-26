@@ -2,6 +2,7 @@ import IconLink from "@components/IconLink";
 import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
 import { cn } from "@utils/component-utils";
+import Link from "next/link";
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
 
 type _ProjectListItemProps = {
@@ -9,6 +10,7 @@ type _ProjectListItemProps = {
 	alias: string;
 	imageUrl: string;
 	description: string | null;
+	url?: string;
 	tags?: JSX.Element;
 };
 
@@ -23,14 +25,18 @@ function ProjectListItem({
 	description,
 	id,
 	tags,
+	url,
 	...props
 }: ProjectListItemProps) {
+	const projectLink = url || "#";
 	return (
 		<div
 			className={cn(`flex flex-col-reverse gap-4 sm:flex-row sm:gap-6`, className)}
 			{...props}
 		>
-			<ProjectImage className="aspect-video object-cover" src={imageUrl} />
+			<Link className="w-fit shrink-0" target="_blank" href={projectLink}>
+				<ProjectImage className="object-cover" src={imageUrl} />
+			</Link>
 			<div className="flex flex-col items-start gap-4 sm:pt-2">
 				<div className="flex max-w-full flex-col gap-2">
 					<IconLink

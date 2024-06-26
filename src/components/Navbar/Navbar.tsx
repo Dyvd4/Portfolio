@@ -94,7 +94,7 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			}}
 			animate={{ transform: navHeaderIsHidden ? "translateY(-57px)" : "translateY(0px)" }}
 			transition={{ duration: 0.25 }}
-			className="sticky top-0 z-50 dark:bg-gray-900"
+			className="sticky top-0 z-50 bg-white bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70"
 		>
 			<ul className="sticky z-40 flex items-center justify-between bg-[#fef5db] px-4 py-2 dark:bg-white">
 				<li className="flex items-center gap-2">
@@ -103,7 +103,15 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 									dark:[&.icon:hover>path]:stroke-black
 										[&.icon>path]:!stroke-black"
 					/>
-					<Copyable className="text-black" onClick={() => toast.success("Copied")}>
+					<Copyable
+						iconProps={{
+							className: `[&.icon:hover>path]:stroke-black
+										dark:[&.icon:hover>path]:stroke-black
+										[&.icon>path]:!stroke-black`,
+						}}
+						className="text-black"
+						onClick={() => toast.success("Copied")}
+					>
 						{NEXT_PUBLIC_CONTACT_RECIPIENT}
 					</Copyable>
 				</li>
@@ -125,7 +133,7 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 					</Tooltip>
 				</li>
 			</ul>
-			<ul className="flex items-center justify-between p-6 backdrop-blur-lg">
+			<ul className="flex items-center justify-between p-3 px-6 backdrop-blur-lg md:p-6">
 				<li>
 					<Link href={"/"}>
 						<H1 className="hidden items-center gap-1 text-lg font-extrabold sm:flex sm:text-2xl">

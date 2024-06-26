@@ -41,6 +41,7 @@ function LatestProjectSection({ latestProject, ...props }: LatestProjectSectionP
 							</>
 						) : undefined
 					}
+					url={latestProject.url}
 				/>
 			</motion.div>
 			<motion.div

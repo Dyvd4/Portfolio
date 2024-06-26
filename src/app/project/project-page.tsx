@@ -144,6 +144,7 @@ export default function ProjectPage({ initialProjects }) {
 												</>
 											) : undefined
 										}
+										url={project.url}
 									/>
 									{status === "authenticated" && (
 										<>
