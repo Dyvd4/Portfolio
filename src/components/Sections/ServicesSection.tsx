@@ -62,7 +62,7 @@ export function ServicesSection() {
 			id="services"
 			heading="Services"
 			subheading="What I can offer you"
-			className="mt-[100vh] bg-[#FEF5DB] [&_h1]:dark:text-black"
+			className="bg-[#FEF5DB] [&_h1]:dark:text-black"
 		>
 			<div className="mt-16 flex flex-col gap-6 px-6 lg:mt-20">
 				{getGroupedArray(SERVICE_CARDS, 2).map((group, idx) => (
