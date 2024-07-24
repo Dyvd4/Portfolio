@@ -47,7 +47,7 @@ export default function LandingPage({ latestProject }) {
 				</div>
 				<Link
 					href={"#services"}
-					className="flex flex-col items-center pb-6 pt-16 sm:pb-20 sm:pt-32"
+					className="flex flex-col items-center pb-6 pt-16 sm:pb-20 sm:pt-28"
 				>
 					More about me
 					<motion.div
