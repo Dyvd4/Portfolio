@@ -25,14 +25,14 @@ export default function LandingPage({ latestProject }) {
 					alt="avatar"
 					width={250}
 					height={250}
-					src={"avatar cartoon.jpg"}
+					src={"avatar cartoon.png"}
 				/>
 				<Image
 					className="hidden sm:block"
 					alt="avatar"
 					width={350}
 					height={350}
-					src={"avatar cartoon.jpg"}
+					src={"avatar cartoon.png"}
 				/>
 				<div className="flex flex-col gap-4">
 					<H1 className="flex flex-col gap-2 whitespace-nowrap text-3xl font-normal sm:text-6xl">
@@ -47,7 +47,7 @@ export default function LandingPage({ latestProject }) {
 				</div>
 				<Link
 					href={"#services"}
-					className="flex flex-col items-center pb-6 pt-16 sm:pb-20 sm:pt-28"
+					className="flex flex-col items-center pb-6 pt-16 dark:text-white sm:pb-20 sm:pt-28"
 				>
 					More about me
 					<motion.div
