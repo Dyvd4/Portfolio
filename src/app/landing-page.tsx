@@ -1,8 +1,6 @@
 "use client";
 import { H1 } from "@components/H1";
 import NavDoubleArrowDown from "@components/Icons/NavDoubleArrowDown";
-import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
-import ContactModal from "@components/Modals/ContactModal";
 import { LanguagesSection } from "@components/Sections/LanguagesSection";
 import LatestProjectSection from "@components/Sections/LatestProjectSection";
 import { ServicesSection } from "@components/Sections/ServicesSection";
@@ -15,8 +13,6 @@ import Link from "next/link";
 
 export default function LandingPage({ latestProject }) {
 	useBreadcrumb([]);
-
-	const { isActive, open, close } = useModalDisclosure();
 
 	return (
 		<>
@@ -75,7 +71,6 @@ export default function LandingPage({ latestProject }) {
 			<LanguagesSection />
 			<TechnologiesSection />
 			<LatestProjectSection latestProject={latestProject} />
-			<ContactModal isActive={isActive} close={close} />
 		</>
 	);
 }
