@@ -1,10 +1,11 @@
-import Button from "@components/Button";
-import Download from "@components/Icons/Download";
+import DownloadResumeButton from "@components/DownloadResumeButton";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import { Experience, WorkExperienceWrapper } from "@components/WorkExperienceWrapper";
 import LMobileImg from "@public/work-experience/l_mobile.jpg";
 import { motion } from "framer-motion";
-import Link from "next/link";
+
+const RESUME_LANGUAGES = ["de", "en"] as const;
+type ResumeLanguages = (typeof RESUME_LANGUAGES)[number];
 
 const experiences: Experience[] = [
 	{
@@ -53,21 +54,7 @@ export function WorkExperienceSection() {
 				/>
 			</motion.div>
 			<motion.div initial={initial} whileInView={whileInView} viewport={viewPort}>
-				<Link
-					href={
-						"https://docs.google.com/document/d/1zpsrfkJwahODJtvS_6ll5aC7ofwgkOk5ZXsrvBaBSE0/export?format=pdf"
-					}
-					target="_blank"
-				>
-					<Button className="group mx-auto mt-16 flex items-center justify-center gap-2 whitespace-nowrap lg:mt-20">
-						<Download
-							className="[&.icon:hover>path]:stroke-black
-									dark:[&.icon:hover>path]:stroke-black
-										[&.icon>path]:!stroke-black"
-						/>
-						Résumé
-					</Button>
-				</Link>
+				<DownloadResumeButton />
 			</motion.div>
 		</LandingPageSection>
 	);
