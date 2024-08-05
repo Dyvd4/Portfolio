@@ -13,7 +13,8 @@ export type DropdownItemProps = _DropdownItemProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _DropdownItemProps>;
 
 function DropdownItem({ className, children, id, ...props }: DropdownItemProps) {
-	const { selectedOptions, setSelectedOptions } = useContext(DropdownMenuContext);
+	const { selectedOptions: selectedOptions, onSelectionChange: setSelectedOptions } =
+		useContext(DropdownMenuContext);
 	const { setIsActive } = useContext(DropdownContext);
 	delete props.onClick;
 	const isActive = selectedOptions.includes(id);

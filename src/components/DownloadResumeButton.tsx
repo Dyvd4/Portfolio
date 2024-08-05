@@ -48,7 +48,7 @@ function DownloadResumeButton({ className, children, ...props }: DownloadResumeB
 				</DropdownTrigger>
 				<DropdownMenu
 					selectedOptions={selectedLanguage}
-					setSelectedOptions={setSelectedLanguage}
+					onSelectionChange={setSelectedLanguage}
 				>
 					<DropdownItem id="en">English</DropdownItem>
 					<DropdownItem id="de">German</DropdownItem>

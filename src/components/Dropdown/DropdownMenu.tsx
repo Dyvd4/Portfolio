@@ -2,15 +2,21 @@
 
 import { DropdownContext } from "@components/Dropdown/Dropdown";
 import { cn } from "@utils/component-utils";
-import { ComponentPropsWithRef, createContext, PropsWithChildren, useContext } from "react";
+import {
+	ComponentPropsWithRef,
+	createContext,
+	PropsWithChildren,
+	useContext,
+	useState,
+} from "react";
 
 type TDropdownMenuContext = {
 	selectedOptions: string[];
-	setSelectedOptions(s: string[]): void;
+	onSelectionChange(s: string[]): void;
 };
 export const DropdownMenuContext = createContext<TDropdownMenuContext>({
 	selectedOptions: [] as string[],
-	setSelectedOptions: (s: string[]) => {},
+	onSelectionChange: (s: string[]) => {},
 });
 
 type _DropdownMenuProps = TDropdownMenuContext;
@@ -21,16 +27,23 @@ export type DropdownMenuProps = _DropdownMenuProps &
 function DropdownMenu({
 	className,
 	children,
-	selectedOptions,
-	setSelectedOptions,
+	selectedOptions: defaultSelectedOptions,
+	onSelectionChange,
 	...props
 }: DropdownMenuProps) {
 	const { isActive } = useContext(DropdownContext);
+	const [selectedOptions, setSelectedOptions] = useState(defaultSelectedOptions);
+
+	const handleOnSelectionChange = (s: string[]) => {
+		setSelectedOptions(s);
+		onSelectionChange(s);
+	};
+
 	return (
 		<DropdownMenuContext.Provider
 			value={{
 				selectedOptions,
-				setSelectedOptions,
+				onSelectionChange: handleOnSelectionChange,
 			}}
 		>
 			<div
