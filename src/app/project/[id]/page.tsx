@@ -58,7 +58,6 @@ async function ProjectDetails({ params: { id } }: ProjectDetailsProps) {
 			name: true,
 			alias: true,
 			githubUrl: true,
-			imageUrl: true,
 			url: true,
 			description: true,
 			visibility: true,
@@ -88,7 +87,7 @@ async function ProjectDetails({ params: { id } }: ProjectDetailsProps) {
 							latestCommitDate: new Date(),
 							firstCommitDate: new Date(),
 							commitsGroupedByDate: [],
-					  }
+						}
 			}
 		/>
 	);

@@ -81,6 +81,7 @@ export const useImageUpload = (images: TImage[]) => {
 					images.map(async (file) => {
 						const { presignedPost, id } = await createFileAsync({
 							fileName: file.name,
+							fileExtension: file.name.split(".").pop()!.toLowerCase(),
 							mimeType: file.mimeType,
 							size: file.size,
 						});

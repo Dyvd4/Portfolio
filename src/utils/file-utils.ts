@@ -1,6 +1,8 @@
+import { File as DBFile } from "@prisma/client";
 import request from "@utils/request-utils";
 
 const NEXT_PUBLIC_FILE_API_PATH = process.env.NEXT_PUBLIC_FILE_API_PATH!;
+const NEXT_PUBLIC_CDN_URL = process.env.NEXT_PUBLIC_CDN_URL!;
 
 export const getDataUrl = (file: File) => {
 	return new Promise<string>((resolve, reject) => {
@@ -21,4 +23,8 @@ export const getFileBuffer = async (fileId: number): Promise<ArrayBuffer> => {
 		responseType: "arraybuffer",
 	});
 	return response.data as ArrayBuffer;
+};
+
+export const getImageUrl = (file: DBFile) => {
+	return `${NEXT_PUBLIC_CDN_URL}/${file.id}.${file.fileExtension}`;
 };

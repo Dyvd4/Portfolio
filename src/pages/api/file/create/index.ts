@@ -20,6 +20,7 @@ const s3Client = new S3Client({
 
 export const fileCreateSchema = z.object({
 	fileName: z.string(),
+	fileExtension: z.string(),
 	mimeType: z.string(),
 	size: z.number(),
 });
@@ -36,8 +37,7 @@ async function createWithPresignedUrl(fileToCreate: FileCreateSchema) {
 		const file = await tx.file.create({
 			data: fileToCreate,
 		});
-		const fileExtension = fileToCreate.fileName.split(".").pop()?.toLowerCase();
-		const filename = `${file.id}.${fileExtension}`;
+		const filename = `${file.id}.${file.fileExtension}`;
 		const presignedPost = await createPresignedPost(s3Client, {
 			Bucket: S3_BUCKET_NAME,
 			Key: filename,
@@ -53,11 +53,12 @@ async function createWithPresignedUrl(fileToCreate: FileCreateSchema) {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== "POST") return res.status(405).send(`${req.method} not supported`);
-	const { fileName, mimeType, size } = req.body;
+	const { fileName, mimeType, size, fileExtension } = req.body;
 	const fileToCreate = {
 		fileName,
 		mimeType,
 		size,
+		fileExtension,
 	};
 	try {
 		fileCreateSchema.parse(fileToCreate);

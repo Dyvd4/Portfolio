@@ -8,6 +8,14 @@ export default async function Page() {
 			project: {
 				include: {
 					tags: true,
+					images: {
+						where: {
+							isThumbnail: true,
+						},
+						include: {
+							file: true,
+						},
+					},
 				},
 			},
 		},

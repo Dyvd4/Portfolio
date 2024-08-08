@@ -10,6 +10,7 @@ import ProjectModal from "@components/Modals/Project/ProjectModal";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import autoAnimate from "@formkit/auto-animate";
 import useDebounce from "@hooks/useDebounce";
+import { getImageUrl } from "@utils/file-utils";
 import request, { fetchEntity } from "@utils/request-utils";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
@@ -127,7 +128,7 @@ export default function ProjectPage({ initialProjects }) {
 									<ProjectListItem
 										id={project.id}
 										alias={project.alias}
-										imageUrl={project.imageUrl}
+										imageUrl={getImageUrl(project.images[0].file)}
 										description={project.description}
 										tags={
 											project.tags.length > 0 ? (

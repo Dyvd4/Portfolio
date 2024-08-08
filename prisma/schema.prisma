@@ -30,13 +30,14 @@ model Project {
 }
 
 model File {
-    id           Int            @id() @default(autoincrement())
-    fileName     String
-    mimeType     String
-    size         Int
-    updatedAt    DateTime       @updatedAt()
-    createdAt    DateTime       @default(now())
-    ProjectImage ProjectImage[]
+    id            Int            @id() @default(autoincrement())
+    fileName      String
+    mimeType      String
+    fileExtension String
+    size          Int
+    updatedAt     DateTime       @updatedAt()
+    createdAt     DateTime       @default(now())
+    ProjectImage  ProjectImage[]
 }
 
 model ProjectImage {

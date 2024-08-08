@@ -3,6 +3,7 @@ import Button from "@components/Button";
 import IconLink from "@components/IconLink";
 import ProjectListItem from "@components/ListItems/ProjectListItem";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
+import { getImageUrl } from "@utils/file-utils";
 import { motion } from "framer-motion";
 
 type LatestProjectSectionProps = {
@@ -30,7 +31,7 @@ function LatestProjectSection({ latestProject, ...props }: LatestProjectSectionP
 					className="mt-16 px-6 lg:mt-20"
 					id={latestProject.id}
 					alias={latestProject.alias}
-					imageUrl={latestProject.imageUrl}
+					imageUrl={getImageUrl(latestProject.images[0].file)}
 					description={latestProject.description}
 					tags={
 						latestProject.tags.length > 0 ? (

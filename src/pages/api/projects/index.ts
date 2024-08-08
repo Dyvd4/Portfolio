@@ -30,7 +30,7 @@ export const getLatestProjects = async (projectOrTagname?: string) => {
 									},
 								},
 							},
-					  ]
+						]
 					: undefined,
 			},
 		})
@@ -49,6 +49,14 @@ export const getLatestProjects = async (projectOrTagname?: string) => {
 							project: {
 								include: {
 									tags: true,
+									images: {
+										where: {
+											isThumbnail: true,
+										},
+										include: {
+											file: true,
+										},
+									},
 								},
 							},
 						},

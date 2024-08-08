@@ -47,7 +47,7 @@ export const addProjectSchema = z.object({
 const editProjectSchema = addProjectSchema.omit({ name: true });
 type EditProjectSchema = z.infer<typeof editProjectSchema>;
 export type AddProjectSchema = z.infer<typeof addProjectSchema>;
-export type AddProjectFormData = Omit<AddProjectSchema, "imageUrl">;
+export type AddProjectFormData = AddProjectSchema;
 
 const getImagesFromProject = async (projectToEdit: ProjectWithImages): Promise<Image[]> => {
 	const imagesForStore = await Promise.all(
