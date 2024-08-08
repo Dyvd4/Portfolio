@@ -5,9 +5,8 @@ import { H1 } from "@components/H1";
 import Input from "@components/Input";
 import ProjectListItem from "@components/ListItems/ProjectListItem";
 import useModalDisclosure from "@components/Modal/hooks/useModalDisclosure";
-import AddProjectModal from "@components/Modals/Project/AddProjectModal";
 import DeleteProjectModal from "@components/Modals/Project/DeleteProjectModal";
-import EditProjectModal from "@components/Modals/Project/EditProjectModal";
+import ProjectModal from "@components/Modals/Project/ProjectModal";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
 import autoAnimate from "@formkit/auto-animate";
 import useDebounce from "@hooks/useDebounce";
@@ -27,11 +26,6 @@ export default function ProjectPage({ initialProjects }) {
 			isCurrentPage: true,
 		},
 	]);
-	const {
-		isActive: projectEditModalIsActive,
-		open: openProjectEditModal,
-		close: closeProjectEditModal,
-	} = useModalDisclosure();
 	const {
 		isActive: projectDeleteModalIsActive,
 		open: openProjectDeleteModal,
@@ -91,7 +85,7 @@ export default function ProjectPage({ initialProjects }) {
 
 	const handleProjectEdit = (projectId: number) => {
 		setProjectIdToEdit(projectId);
-		openProjectEditModal();
+		openProjectAddModal();
 	};
 	const handleProjectDelete = (projectId: number) => {
 		setProjectIdToEdit(projectId);
@@ -177,13 +171,9 @@ export default function ProjectPage({ initialProjects }) {
 			</main>
 			{status === "authenticated" && (
 				<>
-					<AddProjectModal
+					<ProjectModal
 						isActive={projectAddModalIsActive}
 						close={closeProjectAddModal}
-					/>
-					<EditProjectModal
-						isActive={projectEditModalIsActive}
-						close={closeProjectEditModal}
 						projectId={projectIdToEdit}
 					/>
 					<DeleteProjectModal
