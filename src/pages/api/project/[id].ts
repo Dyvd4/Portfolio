@@ -19,12 +19,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		body: { alias, additionalDescription },
 	} = req;
 
-	const imageIds = req.body.imageIds as number[];
+	const images = req.body.images as { id: number; isThumbnail: boolean }[];
 
 	switch (method) {
 		case "PATCH":
 			try {
-				editProjectSchema.parse({ alias, additionalDescription, imageIds });
+				editProjectSchema.parse({ alias, additionalDescription, images });
 			} catch (e) {
 				console.error(e);
 				if (e instanceof z.ZodError) {
@@ -43,9 +43,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						},
 					});
 					await tx.projectImage.createMany({
-						data: imageIds.map((id) => ({
-							fileId: id,
+						data: images.map((i) => ({
+							fileId: i.id,
 							projectId: updatedProject.id,
+							isThumbnail: i.isThumbnail,
 						})),
 					});
 					return res.json(updatedProject);
@@ -53,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			} catch (e) {
 				console.error(e);
 				await prisma.file.deleteMany({
-					where: { id: { in: imageIds } },
+					where: { id: { in: images.map((i) => i.id) } },
 				});
 				return res.status(500).json("An unknown error occurred");
 			}

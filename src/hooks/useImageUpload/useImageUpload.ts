@@ -43,7 +43,7 @@ type UploadProgress = { fileId: number; value: number };
 
 type HandleUploadReturnType =
 	| { aborted: true; errorMessage: string }
-	| { aborted: false; imageIds: number[] };
+	| { aborted: false; images: { id: number; isThumbnail: boolean }[] };
 export const useImageUpload = (images: TImage[]) => {
 	const abortControllerRef = useRef<AbortController | null>(null);
 	const [uploadProgress, setUploadProgress] = useState<UploadProgress[]>([]);
@@ -159,7 +159,10 @@ export const useImageUpload = (images: TImage[]) => {
 			}
 
 			abortControllerRef.current = null;
-			return { aborted: false, imageIds: createdFiles.map((f) => f.dbId) };
+			return {
+				aborted: false,
+				images: createdFiles.map((f) => ({ id: f.dbId, isThumbnail: f.isThumbnail })),
+			};
 		},
 	});
 

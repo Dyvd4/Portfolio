@@ -12,7 +12,14 @@ export const addProjectSchema = z.object({
 			message: `String cannot be "${pleaseSelect}"`,
 		}),
 	alias: z.string().min(1),
-	imageIds: z.array(z.number()).optional(),
+	images: z
+		.array(
+			z.object({
+				id: z.number(),
+				isThumbnail: z.boolean(),
+			})
+		)
+		.optional(),
 	additionalDescription: z.string().nullable(),
 });
 
@@ -29,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		body: { name, alias, additionalDescription },
 	} = req;
 
-	const imageIds = req.body.imageIds as number[];
+	const images = req.body.images as { id: number; isThumbnail: boolean }[];
 
 	switch (method) {
 		case "POST":
@@ -37,7 +44,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				addProjectSchema.parse({
 					name,
 					alias,
-					imageIds,
+					imageIds: images,
 					additionalDescription,
 				});
 			} catch (e) {
@@ -65,9 +72,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 						},
 					});
 					await tx.projectImage.createMany({
-						data: imageIds.map((id) => ({
-							fileId: id,
+						data: images.map((i) => ({
+							fileId: i.id,
 							projectId: newProject.id,
+							isThumbnail: i.isThumbnail,
 						})),
 					});
 				});
@@ -75,7 +83,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				return res.status(200).json(newProject);
 			} catch (e) {
 				await prisma.file.deleteMany({
-					where: { id: { in: imageIds } },
+					where: { id: { in: images.map((i) => i.id) } },
 				});
 				console.error(e);
 				return res.status(500).json("An unknown error occurred");

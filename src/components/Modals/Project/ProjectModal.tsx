@@ -33,7 +33,14 @@ export const addProjectSchema = z.object({
 			message: `String cannot be "${pleaseSelect}"`,
 		}),
 	alias: z.string().min(1),
-	imageIds: z.array(z.number()).optional(),
+	images: z
+		.array(
+			z.object({
+				id: z.number(),
+				isThumbnail: z.boolean(),
+			})
+		)
+		.optional(),
 	additionalDescription: z.string().nullable(),
 });
 
@@ -231,14 +238,14 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 		if (!!editProject) {
 			updateProjectAsync({
 				alias,
-				imageIds: uploadResponse.imageIds,
+				images: uploadResponse.images,
 				additionalDescription,
 			});
 		} else {
 			createProjectAsync({
 				name,
 				alias,
-				imageIds: uploadResponse.imageIds,
+				images: uploadResponse.images,
 				additionalDescription,
 			});
 		}
