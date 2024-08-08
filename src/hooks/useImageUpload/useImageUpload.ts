@@ -3,7 +3,7 @@ import { FileCreateSchema } from "@pages/api/file/create";
 import request from "@utils/request-utils";
 import { useEffect, useRef, useState } from "react";
 import { useMutation } from "react-query";
-import { useImageStore, type Image as TImage } from "./useImageUploadStore";
+import { type Image as TImage } from "./useImages";
 
 type ValidateImagesReturnType = { isValid: true } | { isValid: false; errorMessage: string };
 function validateImages(images: TImage[]): ValidateImagesReturnType {
@@ -44,9 +44,8 @@ type UploadProgress = { fileId: number; value: number };
 type HandleUploadReturnType =
 	| { aborted: true; errorMessage: string }
 	| { aborted: false; imageIds: number[] };
-export const useImageUpload = () => {
+export const useImageUpload = (images: TImage[]) => {
 	const abortControllerRef = useRef<AbortController | null>(null);
-	const { images } = useImageStore();
 	const [uploadProgress, setUploadProgress] = useState<UploadProgress[]>([]);
 
 	useEffect(() => {

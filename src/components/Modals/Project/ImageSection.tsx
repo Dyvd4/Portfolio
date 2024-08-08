@@ -4,10 +4,7 @@ import { cn } from "@utils/component-utils";
 import { getDataUrl } from "@utils/file-utils";
 import Image from "next/image";
 import { ComponentPropsWithRef, MutableRefObject, PropsWithChildren } from "react";
-import {
-	useImageStore,
-	type Image as TImage,
-} from "../../../hooks/useImageUpload/useImageUploadStore";
+import { type Image as TImage } from "../../../hooks/useImageUpload/useImages";
 
 type EditImageProps = {
 	image: TImage;
@@ -40,15 +37,21 @@ const EditImage = ({ image, onRemove, onSetThumbnail }: EditImageProps) => {
 
 type _ImagesSectionProps = {
 	fileRef: MutableRefObject<HTMLInputElement | null>;
+	images: TImage[];
+	setImages(this: void, images: TImage[]): void;
 };
 
 export type ImagesSectionProps = _ImagesSectionProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _ImagesSectionProps>;
 
-function ImagesSection({ className, children, fileRef, ...props }: ImagesSectionProps) {
-	// store per instance?
-	const { images, setImages } = useImageStore();
-
+function ImagesSection({
+	className,
+	children,
+	fileRef,
+	images,
+	setImages,
+	...props
+}: ImagesSectionProps) {
 	const handleFileInputChange = async (files: FileList | null) => {
 		if (!files) return;
 		const newImages: TImage[] = [...images];

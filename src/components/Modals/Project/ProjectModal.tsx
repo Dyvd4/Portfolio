@@ -8,7 +8,7 @@ import { Progress } from "@components/Progress";
 import Select from "@components/Select";
 import Textarea from "@components/Textarea";
 import { useImageUpload } from "@hooks/useImageUpload/useImageUpload";
-import { Image, ProjectWithImages, useImageStore } from "@hooks/useImageUpload/useImageUploadStore";
+import { Image, ProjectWithImages, useImages } from "@hooks/useImageUpload/useImages";
 import useGithubReposQuery from "@queries/github-repos-query";
 import { getDataUrl, getFileBuffer } from "@utils/file-utils";
 import request, { addEntity, fetchEntity, updateEntity } from "@utils/request-utils";
@@ -79,9 +79,9 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<AddProjectSchema> | null>(null);
 	const { isLoading: reposAreLoading, data: githubRepos } = useGithubReposQuery(props.isActive);
-	const { handleUpload, cancelUpload, uploadProgress, isUploading } = useImageUpload();
+	const { images, setImages } = useImages();
+	const { handleUpload, cancelUpload, uploadProgress, isUploading } = useImageUpload(images);
 	const [imagesLoading, setImagesLoading] = useState(false);
-	const { setImages } = useImageStore();
 
 	const { isLoading: projectIsLoading, data: editProject } = useQuery<ProjectWithImages>(
 		["project", props.projectId],
@@ -293,7 +293,11 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 									<LoadingCircle />
 								</>
 							)}
-							<ImagesSection fileRef={fileRef} />
+							<ImagesSection
+								images={images}
+								setImages={setImages}
+								fileRef={fileRef}
+							/>
 							<FormControl errorMessage={errorMap?.additionalDescription?._errors}>
 								<Textarea
 									placeholder="additional description"
