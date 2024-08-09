@@ -4,7 +4,6 @@ import { GalleryModal } from "@components/Gallery/GalleryModal";
 import autoAnimate from "@formkit/auto-animate";
 import { cn } from "@utils/component-utils";
 import Image from "next/image";
-import Link from "next/link";
 import { useState, type ComponentPropsWithRef, type PropsWithChildren } from "react";
 import useKeypress from "react-use-keypress";
 
@@ -80,15 +79,9 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 			/>
 			<div ref={(ref) => !!ref && autoAnimate(ref)} className="grid grid-cols-6 gap-4">
 				{bottomImages.map((image, i) => (
-					<Link
+					<div
 						onClick={() => handleImageClick(i)}
 						key={image.id}
-						href={{
-							query: {
-								imageId: image.id,
-							},
-						}}
-						scroll={false}
 						className="after:content after:shadow-highlight group relative block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg"
 					>
 						<Image
@@ -99,7 +92,7 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 							width={720}
 							height={480}
 						/>
-					</Link>
+					</div>
 				))}
 				{displayShowMoreButton && (
 					<>
