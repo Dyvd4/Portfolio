@@ -73,12 +73,39 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			});
 			return res.json(project);
 		case "DELETE":
-			const deletedProject = await prisma.project.delete({
-				where: {
-					id: parseInt(id as string),
-				},
+			return await prisma.$transaction(async (tx) => {
+				const projectId = parseInt(id as string);
+				const imageIds = (
+					await tx.projectImage.findMany({
+						where: {
+							projectId,
+						},
+						select: {
+							fileId: true,
+						},
+					})
+				).map((i) => i.fileId);
+				await tx.projectImage.deleteMany({
+					where: {
+						fileId: {
+							in: imageIds,
+						},
+					},
+				});
+				await tx.file.deleteMany({
+					where: {
+						id: {
+							in: imageIds,
+						},
+					},
+				});
+				const deletedProject = await tx.project.delete({
+					where: {
+						id: projectId,
+					},
+				});
+				return res.json(deletedProject);
 			});
-			return res.json(deletedProject);
 		default:
 			return res.send(`${req.method} not supported`);
 	}
