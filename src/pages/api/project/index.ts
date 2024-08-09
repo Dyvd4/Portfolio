@@ -17,11 +17,14 @@ export const addProjectSchema = z.object({
 			z.object({
 				id: z.number(),
 				isThumbnail: z.boolean(),
+				sortOrder: z.number(),
 			})
 		)
 		.optional(),
 	additionalDescription: z.string().nullable(),
 });
+
+export type ImageToUpload = { id: number; isThumbnail: boolean; sortOrder: number };
 
 export const config = {
 	api: {
@@ -36,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		body: { name, alias, additionalDescription },
 	} = req;
 
-	const images = req.body.images as { id: number; isThumbnail: boolean }[];
+	const images = req.body.images as ImageToUpload[];
 
 	switch (method) {
 		case "POST":
@@ -76,6 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 							fileId: i.id,
 							projectId: newProject.id,
 							isThumbnail: i.isThumbnail,
+							sortOrder: i.sortOrder,
 						})),
 					});
 				});

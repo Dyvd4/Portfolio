@@ -38,12 +38,12 @@ export const addProjectSchema = z.object({
 			z.object({
 				id: z.number(),
 				isThumbnail: z.boolean(),
+				sortOrder: z.number(),
 			})
 		)
 		.optional(),
 	additionalDescription: z.string().nullable(),
 });
-
 const editProjectSchema = addProjectSchema.omit({ name: true });
 type EditProjectSchema = z.infer<typeof editProjectSchema>;
 export type AddProjectSchema = z.infer<typeof addProjectSchema>;
@@ -63,6 +63,7 @@ const getImagesFromProject = async (projectToEdit: ProjectWithImages): Promise<I
 				isThumbnail: image.isThumbnail,
 				raw: rawImage,
 				dataUrl,
+				sortOrder: image.sortOrder,
 			};
 		})
 	);
@@ -86,7 +87,7 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<AddProjectSchema> | null>(null);
 	const { isLoading: reposAreLoading, data: githubRepos } = useGithubReposQuery(props.isActive);
-	const { images, setImages } = useImages();
+	const { images, setImages, remove, addFromFileList, setThumbnail } = useImages();
 	const { handleUpload, cancelUpload, uploadProgress, isUploading } = useImageUpload(images);
 	const [imagesLoading, setImagesLoading] = useState(false);
 
@@ -106,7 +107,7 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 				setImagesLoading(true);
 				const images = await getImagesFromProject(project);
 				setImagesLoading(false);
-				setImages(images);
+				setImages(images.toSorted((a, b) => a.sortOrder - b.sortOrder));
 			},
 		}
 	);
@@ -303,6 +304,9 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 							<ImagesSection
 								images={images}
 								setImages={setImages}
+								remove={remove}
+								addFromFileList={addFromFileList}
+								setThumbnail={setThumbnail}
 								fileRef={fileRef}
 							/>
 							<FormControl errorMessage={errorMap?.additionalDescription?._errors}>

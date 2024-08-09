@@ -1,7 +1,7 @@
 import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
-import { addProjectSchema } from ".";
+import { addProjectSchema, ImageToUpload } from ".";
 
 const editProjectSchema = addProjectSchema.omit({ name: true });
 
@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		body: { alias, additionalDescription },
 	} = req;
 
-	const images = req.body.images as { id: number; isThumbnail: boolean }[];
+	const images = req.body.images as ImageToUpload[];
 
 	switch (method) {
 		case "PATCH":
@@ -47,6 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 							fileId: i.id,
 							projectId: updatedProject.id,
 							isThumbnail: i.isThumbnail,
+							sortOrder: i.sortOrder,
 						})),
 					});
 					return res.json(updatedProject);

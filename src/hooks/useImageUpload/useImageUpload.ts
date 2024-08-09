@@ -1,5 +1,6 @@
 import { PresignedPost } from "@aws-sdk/s3-presigned-post";
 import { FileCreateSchema } from "@pages/api/file/create";
+import { ImageToUpload } from "@pages/api/project";
 import request from "@utils/request-utils";
 import { useEffect, useRef, useState } from "react";
 import { useMutation } from "react-query";
@@ -43,7 +44,7 @@ type UploadProgress = { fileId: number; value: number };
 
 type HandleUploadReturnType =
 	| { aborted: true; errorMessage: string }
-	| { aborted: false; images: { id: number; isThumbnail: boolean }[] };
+	| { aborted: false; images: ImageToUpload[] };
 export const useImageUpload = (images: TImage[]) => {
 	const abortControllerRef = useRef<AbortController | null>(null);
 	const [uploadProgress, setUploadProgress] = useState<UploadProgress[]>([]);
@@ -162,7 +163,11 @@ export const useImageUpload = (images: TImage[]) => {
 			abortControllerRef.current = null;
 			return {
 				aborted: false,
-				images: createdFiles.map((f) => ({ id: f.dbId, isThumbnail: f.isThumbnail })),
+				images: createdFiles.map((f) => ({
+					id: f.dbId,
+					isThumbnail: f.isThumbnail,
+					sortOrder: f.sortOrder,
+				})),
 			};
 		},
 	});

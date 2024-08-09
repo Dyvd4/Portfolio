@@ -1,9 +1,9 @@
 import FileInput from "@components/FileInput";
 import XCircle from "@components/Icons/XCircle";
 import { cn } from "@utils/component-utils";
-import { getDataUrl } from "@utils/file-utils";
 import Image from "next/image";
 import { ComponentPropsWithRef, MutableRefObject, PropsWithChildren } from "react";
+import { ReactSortable } from "react-sortablejs";
 import { type Image as TImage } from "../../../hooks/useImageUpload/useImages";
 
 type EditImageProps = {
@@ -39,6 +39,9 @@ type _ImagesSectionProps = {
 	fileRef: MutableRefObject<HTMLInputElement | null>;
 	images: TImage[];
 	setImages(this: void, images: TImage[]): void;
+	remove(imageToRemove: TImage): void;
+	setThumbnail(image: TImage): void;
+	addFromFileList(files: FileList): void;
 };
 
 export type ImagesSectionProps = _ImagesSectionProps &
@@ -50,41 +53,22 @@ function ImagesSection({
 	fileRef,
 	images,
 	setImages,
+	remove,
+	setThumbnail,
+	addFromFileList,
 	...props
 }: ImagesSectionProps) {
 	const handleFileInputChange = async (files: FileList | null) => {
 		if (!files) return;
-		const newImages: TImage[] = [...images];
-		await Promise.all(
-			Array.from(files).map(async (file, idx) => {
-				newImages.push({
-					id: 0,
-					isThumbnail: false,
-					raw: file,
-					name: file.name,
-					mimeType: file.type,
-					dataUrl: await getDataUrl(file),
-					size: file.size,
-				});
-				return null;
-			})
-		);
-
-		setImages(newImages.map((f, idx) => ({ ...f, id: idx })));
+		addFromFileList(files);
 	};
 
 	const handleOnRemove = (image: TImage) => {
-		setImages(images.filter((i) => i.id !== image.id));
+		remove(image);
 	};
 
 	const handleOnSetThumbnail = (image: TImage) => {
-		const newImages = [...images];
-		newImages.forEach((image) => {
-			image.isThumbnail = false;
-		});
-		const thumbImage = newImages.find((i) => i.id === image.id);
-		thumbImage!.isThumbnail = true;
-		setImages(newImages);
+		setThumbnail(image);
 	};
 
 	return (
@@ -97,7 +81,7 @@ function ImagesSection({
 					handleFileInputChange((e.target as HTMLInputElement).files);
 				}}
 			/>
-			<div className="grid grid-cols-3 gap-4">
+			<ReactSortable className="grid grid-cols-3 gap-4" list={images} setList={setImages}>
 				{images.map((image) => (
 					<EditImage
 						image={image}
@@ -106,7 +90,7 @@ function ImagesSection({
 						onSetThumbnail={handleOnSetThumbnail}
 					/>
 				))}
-			</div>
+			</ReactSortable>
 		</div>
 	);
 }

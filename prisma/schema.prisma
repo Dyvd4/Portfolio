@@ -47,6 +47,7 @@ model ProjectImage {
     projectId   Int
     fileId      Int
     isThumbnail Boolean @default(false)
+    sortOrder   Int
 }
 
 model ProjectCommit {

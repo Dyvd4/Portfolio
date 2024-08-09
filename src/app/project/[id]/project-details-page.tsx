@@ -16,7 +16,6 @@ import DevelopmentActivityChart from "./DevelopmentActivityChart";
 import LanguagesUsedChart from "./LanguagesUsedChart";
 
 export default function ProjectDetailsPage({ project, latestCommitsView }) {
-	console.log("🚀 ~ ProjectDetailsPage ~ project:", project);
 	useBreadcrumb([
 		{
 			isHome: true,
@@ -32,6 +31,9 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 	]);
 
 	const projectLink = project.url || "#";
+	const images = (project.images as any[])
+		.toSorted((a, b) => a.sortOrder - b.sortOrder)
+		.map(({ file }) => ({ id: file.id, src: getImageUrl(file) }));
 
 	return (
 		<>
@@ -62,10 +64,7 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 				</ProjectSectionBody>
 			</ProjectSection>
 
-			<Gallery
-				className="mt-16"
-				images={project.images.map(({ file }) => ({ id: file.id, src: getImageUrl(file) }))}
-			/>
+			<Gallery className="mt-16" images={images} />
 
 			<ProjectSection className="mt-16">
 				<ProjectSectionHeading>Intention</ProjectSectionHeading>
