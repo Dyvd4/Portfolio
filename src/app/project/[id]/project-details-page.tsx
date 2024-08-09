@@ -1,21 +1,22 @@
 "use client";
 import Badge from "@components/Badge";
+import { Gallery } from "@components/Gallery/Gallery";
 import { H2 } from "@components/H2";
 import LeftHeading from "@components/Headings/LeftHeading";
 import IconLink from "@components/IconLink";
 import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
-import ProjectImage from "@components/Images/ProjectImage";
 import ImportedFromGithubInfo from "@components/ImportedFromGithubInfo";
 import ProjectSection from "@components/Sections/ProjectSection/ProjectSection";
 import ProjectSectionBody from "@components/Sections/ProjectSection/ProjectSectionBody";
 import ProjectSectionHeading from "@components/Sections/ProjectSection/ProjectSectionHeading";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
+import { getImageUrl } from "@utils/file-utils";
 import { Suspense } from "react";
 import DevelopmentActivityChart from "./DevelopmentActivityChart";
 import LanguagesUsedChart from "./LanguagesUsedChart";
-import Link from "next/link";
 
 export default function ProjectDetailsPage({ project, latestCommitsView }) {
+	console.log("🚀 ~ ProjectDetailsPage ~ project:", project);
 	useBreadcrumb([
 		{
 			isHome: true,
@@ -61,9 +62,10 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 				</ProjectSectionBody>
 			</ProjectSection>
 
-			<Link target="_blank" href={projectLink}>
-				<ProjectImage className="mt-16" src={project.imageUrl} width={1024} height={413} />
-			</Link>
+			<Gallery
+				className="mt-16"
+				images={project.images.map(({ file }) => ({ id: file.id, src: getImageUrl(file) }))}
+			/>
 
 			<ProjectSection className="mt-16">
 				<ProjectSectionHeading>Intention</ProjectSectionHeading>

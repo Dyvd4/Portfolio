@@ -73,6 +73,11 @@ async function ProjectDetails({ params: { id } }: ProjectDetailsProps) {
 					},
 				},
 			},
+			images: {
+				include: {
+					file: true,
+				},
+			},
 			commits: true,
 			tags: true,
 		},
