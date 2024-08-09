@@ -25,11 +25,11 @@ export type GalleryProps = _GalleryProps &
 
 export function Gallery({ images: propsImages, className, ...props }: GalleryProps) {
 	const thumbnail = propsImages[0];
-	const images: _TImage[] = propsImages.map((image, index) => ({ ...image, index })).slice(1);
+	const images: _TImage[] = propsImages.map((image, index) => ({ ...image, index }));
 	const [bottomImagesExpanded, setBottomImagesExpanded] = useState(false);
 	const displayShowMoreButton = images.length > 6 && !bottomImagesExpanded;
 	const [bottomImages, setBottomImages] = useState(
-		displayShowMoreButton ? images.slice(0, 5) : images.slice(0, 6)
+		displayShowMoreButton ? images.slice(1, 5) : images.slice(1, 6)
 	);
 	const [direction, setDirection] = useState(0);
 	const [curIndex, setCurIndex] = useState(0);
@@ -70,7 +70,8 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 	return (
 		<div className={cn("flex flex-col gap-4", className)} {...props}>
 			<Image
-				className="aspect-video rounded-xl border drop-shadow-2xl dark:border-none"
+				onClick={() => handleImageClick(0)}
+				className="aspect-video cursor-zoom-in rounded-xl border drop-shadow-2xl dark:border-none"
 				style={{ transform: "translate3d(0, 0, 0)" }}
 				src={thumbnail.src}
 				alt="gallery image"
@@ -80,7 +81,7 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 			<div ref={(ref) => !!ref && autoAnimate(ref)} className="grid grid-cols-6 gap-4">
 				{bottomImages.map((image, i) => (
 					<div
-						onClick={() => handleImageClick(i)}
+						onClick={() => handleImageClick(i + 1)}
 						key={image.id}
 						className="after:content after:shadow-highlight group relative block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg"
 					>
