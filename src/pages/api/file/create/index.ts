@@ -42,7 +42,7 @@ async function createWithPresignedUrl(fileToCreate: FileCreateSchema) {
 			Bucket: S3_BUCKET_NAME,
 			Key: filename,
 			Fields: {
-				ContentType: fileToCreate.mimeType,
+				"Content-Type": fileToCreate.mimeType,
 				"x-amz-meta-file-id": file.id.toString(),
 			},
 			Expires: parseInt(FILE_SIGNED_URL_EXPIRING_IN_SECONDS),
