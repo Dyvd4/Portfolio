@@ -50,6 +50,8 @@ jobs:
                   echo "NEXT_PUBLIC_LINKEDIN_PROFILE_URL=${{secrets.NEXT_PUBLIC_LINKEDIN_PROFILE_URL}}" >> docker/.env
                   echo "NEXT_PUBLIC_ENGLISH_RESUME_URL=${{secrets.NEXT_PUBLIC_ENGLISH_RESUME_URL}}" >> docker/.env
                   echo "NEXT_PUBLIC_GERMAN_RESUME_URL=${{secrets.NEXT_PUBLIC_GERMAN_RESUME_URL}}" >> docker/.env
+                  echo "NEXT_PUBLIC_FILE_API_PATH=${{secrets.NEXT_PUBLIC_FILE_API_PATH}}" >> docker/.env
+                  echo "NEXT_PUBLIC_CDN_URL=${{secrets.NEXT_PUBLIC_CDN_URL}}" >> docker/.env
 
             - name: Build, tag, and push `frontend` image to Amazon ECR
               env:
