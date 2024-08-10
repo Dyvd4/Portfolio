@@ -12,9 +12,12 @@ export default function LanguagesUsedChart({ project }) {
 		(totalAmount, language) => (totalAmount += language.codeAmountInBytes),
 		0
 	);
+	const languages = (project.languages as any[]).toSorted(
+		(a, b) => a.codeAmountInBytes - b.codeAmountInBytes
+	);
 	return (
 		<ResponsiveContainer width={"100%"} height={300}>
-			<BarChart data={project.languages}>
+			<BarChart data={languages}>
 				<Bar className="fill-sky-600" dataKey={"codeAmountInBytes"}>
 					<LabelList
 						className="fill-secondary text-xs"
