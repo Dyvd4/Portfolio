@@ -88,7 +88,7 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 
 	const expandBottomImages = () => {
 		setBottomImagesExpanded(true);
-		setBottomImages(images);
+		setBottomImages(images.slice(1));
 	};
 
 	return (
@@ -129,7 +129,7 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 							className="flex flex-col items-center justify-center rounded-lg"
 						>
 							<div className="whitespace-nowrap">Show more</div>
-							<div>({images.length - bottomImages.length})</div>
+							<div>({images.length - 1 - bottomImages.length})</div>
 						</Button>
 					</>
 				)}
