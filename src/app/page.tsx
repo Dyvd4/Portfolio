@@ -20,7 +20,7 @@ export default async function Page() {
 			},
 		},
 		orderBy: {
-			createdAt: "desc",
+			createDate: "desc",
 		},
 	});
 	const latestProject = !!latestCommit ? latestCommit.project : null;
