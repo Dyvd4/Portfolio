@@ -1,6 +1,7 @@
 "use client";
 import Button from "@components/Button";
 import { GalleryModal } from "@components/Gallery/GalleryModal";
+import { NAVBAR_TOP_THRESHOLD } from "@components/Navbar/Navbar";
 import autoAnimate from "@formkit/auto-animate";
 import useActiveBreakPoints from "@hooks/useActiveBreakPoints";
 import { cn } from "@utils/component-utils";
@@ -49,7 +50,15 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 	const [direction, setDirection] = useState(0);
 	const [curIndex, setCurIndex] = useState(0);
 	const [isOpen, setIsOpen] = useState(false);
-	const onOpenChange = () => setIsOpen(!isOpen);
+	const onOpenChange = () => {
+		const newIsOpen = !isOpen;
+		if (newIsOpen) {
+			window.scrollTo({
+				top: NAVBAR_TOP_THRESHOLD + 1,
+			});
+		}
+		setIsOpen(newIsOpen);
+	};
 
 	useKeypress("ArrowRight", () => {
 		if (curIndex + 1 < images.length) {

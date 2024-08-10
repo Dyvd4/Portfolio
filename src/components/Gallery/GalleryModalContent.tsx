@@ -89,7 +89,7 @@ export default function GalleryModalContent({
 			}}
 		>
 			<div
-				className="wide:h-full xl:taller-than-854:h-auto relative z-10 flex aspect-[3/2] w-full max-w-7xl items-center"
+				className="relative z-10 flex aspect-[3/2] w-full max-w-7xl items-center"
 				{...handlers}
 			>
 				{/* Main image */}
@@ -106,7 +106,7 @@ export default function GalleryModalContent({
 								className="absolute inset-0"
 							>
 								<Image
-									className="h-full w-full object-cover"
+									className="h-full w-full object-contain"
 									src={curren_TImage.src}
 									width={1920}
 									height={1080}

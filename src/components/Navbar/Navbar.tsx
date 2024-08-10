@@ -37,6 +37,8 @@ const LINKS: Array<{ href: string; title: string }> = [
 	},
 ];
 
+export const NAVBAR_TOP_THRESHOLD = 50;
+
 function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 	const pathname = usePathname();
 	const darkModeIsActive = useDarkModeIsActive(initialDarkModeIsActive);
@@ -44,10 +46,9 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 	const [intersectingSections, setIntersectingSections] = useState<string[]>([]);
 
 	useEffect(() => {
-		const threshold = 50;
-		setNavHeaderIsHidden(window.scrollY > threshold);
+		setNavHeaderIsHidden(window.scrollY > NAVBAR_TOP_THRESHOLD);
 		window.addEventListener("scroll", (e) => {
-			setNavHeaderIsHidden(window.scrollY > threshold);
+			setNavHeaderIsHidden(window.scrollY > NAVBAR_TOP_THRESHOLD);
 		});
 	}, []);
 

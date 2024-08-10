@@ -25,7 +25,7 @@ export function GalleryModal({
 		<Dialog
 			open={isOpen}
 			onClose={onOpenChange}
-			className="fixed inset-0 z-10 flex items-center justify-center"
+			className="fixed inset-0 top-[80px] z-10 flex justify-center"
 		>
 			<DialogBackdrop
 				className="fixed inset-0 bg-black/70 backdrop-blur-2xl"
