@@ -311,7 +311,7 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 							/>
 							<FormControl errorMessage={errorMap?.additionalDescription?._errors}>
 								<Textarea
-									placeholder="additional description"
+									placeholder="Background info"
 									{...register("additionalDescription")}
 								/>
 							</FormControl>

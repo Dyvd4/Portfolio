@@ -67,7 +67,7 @@ export default function ProjectDetailsPage({ project, latestCommitsView }) {
 			<Gallery className="mt-16" images={images} />
 
 			<ProjectSection className="mt-16">
-				<ProjectSectionHeading>Intention</ProjectSectionHeading>
+				<ProjectSectionHeading>Background info</ProjectSectionHeading>
 				<ProjectSectionBody>{project.additionalDescription || "-"}</ProjectSectionBody>
 			</ProjectSection>
 
