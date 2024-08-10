@@ -8,7 +8,7 @@ export type ModalBodyProps = _ModalBodyProps &
 
 function ModalBody({ className, children, ...props }: ModalBodyProps) {
 	return (
-		<div className={cn(`pt-6`, className)} {...props}>
+		<div className={cn(`min-h-0 overflow-y-auto pt-6 `, className)} {...props}>
 			{children}
 		</div>
 	);
