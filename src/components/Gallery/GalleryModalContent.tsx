@@ -103,9 +103,10 @@ export default function GalleryModalContent({
 								initial="enter"
 								animate="center"
 								exit="exit"
-								className="absolute"
+								className="absolute inset-0"
 							>
 								<Image
+									className="h-full w-full object-cover"
 									src={curren_TImage.src}
 									width={1920}
 									height={1080}

@@ -2,9 +2,10 @@
 import Button from "@components/Button";
 import { GalleryModal } from "@components/Gallery/GalleryModal";
 import autoAnimate from "@formkit/auto-animate";
+import useActiveBreakPoints from "@hooks/useActiveBreakPoints";
 import { cn } from "@utils/component-utils";
 import Image from "next/image";
-import { useState, type ComponentPropsWithRef, type PropsWithChildren } from "react";
+import { useEffect, useState, type ComponentPropsWithRef, type PropsWithChildren } from "react";
 import useKeypress from "react-use-keypress";
 
 export type _TImage = {
@@ -27,10 +28,24 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 	const thumbnail = propsImages[0];
 	const images: _TImage[] = propsImages.map((image, index) => ({ ...image, index }));
 	const [bottomImagesExpanded, setBottomImagesExpanded] = useState(false);
-	const displayShowMoreButton = images.length > 6 && !bottomImagesExpanded;
-	const [bottomImages, setBottomImages] = useState(
-		displayShowMoreButton ? images.slice(1, 5) : images.slice(1, 6)
-	);
+	const {
+		sm: smBreakpointHit,
+		md: mdBreakpointHit,
+		loaded: breakpointLoaded,
+	} = useActiveBreakPoints();
+	const [bottomImages, setBottomImages] = useState<_TImage[]>([]);
+	const maxBottomImages = mdBreakpointHit ? 6 : smBreakpointHit ? 4 : 3;
+	const displayShowMoreButton =
+		images.length - 1 > maxBottomImages && !bottomImagesExpanded && breakpointLoaded;
+	const getBottomImages = () => {
+		return displayShowMoreButton ? images.slice(1, maxBottomImages) : images.slice(1);
+	};
+	useEffect(() => {
+		if (breakpointLoaded) {
+			setBottomImages(getBottomImages());
+		}
+	}, [smBreakpointHit, mdBreakpointHit, breakpointLoaded]);
+
 	const [direction, setDirection] = useState(0);
 	const [curIndex, setCurIndex] = useState(0);
 	const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +93,10 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 				width={1920}
 				height={1080}
 			/>
-			<div ref={(ref) => !!ref && autoAnimate(ref)} className="grid grid-cols-6 gap-4">
+			<div
+				ref={(ref) => !!ref && autoAnimate(ref)}
+				className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6"
+			>
 				{bottomImages.map((image, i) => (
 					<div
 						onClick={() => handleImageClick(i + 1)}
@@ -97,8 +115,12 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 				))}
 				{displayShowMoreButton && (
 					<>
-						<Button onClick={() => expandBottomImages()} className="rounded-lg">
-							Show more ({images.length - bottomImages.length})
+						<Button
+							onClick={() => expandBottomImages()}
+							className="flex flex-col items-center justify-center rounded-lg"
+						>
+							<div className="whitespace-nowrap">Show more</div>
+							<div>({images.length - bottomImages.length})</div>
 						</Button>
 					</>
 				)}
