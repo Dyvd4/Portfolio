@@ -1,6 +1,7 @@
 import ProjectCommitService from "@backend/services/ProjectCommitService";
 import config from "@config/config";
 import { prisma } from "@prisma";
+import { getImageUrl } from "@utils/file-utils";
 import dayjs from "dayjs";
 import dayJsIsBetweenPlugin from "dayjs/plugin/isBetween";
 import { Metadata } from "next";
@@ -22,6 +23,16 @@ export async function generateMetadata({ params: { id } }: ProjectDetailsProps):
 		where: {
 			id: +id,
 		},
+		include: {
+			images: {
+				where: {
+					isThumbnail: true,
+				},
+				include: {
+					file: true,
+				},
+			},
+		},
 	});
 
 	if (!project) return {};
@@ -30,7 +41,7 @@ export async function generateMetadata({ params: { id } }: ProjectDetailsProps):
 		title: `Project: ${project.alias}`,
 		description: `Detailed overview of the "${project.alias}"-project`,
 		openGraph: {
-			images: [`${NEXT_PUBLIC_BASE_URL}/api/project/${project.id}/image`],
+			images: [getImageUrl(project.images[0].file)],
 		},
 	};
 }
