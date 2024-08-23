@@ -5,6 +5,7 @@ import IconButton from "@components/IconButton";
 import Tooltip from "@components/Tooltip";
 import config from "@config/config";
 import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
+import { cn } from "@utils/component-utils";
 import { toggleDarkMode } from "@utils/dark-mode-utils";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -12,6 +13,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { create } from "zustand";
 import { GitHub, HalfMoon, LinkedIn, Mail, SunLight } from "../Icons";
 import NavLink from "./NavLink";
 import SignOutButton from "./SignOutButton";
@@ -39,11 +41,19 @@ const LINKS: Array<{ href: string; title: string }> = [
 
 export const NAVBAR_TOP_THRESHOLD = 50;
 
+export const useNavbarStore = create<{ className: string; setClassName: (cn: string) => void }>(
+	(set) => ({
+		className: "",
+		setClassName: (cn: string) => set({ className: cn }),
+	})
+);
+
 function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 	const pathname = usePathname();
 	const darkModeIsActive = useDarkModeIsActive(initialDarkModeIsActive);
 	const [navHeaderIsHidden, setNavHeaderIsHidden] = useState(false);
 	const [intersectingSections, setIntersectingSections] = useState<string[]>([]);
+	const { className } = useNavbarStore();
 
 	useEffect(() => {
 		setNavHeaderIsHidden(window.scrollY > NAVBAR_TOP_THRESHOLD);
@@ -95,7 +105,10 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			}}
 			animate={{ transform: navHeaderIsHidden ? "translateY(-57px)" : "translateY(0px)" }}
 			transition={{ duration: 0.25 }}
-			className="sticky top-0 z-50 bg-white bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70"
+			className={cn(
+				"sticky top-0 z-50 bg-white bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70",
+				className
+			)}
 		>
 			<ul className="sticky z-40 flex items-center justify-between bg-[#fef5db] px-4 py-2 dark:bg-white">
 				<li className="flex items-center gap-2">
