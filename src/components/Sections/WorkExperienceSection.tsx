@@ -2,12 +2,21 @@ import DownloadResumeButton from "@components/DownloadResumeButton";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import { Experience, WorkExperienceWrapper } from "@components/WorkExperienceWrapper";
 import LMobileImg from "@public/work-experience/l_mobile.jpg";
+import NexobilityImg from "@public/work-experience/nexobility_gmbh.png";
 import { motion } from "framer-motion";
 
-const RESUME_LANGUAGES = ["de", "en"] as const;
-type ResumeLanguages = (typeof RESUME_LANGUAGES)[number];
-
 const experiences: Experience[] = [
+	{
+		title: "Software developer",
+		dateStarted: new Date(2024, 8),
+		dateEnded: new Date(2025, 7),
+		employmentType: "Fulltime",
+		organization: {
+			name: "Nexobility GmbH",
+			icon: NexobilityImg,
+			link: "https://www.betterpark.de",
+		},
+	},
 	{
 		title: "Project Engineer",
 		dateStarted: new Date(2023, 6),

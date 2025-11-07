@@ -113,21 +113,23 @@ function WorkExperience({ className, children, experience, ...props }: WorkExper
 							</>
 						)}
 					</div>
-					<div className="flex flex-col gap-6">
-						{experience.subExperience.map((subExperience, idx, self) => (
-							<div className="relative flex flex-col" key={subExperience.title}>
-								<div className="absolute -left-[60px] top-2 h-2 w-2 rounded-full bg-neutral-300"></div>
-								{idx !== self.length - 1 && (
-									<div className="absolute -left-[57px] top-6 h-[95%] w-[2px] bg-neutral-300"></div>
-								)}
-								<h1 className="font-bold">{subExperience.title}</h1>
-								<h2 className="font-light">{subExperience.employmentType}</h2>
-								<div className="text-secondary font-light">
-									{getTimeSpanWitReadableDuration(subExperience)}
+					{experience.subExperience.length > 0 && (
+						<div className="flex flex-col gap-6">
+							{experience.subExperience.map((subExperience, idx, self) => (
+								<div className="relative flex flex-col" key={subExperience.title}>
+									<div className="absolute -left-[60px] top-2 h-2 w-2 rounded-full bg-neutral-300"></div>
+									{idx !== self.length - 1 && (
+										<div className="absolute -left-[57px] top-6 h-[95%] w-[2px] bg-neutral-300"></div>
+									)}
+									<h1 className="font-bold">{subExperience.title}</h1>
+									<h2 className="font-light">{subExperience.employmentType}</h2>
+									<div className="text-secondary font-light">
+										{getTimeSpanWitReadableDuration(subExperience)}
+									</div>
 								</div>
-							</div>
-						))}
-					</div>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 		</>

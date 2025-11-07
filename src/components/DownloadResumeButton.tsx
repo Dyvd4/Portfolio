@@ -11,13 +11,24 @@ import { ComponentPropsWithRef, PropsWithChildren, useState } from "react";
 const ENGLISH_RESUME_URL = process.env.NEXT_PUBLIC_ENGLISH_RESUME_URL!;
 const GERMAN_RESUME_URL = process.env.NEXT_PUBLIC_GERMAN_RESUME_URL!;
 
+enum ResumeLanguage {
+	English = "en",
+	German = "de",
+}
+const RESUME_LANGUAGES = [ResumeLanguage.English, ResumeLanguage.German] as const;
+const RESUME_LANGUAGES_I18n: Record<ResumeLanguage, string> = {
+	de: "German",
+	en: "English",
+};
+
 type _DownloadResumeButtonProps = {};
 
 export type DownloadResumeButtonProps = _DownloadResumeButtonProps &
 	Omit<PropsWithChildren<ComponentPropsWithRef<"div">>, keyof _DownloadResumeButtonProps>;
 
 function DownloadResumeButton({ className, children, ...props }: DownloadResumeButtonProps) {
-	const [selectedLanguage, setSelectedLanguage] = useState<string[]>(["en"]);
+	const [selectedLanguages, setSelectedLanguages] = useState<string[]>([ResumeLanguage.English]);
+
 	return (
 		<div
 			className={cn(
@@ -27,7 +38,11 @@ function DownloadResumeButton({ className, children, ...props }: DownloadResumeB
 			{...props}
 		>
 			<Link
-				href={selectedLanguage[0] === "de" ? GERMAN_RESUME_URL : ENGLISH_RESUME_URL}
+				href={
+					selectedLanguages[0] === ResumeLanguage.German
+						? GERMAN_RESUME_URL
+						: ENGLISH_RESUME_URL
+				}
 				target="_blank"
 			>
 				<Button className="group flex items-center gap-2 whitespace-nowrap rounded-r-none pr-2">
@@ -42,16 +57,19 @@ function DownloadResumeButton({ className, children, ...props }: DownloadResumeB
 			<Dropdown>
 				<DropdownTrigger>
 					<Button className="flex items-center rounded-l-none rounded-r-full">
-						{selectedLanguage[0]}
+						{selectedLanguages[0]}
 						<div className="h-6"></div>
 					</Button>
 				</DropdownTrigger>
 				<DropdownMenu
-					selectedOptions={selectedLanguage}
-					onSelectionChange={setSelectedLanguage}
+					selectedOptions={selectedLanguages}
+					onSelectionChange={setSelectedLanguages}
 				>
-					<DropdownItem id="en">English</DropdownItem>
-					<DropdownItem id="de">German</DropdownItem>
+					{RESUME_LANGUAGES.map((language) => (
+						<DropdownItem key={language} id={language}>
+							{RESUME_LANGUAGES_I18n[language]}
+						</DropdownItem>
+					))}
 				</DropdownMenu>
 			</Dropdown>
 		</div>
