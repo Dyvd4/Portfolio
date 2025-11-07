@@ -35,7 +35,7 @@ ENV SKIP_ENV_VALIDATION=1
 ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build Next.js based on the preferred package manager
-RUN pnpx prisma generate 
+RUN pnpm prisma generate 
 RUN pnpm build;
 
 # Note: It is not necessary to add an intermediate step that does a full copy of `node_modules` here
