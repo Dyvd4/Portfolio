@@ -3,6 +3,9 @@ FROM node:20-alpine AS base
 # Step 1. Rebuild the source code only when needed
 FROM base AS builder
 
+# install openssl
+RUN apk add --no-cache openssl
+
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
