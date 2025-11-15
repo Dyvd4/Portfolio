@@ -1,10 +1,7 @@
-FROM node:20-alpine AS base
+FROM node:25 AS base
 
 # Step 1. Rebuild the source code only when needed
 FROM base AS builder
-
-# install openssl
-RUN apk add --no-cache openssl
 
 WORKDIR /app
 
@@ -12,7 +9,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml* ./
 
 # Omit --production flag for TypeScript devDependencies
-RUN corepack enable pnpm && pnpm i; 
+RUN npm install -g pnpm && pnpm i
 
 COPY . . 
 
