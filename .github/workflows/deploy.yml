@@ -44,6 +44,7 @@ jobs:
             - name: create .env file for building `frontend` image
               run: |
                   echo "BASE_URL=${{secrets.BASE_URL}}" >> docker/.env
+                  echo "PORTFOLIO_DATABASE_URL=${{secrets.PORTFOLIO_DATABASE_URL}}" >> docker/.env
                   echo "NEXT_PUBLIC_BASE_URL=${{secrets.NEXT_PUBLIC_BASE_URL}}" >> docker/.env
                   echo "NEXT_PUBLIC_GITHUB_PROFILE_URL=${{secrets.NEXT_PUBLIC_GITHUB_PROFILE_URL}}" >> docker/.env
                   echo "NEXT_PUBLIC_CONTACT_RECIPIENT=${{secrets.NEXT_PUBLIC_CONTACT_RECIPIENT}}" >> docker/.env
@@ -64,52 +65,3 @@ jobs:
                   docker compose --file docker-compose.build.yml build 
                   docker tag $BUILD_IMAGE_NAME $ECR_REPO_URL
                   docker push $ECR_REPO_URL
-    # deploy:
-    #     needs: build
-    #     runs-on: ubuntu-latest
-    #     env:
-    #         APP_PATH: /usr/web-services/portfolio/
-    #     steps:
-    #         - name: Checkout code
-    #           uses: actions/checkout@v4
-
-    #         - name: copy necessary files for starting docker container into vps
-    #           uses: appleboy/scp-action@v0.1.7
-    #           with:
-    #               host: ${{ secrets.VPS_HOST }}
-    #               username: ${{ secrets.VPS_USERNAME }}
-    #               key: ${{ secrets.VPS_PRIVATE_KEY }}
-    #               port: 22
-    #               source: docker/server/
-    #               target: ${{env.APP_PATH}}
-    #               strip_components: 2
-
-    #         - name: start `cron-jobs` application
-    #           uses: appleboy/ssh-action@master
-    #           with:
-    #               host: ${{ secrets.VPS_HOST }}
-    #               username: ${{ secrets.VPS_USERNAME }}
-    #               key: ${{ secrets.VPS_PRIVATE_KEY }}
-    #               port: 22
-    #               script: |
-    #                   aws ecr get-login-password --region ${{ secrets.AWS_ECR_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_ECR_REGION }}.amazonaws.com
-    #                   cd ${{env.APP_PATH}}/cron-jobs
-    #                   docker stop cron-jobs
-    #                   docker rm cron-jobs
-    #                   docker compose -f docker/docker-compose.yml pull
-    #                   docker compose -f docker/docker-compose.yml up -d
-
-    #         - name: start `frontend` application
-    #           uses: appleboy/ssh-action@master
-    #           with:
-    #               host: ${{ secrets.VPS_HOST }}
-    #               username: ${{ secrets.VPS_USERNAME }}
-    #               key: ${{ secrets.VPS_PRIVATE_KEY }}
-    #               port: 22
-    #               script: |
-    #                   aws ecr get-login-password --region ${{ secrets.AWS_ECR_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_ECR_REGION }}.amazonaws.com
-    #                   cd ${{env.APP_PATH}}/frontend
-    #                   docker stop frontend
-    #                   docker rm frontend
-    #                   docker compose -f docker/docker-compose.yml pull
-    #                   docker compose -f docker/docker-compose.yml up -d
