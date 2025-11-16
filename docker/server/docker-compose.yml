@@ -7,6 +7,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
             - docker-config:${DOCKER_CONFIG_PATH}
         command:
+            - "--label-enable"
             - "--interval"
             - "30"
         restart: unless-stopped
@@ -44,12 +45,16 @@ services:
         restart: unless-stopped
         env_file:
             - ./frontend/.env
+        labels:
+            - com.centurylinklabs.watchtower.enable=true
 
     portfolio-cron-jobs:
         image: ${PORTFOLIO_CRON_JOBS_IMAGE_NAME}
         restart: unless-stopped
         env_file:
             - ./cron-jobs/.env
+        labels:
+            - com.centurylinklabs.watchtower.enable=true
 
 volumes:
     uptime-kuma:
