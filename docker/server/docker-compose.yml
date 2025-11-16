@@ -1,4 +1,16 @@
 services:
+    caddy:
+        image: local/caddy
+        ports:
+            - 443:443
+            - 80:80
+        build:
+            context: caddy
+            dockerfile: Dockerfile
+        pull_policy: never
+        networks:
+            - proxy
+
     watchtower:
         image: nickfedor/watchtower
         environment:
@@ -47,6 +59,8 @@ services:
             - ./frontend/.env
         labels:
             - com.centurylinklabs.watchtower.enable=true
+        networks:
+            - proxy
 
     portfolio-cron-jobs:
         image: ${PORTFOLIO_CRON_JOBS_IMAGE_NAME}
@@ -61,3 +75,6 @@ volumes:
     aws-credentials:
     alpine-cron-logs:
     docker-config:
+
+networks:
+    proxy:
