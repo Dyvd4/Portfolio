@@ -1,5 +1,6 @@
 import config from "@/config";
 import axios from "axios";
+import logger from "./logger";
 
 const { BASE_URL, ADMIN_USERNAME, ADMIN_PASSWORD } = config;
 
@@ -20,6 +21,7 @@ API.interceptors.request.use(async (config) => {
 		}),
 		method: "POST",
 	});
+	logger.info("Retrieved auth token");
 
 	const resText = await res.json();
 	if (!res.ok) {
