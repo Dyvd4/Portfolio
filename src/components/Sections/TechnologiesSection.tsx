@@ -1,21 +1,22 @@
 import ExperienceCard from "@components/ExperienceCard";
 import { H2 } from "@components/H2";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
+import AngularImg from "@public/experience-cards/Angular.gif";
 import AwsImg from "@public/experience-cards/AWS.png";
+import DrizzleImg from "@public/experience-cards/drizzle.png";
 import ExpressJsImg from "@public/experience-cards/ExpressJs.png";
+import FiberImg from "@public/experience-cards/fiber.png";
 import FigmaImg from "@public/experience-cards/Figma.png";
 import GitHubImg from "@public/experience-cards/GitHub.svg";
 import KnockoutImg from "@public/experience-cards/knockout.png";
 import NestJsImg from "@public/experience-cards/NestJS.png";
 import NextJsImg from "@public/experience-cards/NextJs.svg";
 import NodeJsImg from "@public/experience-cards/NodeJs.svg";
-import ReactImg from "@public/experience-cards/React.svg";
-import DrizzleImg from "@public/experience-cards/drizzle.png";
-import FiberImg from "@public/experience-cards/fiber.png";
 import PrismaImg from "@public/experience-cards/prisma.png";
-import tRPC from "@public/experience-cards/tRPC.svg";
+import ReactImg from "@public/experience-cards/React.svg";
 import TailwindCssImg from "@public/experience-cards/tailwind-css.svg";
 import TeamCityImg from "@public/experience-cards/teamcity.png";
+import tRPC from "@public/experience-cards/tRPC.svg";
 import { motion } from "framer-motion";
 
 const TECHNOLOGY_GROUPS = [
@@ -34,6 +35,13 @@ const TECHNOLOGY_GROUPS = [
 				imageProps: {
 					src: ReactImg,
 					alt: "React",
+				},
+			},
+			{
+				name: "Angular",
+				imageProps: {
+					src: AngularImg,
+					alt: "Angular",
 				},
 			},
 			{
