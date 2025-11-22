@@ -1,4 +1,6 @@
-FROM node:25 AS base
+FROM node:lts-slim AS base
+
+RUN apt-get update -y && apt-get install -y openssl
 
 # Step 1. Rebuild the source code only when needed
 FROM base AS builder
