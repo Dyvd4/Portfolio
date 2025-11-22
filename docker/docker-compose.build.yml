@@ -6,6 +6,7 @@ services:
             dockerfile: prod.Dockerfile
             args:
                 BASE_URL: ${BASE_URL}
+                PORTFOLIO_DATABASE_URL: ${PORTFOLIO_DATABASE_URL}
                 NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
                 NEXT_PUBLIC_GITHUB_PROFILE_URL: ${NEXT_PUBLIC_GITHUB_PROFILE_URL}
                 NEXT_PUBLIC_CONTACT_RECIPIENT: ${NEXT_PUBLIC_CONTACT_RECIPIENT}
