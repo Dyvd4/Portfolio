@@ -32,11 +32,16 @@ ENV SKIP_ENV_VALIDATION=1
 
 # Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line to disable telemetry at build time
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build Next.js based on the preferred package manager
 RUN pnpm prisma generate 
-RUN pnpm build;
+# Use the secret only for this step
+RUN --mount=type=secret,id=build_secrets_env \
+ 	set -a && \
+    . /run/secrets/build_secrets_env && \
+    set +a && \
+    pnpm build
 
 # Note: It is not necessary to add an intermediate step that does a full copy of `node_modules` here
 
@@ -59,7 +64,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # COPY --from=builder --chown=nextjs:nodejs /app/tailwind.config.ts ./ 
 
 # Uncomment the following line to disable telemetry at run time
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Note: Don't expose ports here, Compose will handle that for us
 

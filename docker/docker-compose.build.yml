@@ -6,7 +6,6 @@ services:
             dockerfile: prod.Dockerfile
             args:
                 BASE_URL: ${BASE_URL}
-                PORTFOLIO_DATABASE_URL: ${PORTFOLIO_DATABASE_URL}
                 NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
                 NEXT_PUBLIC_GITHUB_PROFILE_URL: ${NEXT_PUBLIC_GITHUB_PROFILE_URL}
                 NEXT_PUBLIC_CONTACT_RECIPIENT: ${NEXT_PUBLIC_CONTACT_RECIPIENT}
@@ -15,3 +14,8 @@ services:
                 NEXT_PUBLIC_ENGLISH_RESUME_URL: ${NEXT_PUBLIC_ENGLISH_RESUME_URL}
                 NEXT_PUBLIC_FILE_API_PATH: ${NEXT_PUBLIC_FILE_API_PATH}
                 NEXT_PUBLIC_CDN_URL: ${NEXT_PUBLIC_CDN_URL}
+            secrets:
+                - build_secrets_env
+secrets:
+    build_secrets_env:
+        file: ./build_secrets.env
