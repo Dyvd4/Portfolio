@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@generated/prisma/client";
 import { getDataUrl } from "@utils/file-utils";
 import { useState } from "react";
 
@@ -13,9 +13,9 @@ export type Image = {
 	sortOrder: number;
 };
 
-const projectWithImages = Prisma.validator<Prisma.ProjectDefaultArgs>()({
+const projectWithImages = {
 	include: { images: { include: { file: true } } },
-});
+} satisfies Prisma.ProjectDefaultArgs;
 
 export type ProjectWithImages = Prisma.ProjectGetPayload<typeof projectWithImages>;
 

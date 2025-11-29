@@ -3,7 +3,7 @@ name: deploy
 on:
     push:
         branches:
-            - main
+            - update-npm-packages
 
 concurrency:
     group: deployment
