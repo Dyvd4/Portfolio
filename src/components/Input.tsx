@@ -16,7 +16,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 			className={cn(
 				`block w-full rounded-lg
 						border border-gray-300 bg-gray-50 p-4
-						text-sm outline-none focus:border-blue-500
+						text-sm outline-hidden focus:border-blue-500
 						focus:ring-2 focus:ring-blue-500 dark:border-gray-600
 						dark:bg-gray-700 dark:text-white
 						dark:placeholder-gray-400

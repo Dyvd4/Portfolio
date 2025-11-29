@@ -22,8 +22,7 @@ function ModalHeader({ className, children, close, ...props }: ModalHeaderProps)
 			{children}
 			{/* that's crazy but I stick with it (it works) */}
 			<Times
-				className="[&:hover>path]:!stroke-yellow-400 
-								[&>path]:!stroke-white"
+				className="[&:hover>path]:stroke-yellow-400! [&>path]:stroke-white!"
 				onClick={close}
 			/>
 		</H1>

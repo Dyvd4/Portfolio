@@ -117,7 +117,7 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 						className="after:content after:shadow-highlight group relative block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg"
 					>
 						<Image
-							className="aspect-[3/2] transform rounded-lg object-cover brightness-90 transition will-change-auto hover:brightness-110"
+							className="aspect-3/2 transform rounded-lg object-cover brightness-90 transition will-change-auto hover:brightness-110"
 							style={{ transform: "translate3d(0, 0, 0)" }}
 							src={image.src}
 							alt="gallery image"

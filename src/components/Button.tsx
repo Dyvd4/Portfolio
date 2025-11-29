@@ -13,13 +13,13 @@ export default function Button({ children, className, ...props }: ButtonProps) {
 						border-none 
 						bg-yellow-500 px-6
 						py-2 text-sm font-bold
-						text-black outline-none
+						text-black outline-hidden
 						transition-transform hover:bg-yellow-400 
 						active:scale-90 active:bg-yellow-300 disabled:transform-none 
 						disabled:bg-yellow-200 disabled:hover:cursor-not-allowed disabled:hover:bg-yellow-200
 						dark:bg-yellow-400 dark:hover:bg-yellow-300
-						dark:active:bg-yellow-200 disabled:dark:bg-yellow-200
-						disabled:dark:hover:bg-yellow-200
+						dark:active:bg-yellow-200 dark:disabled:bg-yellow-200
+						dark:disabled:hover:bg-yellow-200
 						sm:text-lg
 						`,
 				className

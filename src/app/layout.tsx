@@ -63,7 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 					<div className="min-h-screen">
 						<Navbar darkModeIsActive={darkModeIsActive} />
 						<main className="mx-auto pt-2">
-							<Breadcrumbs className="mx-auto max-w-screen-lg px-6" />
+							<Breadcrumbs className="mx-auto max-w-(--breakpoint-lg) px-6" />
 							{children}
 						</main>
 						<LoadingPortalSlot />

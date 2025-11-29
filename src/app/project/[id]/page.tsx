@@ -1,5 +1,4 @@
 import ProjectCommitService from "@backend/services/ProjectCommitService";
-import config from "@config/config";
 import { prisma } from "@prisma";
 import { getImageUrl } from "@utils/file-utils";
 import dayjs from "dayjs";
@@ -9,8 +8,6 @@ import { notFound } from "next/navigation";
 import ProjectDetailsPage from "./project-details-page";
 
 dayjs.extend(dayJsIsBetweenPlugin);
-
-const { NEXT_PUBLIC_BASE_URL } = config;
 
 type ProjectDetailsProps = {
 	params: {

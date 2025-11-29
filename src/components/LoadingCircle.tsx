@@ -7,7 +7,7 @@ function LoadingCircle({ ...props }: LoadingCircleProps) {
 		<span
 			className="loading-circle
 						border-black after:border-black 
-						dark:border-white after:dark:border-white"
+						dark:border-white dark:after:border-white"
 			{...props}
 		></span>
 	);

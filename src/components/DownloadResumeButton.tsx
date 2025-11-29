@@ -32,7 +32,7 @@ function DownloadResumeButton({ className, children, ...props }: DownloadResumeB
 	return (
 		<div
 			className={cn(
-				`group mt-16 flex items-center justify-center gap-1 whitespace-nowrap px-0 py-0 lg:mt-20`,
+				`group mt-16 flex items-center justify-center gap-1 px-0 py-0 whitespace-nowrap lg:mt-20`,
 				className
 			)}
 			{...props}
@@ -45,13 +45,9 @@ function DownloadResumeButton({ className, children, ...props }: DownloadResumeB
 				}
 				target="_blank"
 			>
-				<Button className="group flex items-center gap-2 whitespace-nowrap rounded-r-none pr-2">
+				<Button className="group flex items-center gap-2 rounded-r-none pr-2 whitespace-nowrap">
 					Résumé
-					<Download
-						className="[&.icon:hover>path]:stroke-black
-									dark:[&.icon:hover>path]:stroke-black
-										[&.icon>path]:!stroke-black"
-					/>
+					<Download className="[&.icon:hover>path]:stroke-black dark:[&.icon:hover>path]:stroke-black [&.icon>path]:stroke-black!" />
 				</Button>
 			</Link>
 			<Dropdown>
