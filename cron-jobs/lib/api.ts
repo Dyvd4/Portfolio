@@ -11,7 +11,9 @@ const API = axios.create({
 API.interceptors.request.use(async (config) => {
 	// using axios to fetch token would trigger the interceptor again
 	// which would cause an infinite loop
-	const res = await fetch(`${BASE_URL}/auth/custom-sign-in`, {
+	const url = `${BASE_URL}/auth/custom-sign-in`;
+	logger.debug(url);
+	const res = await fetch(url, {
 		headers: {
 			"Content-Type": "application/json",
 		},
