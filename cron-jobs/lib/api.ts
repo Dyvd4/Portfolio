@@ -21,12 +21,15 @@ API.interceptors.request.use(async (config) => {
 		}),
 		method: "POST",
 	});
-	logger.info("Retrieved auth token");
 
 	const resText = await res.json();
+	logger.info("Retrieved auth token");
+	logger.debug(resText);
+
 	if (!res.ok) {
 		throw new Error(`Error retrieving auth token: ${resText}`);
 	}
+
 	config.headers["auth-token"] = resText;
 	return config;
 });

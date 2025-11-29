@@ -1,11 +1,11 @@
-import winston from "winston";
-import { WinstonTransport as AxiomTransport } from "@axiomhq/winston";
 import config from "@/config";
+import { WinstonTransport as AxiomTransport } from "@axiomhq/winston";
+import winston from "winston";
 
-const { NODE_ENV, AXIOM_TOKEN, AXIOM_DATASET } = config;
+const { LOG_LEVEL, NODE_ENV, AXIOM_TOKEN, AXIOM_DATASET } = config;
 
 const logger = winston.createLogger({
-	level: "info",
+	level: LOG_LEVEL,
 	format: winston.format.combine(
 		winston.format.timestamp(),
 		winston.format.metadata({ fillExcept: ["level", "message"] }),
@@ -35,9 +35,11 @@ if (NODE_ENV !== "production") {
 				winston.format.align(),
 				winston.format.printf((info) => {
 					let str = `${info.timestamp} ${info.level}: ${info.message}`;
-					if (info.metadata) {
+
+					if (info.metadata != null) {
 						str += `. Metadata: ${JSON.stringify(info.metadata)}`;
 					}
+
 					return str;
 				})
 			),
