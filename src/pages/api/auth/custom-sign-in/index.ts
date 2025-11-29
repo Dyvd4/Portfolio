@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	console.log("🚀 ~ handler ~ req.method:", req.method);
+	console.log("🚀 ~ handler ~ req.url:", req.url);
 	if (req.method !== "POST") return res.status(400).send(`${req.method} not supported`);
 	const { username, password } = req.body;
 	const user = await prisma.user.findFirst({
