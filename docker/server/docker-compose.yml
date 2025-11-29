@@ -12,7 +12,7 @@ services:
             - caddy_data:/data
             - caddy_config:/config
         networks:
-            - proxy
+            - frontend
 
     watchtower:
         image: nickfedor/watchtower
@@ -63,7 +63,7 @@ services:
         labels:
             - com.centurylinklabs.watchtower.enable=true
         networks:
-            - proxy
+            - frontend
 
     portfolio-cron-jobs:
         image: ${PORTFOLIO_CRON_JOBS_IMAGE_NAME}
@@ -72,6 +72,8 @@ services:
             - ./cron-jobs/.env
         labels:
             - com.centurylinklabs.watchtower.enable=true
+        networks:
+            - frontend
 
 volumes:
     uptime-kuma:
@@ -82,4 +84,4 @@ volumes:
     caddy_config:
 
 networks:
-    proxy:
+    frontend:
