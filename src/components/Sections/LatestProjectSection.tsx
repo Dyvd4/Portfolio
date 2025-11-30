@@ -4,7 +4,7 @@ import IconLink from "@components/IconLink";
 import ProjectListItem from "@components/ListItems/ProjectListItem";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import { getImageUrl } from "@utils/file-utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 type LatestProjectSectionProps = {
 	latestProject: any;

@@ -3,7 +3,7 @@ import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import { Experience, WorkExperienceWrapper } from "@components/WorkExperienceWrapper";
 import LMobileImg from "@public/work-experience/l_mobile.jpg";
 import NexobilityImg from "@public/work-experience/nexobility_gmbh.png";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const experiences: Experience[] = [
 	{

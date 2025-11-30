@@ -1,5 +1,4 @@
 import ProjectCommitService from "@backend/services/ProjectCommitService";
-import config from "@config/config";
 import { prisma } from "@prisma";
 import { getImageUrl } from "@utils/file-utils";
 import dayjs from "dayjs";
@@ -10,16 +9,20 @@ import ProjectDetailsPage from "./project-details-page";
 
 dayjs.extend(dayJsIsBetweenPlugin);
 
-const { NEXT_PUBLIC_BASE_URL } = config;
-
 type ProjectDetailsProps = {
-	params: {
+	params: Promise<{
 		id: string;
-	};
+	}>;
 };
 
-export async function generateMetadata({ params: { id } }: ProjectDetailsProps): Promise<Metadata> {
-	const project = await prisma.project.findFirst({
+export async function generateMetadata(props: ProjectDetailsProps): Promise<Metadata> {
+    const params = await props.params;
+
+    const {
+        id
+    } = params;
+
+    const project = await prisma.project.findFirst({
 		where: {
 			id: +id,
 		},
@@ -35,9 +38,9 @@ export async function generateMetadata({ params: { id } }: ProjectDetailsProps):
 		},
 	});
 
-	if (!project) return {};
+    if (!project) return {};
 
-	return {
+    return {
 		title: `Project: ${project.alias}`,
 		description: `Detailed overview of the "${project.alias}"-project`,
 		openGraph: {
@@ -46,12 +49,18 @@ export async function generateMetadata({ params: { id } }: ProjectDetailsProps):
 	};
 }
 
-async function ProjectDetails({ params: { id } }: ProjectDetailsProps) {
-	if (!id) {
+async function ProjectDetails(props: ProjectDetailsProps) {
+    const params = await props.params;
+
+    const {
+        id
+    } = params;
+
+    if (!id) {
 		notFound();
 	}
 
-	const projectLanguageAggregate = await prisma.projectLanguage.aggregate({
+    const projectLanguageAggregate = await prisma.projectLanguage.aggregate({
 		where: {
 			projectId: +id,
 		},
@@ -60,7 +69,7 @@ async function ProjectDetails({ params: { id } }: ProjectDetailsProps) {
 		},
 	});
 
-	const project = await prisma.project.findFirst({
+    const project = await prisma.project.findFirst({
 		where: {
 			id: +id,
 		},
@@ -93,7 +102,7 @@ async function ProjectDetails({ params: { id } }: ProjectDetailsProps) {
 			tags: true,
 		},
 	});
-	return (
+    return (
 		<ProjectDetailsPage
 			project={project}
 			latestCommitsView={

@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, PropsWithChildren } from "react";
+import { ComponentPropsWithRef, PropsWithChildren, type JSX } from "react";
 
 type _CardProps = {
 	title: React.ReactNode;

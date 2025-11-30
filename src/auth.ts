@@ -1,11 +1,11 @@
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import config from "@config/config";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@prisma";
 import bcrypt from "bcryptjs";
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthConfig = {
 	adapter: PrismaAdapter(prisma),
 	session: {
 		strategy: "jwt",
@@ -42,7 +42,7 @@ export const authOptions: AuthOptions = {
 
 				if (
 					credentials?.username === adminUser.username &&
-					(await bcrypt.compare(credentials.password, dbAdminUser.password))
+					(await bcrypt.compare(credentials.password as string, dbAdminUser.password))
 				) {
 					return {
 						id: dbAdminUser.id,
@@ -61,4 +61,4 @@ export const authOptions: AuthOptions = {
 	secret: process.env.NEXTAUTH_SECRET!,
 };
 
-export default NextAuth(authOptions);
+export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);

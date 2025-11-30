@@ -3,7 +3,7 @@ import LongArrowRightUp from "@components/Icons/LongArrowRightUp";
 import ProjectImage from "@components/Images/ProjectImage";
 import { cn } from "@utils/component-utils";
 import Link from "next/link";
-import { ComponentPropsWithRef, PropsWithChildren } from "react";
+import { ComponentPropsWithRef, PropsWithChildren, type JSX } from "react";
 
 type _ProjectListItemProps = {
 	id: number;

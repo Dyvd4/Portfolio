@@ -13,7 +13,7 @@ type IconLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof L
 		 * text and icon is always black (also in dark mode)
 		 */
 		variant?: "normal" | "black" | "secondary";
-		icon?: React.ReactElement;
+		icon?: React.ReactElement<any>;
 	} & React.RefAttributes<HTMLAnchorElement>;
 
 function IconLink({

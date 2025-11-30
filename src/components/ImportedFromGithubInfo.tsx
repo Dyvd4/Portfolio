@@ -22,7 +22,7 @@ function ImportedFromGithubInfo({ className, children, ...props }: ImportedFromG
 			{...props}
 		>
 			Imported from GitHub
-			<GitHub className="[&>path]:stroke-secondary !h-4 !w-4 !cursor-default" />
+			<GitHub className="[&>path]:stroke-secondary h-4! w-4! cursor-default!" />
 		</Link>
 	);
 }

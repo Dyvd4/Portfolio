@@ -97,8 +97,8 @@ export default function ProjectPage({ initialProjects }) {
 	};
 
 	return (
-		<>
-			<main className="mx-auto">
+        <>
+            <main className="mx-auto">
 				<H1 className="text-center text-6xl sm:text-7xl">Projects</H1>
 				{status === "authenticated" && (
 					<>
@@ -114,7 +114,9 @@ export default function ProjectPage({ initialProjects }) {
 					className="mt-12 rounded-md border-2"
 				/>
 				<ul
-					ref={(ref) => !!ref && autoAnimate(ref)}
+					ref={ref => {
+                        !!ref && autoAnimate(ref);
+                    }}
 					className="my-12 flex flex-col items-center gap-10"
 				>
 					{!projectsAreLoading && projects.length === 0 && <p>No projects found 😴</p>}
@@ -170,7 +172,7 @@ export default function ProjectPage({ initialProjects }) {
 					)}
 				</ul>
 			</main>
-			{status === "authenticated" && (
+            {status === "authenticated" && (
 				<>
 					<ProjectModal
 						isActive={projectAddModalIsActive}
@@ -184,6 +186,6 @@ export default function ProjectPage({ initialProjects }) {
 					/>
 				</>
 			)}
-		</>
-	);
+        </>
+    );
 }

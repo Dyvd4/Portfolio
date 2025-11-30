@@ -17,7 +17,7 @@ import ReactImg from "@public/experience-cards/React.svg";
 import TailwindCssImg from "@public/experience-cards/tailwind-css.svg";
 import TeamCityImg from "@public/experience-cards/teamcity.png";
 import tRPC from "@public/experience-cards/tRPC.svg";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const TECHNOLOGY_GROUPS = [
 	{

@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { ComponentPropsWithRef, PropsWithChildren, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { z } from "zod";
+import { z, ZodFormattedError } from "zod";
 
 const contactSchema = z.object({
 	name: z.string().nonempty(),
@@ -36,7 +36,7 @@ function ContactModal({ className, children, ...props }: ContactModalProps) {
 		handleSubmit,
 		reset: resetFields,
 	} = useForm<ContactSchema>({ defaultValues: { services: [] } });
-	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<ContactSchema> | null>(null);
+	const [errorMap, setErrorMap] = useState<ZodFormattedError<ContactSchema> | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 	const router = useRouter();
 

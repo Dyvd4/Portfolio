@@ -1,7 +1,7 @@
 "use client";
 import GalleryModalContent from "@components/Gallery/GalleryModalContent";
 import { Dialog, DialogBackdrop } from "@headlessui/react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { type _TImage } from "./Gallery";
 
 type GalleryModalProps = {
@@ -25,7 +25,7 @@ export function GalleryModal({
 		<Dialog
 			open={isOpen}
 			onClose={onOpenChange}
-			className="fixed inset-0 top-[80px] z-10 flex justify-center"
+			className="fixed inset-0 top-20 z-10 flex justify-center"
 		>
 			<DialogBackdrop
 				className="fixed inset-0 bg-black/70 backdrop-blur-2xl"

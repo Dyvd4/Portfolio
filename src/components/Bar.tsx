@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@utils/component-utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ComponentPropsWithRef, PropsWithChildren } from "react";
 
 type _BarProps = {

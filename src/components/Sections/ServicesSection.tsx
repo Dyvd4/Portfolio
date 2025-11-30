@@ -7,7 +7,7 @@ import ContactModal from "@components/Modals/ContactModal";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import ServiceCard, { _ServiceCardProps } from "@components/ServiceCard";
 import { getGroupedArray } from "@utils/array-utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export const SERVICE_CARDS: _ServiceCardProps[] = [
 	{
@@ -62,7 +62,7 @@ export function ServicesSection() {
 			id="services"
 			heading="Services"
 			subheading="What I can offer you"
-			className="bg-[#FEF5DB] [&_h1]:dark:text-black"
+			className="bg-[#FEF5DB] dark:[&_h1]:text-black"
 		>
 			<div className="mt-16 flex flex-col gap-6 px-6 lg:mt-20">
 				{getGroupedArray(SERVICE_CARDS, 2).map((group, idx) => (

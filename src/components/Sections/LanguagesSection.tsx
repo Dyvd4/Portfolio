@@ -10,7 +10,7 @@ import TypeScriptImg from "@public/experience-cards/TypeScript.svg";
 import EnglishImg from "@public/experience-cards/UK.png";
 import CppImg from "@public/experience-cards/cpp.png";
 import GermanImg from "@public/experience-cards/german.png";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Image from "next/image";
 
 const LANGUAGE_GROUPS = [

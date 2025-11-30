@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# prisma
+/src/generated
+
 # production
 /build
 
@@ -41,3 +44,9 @@ next-env.d.ts
 
 # open-next
 .open-next
+
+# docker build secrets
+build_secrets.env
+
+# db certificate
+prod-*.crt

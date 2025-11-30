@@ -1,5 +1,5 @@
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { ChevronLeftIcon, ChevronRightIcon, Download, ExternalLink, XCircle } from "lucide-react";
+import { AnimatePresence, motion, MotionConfig } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -89,12 +89,12 @@ export default function GalleryModalContent({
 			}}
 		>
 			<div
-				className="relative z-10 flex aspect-[3/2] w-full max-w-7xl items-center"
+				className="relative z-10 flex aspect-3/2 w-full max-w-7xl items-center"
 				{...handlers}
 			>
 				{/* Main image */}
 				<div className="w-full">
-					<div className="relative flex aspect-[3/2] items-center justify-center">
+					<div className="relative flex aspect-3/2 items-center justify-center">
 						<AnimatePresence initial={false} custom={direction}>
 							<motion.div
 								key={curIndex}
@@ -121,7 +121,7 @@ export default function GalleryModalContent({
 							<>
 								{curIndex > 0 && (
 									<button
-										className="absolute left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+										className="absolute top-[calc(50%-16px)] left-3 rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-hidden"
 										style={{ transform: "translate3d(0, 0, 0)" }}
 										onClick={() => changeCurrentIndex(curIndex - 1)}
 									>
@@ -130,14 +130,14 @@ export default function GalleryModalContent({
 								)}
 								{curIndex + 1 < images.length && (
 									<button
-										className="absolute right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
+										className="absolute top-[calc(50%-16px)] right-3 rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-hidden"
 										style={{ transform: "translate3d(0, 0, 0)" }}
 										onClick={() => changeCurrentIndex(curIndex + 1)}
 									>
 										<ChevronRightIcon className="h-6 w-6" />
 									</button>
 								)}
-								<div className="absolute left-0 top-0 z-20 flex -translate-y-full transform items-center gap-2 p-3 text-white">
+								<div className="absolute top-0 left-0 z-20 flex -translate-y-full transform items-center gap-2 p-3 text-white">
 									{/* full size version */}
 									<a
 										href={curren_TImage.src}
@@ -159,7 +159,7 @@ export default function GalleryModalContent({
 										<Download className="h-5 w-5" />
 									</button>
 								</div>{" "}
-								<div className="absolute right-0 top-0 flex -translate-y-full transform items-center gap-2 p-3 text-white">
+								<div className="absolute top-0 right-0 flex -translate-y-full transform items-center gap-2 p-3 text-white">
 									<button
 										onClick={() => closeModal()}
 										className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
@@ -173,11 +173,8 @@ export default function GalleryModalContent({
 				</div>
 
 				{/* Bottom Nav bar */}
-				<div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60">
-					<motion.div
-						initial={false}
-						className="mx-auto mb-6 mt-6 flex aspect-[3/2] h-14"
-					>
+				<div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-linear-to-b from-black/0 to-black/60">
+					<motion.div initial={false} className="mx-auto mt-6 mb-6 flex aspect-3/2 h-14">
 						<AnimatePresence initial={false}>
 							{filteredImages.map(({ src, id }, i) => (
 								<motion.button
@@ -195,11 +192,11 @@ export default function GalleryModalContent({
 									key={i}
 									className={`${
 										i === curIndex
-											? "z-20 rounded-md shadow shadow-black/50"
+											? "z-20 rounded-md shadow-sm shadow-black/50"
 											: "z-10"
 									} ${i === 0 ? "rounded-l-md" : ""} ${
 										i === images.length - 1 ? "rounded-r-md" : ""
-									} relative inline-block w-full shrink-0 transform-gpu overflow-hidden focus:outline-none`}
+									} relative inline-block w-full shrink-0 transform-gpu overflow-hidden focus:outline-hidden`}
 								>
 									<Link
 										href={{

@@ -22,8 +22,8 @@ const EditImage = ({ image, onRemove, onSetThumbnail }: EditImageProps) => {
 				onClick={() => onSetThumbnail(image)}
 				className="invisible absolute inset-0 z-10 bg-black/70 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100"
 			></div>
-			<div className="invisible absolute right-0 top-0 z-10 flex cursor-pointer p-1 text-red-500 opacity-0 group-hover:visible group-hover:opacity-100">
-				<XCircle onClick={() => onRemove(image)} />
+			<div className="invisible absolute top-0 right-0 z-10 flex cursor-pointer p-1 opacity-0 group-hover:visible group-hover:opacity-100">
+				<XCircle className="[&>path]:stroke-white!" onClick={() => onRemove(image)} />
 			</div>
 			<Image className="object-cover" fill alt="place image" src={image.dataUrl} />
 			{image.isThumbnail && (

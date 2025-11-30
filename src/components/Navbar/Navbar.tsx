@@ -7,7 +7,7 @@ import config from "@config/config";
 import useDarkModeIsActive from "@hooks/useDarkModeIsActive";
 import { cn } from "@utils/component-utils";
 import { toggleDarkMode } from "@utils/dark-mode-utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -106,22 +106,18 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			animate={{ transform: navHeaderIsHidden ? "translateY(-57px)" : "translateY(0px)" }}
 			transition={{ duration: 0.25 }}
 			className={cn(
-				"sticky top-0 z-50 bg-white bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-70",
+				"bg-opacity-70 dark:bg-opacity-70 sticky top-0 z-50 bg-white dark:bg-gray-900",
 				className
 			)}
 		>
 			<ul className="sticky z-40 flex items-center justify-between bg-[#fef5db] px-4 py-2 dark:bg-white">
 				<li className="flex items-center gap-2">
-					<Mail
-						className="[&.icon:hover>path]:stroke-black
-									dark:[&.icon:hover>path]:stroke-black
-										[&.icon>path]:!stroke-black"
-					/>
+					<Mail className="[&.icon:hover>path]:stroke-black dark:[&.icon:hover>path]:stroke-black [&.icon>path]:stroke-black!" />
 					<Copyable
 						iconProps={{
 							className: `[&.icon:hover>path]:stroke-black
 										dark:[&.icon:hover>path]:stroke-black
-										[&.icon>path]:!stroke-black`,
+										[&.icon>path]:stroke-black!`,
 						}}
 						className="text-black"
 						onClick={() => toast.success("Copied")}
@@ -202,9 +198,9 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 						</li>
 						<li onClick={toggleDarkMode}>
 							{darkModeIsActive ? (
-								<SunLight className="!h-5 !w-5" />
+								<SunLight className="h-5! w-5!" />
 							) : (
-								<HalfMoon className="!h-5 !w-5" />
+								<HalfMoon className="h-5! w-5!" />
 							)}
 						</li>
 					</ul>

@@ -1,6 +1,6 @@
 import { H1 } from "@components/H1";
 import { cn } from "@utils/component-utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import type { ComponentPropsWithRef, PropsWithChildren } from "react";
 
 type _LandingPageSectionProps = {
@@ -19,8 +19,8 @@ export function LandingPageSection({
 	...props
 }: LandingPageSectionProps) {
 	return (
-		<section className={cn("pb-28 pt-20 lg:pb-44 lg:pt-32", className)} {...props}>
-			<div className="mx-auto max-w-screen-lg">
+		<section className={cn("pt-20 pb-28 lg:pt-32 lg:pb-44", className)} {...props}>
+			<div className="mx-auto max-w-(--breakpoint-lg)">
 				<motion.div
 					initial={{ transform: "translateY(100%)", opacity: 0 }}
 					whileInView={{ transform: "translateY(0%)", opacity: 1 }}

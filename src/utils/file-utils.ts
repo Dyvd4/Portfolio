@@ -1,4 +1,4 @@
-import { File as DBFile } from "@prisma/client";
+import { File as DBFile } from "@generated/prisma/client";
 import request from "@utils/request-utils";
 
 const NEXT_PUBLIC_FILE_API_PATH = process.env.NEXT_PUBLIC_FILE_API_PATH!;

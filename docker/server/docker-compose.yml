@@ -62,6 +62,8 @@ services:
             - ./frontend/.env
         labels:
             - com.centurylinklabs.watchtower.enable=true
+        volumes:
+            - ./prod-ca-2021.crt:/app/prod-ca-2021.crt
         networks:
             - frontend
 

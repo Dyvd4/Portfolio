@@ -4,12 +4,12 @@ import ModalPortal from "@components/ModalPortal";
 import Navbar from "@components/Navbar/Navbar";
 import LoadingPortalSlot from "@components/Slots/LoadingPortalSlot";
 import config from "@config/config";
-import useDarkModeIsActive from "@hooks/server/useDarkModeIsActive";
 import OgImage from "@public/og/landing-page.png";
-import { getServerSession } from "next-auth";
 import { Geologica } from "next/font/google";
 import { Metadata } from "next/types";
 import { Toaster } from "react-hot-toast";
+import { auth } from "../auth";
+import { getDarkModeIsActive } from "../backend/utils/dark-mode-utils";
 import Breadcrumbs from "./breadcrumbs";
 import Providers from "./providers";
 
@@ -54,16 +54,16 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-	const darkModeIsActive = useDarkModeIsActive();
-	const session = await getServerSession();
+	const darkModeIsActive = await getDarkModeIsActive();
+	const session = await auth();
 	return (
 		<html lang="en" className={darkModeIsActive ? "dark" : ""}>
-			<body className={`${font.className} bg-white transition-colors dark:bg-gray-900 `}>
+			<body className={`${font.className} bg-white transition-colors dark:bg-gray-900`}>
 				<Providers session={session}>
 					<div className="min-h-screen">
 						<Navbar darkModeIsActive={darkModeIsActive} />
 						<main className="mx-auto pt-2">
-							<Breadcrumbs className="mx-auto max-w-screen-lg px-6" />
+							<Breadcrumbs className="mx-auto max-w-(--breakpoint-lg) px-6" />
 							{children}
 						</main>
 						<LoadingPortalSlot />

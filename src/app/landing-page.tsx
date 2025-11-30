@@ -7,7 +7,7 @@ import { ServicesSection } from "@components/Sections/ServicesSection";
 import { TechnologiesSection } from "@components/Sections/TechnologiesSection";
 import { WorkExperienceSection } from "@components/Sections/WorkExperienceSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,10 +16,7 @@ export default function LandingPage({ latestProject }) {
 
 	return (
 		<>
-			<div
-				className="flex w-full max-w-full flex-col
-							items-center gap-6 px-6 pb-32 2xl:px-60"
-			>
+			<div className="flex w-full max-w-full flex-col items-center gap-6 px-6 pb-32 2xl:px-60">
 				<Image
 					className="sm:hidden"
 					alt="avatar"
@@ -35,7 +32,7 @@ export default function LandingPage({ latestProject }) {
 					src={"avatar cartoon.png"}
 				/>
 				<div className="flex flex-col gap-4">
-					<H1 className="flex flex-col gap-2 whitespace-nowrap text-3xl font-normal sm:text-6xl">
+					<H1 className="flex flex-col gap-2 text-3xl font-normal whitespace-nowrap sm:text-6xl">
 						<div>Hey,</div>
 						<div>I&apos;m David Kimmich,</div>
 						<div>A web developer</div>
@@ -47,7 +44,7 @@ export default function LandingPage({ latestProject }) {
 				</div>
 				<Link
 					href={"#services"}
-					className="flex flex-col items-center pb-6 pt-16 dark:text-white sm:pb-20 sm:pt-28"
+					className="flex flex-col items-center pt-16 pb-6 sm:pt-28 sm:pb-20 dark:text-white"
 				>
 					More about me
 					<motion.div
