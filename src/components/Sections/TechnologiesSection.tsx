@@ -3,6 +3,7 @@ import { H2 } from "@components/H2";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import AngularImg from "@public/experience-cards/Angular.gif";
 import AwsImg from "@public/experience-cards/AWS.png";
+import AzureDevopsImg from "@public/experience-cards/azure-devops.svg";
 import DrizzleImg from "@public/experience-cards/drizzle.png";
 import ExpressJsImg from "@public/experience-cards/ExpressJs.png";
 import FiberImg from "@public/experience-cards/fiber.png";
@@ -136,6 +137,13 @@ const TECHNOLOGY_GROUPS = [
 				imageProps: {
 					src: TeamCityImg,
 					alt: "TeamCity",
+				},
+			},
+			{
+				name: "Azure DevOps",
+				imageProps: {
+					src: AzureDevopsImg,
+					alt: "Azure DevOps",
 				},
 			},
 		],
