@@ -69,5 +69,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Note: Don't expose ports here, Compose will handle that for us
+ENV HOSTNAME=0.0.0.0
 
 CMD ["node", "server.js"]
