@@ -11,7 +11,7 @@ export const fetchProjects = async () => {
 	await Promise.all(projects.map(fetchProject));
 };
 
-const fetchProject = (project: Project) => {
+export const fetchProject = (project: Project) => {
 	return Promise.all([
 		updateProjectMetaData(project),
 		upsertProjectCommits(project),

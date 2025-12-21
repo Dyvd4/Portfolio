@@ -1,4 +1,4 @@
-import ProjectService from "@backend/services/ProjectService";
+import * as ProjectService from "@backend/services/ProjectService";
 import { prisma } from "@prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
