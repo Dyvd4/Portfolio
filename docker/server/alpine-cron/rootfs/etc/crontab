@@ -1,2 +1,0 @@
-# ecr token expires after 12 hours
-0 */12 * * * ecr-login.sh | tee -a /var/log/crontab
