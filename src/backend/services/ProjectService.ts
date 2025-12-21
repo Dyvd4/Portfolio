@@ -6,7 +6,7 @@ import parseLink from "parse-link-header";
 
 const octokit = new Octokit({ auth: config.GH_ACCESS_TOKEN });
 
-const fetchProjects = async () => {
+export const fetchProjects = async () => {
 	const projects = await prisma.project.findMany();
 	await Promise.all(projects.map(fetchProject));
 };
@@ -167,14 +167,3 @@ const upsertProjectTags = async (project: Project, githubTags: string[]) => {
 		},
 	});
 };
-
-const ProjectService = {
-	fetchProjects,
-	fetchProject,
-	updateProjectMetaData,
-	upsertProjectCommits,
-	upsertProjectLanguages,
-	upsertProjectTags,
-};
-
-export default ProjectService;

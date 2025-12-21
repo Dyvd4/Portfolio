@@ -1,4 +1,4 @@
-import GitHubRepoService from "@backend/services/GitHubRepoService";
+import * as GitHubRepoService from "@backend/services/GitHubRepoService";
 import { isAuthenticated } from "@backend/utils/auth-utils";
 import logger from "@lib/logger";
 import { NextApiRequest, NextApiResponse } from "next";

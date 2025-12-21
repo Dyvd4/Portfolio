@@ -21,9 +21,3 @@ export const fetchRepos = async () => {
 			.map((repo) => ({ name: repo.name })),
 	});
 };
-
-const GitHubRepoService = {
-	fetchRepos,
-};
-
-export default GitHubRepoService;

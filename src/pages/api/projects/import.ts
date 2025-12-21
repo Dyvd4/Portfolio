@@ -1,4 +1,4 @@
-import ProjectService from "@backend/services/ProjectService";
+import * as ProjectService from "@backend/services/ProjectService";
 import { isAuthenticated } from "@backend/utils/auth-utils";
 import logger from "@lib/logger";
 import { NextApiRequest, NextApiResponse } from "next";
