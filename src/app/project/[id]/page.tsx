@@ -16,13 +16,11 @@ type ProjectDetailsProps = {
 };
 
 export async function generateMetadata(props: ProjectDetailsProps): Promise<Metadata> {
-    const params = await props.params;
+	const params = await props.params;
 
-    const {
-        id
-    } = params;
+	const { id } = params;
 
-    const project = await prisma.project.findFirst({
+	const project = await prisma.project.findFirst({
 		where: {
 			id: +id,
 		},
@@ -38,9 +36,9 @@ export async function generateMetadata(props: ProjectDetailsProps): Promise<Meta
 		},
 	});
 
-    if (!project) return {};
+	if (!project) return {};
 
-    return {
+	return {
 		title: `Project: ${project.alias}`,
 		description: `Detailed overview of the "${project.alias}"-project`,
 		openGraph: {
@@ -50,17 +48,15 @@ export async function generateMetadata(props: ProjectDetailsProps): Promise<Meta
 }
 
 async function ProjectDetails(props: ProjectDetailsProps) {
-    const params = await props.params;
+	const params = await props.params;
 
-    const {
-        id
-    } = params;
+	const { id } = params;
 
-    if (!id) {
+	if (!id) {
 		notFound();
 	}
 
-    const projectLanguageAggregate = await prisma.projectLanguage.aggregate({
+	const projectLanguageAggregate = await prisma.projectLanguage.aggregate({
 		where: {
 			projectId: +id,
 		},
@@ -69,7 +65,7 @@ async function ProjectDetails(props: ProjectDetailsProps) {
 		},
 	});
 
-    const project = await prisma.project.findFirst({
+	const project = await prisma.project.findFirst({
 		where: {
 			id: +id,
 		},
@@ -102,7 +98,7 @@ async function ProjectDetails(props: ProjectDetailsProps) {
 			tags: true,
 		},
 	});
-    return (
+	return (
 		<ProjectDetailsPage
 			project={project}
 			latestCommitsView={
