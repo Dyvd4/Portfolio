@@ -3,7 +3,6 @@ import { H1 } from "@components/H1";
 import NavDoubleArrowDown from "@components/Icons/NavDoubleArrowDown";
 import { LanguagesSection } from "@components/Sections/LanguagesSection";
 import LatestProjectSection from "@components/Sections/LatestProjectSection";
-import { ServicesSection } from "@components/Sections/ServicesSection";
 import { TechnologiesSection } from "@components/Sections/TechnologiesSection";
 import { WorkExperienceSection } from "@components/Sections/WorkExperienceSection";
 import useBreadcrumb from "@context/hooks/useBreadcrumb";
@@ -43,7 +42,7 @@ export default function LandingPage({ latestProject }) {
 					</div>
 				</div>
 				<Link
-					href={"#services"}
+					href={"#work"}
 					className="flex flex-col items-center pt-16 pb-6 sm:pt-28 sm:pb-20 dark:text-white"
 				>
 					More about me
@@ -63,7 +62,7 @@ export default function LandingPage({ latestProject }) {
 					</motion.div>
 				</Link>
 			</div>
-			<ServicesSection />
+			{/* <ServicesSection /> */}
 			<WorkExperienceSection />
 			<LanguagesSection />
 			<TechnologiesSection />
