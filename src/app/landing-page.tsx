@@ -33,7 +33,7 @@ export default function LandingPage({ latestProject }) {
 				<div className="flex flex-col gap-4">
 					<H1 className="flex flex-col gap-2 text-3xl font-normal whitespace-nowrap sm:text-6xl">
 						<div>Hey,</div>
-						<div>I&apos;m David Kimmich.,</div>
+						<div>I&apos;m David Kimmich,</div>
 						<div>A web developer</div>
 					</H1>
 					<div className="text-secondary text-[#8B6E18]">
