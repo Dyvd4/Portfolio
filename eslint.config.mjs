@@ -6,11 +6,14 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default defineConfig([{
-    extends: [...nextCoreWebVitals],
+export default defineConfig([
+	{
+		extends: [...nextCoreWebVitals],
 
-    rules: {
-        "prefer-const": "warn",
-        "react-hooks/exhaustive-deps": "off",
-    },
-}]);
+		rules: {
+			"prefer-const": "warn",
+			"react-hooks/exhaustive-deps": "off",
+		},
+		ignores: ["src/generated/**"],
+	},
+]);

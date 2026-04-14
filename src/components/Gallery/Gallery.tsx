@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/immutability */
 "use client";
 import Button from "@components/Button";
 import { GalleryModal } from "@components/Gallery/GalleryModal";
@@ -96,8 +97,8 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 	};
 
 	return (
-        <div className={cn("flex flex-col gap-4", className)} {...props}>
-            <Image
+		<div className={cn("flex flex-col gap-4", className)} {...props}>
+			<Image
 				onClick={() => handleImageClick(0)}
 				className="aspect-video cursor-zoom-in rounded-xl border drop-shadow-2xl dark:border-none"
 				style={{ transform: "translate3d(0, 0, 0)" }}
@@ -106,10 +107,10 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 				width={1920}
 				height={1080}
 			/>
-            <div
-				ref={ref => {
-                    !!ref && autoAnimate(ref);
-                }}
+			<div
+				ref={(ref) => {
+					!!ref && autoAnimate(ref);
+				}}
 				className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6"
 			>
 				{bottomImages.map((image, i) => (
@@ -140,7 +141,7 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 					</>
 				)}
 			</div>
-            <GalleryModal
+			<GalleryModal
 				images={images}
 				curIndex={curIndex}
 				direction={direction}
@@ -148,6 +149,6 @@ export function Gallery({ images: propsImages, className, ...props }: GalleryPro
 				onOpenChange={onOpenChange}
 				changeCurrentIndex={changeCurrentIndex}
 			/>
-        </div>
-    );
+		</div>
+	);
 }

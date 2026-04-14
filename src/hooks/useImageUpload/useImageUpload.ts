@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { PresignedPost } from "@aws-sdk/s3-presigned-post";
 import { FileCreateSchema } from "@pages/api/file/create";
 import { ImageToUpload } from "@pages/api/project";
@@ -93,7 +94,7 @@ export const useImageUpload = (images: TImage[]) => {
 				// if one file fails, delete all files in db
 				return {
 					aborted: true,
-					errorMessage: "An error ocurred when trying to create files",
+					errorMessage: "An error occurred when trying to create files",
 				};
 			}
 
@@ -156,7 +157,7 @@ export const useImageUpload = (images: TImage[]) => {
 				const errorMessage =
 					(e as Error) instanceof UploadAbortError
 						? "Cancelled upload"
-						: "An error ocurred when trying to upload files";
+						: "An error occurred when trying to upload files";
 				return { aborted: true, errorMessage };
 			}
 

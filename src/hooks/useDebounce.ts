@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
 
 const DEFAULT_DEBOUNCE_DELAY_MS = 250;

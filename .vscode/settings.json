@@ -1,6 +1,14 @@
 {
-	"cSpell.words": ["dayjs", "Imac", "NEXTAUTH", "nextjs", "prisma", "Résumé", "unoptimized"],
-	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"cSpell.words": [
+		"dayjs",
+		"Imac",
+		"NEXTAUTH",
+		"nextjs",
+		"prisma",
+		"Résumé",
+		"unoptimized"
+	],
 	"editor.insertSpaces": false,
-	"editor.detectIndentation": false
+	"editor.detectIndentation": false,
+	"js/ts.tsdk.path": "node_modules\\typescript\\lib"
 }

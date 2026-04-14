@@ -19,19 +19,18 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "baseUrl": "./src/",
     "paths": {
       "@*": [
-        "*"
+        "./src/*"
       ],
       "@prisma": [
-        "prisma.ts"
+        "./src/prisma.ts"
       ],
       "@config": [
-        "config/config.ts"
+        "./src/config/config.ts"
       ],
       "@public/*": [
-        "../public/*"
+        "./public/*"
       ]
     },
     "plugins": [

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 import Copyable from "@components/Copyable";
 import { H1 } from "@components/H1";
@@ -55,21 +56,6 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 	const [intersectingSections, setIntersectingSections] = useState<string[]>([]);
 	const { className } = useNavbarStore();
 
-	useEffect(() => {
-		setNavHeaderIsHidden(window.scrollY > NAVBAR_TOP_THRESHOLD);
-		window.addEventListener("scroll", (e) => {
-			setNavHeaderIsHidden(window.scrollY > NAVBAR_TOP_THRESHOLD);
-		});
-	}, []);
-
-	useEffect(() => {
-		setIntersectingSections([]);
-		const observer = observe();
-		return () => {
-			unobserve(observer);
-		};
-	}, [pathname]);
-
 	const observe = () => {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
@@ -97,6 +83,21 @@ function Navbar({ darkModeIsActive: initialDarkModeIsActive }: NavbarProps) {
 			});
 		observer.disconnect();
 	};
+
+	useEffect(() => {
+		setNavHeaderIsHidden(window.scrollY > NAVBAR_TOP_THRESHOLD);
+		window.addEventListener("scroll", (e) => {
+			setNavHeaderIsHidden(window.scrollY > NAVBAR_TOP_THRESHOLD);
+		});
+	}, []);
+
+	useEffect(() => {
+		setIntersectingSections([]);
+		const observer = observe();
+		return () => {
+			unobserve(observer);
+		};
+	}, [pathname]);
 
 	return (
 		<motion.nav
