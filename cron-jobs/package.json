@@ -21,5 +21,10 @@
 	"type": "module",
 	"devDependencies": {
 		"@types/node-cron": "^3.0.11"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	}
 }
