@@ -1,5 +1,5 @@
 import CommitsTooltip from "@components/recharts/Tooltips/CommitsTooltip";
-import { ResponsiveContainer, LineChart, Line, Tooltip } from "recharts";
+import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 
 export default function DevelopmentActivityChart({ latestCommitsView }) {
 	return (
@@ -12,6 +12,7 @@ export default function DevelopmentActivityChart({ latestCommitsView }) {
 					strokeWidth={2}
 					dot={false}
 				/>
+				{/* @ts-ignore */}
 				<Tooltip content={<CommitsTooltip />} />
 			</LineChart>
 		</ResponsiveContainer>

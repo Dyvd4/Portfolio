@@ -10,12 +10,11 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@axiomhq/js": "1.6.1",
-		"@axiomhq/winston": "1.6.1",
-		"axios": "^1.16.0",
+		"@axiomhq/winston": "2.0.0",
+		"axios": "^1.19.0",
 		"dotenv": "^17.4.2",
-		"node-cron": "^4.2.1",
-		"tsx": "^4.21.0",
+		"node-cron": "^4.6.0",
+		"tsx": "^4.23.5",
 		"winston": "^3.19.0"
 	},
 	"type": "module",

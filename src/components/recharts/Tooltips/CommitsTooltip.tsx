@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
-import { TooltipProps } from "recharts";
+import { TooltipContentProps } from "recharts";
 import TooltipWrapper from "../TooltipWrapper";
 
 export default function CommitsTooltip({
 	active,
 	payload: payloads,
-}: TooltipProps<number, string>) {
+}: TooltipContentProps<number, string>) {
 	if (active && payloads && payloads.length) {
 		const payload = payloads[0];
 

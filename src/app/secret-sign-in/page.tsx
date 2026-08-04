@@ -25,7 +25,7 @@ function SecretSignIn() {
 		if (response!.ok) {
 			router.push("/project");
 		} else {
-			setErrorMessage(response!.error);
+			setErrorMessage(response!.error!);
 		}
 	};
 	return (

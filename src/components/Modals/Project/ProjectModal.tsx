@@ -16,7 +16,7 @@ import { ComponentPropsWithRef, PropsWithChildren, useEffect, useRef, useState }
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { z } from "zod";
+import { z, ZodFormattedError } from "zod";
 
 type _ProjectModalProps = {
 	isActive: boolean;
@@ -85,7 +85,7 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 	const fileRef = useRef<HTMLInputElement | null>(null);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const submitButtonRef = useRef<HTMLButtonElement | null>(null);
-	const [errorMap, setErrorMap] = useState<Zod.ZodFormattedError<AddProjectSchema> | null>(null);
+	const [errorMap, setErrorMap] = useState<ZodFormattedError<AddProjectSchema> | null>(null);
 	const { isLoading: reposAreLoading, data: githubRepos } = useGithubReposQuery(props.isActive);
 	const { images, setImages, remove, addFromFileList, setThumbnail } = useImages();
 	const { handleUpload, cancelUpload, uploadProgress, isUploading } = useImageUpload(images);
@@ -278,7 +278,7 @@ function ProjectModal({ className, children, ...props }: ProjectModalProps) {
 							className="flex flex-col gap-4"
 						>
 							<FormControl errorMessage={errorMap?.name?._errors}>
-								<Select placeholder="name" {...register("name")}>
+								<Select {...register("name")}>
 									{projectsSelect.map((repo) => (
 										<option value={repo.name} key={repo.id}>
 											{repo.name}
