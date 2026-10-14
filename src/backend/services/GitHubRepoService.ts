@@ -13,7 +13,8 @@ type UserRepoResponse = {
 };
 
 export const fetchRepos = async () => {
-	const response = (await GithubApi.get(`user/repos`)).data as UserRepoResponse[];
+	const response = (await GithubApi.get(`user/repos`, { params: { per_page: 100 } }))
+		.data as UserRepoResponse[];
 	await prisma.githubRepo.deleteMany();
 	await prisma.githubRepo.createMany({
 		data: response
