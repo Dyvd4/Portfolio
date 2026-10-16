@@ -3,12 +3,10 @@ import { H2 } from "@components/H2";
 import { LandingPageSection } from "@components/Sections/LandingPageSection";
 import CssImg from "@public/experience-cards/CSS.svg";
 import CsharpImg from "@public/experience-cards/Csharp.png";
-import GoImg from "@public/experience-cards/Go.svg";
 import HtmlImg from "@public/experience-cards/HTML.svg";
 import SqlImg from "@public/experience-cards/Sql.png";
 import TypeScriptImg from "@public/experience-cards/TypeScript.svg";
 import EnglishImg from "@public/experience-cards/UK.png";
-import CppImg from "@public/experience-cards/cpp.png";
 import GermanImg from "@public/experience-cards/german.png";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -47,6 +45,14 @@ const LANGUAGE_GROUPS = [
 		title: "Backend development",
 		languages: [
 			{
+				name: "TypeScript",
+				widthInPercent: 80,
+				imageProps: {
+					src: TypeScriptImg,
+					alt: "TypeScript",
+				},
+			},
+			{
 				name: "C#",
 				widthInPercent: 60,
 				imageProps: {
@@ -60,22 +66,6 @@ const LANGUAGE_GROUPS = [
 				imageProps: {
 					src: SqlImg,
 					alt: "SQL",
-				},
-			},
-			{
-				name: "Go",
-				widthInPercent: 30,
-				imageProps: {
-					src: GoImg,
-					alt: "Go",
-				},
-			},
-			{
-				name: "C++",
-				widthInPercent: 30,
-				imageProps: {
-					src: CppImg,
-					alt: "C++",
 				},
 			},
 		],
